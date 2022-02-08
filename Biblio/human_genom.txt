@@ -1,0 +1,6 @@
+1. Lander,E.S., Linton,L.M., Birren,B., Nusbaum,C., Zody,M.C.,
+Baldwin,J., Devon,K., Dewar,K., Doyle,M., FitzHugh,W. et al.
+(2001) Initial sequencing and analysis of the human genome.
+Nature, 409, 860–921.
+2. Kazazian,H.H. (2004) Mobile elements: drivers of genome
+evolution. Science, 303, 1626–1632.
