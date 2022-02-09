@@ -13,10 +13,10 @@ else:
 	m = 0
 	with open(Arg[0]) as f:
 		for line in f:
-			if (len(line)<5):
+			if (len(line)<2):
 				break
 			L = line.split('\t')
-			y.append(int(L[2][:-1]))
+			y.append(int(L[1][:-1]))
 			m = max(m,y[-1])
 		x = np.arange(1,m+1,1)
 		Y = [0 for i in range(m)]
