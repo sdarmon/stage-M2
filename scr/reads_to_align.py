@@ -15,7 +15,7 @@ else:
                 break
             L = line.split('\t')
             if (int(L[2][:-1])> t):
-                seqs.append(int(L[1]))
+                seqs.append(L[1])
     with open(Arg[2],'w') as f:
         compt = 0
         for seq in seqs:
