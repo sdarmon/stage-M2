@@ -327,7 +327,7 @@ void printGraphVertices(Graph& G,ofstream& output)
 {
     vector<Node> V = G.Vertices;
     for (vector<Node>::iterator it = V.begin(); it != V.end(); ++it) {
-        output << it->val << "\t" << it->weight << "\n";
+        output << it->val << "\t" <<(string)it->label << "\t" << it->weight << "\n";
     }
 }
 
