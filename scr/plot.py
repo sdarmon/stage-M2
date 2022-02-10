@@ -82,9 +82,9 @@ elif Arg[2] == "top10":
 		for line in f:
 			if (len(line)<2):
 				break
-		L = line.split('\t')
-		y.append(int(L[2][:-1]))
-		m = max(m,y[-1])
+			L = line.split('\t')
+			y.append(int(L[2][:-1]))
+			m = max(m,y[-1])
 	x = np.arange(1,m+1,1)
 	Y = [0 for i in range(m)]
 	for el in y:
@@ -97,7 +97,7 @@ elif Arg[2] == "top10":
 			break
 		size+=1
 	print(size)
-	print(Y)
+	print(m)
 
 else:
 	print("Wrong format used.\n Use : "+Arg[0]+" output.txt format\n Where format is either 'dot' or 'his', the format of the plot.")
