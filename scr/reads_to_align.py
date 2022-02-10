@@ -8,7 +8,7 @@ if len(Arg) != 4:
     print("Use : "+Arg[0]+ " input.txt output.fq threshold")
 else:
     seqs = []
-    t = Arg[3]
+    t = int(Arg[3])
     with open(Arg[1],'r') as f:
         for line in f:
             if (len(line)<2):
