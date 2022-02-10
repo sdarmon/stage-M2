@@ -79,10 +79,19 @@ elif Arg[2] == "top10":
 	i = 1
 	with open(Arg[1]) as f:
 		for line in f:
-			if (len(line)<2):
-				break
-			m+=(float(line[:-1]))
-			if m>=90:
+            if (len(line)<2):
+                break
+            L = line.split('\t')
+            y.append(int(L[2][:-1]))
+            m = max(m,y[-1])
+        x = np.arange(1,m+1,1)
+        Y = [0 for i in range(m)]
+        for el in y:
+            Y[el-1] +=100/len(y)
+        M=0
+		for el in Y:
+			M+=(el)
+			if M>=90:
 				index = i
 				break
 			i+=1
