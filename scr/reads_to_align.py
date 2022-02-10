@@ -19,8 +19,8 @@ else:
     with open(Arg[2],'w') as f:
         compt = 0
         for seq in seqs:
-            f.write("@SEQ_"+str(compt))
+            f.write("@SEQ_"+str(compt)+"\n")
             compt+=1
-            f.write(seq)
-            f.write("+")
-            f.write("J"*len(seq))
+            f.write(seq+"\n")
+            f.write("+"+"\n")
+            f.write("J"*len(seq)+"\n")
