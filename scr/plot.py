@@ -74,6 +74,7 @@ elif Arg[2] == "his":
 	plt.show()
 
 elif Arg[2] == "top10":
+	y=[]
 	index = 0
 	m = 0
 	i = 1
