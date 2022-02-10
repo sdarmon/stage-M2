@@ -97,7 +97,7 @@ elif Arg[2] == "top10":
 			break
 		i+=1
 	print(i)
-	print(m,float(line[:-1]))
+	print(m)
 
 else:
 	print("Wrong format used.\n Use : "+Arg[0]+" output.txt format\n Where format is either 'dot' or 'his', the format of the plot.")
