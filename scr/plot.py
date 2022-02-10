@@ -97,7 +97,7 @@ elif Arg[2] == "top10":
 			break
 		size+=1
 	print(size)
-	print(m)
+	print(M)
 
 else:
 	print("Wrong format used.\n Use : "+Arg[0]+" output.txt format\n Where format is either 'dot' or 'his', the format of the plot.")
