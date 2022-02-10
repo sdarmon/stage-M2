@@ -77,7 +77,7 @@ elif Arg[2] == "top10":
 	y=[]
 	index = 0
 	m = 0
-	i = 1
+	size = 1
 	with open(Arg[1]) as f:
 		for line in f:
 			if (len(line)<2):
@@ -91,13 +91,13 @@ elif Arg[2] == "top10":
 	    Y[el-1] +=100/len(y)
 	M=0
 	for el in Y:
-		M+=(el)
+		M+=el
 		if M>=90:
-			index = i
+			index = size
 			break
-		i+=1
+		size+=1
 	print(i)
-	print(m)
+	print(M)
 
 else:
 	print("Wrong format used.\n Use : "+Arg[0]+" output.txt format\n Where format is either 'dot' or 'his', the format of the plot.")
