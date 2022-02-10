@@ -96,7 +96,7 @@ elif Arg[2] == "top10":
 			index = size
 			break
 		size+=1
-	print(i)
+	print(size)
 	print(M)
 
 else:
