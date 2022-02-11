@@ -13,10 +13,10 @@ else:
             for line in f:
                 if oldline == "":
                     oldline = line[:-1]
-                    f.write(oldline)
+                    o.write(oldline)
                 elif line[:-1] == oldline:
                     continue
                 else:
-                    f.write(line[:-1])
+                    o.write(line[:-1])
                     oldline=line[:-1]
 
