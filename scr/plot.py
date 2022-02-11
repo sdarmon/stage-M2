@@ -16,6 +16,7 @@ elif Arg[2] == "dot":
 			if (len(line)<2):
 				break
 			L = line.split('\t')
+			print(L)
 			y.append(int(L[2][:-1]))
 			m = max(m,y[-1])
 		x = np.arange(1,m+1,1)
