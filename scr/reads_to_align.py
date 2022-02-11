@@ -19,8 +19,22 @@ else:
     with open(Arg[2],'w') as f:
         compt = 0
         for seq in seqs:
-            f.write("@SEQ_"+str(compt)+"\n")
-            compt+=1
-            f.write(seq+"\n")
-            f.write("+"+"\n")
-            f.write("J"*len(seq)+"\n")
+            if len(seq)> 600:
+                s1 = seq[:len(seq)//2]
+                s2 = seq[len(seq)//2:]
+                f.write("@SEQ_"+str(compt)+"\n")
+                compt+=1
+                f.write(s1+"\n")
+                f.write("+"+"\n")
+                f.write("J"*len(s1)+"\n")
+                f.write("@SEQ_"+str(compt)+"\n")
+                compt+=1
+                f.write(s2+"\n")
+                f.write("+"+"\n")
+                f.write("J"*len(s2)+"\n")
+            else:
+                f.write("@SEQ_"+str(compt)+"\n")
+                compt+=1
+                f.write(seq+"\n")
+                f.write("+"+"\n")
+                f.write("J"*len(seq)+"\n")
