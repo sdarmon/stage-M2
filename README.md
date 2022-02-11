@@ -21,7 +21,7 @@ scp -p ../../Bureau/genome_assemblies_genome_fasta.tar sdarmon@pedago-ngs:/local
 
 ### Etape 1: Téléchargement
 
-On a besoin tout d'abord des séquences ref_genome.fna et genome.gtf. Ensuite, on va utiliser plusieurs programme dans la pipeline :
+On a besoin tout d'abord des séquences ref_genome.fna, genome.gtf et TEgenome.gtf. Ensuite, on va utiliser plusieurs programme dans la pipeline :
 - STAR
 - KisSplice
 
@@ -61,3 +61,16 @@ Finallement, on génère un fichier de reads à aligner sur le génome de réfé
 python3 reads_to_align.py input.txt output.fq threshold
 ```
 Où the input is the output of graph.exe, output.fq est le format des séquences à générer et threshold est l'output de plot.py top10.
+
+### Etape 5: Alignement de nos reads sur le génome de ref
+
+```
+STAR --genomeDir ../results \
+--runMode alignReads \
+--runThreadN 8 \
+--readFilesIn read.fq \
+--outFileNamePrefix ../results/STAR/ \
+--outSAMtype BAM SortedByCoordinate \
+--outSAMunmapped Within \
+--outSAMattributes Standard 
+```
