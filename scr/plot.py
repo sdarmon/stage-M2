@@ -11,12 +11,11 @@ if len(Arg) <3:
 elif Arg[2] == "dot":
 	y = []
 	m = 0
-	with open(Arg[0]) as f:
+	with open(Arg[1]) as f:
 		for line in f:
 			if (len(line)<2):
 				break
 			L = line.split('\t')
-			print(L)
 			y.append(int(L[2][:-1]))
 			m = max(m,y[-1])
 		x = np.arange(1,m+1,1)
