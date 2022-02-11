@@ -398,7 +398,6 @@ int main(int argc, char** argv)
     if(argc == 5){
         ofstream output;
         output.open(argv[4]);
-        cout << "ici?" << endl;
         printGraphVertices(G,output);
         output.close();
     } else{
