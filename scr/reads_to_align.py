@@ -41,7 +41,7 @@ if len(Arg) == 4:
                 f.write("J"*len(seq)+"\n")
 else:
     seqs = []
-    ref = []
+    ref = set()
     t = int(Arg[3])
     with open(Arg[1],'r') as f:
         for line in f:
@@ -55,7 +55,7 @@ else:
             if (len(line)<2):
                 break
             L = line.split('\t')
-            ref.append(int(L[12].split('_')[1]))
+            ref.add(int(L[12].split('_')[1]))
     with open(Arg[2],'w') as f:
         compt = 0
         for seq in seqs:
