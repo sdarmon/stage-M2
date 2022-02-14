@@ -63,6 +63,7 @@ else:
                 if compt in ref or (compt+1) in ref:
                    f.write(seq)
                 compt+=2
-            elif compt in ref:
-                f.write(seq)
+            else:
+                if compt in ref:
+                    f.write(seq)
                 compt+=1
