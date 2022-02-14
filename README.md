@@ -45,20 +45,20 @@ On calcule les poids de chaque sommet (rajouter ici une explication)
 
 ```
 g++ graph.cpp -o graph.exe
-./graph.exe file.nodes file.edges -o output.txt
+../DmGoth/stage-M2/scr/graph.exe graph_IR03_B_R1_IR03_C_R1_IR03_D_R1_IR03_E_R1_IR13_B_R1_IR13_C_R1_IR13_D_R1_IR13_E_R1_k41.nodes graph_IR03_B_R1_IR03_C_R1_IR03_D_R1_IR03_E_R1_IR13_B_R1_IR13_C_R1_IR13_D_R1_IR13_E_R1_k41_C0.05.edges 10 -o ../DmGoth/data/outputGraph.txt 
 ```
 
 Puis on lance l'analyse graphique (dot) et on vérifie que la valeur donnée pour le threshold semble correcte (top10)
 
 ```
-python3 plot.py output.txt dot
-python3 plot.py output.txt top10
+python3 plot.py outputGraph.txt dot
+python3 plot.py outputGraph.txt top10
 ```
 
 Finallement, on génère un fichier de reads à aligner sur le génome de référence. (Ici threshold = 11)
 
 ```
-python3 reads_to_align.py input.txt output.fq threshold
+python3 reads_to_align.py outputGraph.txt read.fq 11
 ```
 Où the input is the output of graph.exe, output.fq est le format des séquences à générer et threshold est l'output de plot.py top10.
 

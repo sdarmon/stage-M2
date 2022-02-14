@@ -369,8 +369,8 @@ void printEdges(vector<Edge>& E)
 // graph implementation
 int main(int argc, char** argv)
 {
-    if (argc!=3 and argc!=5){
-        cout << "Expected use of this program: \n\n\t" <<argv[0] << " file.nodes file.edges -o output.txt\n" << endl;
+    if (argc!=4 and argc!=6){
+        cout << "Expected use of this program: \n\n\t" <<argv[0] << " file.nodes file.edges radius -o output.txt\n" << endl;
         return 0;
     }
 
@@ -393,11 +393,11 @@ int main(int argc, char** argv)
     Graph G(V,E);
 
     G.weighing();
-    G.weighingAllNodes(200);
+    G.weighingAllNodes(argv[3]);
 
     if(argc == 5){
         ofstream output;
-        output.open(argv[4]);
+        output.open(argv[5]);
         printGraphVertices(G,output);
         output.close();
     } else{
