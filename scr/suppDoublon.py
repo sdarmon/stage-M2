@@ -12,7 +12,7 @@ elif len(Arg) == 5:
             oldTarget = ""
             for line in f:
                 target = line.split("\t")[int(Arg[4])]
-                if oldtarget == "":
+                if oldTarget == "":
                     oldTarget = target
                     o.write(line)
                 elif target == oldTarget:
