@@ -73,7 +73,8 @@ STAR --genomeDir ../results \
 --outSAMtype BAM SortedByCoordinate \
 --outSAMunmapped Within \
 --outSAMattributes Standard \
---outFilterMultimapNmax 100
+--outFilterMultimapNmax 10000 \
+--outReadsUnmapped Fastx
 ```
 
 
@@ -83,7 +84,9 @@ STAR --genomeDir ../results \
 bedtools intersect -wa -a AaegL5_TE_repeats.gff -b ../results/STAR/Aligned.sortedByCoord.out.bam > ../results/intersectionTE.txt
 bedtools intersect -wb -a AaegL5_TE_repeats.gff -b ../results/STAR/Aligned.sortedByCoord.out.bam > ../results/intersectionKiss.txt
 cd ../stage-M2/scr/
-python3 suppDoublon.py ../../results/intersectionKiss.txt ../../results/intersectionKissNoDouble.txt -t 12
+python3 suppDoublon.py ../../results/intersectionKiss.txt ../../results/intersectionKissNoDouble.txt -s 12
+python3 suppDoublon.py ../../results/intersectionTE.txt ../../results/intersectionTENoDouble.txt -t 8
 wc -l ../../results/intersectionKissNoDouble.txt 
+wc -l ../../results/intersectionTENoDouble.txt 
 less ../../results/STAR/Log.final.out
 ```

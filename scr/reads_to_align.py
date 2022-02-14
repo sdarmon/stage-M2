@@ -4,9 +4,9 @@ import sys
 
 Arg = sys.argv[:]
 
-if len(Arg) != 4:
-    print("Use : "+Arg[0]+ " input.txt output.fq threshold")
-else:
+if len(Arg) not in [4,6]:
+    print("Use : "+Arg[0]+ " input.txt output.fq threshold -reverse ref.txt")
+if len(Arg) == 4:
     seqs = []
     t = int(Arg[3])
     with open(Arg[1],'r') as f:
@@ -38,3 +38,30 @@ else:
                 f.write(seq+"\n")
                 f.write("+"+"\n")
                 f.write("J"*len(seq)+"\n")
+else:
+    seqs = []
+    ref = []
+    t = int(Arg[3])
+    with open(Arg[1],'r') as f:
+        for line in f:
+            if (len(line)<2):
+                break
+            L = line.split('\t')
+            if (int(L[2][:-1])> t):
+                seqs.append(line)
+    with open(Arg[5],'r') as f2:
+        for line in f2:
+            if (len(line)<2):
+                break
+            L = line.split('\t')
+            ref.append(int(L[12].split('_')[1]))
+    with open(Arg[2],'w') as f:
+        compt = 0
+        for seq in seqs:
+            if len(seq.split('\t')[1]) > 600:
+                if compt in ref or (compt+1) in ref:
+                   f.write(line)
+                compt+=2
+            else:
+                f.write(line)
+                compt+=1
