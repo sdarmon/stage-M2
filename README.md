@@ -72,5 +72,18 @@ STAR --genomeDir ../results \
 --outFileNamePrefix ../results/STAR/ \
 --outSAMtype BAM SortedByCoordinate \
 --outSAMunmapped Within \
---outSAMattributes Standard 
+--outSAMattributes Standard \
+--outFilterMultimapNmax 100
+```
+
+
+### Etape 6: Intersection des reads alignés avec les TE connues
+
+```
+bedtools intersect -wa -a AaegL5_TE_repeats.gff -b ../results/STAR/Aligned.sortedByCoord.out.bam > ../results/intersectionTE.txt
+bedtools intersect -wb -a AaegL5_TE_repeats.gff -b ../results/STAR/Aligned.sortedByCoord.out.bam > ../results/intersectionKiss.txt
+cd ../stage-M2/scr/
+python3 suppDoublon.py ../../results/intersectionKiss.txt ../../results/intersectionKissNoDouble.txt -t 12
+wc -l ../../results/intersectionKissNoDouble.txt 
+less ../../results/STAR/Log.final.out
 ```

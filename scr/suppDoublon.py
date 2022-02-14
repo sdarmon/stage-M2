@@ -11,6 +11,8 @@ elif len(Arg) == 5:
         with open(Arg[2],'w') as o:
             Vu = []
             for line in f:
+                if line[:2] == "##":
+                    continue
                 target = int((line.split("\t")[int(Arg[4])]).split("_")[1])
                 if target >= len(Vu):
                     for i in range(len(Vu),target+10):
