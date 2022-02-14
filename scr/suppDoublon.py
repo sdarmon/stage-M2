@@ -17,6 +17,5 @@ else:
                 elif line[:-1] == oldline:
                     continue
                 else:
-                    o.write(line[:-1])
+                    o.write(line)
                     oldline=line[:-1]
-
