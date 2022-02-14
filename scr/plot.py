@@ -113,7 +113,7 @@ elif Arg[2] == "reverse":
 			if (len(line)<2):
 				break
 			L = line.split('\t')
-			ref.append(len(L[1]))
+			ref.append(int(L[2][:-1]))
 	with open(Arg[1]) as f:
 		for line in f:
 			if (len(line)<2):
