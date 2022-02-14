@@ -133,7 +133,7 @@ elif Arg[2] == "reverse":
 
 	xg = []
 	yg = []
-
+	Z2 = [10*el for el in Z]
 	for i in range(len(x)):
 		if Y[i] == float(0):
 			yb.append(Y[i])
@@ -153,7 +153,7 @@ elif Arg[2] == "reverse":
 	axs[0].plot(x,Y, 'green')
 	axs[1].plot(x,Y, 'green')
 	axs[2].plot(x,Y, 'green')
-	axs[2].plot(x,Z*10, 'orange')
+	axs[2].plot(x,Z2, 'orange')
 	axs[0].set(ylabel= "Frequencies (in %)")
 	axs[1].set(ylabel= "Frequencies (in %)")
 	axs[2].set(ylabel= "Frequencies of matching sequencies (in %)")
