@@ -6,6 +6,7 @@ Arg = sys.argv[:]
 
 if len(Arg) not in [4,6]:
     print("Use : "+Arg[0]+ " input.txt output.fq threshold -reverse ref.txt")
+    exit()
 if len(Arg) == 4:
     seqs = []
     t = int(Arg[3])
@@ -60,8 +61,8 @@ else:
         for seq in seqs:
             if len(seq.split('\t')[1]) > 600:
                 if compt in ref or (compt+1) in ref:
-                   f.write(line)
+                   f.write(seq)
                 compt+=2
             else:
-                f.write(line)
+                f.write(seq)
                 compt+=1

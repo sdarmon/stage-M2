@@ -55,7 +55,7 @@ python3 plot.py output.txt dot
 python3 plot.py output.txt top10
 ```
 
-Finallement, on génère un fichier de reads à aligner sur le génome de référence.
+Finallement, on génère un fichier de reads à aligner sur le génome de référence. (Ici threshold = 11)
 
 ```
 python3 reads_to_align.py input.txt output.fq threshold
@@ -89,4 +89,11 @@ python3 suppDoublon.py ../../results/intersectionTE.txt ../../results/intersecti
 wc -l ../../results/intersectionKissNoDouble.txt 
 wc -l ../../results/intersectionTENoDouble.txt 
 less ../../results/STAR/Log.final.out
+```
+
+
+### Etape 7: Plotting des reads concernés
+
+```
+python3 reads_to_align.py ../../data/outputGraph.txt ../../results/seq.txt 11 -reverse ../../results/intersectionKissNoDouble.txt
 ```
