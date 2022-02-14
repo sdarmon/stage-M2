@@ -133,6 +133,7 @@ elif Arg[2] == "reverse":
 
 	xg = []
 	yg = []
+	Y2 = [max(100*el,40) for el in Y]
 	Z2 = [100*el for el in Z]
 	for i in range(len(x)):
 		if Y[i] == float(0):
@@ -152,7 +153,7 @@ elif Arg[2] == "reverse":
 	axs[2].legend()
 	axs[0].plot(x,Y, 'green')
 	axs[1].plot(x,Y, 'green')
-	axs[2].plot(x,Y, 'green')
+	axs[2].plot(x,Y2, 'c', label = "Frequencies times 100")
 	axs[2].plot(x,Z2, color ='orange',linestyle = 'dashed', label = "Frequencies times 100")
 	axs[2].legend()
 	axs[0].set(ylabel= "Frequencies (in %)")
