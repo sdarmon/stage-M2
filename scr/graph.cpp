@@ -395,7 +395,7 @@ int main(int argc, char** argv)
     G.weighing();
     G.weighingAllNodes(atoi(argv[3]));
 
-    if(argc == 5){
+    if(argc == 6){
         ofstream output;
         output.open(argv[5]);
         printGraphVertices(G,output);
