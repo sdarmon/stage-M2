@@ -9,17 +9,18 @@ if len(Arg) not in [3,5]:
 elif len(Arg) == 5:
     with open(Arg[1],'r') as f:
         with open(Arg[2],'w') as o:
-            oldTarget = ""
+            Vu = []
             for line in f:
-                target = line.split("\t")[int(Arg[4])]
-                if oldTarget == "":
-                    oldTarget = target
+                target = int((line.split("\t")[int(Arg[4])]).split("_")[1])
+                if target >= len(Vu):
+                    for i in range(len(Vu),target+1):
+                        Vu.append(False)
                     o.write(line)
-                elif target == oldTarget:
+                if Vu[target]:
                     continue
                 else:
                     o.write(line)
-                    oldTarget = target
+                    Vu[target] = True
 else:
     with open(Arg[1],'r') as f:
         with open(Arg[2],'w') as o:
