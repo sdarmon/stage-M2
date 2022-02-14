@@ -30,9 +30,6 @@ elif len(Arg) == 5 and Arg[3] == "-t":
                 if line[:2] == "##":
                     continue
                 target = line.split("\t")[int(Arg[4])]
-                if target >= len(Vu):
-                    for i in range(len(Vu),target+10):
-                        Vu.append(False)
                 if target in Vu:
                     continue
                 else:
