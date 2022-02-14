@@ -4,17 +4,17 @@ import sys
 
 Arg = sys.argv[:]
 
-if len(Arg) != 3:
-    print("Use : "+Arg[0]+ " input.txt output.txt")
-elif Arg[1] == "intersectionKiss.txt":
+if len(Arg) not in [3,5]:
+    print("Use : "+Arg[0]+ " input.txt output.txt -t pos")
+elif len(Arg) == 5:
     with open(Arg[1],'r') as f:
         with open(Arg[2],'w') as o:
             oldTarget = ""
             for line in f:
-                target = line.split("\t")[8]
-                if oldline == "":
+                target = line.split("\t")[int(Arg[4])]
+                if oldtarget == "":
                     oldTarget = target
-                    o.write(oldline)
+                    o.write(line)
                 elif target == oldTarget:
                     continue
                 else:
