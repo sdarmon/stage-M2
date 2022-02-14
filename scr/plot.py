@@ -133,7 +133,7 @@ elif Arg[2] == "reverse":
 
 	xg = []
 	yg = []
-	Y2 = [max(100*el,40) for el in Y]
+	Y2 = [min(100*el,40) for el in Y]
 	Z2 = [100*el for el in Z]
 	for i in range(len(x)):
 		if Y[i] == float(0):
