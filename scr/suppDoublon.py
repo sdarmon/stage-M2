@@ -12,7 +12,6 @@ elif Arg[1] == "intersectionKiss.txt":
             oldTarget = ""
             for line in f:
                 target = line.split("\t")[8]
-                print(target)
                 if oldline == "":
                     oldTarget = target
                     o.write(oldline)
