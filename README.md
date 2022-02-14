@@ -51,20 +51,21 @@ g++ graph.cpp -o graph.exe
 Puis on lance l'analyse graphique (dot) et on vérifie que la valeur donnée pour le threshold semble correcte (top10)
 
 ```
-python3 plot.py outputGraph.txt dot
-python3 plot.py outputGraph.txt top10
+python3 plot.py ../../data/outputGraph.txt dot
+python3 plot.py ../../data/outputGraph.txt top10
 ```
 
 Finallement, on génère un fichier de reads à aligner sur le génome de référence. (Ici threshold = 11)
 
 ```
-python3 reads_to_align.py outputGraph.txt read.fq 11
+python3 reads_to_align.py ../../data/outputGraph.txt ../../data/read.fq 13
 ```
 Où the input is the output of graph.exe, output.fq est le format des séquences à générer et threshold est l'output de plot.py top10.
 
 ### Etape 5: Alignement de nos reads sur le génome de ref
 
 ```
+cd ../../data
 STAR --genomeDir ../results \
 --runMode alignReads \
 --runThreadN 8 \
