@@ -133,7 +133,7 @@ elif Arg[2] == "reverse":
 
 	xg = []
 	yg = []
-	Z2 = [10*el for el in Z]
+	Z2 = [100*el for el in Z]
 	for i in range(len(x)):
 		if Y[i] == float(0):
 			yb.append(Y[i])
