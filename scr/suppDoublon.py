@@ -12,9 +12,8 @@ elif len(Arg) == 5:
             Vu = []
             for line in f:
                 target = int((line.split("\t")[int(Arg[4])]).split("_")[1])
-                print(target)
                 if target >= len(Vu):
-                    for i in range(len(Vu),target+1):
+                    for i in range(len(Vu),target+10):
                         Vu.append(False)
                     o.write(line)
                 if Vu[target]:
