@@ -393,7 +393,7 @@ int main(int argc, char** argv)
     Graph G(V,E);
 
     G.weighing();
-    G.weighingAllNodes(argv[3]);
+    G.weighingAllNodes(atoi(argv[3]));
 
     if(argc == 5){
         ofstream output;
