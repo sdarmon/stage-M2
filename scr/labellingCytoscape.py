@@ -14,7 +14,7 @@ if len(Arg) == 4:
                 reads = read.readlines()
                 index = 0
                 for line in f:
-                    if len(line <2):
+                    if len(line) <2:
                         break
                     pos = int(line.split('\t')[0])
                     if pos == int(reads[index].split('\t')[0]):
