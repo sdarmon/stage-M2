@@ -11,7 +11,7 @@ if len(Arg) == 4:
     with open(Arg[1],'r') as f:
         with open(Arg[2],'r') as read:
             with open(Arg[3],'w') as o:
-                reads = readlines(read)
+                reads = read.readlines()
                 index = 0
                 for line in f:
                     pos = int(line.split('\t')[0])
