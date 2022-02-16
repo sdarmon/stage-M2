@@ -37,7 +37,7 @@ STAR --runThreadN 8 --runMode genomeGenerate --genomeDir ../results/ --genomeFas
 ```
 ./build/bin/kissplice -r read.fa 
 ```
-Attention, il s'agit là d'une solution over-killed, il vaudra mieux repartir de `BCaml` ! (Et attention, être dans le bon répertoire)
+Attention, il s'agit là d'une solution over-killed, il vaudra mieux repartir de `BCaml` ! (Et attention, être dans le bon répertoire, pour moi data)
 
 ### Etape 4: Calcul des poids des sommets
 
@@ -45,20 +45,22 @@ On calcule les poids de chaque sommet (rajouter ici une explication)
 
 ```
 g++ graph.cpp -o graph.exe
-../DmGoth/stage-M2/scr/graph.exe graph_IR03_B_R1_IR03_C_R1_IR03_D_R1_IR03_E_R1_IR13_B_R1_IR13_C_R1_IR13_D_R1_IR13_E_R1_k41.nodes graph_IR03_B_R1_IR03_C_R1_IR03_D_R1_IR03_E_R1_IR13_B_R1_IR13_C_R1_IR13_D_R1_IR13_E_R1_k41_C0.05.edges 10 -o ../DmGoth/data/outputGraph.txt 
+cd ../../../kissplice_moustique
+../DmGoth/stage-M2/scr/graph.exe graph_IR03_B_R1_IR03_C_R1_IR03_D_R1_IR03_E_R1_IR13_B_R1_IR13_C_R1_IR13_D_R1_IR13_E_R1_k41.nodes graph_IR03_B_R1_IR03_C_R1_IR03_D_R1_IR03_E_R1_IR13_B_R1_IR13_C_R1_IR13_D_R1_IR13_E_R1_k41_C0.05.edges 250 -o ../DmGoth/data/outputGraph.txt 
+cd ../DmGoth/stage-M2/scr
 ```
 
 Puis on lance l'analyse graphique (dot) et on vérifie que la valeur donnée pour le threshold semble correcte (top10)
 
 ```
-python3 plot.py ../../data/outputGraph.txt dot
 python3 plot.py ../../data/outputGraph.txt top10
+python3 plot.py ../../data/outputGraph.txt dot
 ```
 
 Finallement, on génère un fichier de reads à aligner sur le génome de référence. (Ici threshold = 11)
 
 ```
-python3 reads_to_align.py ../../data/outputGraph.txt ../../data/read.fq 13
+python3 reads_to_align.py ../../data/outputGraph.txt ../../data/read.fq 7
 ```
 Où the input is the output of graph.exe, output.fq est le format des séquences à générer et threshold est l'output de plot.py top10.
 
