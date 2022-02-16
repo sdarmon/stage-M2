@@ -46,7 +46,7 @@ On calcule les poids de chaque sommet (rajouter ici une explication)
 ```
 g++ graph.cpp -o graph.exe
 cd ../../../kissplice_moustique
-../DmGoth/stage-M2/scr/graph.exe graph_IR03_B_R1_IR03_C_R1_IR03_D_R1_IR03_E_R1_IR13_B_R1_IR13_C_R1_IR13_D_R1_IR13_E_R1_k41.nodes graph_IR03_B_R1_IR03_C_R1_IR03_D_R1_IR03_E_R1_IR13_B_R1_IR13_C_R1_IR13_D_R1_IR13_E_R1_k41_C0.05.edges 250 -o ../DmGoth/data/outputGraph.txt 
+../DmGoth/stage-M2/scr/graph.exe graph_IR03_B_R1_IR03_C_R1_IR03_D_R1_IR03_E_R1_IR13_B_R1_IR13_C_R1_IR13_D_R1_IR13_E_R1_k41.nodes graph_IR03_B_R1_IR03_C_R1_IR03_D_R1_IR03_E_R1_IR13_B_R1_IR13_C_R1_IR13_D_R1_IR13_E_R1_k41_C0.05.edges 200 -o ../DmGoth/data/outputGraph.txt 
 cd ../DmGoth/stage-M2/scr
 ```
 
@@ -60,7 +60,7 @@ python3 plot.py ../../data/outputGraph.txt dot
 Finallement, on génère un fichier de reads à aligner sur le génome de référence. (Ici threshold = 11)
 
 ```
-python3 reads_to_align.py ../../data/outputGraph.txt ../../data/read.fq 7
+python3 reads_to_align.py ../../data/outputGraph.txt ../../data/read.fq 8
 ```
 Où the input is the output of graph.exe, output.fq est le format des séquences à générer et threshold est l'output de plot.py top10.
 
@@ -100,3 +100,13 @@ less ../../results/STAR/Log.final.out
 ```
 python3 reads_to_align.py ../../data/outputGraph.txt ../../results/seq.txt 11 -reverse ../../results/intersectionKissNoDouble.txt
 ```
+
+
+### Etape 8: Afficher une séquence sur Cytoscape:
+
+```
+/data/home/vincent/TiffanyDelhomme$ ./nbh -n /localdata/pandata/students/Projet_KS/kissplice_moustique/graph_IR03_B_R1_IR03_C_R1_IR03_D_R1_IR03_E_R1_IR13_B_R1_IR13_C_R1_IR13_D_R1_IR13_E_R1_k41.nodes -e /localdata/pandata/students/Projet_KS/kissplice_moustique/graph_IR03_B_R1_IR03_C_R1_IR03_D_R1_IR03_E_R1_IR13_B_R1_IR13_C_R1_IR13_D_R1_IR13_E_R1_k41_C0.05.edges -k 41 -o /localdata/pandata/students/Projet_KS/DmGoth/data/nbh -d 20 -q CCTCCCCCCCTTGGAGCGTGACGTAATTTGTGCATGACCCC
+Cytoscape &
+```
+
+Puis File > Import > Import Network from file
