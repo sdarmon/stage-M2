@@ -7,7 +7,7 @@ Arg = sys.argv[:]
 if len(Arg) not in [5]:
     print("Use : "+Arg[0]+ " edges.txt inputRead.txt selectedReads.txt output.txt")
     exit()
-if len(Arg) == 4:
+if len(Arg) == 5:
     node = set()
     with open(Arg[1],'r') as f:
         for line in f:
