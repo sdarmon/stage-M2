@@ -18,7 +18,7 @@ if len(Arg) == 5:
             node.add(int(L[1]))
     with open(Arg[2],'r') as f:
         with open(Arg[4],'w') as o:
-            th = Arg[3]
+            th = int(Arg[3])
             for line in f:
                 if len(line) <2:
                     break
