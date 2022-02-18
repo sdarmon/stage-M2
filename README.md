@@ -102,14 +102,20 @@ python3 reads_to_align.py ../../data/outputGraph.txt ../../results/seq.txt 11 -r
 ```
 
 
-### Etape 8: Afficher une séquence sur Cytoscape:
+## Afficher une séquence sur Cytoscape:
 
 ```
-/data/home/vincent/TiffanyDelhomme$ ./nbh -n /localdata/pandata/students/Projet_KS/kissplice_moustique/graph_IR03_B_R1_IR03_C_R1_IR03_D_R1_IR03_E_R1_IR13_B_R1_IR13_C_R1_IR13_D_R1_IR13_E_R1_k41.nodes -e /localdata/pandata/students/Projet_KS/kissplice_moustique/graph_IR03_B_R1_IR03_C_R1_IR03_D_R1_IR03_E_R1_IR13_B_R1_IR13_C_R1_IR13_D_R1_IR13_E_R1_k41_C0.05.edges -k 41 -o /localdata/pandata/students/Projet_KS/DmGoth/data/nbh -d 20 -q CCTCCCCCCCTTGGAGCGTGACGTAATTTGTGCATGACCCC
+/data/home/vincent/TiffanyDelhomme$ ./nbh -n /localdata/pandata/students/Projet_KS/kissplice_moustique/graph_IR03_B_R1_IR03_C_R1_IR03_D_R1_IR03_E_R1_IR13_B_R1_IR13_C_R1_IR13_D_R1_IR13_E_R1_k41.nodes -e /localdata/pandata/students/Projet_KS/kissplice_moustique/graph_IR03_B_R1_IR03_C_R1_IR03_D_R1_IR03_E_R1_IR13_B_R1_IR13_C_R1_IR13_D_R1_IR13_E_R1_k41_C0.05.edges -k 41 -o /localdata/pandata/students/Projet_KS/DmGoth/data/nbh/graph -d 10 -q AGTAAATGTCACAGTTACAATCTCCGGCCATGGAAAAACCAGAAGTAATGAGCCGATCTCCGAGATGCTCAAGTGCAACACC
 
-python3 labellingCytoscape.py ../../data/nbh.edges ../../data/outputGraph.txt ../../results/seq.txt ../../data/nbh.label
+python3 labellingCytoscape.py ../../data/nbh/graph.edges ../../data/outputGraph.txt 8 ../../data/nbh/graph.label
 
 Cytoscape &
 ```
 
 Puis File > Import > Import Network from file
+
+
+
+## Graph foward et reverse
+
+
