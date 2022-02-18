@@ -1,3 +1,14 @@
+// ===========================================================================
+//                               Include Libraries
+// ===========================================================================
+#include <list>
+#include <vector>
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <stdio.h>
+#include <cstring>
+#include <algorithm>
 #include "graph.h"
 
 

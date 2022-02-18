@@ -1,12 +1,25 @@
 // ===========================================================================
-//                                  Constructors
 // ===========================================================================
-/* All the data is coded with int data type. For graph with more than 2147483648
-* (> 2x10^9) nodes or edges, you will get trouble!
-* Instead of int, use unsigned int (for the same weight, extend this upper bound
-* to 4x10^9) or long long int (for twice the weight, extention to 2^63 ~ 10^19).
-*
-*/
+//                               Classe de graphes
+// ===========================================================================
+// ===========================================================================
+
+
+/* 
+ * Ce fichier permet de manipuler les graphes pondérés avec des classes adaptées 
+ * Pour voir les défintions des classes, allez dans le fichier graph.h.
+ * Ce fichier contient seulement les fonctions et méthodes liées aux classes
+ * définies dans le fichier graph.h.
+ */
+
+/* 
+ * WARNING
+ * All the data is coded with int data type. For graph with more than 2147483648
+ * (> 2x10^9) nodes or edges, you will get trouble!
+ * Instead of int, use unsigned int (for the same weight, extend this upper bound
+ * to 4x10^9) or long long int (for twice the weight, extention to 2^63 ~ 10^19).
+ *
+ */
 
 // ===========================================================================
 //                               Include Libraries
@@ -32,9 +45,11 @@
 using namespace std;
 #define MAX 1024
 
+
 // ===========================================================================
-//                                  Structures
+//                                  Constructors
 // ===========================================================================
+
 
 Node::Node(int v, int w, string l){
         val = v;
@@ -48,16 +63,15 @@ Neighbor::Neighbor(int v, int w, char* l){
         strcpy(label,l);
     }
 
-// stores adjacency list items
-LstNode::LstNode() {
+LstNode::LstNode() { // Je crois que ce constructeur ne fonctionne pas, à éviter
         adjVec.clear();
     }
+
 LstNode::LstNode(vector<Neighbor>& A) {
         adjVec = A;
     }
 
 
-// structure to store edges
 Edge::Edge(int s, int e, int w, char* l) {
         start = s;
         end = e;
@@ -65,14 +79,12 @@ Edge::Edge(int s, int e, int w, char* l) {
         strcpy(label,l);
     }
 
-// ===========================================================================
-//                                  Class
-// ===========================================================================
-
-
-
+/* Un graphe est défini par ses sommets (vecteur de Nodes) et
+ * ses arêtes (des listes d'adjacence i.e. un vecteur de LstNode).
+ * On tient également en mémoire le nombre de sommets (N) et le 
+ * nombre d'arête M.
+ */
 Graph::Graph(vector<Node>& vertices, vector<Edge>& edges)  {
-
         N = vertices.size();
         M = 0;
         Vertices = vertices;
@@ -96,18 +108,21 @@ Graph::Graph(vector<Node>& vertices, vector<Edge>& edges)  {
 //                  Public methodes  
 //================================================================
 
+//Ajoute une arête (de type Edge) au graphe.
 void Graph::add( Edge &e) {
     Neighbor node(e.end,e.weight,e.label);
    (Adj[e.start].adjVec).push_back(node);
    M++;
     }
 
+//Ajoute une arête (définie par ses quatres paramètres) au graphe.
 void Graph::add(int start,int end, int weight, char* labelEdge)   {
         Neighbor node(end,weight,labelEdge);
        (Adj[start].adjVec).push_back(node);
        M++;
     }
 
+//Ajoute un sommet (de type Node) au graphe.
 void Graph::add(Node &v) {
    Vertices.push_back(v);
        LstNode A;
@@ -115,6 +130,7 @@ void Graph::add(Node &v) {
    N++;
     }
 
+//Ajoute un sommet (défini par ses trois paramètres) au graphe.
 void Graph::add(int val,int weight, string label)   {
         Node node(val,weight,label);
        Vertices.push_back(node);
@@ -123,6 +139,10 @@ void Graph::add(int val,int weight, string label)   {
        N++;
     }
 
+/* Permet de savoir s'il existe une arête du sommet start au sommet end.
+ * Si c'est le cas, revoit un pointeur vers l'arête dans la liste d'adjacence.
+ * Sinon, revoit le pointeur NULL.
+ */
 Neighbor* Graph::link(int start, int end) {
     if (start >= N) {
         return NULL;
@@ -135,10 +155,21 @@ Neighbor* Graph::link(int start, int end) {
     return NULL;
 }
 
+/* WARNING
+ * Dans ce model de graphe, on suppose que l'on ne peut pas retirer des
+ * sommets et donc la valeur d'un sommet est tout simplement son indice
+ * dans le vecteur des sommets. La fonction suivante sert juste à
+ * renvoyer la liste d'adjacence du n-ème sommet du graphe.
+ * En cas d'ajout de la possibilité de retirer des sommets, cette
+ * fonction sera bien à préciser car ne renverra pas forcément les
+ * voisins d'un sommet de valeur donnée!!!!
+ */ 
 vector<Neighbor>* Graph::Neighbors(int n){
     return &(Adj[n].adjVec);
 }
 
+
+//Donne comme poids à toutes les arêtes la taille du label du sommet d'arrivé
 void Graph::weighing(){
     for (int index = 0; index < N; index++){
         for (vector<Neighbor>::iterator it = Neighbors(index)->begin(); it != Neighbors(index)->end(); ++it){
@@ -148,32 +179,32 @@ void Graph::weighing(){
 }
 
 
-
-
-// /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ 
-//   Petite approximation ici, je suppose que dès lors que l'on 
-//   voit un sommet par le sens foward, on ne le recroisera pas
-//   par le sens reverse! Cela semble peu probable d'arriver et
-//   l'impact semble peu important (car BFS) mais on sous-estime
-//   la vraie valeur.
-// /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ 
-
-
+/* /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ 
+ *   Petite approximation ici, je suppose que dès lors que l'on 
+ *   voit un sommet par le sens foward, on ne le recroisera pas
+ *   par le sens reverse! Cela semble peu probable d'arriver et
+ *   l'impact semble peu important (car BFS) mais on sous-estime
+ *   la vraie valeur.
+ *  /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ 
+ *
+ * Fonction inductive permettant d'effectuer un BFS, en mettant à jour
+ * les données pour les appels inductifs suivants. De manière générale,
+ * cette fonction sert à compter le nombre de sommets dans une boule de
+ * rayon fixé, autour d'un sommet donné. 
+ */
 int Graph::BFSCount(vector<int> &rayons, int acc,vector<Neighbor*> &aVoir,vector<int> &vu){
-    if (aVoir.size() == 0){
+    if (aVoir.size() == 0){ //Cas de terminaison, on a terminé le BFS
         return acc;
     }
     int rayon = rayons.front();
     rayons.erase(rayons.begin());
     Neighbor* node = aVoir.front();
     aVoir.erase(aVoir.begin());
-    if (find(vu.begin(),vu.end(),node->val) != vu.end()){
-        //Cas où le sommet a été vu par le BFS
+    if (find(vu.begin(),vu.end(),node->val) != vu.end()){ //Cas où le sommet a été vu par le BFS
         return BFSCount(rayons,acc,aVoir,vu);
     }
     vu.push_back(node->val);
-    if (node->weight<= rayon){
-        //Cas où le sommet est bien dans la boule de rayon
+    if (node->weight<= rayon){ //Cas où le sommet est bien dans la boule
         for (vector<Neighbor>::iterator it = Neighbors(node->val)->begin(); it != Neighbors(node->val)->end(); ++it){
             //On boucle sur ses voisins
             if (it->label[0] == node->label[1] && find(vu.begin(),vu.end(),it->val) == vu.end()){ 
@@ -185,9 +216,10 @@ int Graph::BFSCount(vector<int> &rayons, int acc,vector<Neighbor*> &aVoir,vector
         return BFSCount(rayons,acc+1,aVoir,vu); //On traite les cas suivants, en prennant en compte le sommet
     }
 
-    return BFSCount(rayons,acc,aVoir,vu); //On continue sans prendre en compte le sommet.
+    return BFSCount(rayons,acc,aVoir,vu); //Sinon, on continue sans prendre en compte le sommet.
 }
 
+//Permet de donner un poids à un sommet, correspondant aux nombres de sommets présents dans un rayon donné.
 void Graph::weighingANode(int source, int rayon) {
     vector<Neighbor*> aVoir;
     vector<int> vu;
@@ -203,6 +235,7 @@ void Graph::weighingANode(int source, int rayon) {
     Vertices[source].weight = BFSCount(rayons,1,aVoir,vu);
 }
 
+//PErmet de donner un poids à tous les sommets du graphe.
 void Graph::weighingAllNodes(int rayon) {
     for (vector<Node>::iterator it = Vertices.begin(); it != Vertices.end(); ++it){
         weighingANode(it->val, rayon-it->label.size());
@@ -213,12 +246,11 @@ void Graph::weighingAllNodes(int rayon) {
 //                  Reading functions
 //================================================================
 
+//Compte le nombre de ligne (réalisé par Pierre Peterlongo et Vincent Lacroix)
 int count_nb_lines( FILE* file )
 {
   int number_of_lines = 0;
   char ch;
-
-  
   while (true) {
         ch=fgetc(file);
         if (ch == (int)'\n') {
@@ -228,13 +260,13 @@ int count_nb_lines( FILE* file )
             break;
         }
     }
-  
   // Set the cursor back to the begining of the file.
   rewind(file);
   // Don't care if the last line has a '\n' or not. We over-estimate it.
   return number_of_lines; 
 }
 
+//Lit un fichier contenant les sommets du graphe et les ajoute au vecteur seqs (réalisé par Pierre Peterlongo et Vincent Lacroix)
 void read_node_file( FILE* node_file, vector<Node>& seqs)
 {
     seqs.clear();
@@ -269,6 +301,7 @@ void read_node_file( FILE* node_file, vector<Node>& seqs)
     delete [] buffer;
 }
 
+//Lit un fichier d'arêtes et les ajoute au vecteur edges (réalisé par Pierre Peterlongo et Vincent Lacroix)
 void read_edge_file( FILE *edge_file, vector<Edge>& edges )
 {
   char* buffer = new char[100 * MAX];
@@ -294,26 +327,20 @@ void read_edge_file( FILE *edge_file, vector<Edge>& edges )
   
     Edge e(atoi(u),atoi(v),0,p);
     edges.push_back(e);
-
   }
-  
-  
   delete [] buffer;
   delete [] u;
   delete [] v;
-  
 }
 
 
-
-
 //================================================================
-//                  Test part
+//                  Fonctions d'affichage
 //================================================================
 
 
 
-// print all adjacent vertices of given vertex
+//Affiche les sommets d'un graphe
 void printGraphVertices(Graph& G)
 {
     vector<Node> V = G.Vertices;
@@ -323,6 +350,7 @@ void printGraphVertices(Graph& G)
     cout << endl;
 }
 
+//Affiche les sommets d'un graphe dans une autre sortie (dans un fichier par exemple)
 void printGraphVertices(Graph& G,ofstream& output)
 {
     vector<Node> V = G.Vertices;
@@ -331,7 +359,7 @@ void printGraphVertices(Graph& G,ofstream& output)
     }
 }
 
-
+//Affiche les sommets d'un graphe à partir d'un vecteur de Nodes
 void printVertices(vector<Node>& V)
 {
     for (vector<Node>::iterator it = V.begin(); it != V.end(); ++it) {
@@ -340,6 +368,7 @@ void printVertices(vector<Node>& V)
     cout << endl;
 }
 
+//Affiche les arêtes d'un graphe
 void printGraphEdges(Graph& G)
 {
     vector<LstNode> Adj = G.Adj;
@@ -352,6 +381,7 @@ void printGraphEdges(Graph& G)
     cout << endl;
 }
 
+//Affiche les arêtes d'un graphe à partir d'un vecteur d'Edges
 void printEdges(vector<Edge>& E)
 {
     int M = E.size();
@@ -364,44 +394,6 @@ void printEdges(vector<Edge>& E)
 }
 
 
-    // printVertices(V);
-    // printEdges(E);
-
-    // printGraphVertices(G);
-    // printGraphEdges(G);
-
-    // cout << "Il y a " << G.M << " arrêtes" << endl;
-
-    // char l[2] = {'F','R'};
-    // Edge e(0,1,2,l);
-    // G.add(e);
-    // cout << "Il y a " << G.M << " arrêtes" << endl;
-
-
-    // printGraphEdges(G);
-
-
-    // Neighbor* p;
-    // p =G.link(2,6);
-    // if (p != NULL){
-    //     cout << "Edge found! weight: " << p->weight << "  type: " << (string)p->label << endl;
-    // } else {
-    //     cout << "Edge not found..." << endl;
-    // }
-
-    // p = G.link(20,3);
-    // if (p != NULL){
-    //     cout << "Edge found! weight: " << p->weight << "  type: " << (string)p->label << endl;
-    // } else {
-    //     cout << "Edge not found..." << endl;
-    // }
-
-    // p = G.link(1,6);
-    // if (p != NULL){
-    //     cout << "Edge found! weight: " << p->weight << "  type: " << (string)p->label << endl;
-    // } else {
-    //     cout << "Edge not found..." << endl;
-    // }
 
 
 

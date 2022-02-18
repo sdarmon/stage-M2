@@ -28,8 +28,16 @@ On a besoin tout d'abord des séquences ref_genome.fna, genome.gtf et TEgenome.g
 
 ### Etape 2: Création de la carte
 
+Moustique : 
+
 ```
 STAR --runThreadN 8 --runMode genomeGenerate --genomeDir ../results/ --genomeFastaFiles ncbi-genomes-2022-02-11/GCF_002204515.2_AaegL5.0_genomic.fna --sjdbGTFfile ncbi-genomes-2022-02-11/GCF_002204515.2_AaegL5.0_genomic.gtf -sjdbOverhang 74 --genomeSAindexNbases 13 --genomeSAsparseD 4
+```
+
+Path pour le chien : home/sdarmon/Documents/stage-M2/peda/fastq/SRR_Chiens
+
+```
+STAR --runThreadN 8 --runMode genomeGenerate --genomeDir ../results/chien/ --genomeFastaFiles ../../fastq/SRR_Chiens/Canis_lupus_familiaris-GCA_011100685.1-unmasked.fa --sjdbGTFfile ../../fastq/SRR_Chiens/Canis_lupus_familiaris-GCA_011100685.1-2021_03-genes.gff3 -sjdbOverhang 74 --genomeSAindexNbases 13 --genomeSAsparseD 4
 ```
 
 ### Etape 3: Génération du graphe de De Bruijn
@@ -44,7 +52,7 @@ Attention, il s'agit là d'une solution over-killed, il vaudra mieux repartir de
 On calcule les poids de chaque sommet (rajouter ici une explication)
 
 ```
-g++ graph.cpp -o graph.exe
+g++ main.cpp -o graph.exe
 cd ../../../kissplice_moustique
 ../DmGoth/stage-M2/scr/graph.exe graph_IR03_B_R1_IR03_C_R1_IR03_D_R1_IR03_E_R1_IR13_B_R1_IR13_C_R1_IR13_D_R1_IR13_E_R1_k41.nodes graph_IR03_B_R1_IR03_C_R1_IR03_D_R1_IR03_E_R1_IR13_B_R1_IR13_C_R1_IR13_D_R1_IR13_E_R1_k41_C0.05.edges 200 -o ../DmGoth/data/outputGraph.txt 
 cd ../DmGoth/stage-M2/scr
@@ -116,6 +124,6 @@ Puis File > Import > Import Network from file
 
 
 
-## Graph foward et reverse
+## Graphe foward et reverse
 
 

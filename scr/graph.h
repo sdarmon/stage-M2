@@ -6,6 +6,16 @@ using namespace std;
 #include <vector>
 
 
+
+// ===========================================================================
+//                                  Structures
+// ===========================================================================
+
+/* 
+ * Noeud d'un graphe 
+ * Il est défini par une valeur val et par un label (string).
+ * On rajoute aussi un argument weight pour lui donner un poids (variable)
+ */
 class Node {
 public:
     int val, weight;
@@ -13,6 +23,12 @@ public:
     Node(int v, int w, string l);
 };
 
+
+/* 
+ * Noeud dans la liste d'adjacence d'un graphe. 
+ * Il est défini par une valeur val et par un label (ici deux caractères correspondant au type de l'arête).
+ * On rajoute aussi un argument weight pour lui donner un poids (variable)
+ */
 class Neighbor {
 public:
     int val, weight;
@@ -20,7 +36,11 @@ public:
     Neighbor(int v, int w, char* l);
 };
 
-
+/* 
+ * Liste des noeuds adajacents à un certain noeud donné. 
+ * Il est défini seulement par un vecteur de Neighbor.
+ * Je pense qu'ici il serait préférable de ne pas utiliser une classe...
+ */
 class LstNode {
 public:
     vector<Neighbor> adjVec;
@@ -29,7 +49,11 @@ public:
 };
 
 
-
+/* 
+ * Arête d'un graphe. 
+ * Il est défini par une valeur de départ (start), d'arrivé (end) et un label (ici deux caractères correspondant au type de l'arête).
+ * On rajoute aussi un argument weight pour lui donner un poids (variable)
+ */
 class Edge {
 public:
     int start, end, weight;
@@ -39,7 +63,11 @@ public:
 
 
 
-
+/* 
+ * Arête d'un graphe. 
+ * Il est défini par une valeur de départ (start), d'arrivé (end) et un label (ici deux caractères correspondant au type de l'arête).
+ * On rajoute aussi un argument weight pour lui donner un poids (variable)
+ */
 class Graph
 {
     public:
