@@ -112,6 +112,7 @@ void read_node_file( FILE* node_file, vector<Node>& seqs);
 void read_edge_file( FILE *edge_file, vector<Edge>& edges );
 
 void printGraphVertices(Graph& G);
+void printGraphVertices(Graph& G,ofstream& output);
 void printVertices(vector<Node>& V);
 void printGraphEdges(Graph& G);
 void printEdges(vector<Edge>& E);
