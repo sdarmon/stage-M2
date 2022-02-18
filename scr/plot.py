@@ -1,3 +1,12 @@
+# Cette fonction permet de traiter les poids des sommets, après avoir
+# utilisé l'executable graph.exe.
+# L'option "dot" permet d'afficher les courbes
+# L'option "his" permet d'afficher des histogrammes des données
+# L'option "top10" permet d'obtenir le poids correspondant à la limite
+# des 10% d'unitigs aux poids les plus élevés
+# L'option "reverse" permet d'afficher les courbes avec les poids
+# matchant avec un TE ou une répétition connu.
+
 import numpy as np 
 import matplotlib.pyplot as plt
 import sys
@@ -47,7 +56,7 @@ elif Arg[2] == "dot":
 	axs[0].set(ylabel= "Frequencies (in %)")
 	axs[1].set(ylabel= "Frequencies (in %)")
 	plt.xlabel("Sizes of weight")
-	fig.suptitle("Frequencies of the different sizes of weight (Case radius = 200)")
+	fig.suptitle("Frequencies of the different sizes of weight (Case of "+Arg[0][:-4]+")")
 	plt.show()
 
 

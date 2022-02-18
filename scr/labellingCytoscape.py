@@ -1,3 +1,5 @@
+# Ce script permet d'obtenir la table des sommets utilisée par Cytoscape
+
 import numpy as np 
 import sys
 

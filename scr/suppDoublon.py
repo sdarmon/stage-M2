@@ -1,3 +1,6 @@
+# Petit script permettant de supprimer les lignes ayant les mêmes target
+# pour intersectionTE et intersectionKiss
+
 import numpy as np 
 import sys
 

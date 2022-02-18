@@ -1,3 +1,12 @@
+# Cette fonction permet de convertir les unitigs ayant un poids 
+# supérieur au threshold au format fastq. Note à moi-même, cela 
+# sera utilisé par STAR qui prend également en entrée les fichiers
+# au format fasta qui sont donc bien moins gros et compliqué à faire!!!
+# L'option "-reserse" permet de récupérer les unitigs qui sont issus du
+# fichier d'intersectionKissNoDouble.txt
+
+
+
 import numpy as np 
 import sys
 
