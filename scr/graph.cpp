@@ -444,10 +444,8 @@ void printEdges(vector<Edge>& E,ofstream& output)
 {
     int M = E.size();
     Edge* e;
-    for (int i = 0; i<M ; i++ ) {
-        *e = E[i];
-        cout << "coucou" << i << endl;
-        output << e->start << "\t" << e->end << "\t" << (string)e->label << "\n";
+    for (vector<Edge>::iterator it = E.begin(); it != E.end(); ++it) {
+        output << it->start << "\t" << it->end << "\t" << (string)it->label << "\n";
     }
 }
 
