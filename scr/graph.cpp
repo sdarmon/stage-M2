@@ -182,15 +182,15 @@ void Graph::weighing(){
 void comp(char* s, char* r){
     if (s[0] == 'F')
     {
-        r[0]='R';
-    } else {
-        r[0] = 'F';
-    }
-    if (s[1] == 'F')
-    {
         r[1]='R';
     } else {
         r[1] = 'F';
+    }
+    if (s[1] == 'F')
+    {
+        r[0]='R';
+    } else {
+        r[0] = 'F';
     }
 }
 
