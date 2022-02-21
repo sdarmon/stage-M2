@@ -127,7 +127,28 @@ int main(int argc, char** argv)
             aVoir.push_back(&(*it));
         }
     }
-    G.BFS(0,reverse,aVoir,vu);
+    G.BFS(0,foward,aVoir,vu);
+
+    aVoir.clear();
+    vu.clear();
+    vu.push_back(node.val);
+    for (vector<Neighbor>::iterator it = G.Neighbors(node.val)->begin(); it != G.Neighbors(node.val)->end(); ++it){
+        if (it->label[0] == 'F'){
+            aVoir.push_back(&(*it));
+        }
+    }
+    G.BFS(0,foward,aVoir,vu);
+
+    aVoir.clear();
+    vu.clear();
+    vu.push_back(node.val);
+    for (vector<Neighbor>::iterator it = G.Neighbors(node.val)->begin(); it != G.Neighbors(node.val)->end(); ++it){
+        if (it->label[0] == 'R'){
+            aVoir.push_back(&(*it));
+        }
+    }
+    G.BFS(1,foward,aVoir,vu);
+
 
     ofstream edges_foward;
     ofstream edges_reverse;
