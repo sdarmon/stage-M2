@@ -178,6 +178,52 @@ void Graph::weighing(){
     }
 }
 
+//Calcule l'arête complémentaire de s.
+void comp(char* s, char* r){
+    if (s[0] == 'F')
+    {
+        r[0]='R';
+    } else {
+        r[0] = 'F';
+    }
+    if (s[1] == 'F')
+    {
+        r[1]='R';
+    } else {
+        r[1] = 'F';
+    }
+}
+
+// BFS qui stocke les arêtes vus dans e. Le premier argument permet de dire dans quel sens on va
+void Graph::BFS(int r, vector<Edge>& e ,vector<Neighbor*> &aVoir,vector<int> &vu){
+    if (aVoir.size() == 0){ //Cas de terminaison, on a terminé le BFS
+        return;
+    }
+    Neighbor* node = aVoir.front();
+    aVoir.erase(aVoir.begin());
+    if (find(vu.begin(),vu.end(),node->val) != vu.end()){ //Cas où le sommet a été vu par le BFS
+        return BFS(r,e,aVoir,vu);
+    }
+    vu.push_back(node->val);
+    for (vector<Neighbor>::iterator it = Neighbors(node->val)->begin(); it != Neighbors(node->val)->end(); ++it){
+        //On boucle sur ses voisins
+        if (it->label[0] == node->label[1] && find(vu.begin(),vu.end(),it->val) == vu.end()){ 
+            //Cas où l'arrêt est bien valide et sommet non vu avant, ce voisin est rajouté dans la file des visites
+            aVoir.push_back(&(*it));
+            if (r){
+                Edge edge(node->val,it->val,0,it->label);
+                e.push_back(edge);
+            } else {
+                char r[2];
+                comp(it->label,r);
+                Edge edge(it->val,node->val,0,r);
+                e.push_back(edge);
+            }
+        }
+    }
+    return BFS(r,e,aVoir,vu); //Sinon, on continue sans prendre en compte le sommet.
+}
+
 
 /* /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ 
  *   Petite approximation ici, je suppose que dès lors que l'on 
@@ -391,6 +437,17 @@ void printEdges(vector<Edge>& E)
         cout << e->start << " to " << e->end << " of type " << (string)e->label << " and of weight " << e->weight << endl;
     }
     cout << endl;
+}
+
+//Affiche les arêtes d'un graphe à partir d'un vecteur d'Edges
+void printEdges(vector<Edge>& E,ofstream& output)
+{
+    int M = E.size();
+    Edge* e;
+    for (int i = 0; i<M ; i++ ) {
+        *e = E[i];
+        output << e->start << "\t" << e->end << "\t" << (string)e->label << endl;
+    }
 }
 
 

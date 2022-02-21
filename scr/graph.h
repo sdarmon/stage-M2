@@ -100,6 +100,7 @@ class Graph
 
     vector<Neighbor>* Neighbors(int n);
     void weighing();
+    void BFS(int r, vector<Edge>& e ,vector<Neighbor*> &aVoir,vector<int> &vu);
     int BFSCount(vector<int> &rayons, int acc,vector<Neighbor*> &aVoir,vector<int> &vu);
     void weighingANode(int source, int rayon);
     void weighingAllNodes(int rayon);
@@ -107,6 +108,7 @@ class Graph
 
 
 //Other functions
+void comp(char* s, char* r);
 int count_nb_lines( FILE* file );
 void read_node_file( FILE* node_file, vector<Node>& seqs);
 void read_edge_file( FILE *edge_file, vector<Edge>& edges );
@@ -116,5 +118,6 @@ void printGraphVertices(Graph& G,ofstream& output);
 void printVertices(vector<Node>& V);
 void printGraphEdges(Graph& G);
 void printEdges(vector<Edge>& E);
+void printEdges(vector<Edge>& E,ofstream& output);
 
 #endif //def_graph
