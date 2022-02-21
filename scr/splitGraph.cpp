@@ -141,7 +141,9 @@ int main(int argc, char** argv)
 
     ofstream edges_foward;
     ofstream edges_reverse;
+    cout << "coucou6.5" << endl;
     edges_foward.open((string)argv[4]+(string)"_foward.edges");
+    cout << "coucou6.75" << endl;
     printEdges(foward,edges_foward);
     edges_foward.close();
     cout << "coucou7" << endl;
