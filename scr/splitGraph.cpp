@@ -68,7 +68,7 @@ void read_node_file_4args( FILE* node_file, vector<Node>& seqs)
 // graph implementation
 int main(int argc, char** argv)
 {
-    if (argc!=3){
+    if (argc!=4){
         cout << "Expected use of this program: \n\n\t" <<argv[0] << " originalFile.nodes file.node file.edges outputPrefixe\n" << endl;
         return 0;
     }

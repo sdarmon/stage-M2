@@ -165,4 +165,8 @@ Puis File > Import > Import Network from file
 
 ## Graphe foward et reverse
 
+```
+g++ graph.cpp splitGraph.cpp -o split.exe
+./split.exe ../../../kissplice_results/kissplice_moustique/graph_IR03_B_R1_IR03_C_R1_IR03_D_R1_IR03_E_R1_IR13_B_R1_IR13_C_R1_IR13_D_R1_IR13_E_R1_k41.nodes ../../data/nbh/graph.nodes ../../data/nbh/graph.edges ../../data/graph
 
+```
