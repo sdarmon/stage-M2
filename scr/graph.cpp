@@ -446,7 +446,7 @@ void printEdges(vector<Edge>& E,ofstream& output)
     Edge* e;
     for (int i = 0; i<M ; i++ ) {
         *e = E[i];
-        output << e->start << "\t" << e->end << "\t" << (string)e->label << endl;
+        output << e->start << "\t" << e->end << "\t" << (string)e->label << "\n";
     }
 }
 

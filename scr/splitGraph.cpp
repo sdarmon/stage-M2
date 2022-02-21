@@ -83,8 +83,6 @@ int main(int argc, char** argv)
     char* nodesVuPath = argv[2];
     char* edgesPath = argv[3];
 
-    cout << "coucou" << endl;
-
     FILE * edges;
     FILE * nodes;
     FILE * nodesVu;
@@ -93,15 +91,12 @@ int main(int argc, char** argv)
     nodes= fopen(nodesPath,"r");
     nodesVu= fopen(nodesVuPath,"r");
 
-    cout << "coucou2" << endl;
-
     read_edge_file(edges,E);
     read_node_file(nodes,V);
     read_node_file_4args(nodesVu,Vvu);
 
     Graph G(V,E);
 
-    cout << "coucou3" << endl;
 
     foward.clear();
     reverse.clear();
@@ -110,8 +105,6 @@ int main(int argc, char** argv)
         cout << "Pas de références!" << endl;
         return 0;
     }
-
-    cout << "coucou4" << endl;
 
     Node node = Vvu.front();
     vector<Neighbor*> aVoir;
@@ -126,7 +119,6 @@ int main(int argc, char** argv)
     }
     G.BFS(1,foward,aVoir,vu);
 
-    cout << "coucou5" << endl;
     aVoir.clear();
     vu.clear();
     vu.push_back(node.val);
@@ -137,16 +129,11 @@ int main(int argc, char** argv)
     }
     G.BFS(0,reverse,aVoir,vu);
 
-    cout << "coucou6" << endl;
-
     ofstream edges_foward;
     ofstream edges_reverse;
-    cout << "coucou6.5" << endl;
     edges_foward.open((string)argv[4]+(string)"_foward.edges");
     printEdges(foward,edges_foward);
-    cout << "coucou6.75" << endl;
     edges_foward.close();
-    cout << "coucou7" << endl;
     edges_reverse.open((string)argv[4]+(string)"_reverse.edges");
     printEdges(reverse,edges_reverse);
     edges_reverse.close();
