@@ -137,7 +137,7 @@ int main(int argc, char** argv)
             aVoir.push_back(&(*it));
         }
     }
-    G.BFS(0,foward,aVoir,vu);
+    G.BFS(0,reverse,aVoir,vu);
 
     aVoir.clear();
     vu.clear();
@@ -147,7 +147,7 @@ int main(int argc, char** argv)
             aVoir.push_back(&(*it));
         }
     }
-    G.BFS(1,foward,aVoir,vu);
+    G.BFS(1,reverse,aVoir,vu);
 
 
     ofstream edges_foward;
