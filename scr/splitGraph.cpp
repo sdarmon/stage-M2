@@ -116,6 +116,8 @@ int main(int argc, char** argv)
     for (vector<Neighbor>::iterator it = G.Neighbors(node.val)->begin(); it != G.Neighbors(node.val)->end(); ++it){
         if (it->label[0] == 'F'){
             aVoir.push_back(&(*it));
+            Edge edge(node.val,it->val,0,it->label);
+            foward.push_back(edge);
         }
     }
     G.BFS(1,foward,aVoir,vu);
@@ -126,6 +128,10 @@ int main(int argc, char** argv)
     for (vector<Neighbor>::iterator it = G.Neighbors(node.val)->begin(); it != G.Neighbors(node.val)->end(); ++it){
         if (it->label[0] == 'R'){
             aVoir.push_back(&(*it));
+            char r[2];
+            comp(it->label,r);
+            Edge edge(it->val,node.val,0,r);
+            reverse.push_back(edge);
         }
     }
     G.BFS(0,reverse,aVoir,vu);
