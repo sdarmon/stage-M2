@@ -107,6 +107,7 @@ int main(int argc, char** argv)
     }
 
     Node node = Vvu.front();
+    cout << "Le noeud de départ est le " << node.val << " de séquence " << node.seq << endl;
     vector<Neighbor*> aVoir;
     vector<int> vu;
     aVoir.clear();
