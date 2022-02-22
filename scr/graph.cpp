@@ -250,13 +250,13 @@ int Graph::BFSCount(vector<int> &rayons, int acc,vector<Neighbor*> &aVoir,vector
         return BFSCount(rayons,acc,aVoir,vu);
     }
     vu.push_back(node->val);
-    if (node->weight<= rayon){ //Cas où le sommet est bien dans la boule
+    if (1<= rayon){ //Cas où le sommet est bien dans la boule
         for (vector<Neighbor>::iterator it = Neighbors(node->val)->begin(); it != Neighbors(node->val)->end(); ++it){
             //On boucle sur ses voisins
             if (it->label[0] == node->label[1] && find(vu.begin(),vu.end(),it->val) == vu.end()){ 
                 //Cas où l'arrêt est bien valide et sommet non vu avant, ce voisin est rajouté dans la file des visites
                 aVoir.push_back(&(*it));
-                rayons.push_back(rayon-node->weight);
+                rayons.push_back(rayon-1);
             }
         }
         return BFSCount(rayons,acc+1,aVoir,vu); //On traite les cas suivants, en prennant en compte le sommet
