@@ -284,7 +284,7 @@ void Graph::weighingANode(int source, int rayon) {
 //PErmet de donner un poids à tous les sommets du graphe.
 void Graph::weighingAllNodes(int rayon) {
     for (vector<Node>::iterator it = Vertices.begin(); it != Vertices.end(); ++it){
-        weighingANode(it->val, rayon-it->label.size());
+        weighingANode(it->val, rayon);
     }
 }
 
