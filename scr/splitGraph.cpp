@@ -136,6 +136,32 @@ int main(int argc, char** argv)
     }
     G.BFS(0,foward,aVoir,vu);
 
+    aVoir.clear();
+    vu.clear();
+    vu.push_back(node.val);
+    for (vector<Neighbor>::iterator it = G.Neighbors(node.val)->begin(); it != G.Neighbors(node.val)->end(); ++it){
+        if (it->label[0] == 'R'){
+            aVoir.push_back(&(*it));
+            Edge edge(node.val,it->val,0,it->label);
+            reverse.push_back(edge);
+        }
+    }
+    G.BFS(1,reverse,aVoir,vu);
+
+    aVoir.clear();
+    vu.clear();
+    vu.push_back(node.val);
+    for (vector<Neighbor>::iterator it = G.Neighbors(node.val)->begin(); it != G.Neighbors(node.val)->end(); ++it){
+        if (it->label[0] == 'F'){
+            aVoir.push_back(&(*it));
+            char r[2];
+            comp(it->label,r);
+            Edge edge(it->val,node.val,0,r);
+            reverse.push_back(edge);
+        }
+    }
+    G.BFS(0,reverse,aVoir,vu);
+
 
 
 
