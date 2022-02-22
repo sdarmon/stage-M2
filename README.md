@@ -59,6 +59,15 @@ g++ graph.cpp main.cpp -o graph.exe
 cd ../../DmGoth/stage-M2/scr
 ```
 
+Version moustique version non optimisée:
+```
+g++ graph.cpp main.cpp -o graph.exe
+ cd ../../../kissplice_results/kissplice_moustique
+../../DmGoth/stage-M2/scr/graph.exe graph_IR03_B_R1_IR03_C_R1_IR03_D_R1_IR03_E_R1_IR13_B_R1_IR13_C_R1_IR13_D_R1_IR13_E_R1_k41.nodes graph_IR03_B_R1_IR03_C_R1_IR03_D_R1_IR03_E_R1_IR13_B_R1_IR13_C_R1_IR13_D_R1_IR13_E_R1_k41_C0.05.edges 5 -o ../../DmGoth/data/outputGraphMoustiqueNonOpt.txt 
+cd ../../DmGoth/stage-M2/scr
+```
+
+
 version chien:
 
 ```
@@ -74,6 +83,12 @@ python3 plot.py ../../data/outputGraphMoustique.txt top10
 python3 plot.py ../../data/outputGraphMoustique.txt dot
 ```
 
+Version moustique version non optimisée:
+
+```
+python3 plot.py ../../data/outputGraphMoustiqueNonOpt.txt top10
+python3 plot.py ../../data/outputGraphMoustiqueNonOpt.txt dot
+```
 Iench version:
 
 ```
@@ -84,7 +99,13 @@ python3 plot.py ../../data/chien/outputGraphChien.txt dot
 Finallement, on génère un fichier de reads à aligner sur le génome de référence. (Ici threshold = 11 pour moustique, 8 pour chien200, ? pour chien300)
 
 ```
-python3 reads_to_align.py ../../data/outputGraphMoustique.txt ../../data/readMoustique.fq 8
+python3 reads_to_align.py ../../data/outputGraphMoustique.txt ../../data/readMoustique.fq 11
+```
+
+Version moustique version non optimisée:
+
+```
+python3 reads_to_align.py ../../data/outputGraphMoustique.txt ../../data/readMoustiqueNonOpt.fq 11
 ```
 
 version chien:
@@ -99,7 +120,7 @@ Où the input is the output of graph.exe, output.fq est le format des séquences
 
 ```
 cd ../../data
-STAR --genomeDir ../results/moustique \
+STAR --genomeDir ../results \
 --runMode alignReads \
 --runThreadN 8 \
 --readFilesIn readMoustique.fq \
@@ -131,8 +152,8 @@ STAR --genomeDir ../../results/chien \
 ### Etape 6: Intersection des reads alignés avec les TE connues
 
 ```
-bedtools intersect -wa -a AaegL5_TE_repeats.gff -b ../results/moustique/STAR/Aligned.sortedByCoord.out.bam > ../results/moustique/intersectionTE.txt
-bedtools intersect -wb -a AaegL5_TE_repeats.gff -b ../results/moustique/STAR/Aligned.sortedByCoord.out.bam > ../results/moustique/intersectionKiss.txt
+bedtools intersect -wa -a AaegL5_TE_repeats.gff -b ../results/STAR/Aligned.sortedByCoord.out.bam > ../results/moustique/intersectionTE.txt
+bedtools intersect -wb -a AaegL5_TE_repeats.gff -b ../results/STAR/Aligned.sortedByCoord.out.bam > ../results/moustique/intersectionKiss.txt
 cd ../stage-M2/scr/
 python3 suppDoublon.py ../../results/moustique/intersectionKiss.txt ../../results/moustique/intersectionKissNoDouble.txt -s 12
 python3 suppDoublon.py ../../results/moustique/intersectionTE.txt ../../results/moustique/intersectionTENoDouble.txt -t 8
