@@ -131,10 +131,10 @@ int main(int argc, char** argv)
             char r[2];
             comp(it->label,r);
             Edge edge(it->val,node.val,0,r);
-            reverse.push_back(edge);
+            foward.push_back(edge);
         }
     }
-    G.BFS(0,reverse,aVoir,vu);
+    G.BFS(0,foward,aVoir,vu);
 
 
 
