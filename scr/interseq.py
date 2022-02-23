@@ -13,7 +13,8 @@ else:
     inter = set()
     seq2Not = set()
     with open(Arg[1],'r') as seq1:
-        Sq = set(seq1.readlines())
+        Sq = set()
+        Sq.update(seq1.readlines())
     with open(Arg[2],'r') as seq2:
         for line in seq2:
             if line in Sq:
@@ -26,10 +27,10 @@ else:
         for line in inter:
             out.write(line)
 
-    with open(Arg[3]+"seq1Missing.txt",'w') as out:
+    with open(Arg[3]+"seq1Remaning.txt",'w') as out:
         for line in Sq:
             out.write(line)
 
-    with open(Arg[3]+"seq2Missing.txt",'w') as out:
+    with open(Arg[3]+"seq2Remaning.txt",'w') as out:
         for line in seq2Not:
             out.write(line)
