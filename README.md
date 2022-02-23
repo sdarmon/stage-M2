@@ -99,7 +99,7 @@ python3 plot.py ../../data/chien/outputGraphChien.txt dot
 Finallement, on génère un fichier de reads à aligner sur le génome de référence. (Ici threshold = 11 pour moustique, 9 pour top 20;  16 pour NonOpt, 11 pour top20, 8 pour chien200, ? pour chien300, 15 moustique300)
 
 ```
-python3 reads_to_align.py ../../data/outputGraphMoustique.txt ../../data/readMoustique300.fq 11
+python3 reads_to_align.py ../../data/outputGraphMoustique.txt ../../data/readMoustiqueAll.fq 11
 ```
 
 Version moustique version non optimisée:

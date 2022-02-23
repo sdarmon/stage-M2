@@ -10,17 +10,17 @@ Arg = sys.argv[:]
 if len(Arg) not in [4]:
     print("Use : "+Arg[0]+ " seq1.txt seq2.txt outputPrefix ")
 else:
-    inter = []
-    seq2Not = []
+    inter = set()
+    seq2Not = set()
     with open(Arg[1],'r') as seq1:
-        Sq = seq1.readlines()
+        Sq = set(seq1.readlines())
     with open(Arg[2],'r') as seq2:
         for line in seq2:
             if line in Sq:
-                inter.append(line)
+                inter.add(line)
                 Sq.remove(line)
             else:
-                seq2Not.append(line)
+                seq2Not.add(line)
 
     with open(Arg[3]+"intersection.txt",'w') as out:
         for line in inter:
