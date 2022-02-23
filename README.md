@@ -96,16 +96,16 @@ python3 plot.py ../../data/chien/outputGraphChien.txt top10
 python3 plot.py ../../data/chien/outputGraphChien.txt dot
 ```
 
-Finallement, on génère un fichier de reads à aligner sur le génome de référence. (Ici threshold = 11 pour moustique, 16 pour NonOpt, 8 pour chien200, ? pour chien300)
+Finallement, on génère un fichier de reads à aligner sur le génome de référence. (Ici threshold = 11 pour moustique, 9 pour top 20;  16 pour NonOpt, 11 pour top20, 8 pour chien200, ? pour chien300, 15 moustique300)
 
 ```
-python3 reads_to_align.py ../../data/outputGraphMoustique.txt ../../data/readMoustique.fq 11
+python3 reads_to_align.py ../../data/outputGraphMoustique.txt ../../data/readMoustique300.fq 11
 ```
 
 Version moustique version non optimisée:
 
 ```
-python3 reads_to_align.py ../../data/outputGraphMoustique.txt ../../data/readMoustiqueNonOpt.fq 16
+python3 reads_to_align.py ../../data/outputGraphMoustiqueNonOpt.txt ../../data/readMoustiqueNonOpt.fq 11
 ```
 
 version chien:
@@ -138,7 +138,7 @@ cd ../../data
 STAR --genomeDir ../results \
 --runMode alignReads \
 --runThreadN 8 \
---readFilesIn readMoustique.fq \
+--readFilesIn readMoustiqueNonOpt.fq \
 --outFileNamePrefix ../results/moustique/STAR/ \
 --outSAMtype BAM SortedByCoordinate \
 --outSAMunmapped Within \
@@ -174,11 +174,11 @@ python3 suppDoublon.py ../../results/moustique/intersectionKiss.txt ../../result
 python3 suppDoublon.py ../../results/moustique/intersectionTE.txt ../../results/moustique/intersectionTENoDouble.txt -t 8
 wc -l ../../results/moustique/intersectionKissNoDouble.txt 
 wc -l ../../results/moustique/intersectionTENoDouble.txt 
-less ../../results/moustique/STAR/Log.final.out
+less ../../results/STAR/Log.final.out
 ```
 
 
-Version moustique version non optimisée:
+Version moustique version non optimisée: A FAIRE DIRECTEMENT SUR SERVEUR DEMANDE 24Go DE RAM!!!
 ```
 bedtools intersect -wa -a AaegL5_TE_repeats.gff -b ../results/moustique/STAR/Aligned.sortedByCoord.out.bam > ../results/moustique/intersectionTENonOpt.txt
 bedtools intersect -wb -a AaegL5_TE_repeats.gff -b ../results/moustique/STAR/Aligned.sortedByCoord.out.bam > ../results/moustique/intersectionKissNonOpt.txt

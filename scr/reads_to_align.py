@@ -29,7 +29,52 @@ if len(Arg) == 4:
     with open(Arg[2],'w') as f:
         compt = 0
         for seq in seqs:
-            if len(seq)> 600:
+            if len(seq)> 1200:
+                s1 = seq[:len(seq)//4]
+                s2 = seq[len(seq)//4:2*len(seq)//4]
+                s3 = seq[2*len(seq)//4:3*len(seq)//4]
+                s4 = seq[3*len(seq)//4:]
+                f.write("@SEQ_"+str(compt)+"\n")
+                compt+=1
+                f.write(s1+"\n")
+                f.write("+"+"\n")
+                f.write("J"*len(s1)+"\n")
+                f.write("@SEQ_"+str(compt)+"\n")
+                compt+=1
+                f.write(s2+"\n")
+                f.write("+"+"\n")
+                f.write("J"*len(s2)+"\n")
+                f.write("@SEQ_"+str(compt)+"\n")
+                compt+=1
+                f.write(s3+"\n")
+                f.write("+"+"\n")
+                f.write("J"*len(s3)+"\n")
+                f.write("@SEQ_"+str(compt)+"\n")
+                compt+=1
+                f.write(s4+"\n")
+                f.write("+"+"\n")
+                f.write("J"*len(s4)+"\n")
+            
+            if len(seq)> 900:
+                s1 = seq[:len(seq)//3]
+                s2 = seq[len(seq)//3:2*len(seq)//3]
+                s3 = seq[2*len(seq)//3:]
+                f.write("@SEQ_"+str(compt)+"\n")
+                compt+=1
+                f.write(s1+"\n")
+                f.write("+"+"\n")
+                f.write("J"*len(s1)+"\n")
+                f.write("@SEQ_"+str(compt)+"\n")
+                compt+=1
+                f.write(s2+"\n")
+                f.write("+"+"\n")
+                f.write("J"*len(s2)+"\n")
+                f.write("@SEQ_"+str(compt)+"\n")
+                compt+=1
+                f.write(s3+"\n")
+                f.write("+"+"\n")
+                f.write("J"*len(s3)+"\n")
+            elif len(seq)> 600:
                 s1 = seq[:len(seq)//2]
                 s2 = seq[len(seq)//2:]
                 f.write("@SEQ_"+str(compt)+"\n")
