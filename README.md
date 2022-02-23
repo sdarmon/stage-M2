@@ -96,7 +96,7 @@ python3 plot.py ../../data/chien/outputGraphChien.txt top10
 python3 plot.py ../../data/chien/outputGraphChien.txt dot
 ```
 
-Finallement, on génère un fichier de reads à aligner sur le génome de référence. (Ici threshold = 11 pour moustique, 8 pour chien200, ? pour chien300)
+Finallement, on génère un fichier de reads à aligner sur le génome de référence. (Ici threshold = 11 pour moustique, 16 pour NonOpt, 8 pour chien200, ? pour chien300)
 
 ```
 python3 reads_to_align.py ../../data/outputGraphMoustique.txt ../../data/readMoustique.fq 11
@@ -105,7 +105,7 @@ python3 reads_to_align.py ../../data/outputGraphMoustique.txt ../../data/readMou
 Version moustique version non optimisée:
 
 ```
-python3 reads_to_align.py ../../data/outputGraphMoustique.txt ../../data/readMoustiqueNonOpt.fq 11
+python3 reads_to_align.py ../../data/outputGraphMoustique.txt ../../data/readMoustiqueNonOpt.fq 16
 ```
 
 version chien:
@@ -125,6 +125,21 @@ STAR --genomeDir ../results \
 --runThreadN 8 \
 --readFilesIn readMoustique.fq \
 --outFileNamePrefix ../results/STAR/ \
+--outSAMtype BAM SortedByCoordinate \
+--outSAMunmapped Within \
+--outSAMattributes Standard \
+--outFilterMultimapNmax 10000 \
+--outReadsUnmapped Fastx
+```
+
+Version moustique version non optimisée:
+```
+cd ../../data
+STAR --genomeDir ../results \
+--runMode alignReads \
+--runThreadN 8 \
+--readFilesIn readMoustique.fq \
+--outFileNamePrefix ../results/moustique/STAR/ \
 --outSAMtype BAM SortedByCoordinate \
 --outSAMunmapped Within \
 --outSAMattributes Standard \
@@ -163,6 +178,18 @@ less ../../results/moustique/STAR/Log.final.out
 ```
 
 
+Version moustique version non optimisée:
+```
+bedtools intersect -wa -a AaegL5_TE_repeats.gff -b ../results/moustique/STAR/Aligned.sortedByCoord.out.bam > ../results/moustique/intersectionTENonOpt.txt
+bedtools intersect -wb -a AaegL5_TE_repeats.gff -b ../results/moustique/STAR/Aligned.sortedByCoord.out.bam > ../results/moustique/intersectionKissNonOpt.txt
+cd ../stage-M2/scr/
+python3 suppDoublon.py ../../results/moustique/intersectionKissNonOpt.txt ../../results/moustique/intersectionKissNonOptNoDouble.txt -s 12
+python3 suppDoublon.py ../../results/moustique/intersectionTENonOpt.txt ../../results/moustique/intersectionTENonOptNoDouble.txt -t 8
+wc -l ../../results/moustique/intersectionKissNonOptNoDouble.txt 
+wc -l ../../results/moustique/intersectionTENonOptNoDouble.txt 
+less ../../results/moustique/STAR/Log.final.out
+```
+
 ### Etape 7: Plotting des reads concernés
 
 On récupère les séquences de l'intercestion dans seq.txt. Puis on les affiche avec la fonction plot.
@@ -170,6 +197,13 @@ On récupère les séquences de l'intercestion dans seq.txt. Puis on les affiche
 python3 reads_to_align.py ../../data/outputGraphMoustique.txt ../../results/moustique/seq.txt 11 -reverse ../../results/moustique/intersectionKissNoDouble.txt
 python3 plot.py ../../data/outputGraphMoustique.txt reverse ../../results/moustique/seq.txt
 ```
+
+Version moustique version non optimisée:
+```
+python3 reads_to_align.py ../../data/outputGraphMoustique.txt ../../results/moustique/seqNonOpt.txt 11 -reverse ../../results/moustique/intersectionNonOptKissNoDouble.txt
+python3 plot.py ../../data/outputGraphMoustiqueNonOpt.txt reverse ../../results/moustique/seqNonOpt.txt
+```
+
 
 
 ## Afficher une séquence sur Cytoscape:

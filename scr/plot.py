@@ -15,7 +15,7 @@ import sys
 Arg = sys.argv[:]
 
 if len(Arg) not in [3,4]:
-	print("Wrong input used.\n Use : "+Arg[0]+" output.txt format optional_input.txt\n Where format is 'dot', 'his', 'top10' or 'reverse', the format of the plot.")
+	print("Wrong input used.\n Use : "+Arg[0]+" output.txt format optional_input.txt\n Where format is 'dot', 'his', 'top10', 'top20' or 'reverse', the format of the plot.")
 
 elif Arg[2] == "dot":
 	y = []
@@ -89,7 +89,6 @@ elif Arg[2] == "his":
 
 elif Arg[2] == "top10":
 	y=[]
-	index = 0
 	m = 0
 	size = 1
 	with open(Arg[1]) as f:
@@ -107,7 +106,29 @@ elif Arg[2] == "top10":
 	for el in Y:
 		M+=el
 		if M>=90:
-			index = size
+			break
+		size+=1
+	print(size)
+
+elif Arg[2] == "top20":
+	y=[]
+	m = 0
+	size = 1
+	with open(Arg[1]) as f:
+		for line in f:
+			if (len(line)<2):
+				break
+			L = line.split('\t')
+			y.append(int(L[2][:-1]))
+			m = max(m,y[-1])
+	x = np.arange(1,m+1,1)
+	Y = [0 for i in range(m)]
+	for el in y:
+	    Y[el-1] +=100/len(y)
+	M=0
+	for el in Y:
+		M+=el
+		if M>=80:
 			break
 		size+=1
 	print(size)
