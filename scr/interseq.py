@@ -12,9 +12,10 @@ if len(Arg) not in [4]:
 else:
     inter = set()
     seq2Not = set()
+    Sq = set()
     with open(Arg[1],'r') as seq1:
-        Sq = set()
-        Sq.update(seq1.readlines())
+        for line in seq1:
+            Sq.add(line)
     with open(Arg[2],'r') as seq2:
         for line in seq2:
             if line in Sq:
