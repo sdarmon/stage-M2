@@ -113,7 +113,15 @@ else:
     with open(Arg[2],'w') as f:
         compt = 0
         for seq in seqs:
-            if len(seq.split('\t')[1]) > 600:
+            if len(seq.split('\t')[1]) > 1200:
+                if compt in ref or (compt+1) in ref or (compt+2) in ref or (compt+3) in ref:
+                   f.write(seq)
+                compt+=4
+            elif len(seq.split('\t')[1]) > 900:
+                if compt in ref or (compt+1) in ref or (compt+2) in ref:
+                   f.write(seq)
+                compt+=3
+            elif len(seq.split('\t')[1]) > 600:
                 if compt in ref or (compt+1) in ref:
                    f.write(seq)
                 compt+=2

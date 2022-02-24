@@ -99,13 +99,13 @@ python3 plot.py ../../data/chien/outputGraphChien.txt dot
 Finallement, on génère un fichier de reads à aligner sur le génome de référence. (Ici threshold = 11 pour moustique, 9 pour top 20;  16 pour NonOpt, 11 pour top20, 8 pour chien200, ? pour chien300, 15 moustique300)
 
 ```
-python3 reads_to_align.py ../../data/outputGraphMoustique.txt ../../data/readMoustiqueAll.fq 11
+python3 reads_to_align.py ../../data/outputGraphMoustique.txt ../../data/readMoustique.fq 11
 ```
 
 Version moustique version non optimisée:
 
 ```
-python3 reads_to_align.py ../../data/outputGraphMoustiqueNonOpt.txt ../../data/readMoustiqueNonOpt.fq 11
+python3 reads_to_align.py ../../data/outputGraphMoustiqueNonOpt.txt ../../data/readMoustiqueNonOpt.fq 16
 ```
 
 version chien:
@@ -177,6 +177,18 @@ wc -l ../../results/moustique/intersectionTENoDouble.txt
 less ../../results/STAR/Log.final.out
 ```
 
+Version capé par le génome de ref
+```
+bedtools intersect -wb -a ../results/STAR/Aligned.sortedByCoord.out.bam -b AaegL5_TE_repeats.gff  > ../results/moustique/intersectionTE.txt
+bedtools intersect -wa -a ../results/STAR/Aligned.sortedByCoord.out.bam -b AaegL5_TE_repeats.gff  > ../results/moustique/intersectionKiss.txt
+cd ../stage-M2/scr/
+python3 suppDoublon.py ../../results/moustique/intersectionKiss.txt ../../results/moustique/intersectionKissNoDouble.txt -s 12
+python3 suppDoublon.py ../../results/moustique/intersectionTE.txt ../../results/moustique/intersectionTENoDouble.txt -t 8
+wc -l ../../results/moustique/intersectionKissNoDouble.txt 
+wc -l ../../results/moustique/intersectionTENoDouble.txt 
+less ../../results/STAR/Log.final.out
+```
+
 
 Version moustique version non optimisée: A FAIRE DIRECTEMENT SUR SERVEUR DEMANDE 24Go DE RAM!!!
 ```
@@ -192,7 +204,7 @@ less ../../results/moustique/STAR/Log.final.out
 
 ### Etape 7: Plotting des reads concernés
 
-On récupère les séquences de l'intercestion dans seq.txt. Puis on les affiche avec la fonction plot.
+On récupère les séquences de l'intersection dans seq.txt (l'output). Puis on les affiche avec la fonction plot.
 ```
 python3 reads_to_align.py ../../data/outputGraphMoustique.txt ../../results/moustique/seq.txt 11 -reverse ../../results/moustique/intersectionKissNoDouble.txt
 python3 plot.py ../../data/outputGraphMoustique.txt reverse ../../results/moustique/seq.txt
@@ -230,3 +242,40 @@ g++ graph.cpp splitGraph.cpp -o split.exe
 
 ## Différence entre les deux méthodes de distance :
 
+### intersection Ref vs nonOpt:
+
+```
+cd ../../results/moustique
+python3 ../../stage-M2/scr/interseq.py intersectionTEAllSeq.txt  intersectionTENonOptNoDouble.txt nonOpt
+wc -l nonOptintersection.txt 
+wc -l nonOptseq1Remaning.txt 
+wc -l nonOptseq2Remaning.txt
+mv nonOptseq1Remaning.txt nonOptseq1Remaning.gff
+bedtools intersect -wb -a nonOptseq1Remaning.gff -b ../STAR/Aligned.sortedByCoord.out.bam > seqKiss.txt
+python3 ../../stage-M2/scr/reads_to_align.py ../../data/outputGraphMoustique.txt seqMissing.txt 0 -reverse seqKiss.txt
+```
+
+### Intersection 200 vs 5:
+
+```
+cd ../../results/moustique
+python3 ../../stage-M2/scr/interseq.py intersectionTENoDouble.txt  intersectionTENonOptNoDouble.txt mous
+wc -l mousintersection.txt 
+wc -l mousseq1Remaning.txt 
+wc -l mousseq2Remaning.txt
+mv mousseq1Remaning.txt mousseq1Remaning.gff
+mv mousseq2Remaning.txt mousseq2Remaning.gff
+mv mousintersection.txt mousintersection.gff
+bedtools intersect -wb -a mousseq1Remaning.gff -b ../STAR/Aligned.sortedByCoord.out.bam > seqKiss5.txt
+bedtools intersect -wb -a mousseq1Remaning.gff -b STAR/Aligned.sortedByCoord.out.bam > seqKiss200.txt
+bedtools intersect -wb -a mousintersection.gff -b STAR/Aligned.sortedByCoord.out.bam > seqKissInter.txt
+python3 ../../stage-M2/scr/reads_to_align.py ../../data/outputGraphMoustiqueNonOpt.txt seqMousMissing5.txt 0 -reverse seqKiss5.txt
+python3 ../../stage-M2/scr/reads_to_align.py ../../data/outputGraphMoustique.txt seqMousMissing200.txt 0 -reverse seqKiss200.txt
+python3 ../../stage-M2/scr/reads_to_align.py ../../data/outputGraphMoustique.txt seqMousMissingInter.txt 0 -reverse seqKissInter.txt
+```
+
+## Premiers pas avec awk:
+
+```
+awk '$3 > 2000 {print $0}' outputGraph300.txt 
+```
