@@ -105,7 +105,7 @@ elif Arg[2] == "top1":
 	M=0
 	for el in Y:
 		M+=el
-		if M>=99:
+		if 10*M>=999:
 			break
 		size+=1
 	print(size)
