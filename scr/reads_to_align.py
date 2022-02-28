@@ -31,7 +31,7 @@ def isPoly(seq):
             compt = 0
             last = seq[i]
     m = max(m,compt)
-    if (2*m > n):
+    if (m > 20):
         return(True)
     return(False)
 
