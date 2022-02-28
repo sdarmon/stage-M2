@@ -277,5 +277,5 @@ python3 ../../stage-M2/scr/reads_to_align.py ../../data/outputGraphMoustique.txt
 ## Premiers pas avec awk:
 
 ```
-awk '$3 > 2000 {print $0}' outputGraph300.txt 
+awk '$3 > 2000' outputGraph300.txt 
 ```

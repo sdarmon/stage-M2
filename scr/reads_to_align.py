@@ -1,7 +1,7 @@
 # Cette fonction permet de convertir les unitigs ayant un poids 
 # supérieur au threshold au format fastq. Note à moi-même, cela 
 # sera utilisé par STAR qui prend également en entrée les fichiers
-# au format fasta qui sont donc bien moins gros et compliqué à faire!!!
+# au format fasta qui sont donc bien moins gros et compliqué à fairenot not not 
 # L'option "-reserse" permet de récupérer les unitigs qui sont issus du
 # fichier d'intersectionKissNoDouble.txt
 
@@ -12,6 +12,28 @@ import sys
 
 
 Arg = sys.argv[:]
+
+
+def isPoly(seq):
+    """
+    Entrée : une séquence de nucléotides
+    Sortie : s'il existe une queue poly
+    """
+    n = len(seq)
+    m = 0
+    compt = 0
+    last = seq[0]
+    for i in range(1,n):
+        if seq[i] == last:
+            compt+=1
+        else:
+            m = max(m,compt)
+            compt = 0
+            last = seq[i]
+    m = max(m,compt)
+    if (2*m > n):
+        return(True)
+    return(False)
 
 if len(Arg) not in [4,6]:
     print("Use : "+Arg[0]+ " input.txt output.fq threshold -reverse ref.txt")
@@ -29,7 +51,7 @@ if len(Arg) == 4:
     with open(Arg[2],'w') as f:
         compt = 0
         for seq in seqs:
-            if len(seq)> 1200:
+            if len(seq)> 1200 and not isPoly(seq):
                 s1 = seq[:len(seq)//4]
                 s2 = seq[len(seq)//4:2*len(seq)//4]
                 s3 = seq[2*len(seq)//4:3*len(seq)//4]
@@ -55,7 +77,7 @@ if len(Arg) == 4:
                 f.write("+"+"\n")
                 f.write("J"*len(s4)+"\n")
             
-            if len(seq)> 900:
+            if len(seq)> 900 and not isPoly(seq):
                 s1 = seq[:len(seq)//3]
                 s2 = seq[len(seq)//3:2*len(seq)//3]
                 s3 = seq[2*len(seq)//3:]
@@ -74,7 +96,7 @@ if len(Arg) == 4:
                 f.write(s3+"\n")
                 f.write("+"+"\n")
                 f.write("J"*len(s3)+"\n")
-            elif len(seq)> 600:
+            elif len(seq)> 600 and not isPoly(seq):
                 s1 = seq[:len(seq)//2]
                 s2 = seq[len(seq)//2:]
                 f.write("@SEQ_"+str(compt)+"\n")
@@ -113,15 +135,15 @@ else:
     with open(Arg[2],'w') as f:
         compt = 0
         for seq in seqs:
-            if len(seq.split('\t')[1]) > 1200:
+            if len(seq.split('\t')[1]) > 1200 and not isPoly(seq.split('\t')[1]):
                 if compt in ref or (compt+1) in ref or (compt+2) in ref or (compt+3) in ref:
                    f.write(seq)
                 compt+=4
-            elif len(seq.split('\t')[1]) > 900:
+            elif len(seq.split('\t')[1]) > 900 and not isPoly(seq.split('\t')[1]):
                 if compt in ref or (compt+1) in ref or (compt+2) in ref:
                    f.write(seq)
                 compt+=3
-            elif len(seq.split('\t')[1]) > 600:
+            elif len(seq.split('\t')[1]) > 600 and not isPoly(seq.split('\t')[1]):
                 if compt in ref or (compt+1) in ref:
                    f.write(seq)
                 compt+=2
