@@ -1,7 +1,7 @@
 # Cette fonction permet de convertir les unitigs ayant un poids 
 # supérieur au threshold au format fastq. Note à moi-même, cela 
 # sera utilisé par STAR qui prend également en entrée les fichiers
-# au format fasta qui sont donc bien moins gros et compliqué à fairenot not not 
+# au format fasta qui sont donc bien moins gros et compliqué à faire!!!
 # L'option "-reserse" permet de récupérer les unitigs qui sont issus du
 # fichier d'intersectionKissNoDouble.txt
 
@@ -51,7 +51,9 @@ if len(Arg) == 4:
     with open(Arg[2],'w') as f:
         compt = 0
         for seq in seqs:
-            if len(seq)> 1200 and not isPoly(seq):
+            if isPoly(seq):
+                continue
+            if len(seq)> 1200:
                 s1 = seq[:len(seq)//4]
                 s2 = seq[len(seq)//4:2*len(seq)//4]
                 s3 = seq[2*len(seq)//4:3*len(seq)//4]
@@ -77,7 +79,7 @@ if len(Arg) == 4:
                 f.write("+"+"\n")
                 f.write("J"*len(s4)+"\n")
             
-            if len(seq)> 900 and not isPoly(seq):
+            if len(seq)> 900:
                 s1 = seq[:len(seq)//3]
                 s2 = seq[len(seq)//3:2*len(seq)//3]
                 s3 = seq[2*len(seq)//3:]
@@ -96,7 +98,7 @@ if len(Arg) == 4:
                 f.write(s3+"\n")
                 f.write("+"+"\n")
                 f.write("J"*len(s3)+"\n")
-            elif len(seq)> 600 and not isPoly(seq):
+            elif len(seq)> 600:
                 s1 = seq[:len(seq)//2]
                 s2 = seq[len(seq)//2:]
                 f.write("@SEQ_"+str(compt)+"\n")
@@ -135,15 +137,17 @@ else:
     with open(Arg[2],'w') as f:
         compt = 0
         for seq in seqs:
-            if len(seq.split('\t')[1]) > 1200 and not isPoly(seq.split('\t')[1]):
+            if isPoly(seq.split('\t')[1]):
+                continue
+            if len(seq.split('\t')[1]) > 1200:
                 if compt in ref or (compt+1) in ref or (compt+2) in ref or (compt+3) in ref:
                    f.write(seq)
                 compt+=4
-            elif len(seq.split('\t')[1]) > 900 and not isPoly(seq.split('\t')[1]):
+            elif len(seq.split('\t')[1]) > 900:
                 if compt in ref or (compt+1) in ref or (compt+2) in ref:
                    f.write(seq)
                 compt+=3
-            elif len(seq.split('\t')[1]) > 600 and not isPoly(seq.split('\t')[1]):
+            elif len(seq.split('\t')[1]) > 600:
                 if compt in ref or (compt+1) in ref:
                    f.write(seq)
                 compt+=2
