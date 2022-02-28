@@ -21,14 +21,14 @@ def isPoly(seq):
     """
     n = len(seq)
     m = 0
-    compt = 0
+    compt = 1
     last = seq[0]
     for i in range(1,n):
         if seq[i] == last:
             compt+=1
         else:
             m = max(m,compt)
-            compt = 0
+            compt = 1
             last = seq[i]
     m = max(m,compt)
     if (m > 19):
