@@ -35,8 +35,8 @@ def isPoly(seq):
         return(True)
     return(False)
 
-if len(Arg) not in [4,6]:
-    print("Use : "+Arg[0]+ " input.txt output.fq threshold -reverse ref.txt")
+if len(Arg) not in [4,5,6]:
+    print("Use : "+Arg[0]+ " input.txt output.fq threshold -reverse ref.txt -clean")
     exit()
 if len(Arg) == 4:
     seqs = []
@@ -117,6 +117,22 @@ if len(Arg) == 4:
                 f.write(seq+"\n")
                 f.write("+"+"\n")
                 f.write("J"*len(seq)+"\n")
+elif len(Arg) == 5:
+    seqs = []
+    t = int(Arg[3])
+    with open(Arg[1],'r') as f:
+        for line in f:
+            if (len(line)<2):
+                break
+            L = line.split('\t')
+            if (int(L[2][:-1])> t):
+                seqs.append(line)
+    with open(Arg[2],'w') as f:
+        compt = 0
+        for seq in seqs:
+            if isPoly(seq):
+                continue
+            f.write(seq)
 else:
     seqs = []
     ref = set()
