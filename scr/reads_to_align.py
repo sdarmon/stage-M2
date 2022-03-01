@@ -53,70 +53,9 @@ if len(Arg) == 4:
         for seq in seqs:
             if isPoly(seq):
                 continue
-            if len(seq)> 1200:
-                s1 = seq[:len(seq)//4]
-                s2 = seq[len(seq)//4:2*len(seq)//4]
-                s3 = seq[2*len(seq)//4:3*len(seq)//4]
-                s4 = seq[3*len(seq)//4:]
-                f.write("@SEQ_"+str(compt)+"\n")
-                compt+=1
-                f.write(s1+"\n")
-                f.write("+"+"\n")
-                f.write("J"*len(s1)+"\n")
-                f.write("@SEQ_"+str(compt)+"\n")
-                compt+=1
-                f.write(s2+"\n")
-                f.write("+"+"\n")
-                f.write("J"*len(s2)+"\n")
-                f.write("@SEQ_"+str(compt)+"\n")
-                compt+=1
-                f.write(s3+"\n")
-                f.write("+"+"\n")
-                f.write("J"*len(s3)+"\n")
-                f.write("@SEQ_"+str(compt)+"\n")
-                compt+=1
-                f.write(s4+"\n")
-                f.write("+"+"\n")
-                f.write("J"*len(s4)+"\n")
-            
-            if len(seq)> 900:
-                s1 = seq[:len(seq)//3]
-                s2 = seq[len(seq)//3:2*len(seq)//3]
-                s3 = seq[2*len(seq)//3:]
-                f.write("@SEQ_"+str(compt)+"\n")
-                compt+=1
-                f.write(s1+"\n")
-                f.write("+"+"\n")
-                f.write("J"*len(s1)+"\n")
-                f.write("@SEQ_"+str(compt)+"\n")
-                compt+=1
-                f.write(s2+"\n")
-                f.write("+"+"\n")
-                f.write("J"*len(s2)+"\n")
-                f.write("@SEQ_"+str(compt)+"\n")
-                compt+=1
-                f.write(s3+"\n")
-                f.write("+"+"\n")
-                f.write("J"*len(s3)+"\n")
-            elif len(seq)> 600:
-                s1 = seq[:len(seq)//2]
-                s2 = seq[len(seq)//2:]
-                f.write("@SEQ_"+str(compt)+"\n")
-                compt+=1
-                f.write(s1+"\n")
-                f.write("+"+"\n")
-                f.write("J"*len(s1)+"\n")
-                f.write("@SEQ_"+str(compt)+"\n")
-                compt+=1
-                f.write(s2+"\n")
-                f.write("+"+"\n")
-                f.write("J"*len(s2)+"\n")
-            else:
-                f.write("@SEQ_"+str(compt)+"\n")
-                compt+=1
-                f.write(seq+"\n")
-                f.write("+"+"\n")
-                f.write("J"*len(seq)+"\n")
+            f.write(">SEQ_"+str(compt)+"\n")
+            compt+=1
+            f.write(seq+"\n")
 elif len(Arg) == 5:
     seqs = []
     t = int(Arg[3])
@@ -155,19 +94,6 @@ else:
         for seq in seqs:
             if isPoly(seq.split('\t')[1]):
                 continue
-            if len(seq.split('\t')[1]) > 1200:
-                if compt in ref or (compt+1) in ref or (compt+2) in ref or (compt+3) in ref:
-                   f.write(seq)
-                compt+=4
-            elif len(seq.split('\t')[1]) > 900:
-                if compt in ref or (compt+1) in ref or (compt+2) in ref:
-                   f.write(seq)
-                compt+=3
-            elif len(seq.split('\t')[1]) > 600:
-                if compt in ref or (compt+1) in ref:
-                   f.write(seq)
-                compt+=2
-            else:
-                if compt in ref:
-                    f.write(seq)
-                compt+=1
+            if compt in ref:
+                f.write(seq)
+            compt+=1
