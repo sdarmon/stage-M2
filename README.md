@@ -105,7 +105,7 @@ python3 reads_to_align.py ../../data/outputGraphMoustique.txt ../../data/readMou
 Version moustique version non optimisée:
 
 ```
-python3 reads_to_align.py ../../data/outputGraphMoustiqueNonOpt.txt ../../data/readMoustiqueNonOpt.fq 16
+python3 reads_to_align.py ../../data/outputGraphMoustiqueNonOpt.txt ../../data/readMoustiqueNonOptClean.fq 16
 ```
 
 version chien:
@@ -138,8 +138,8 @@ cd ../../data
 STAR --genomeDir ../results \
 --runMode alignReads \
 --runThreadN 8 \
---readFilesIn readMoustiqueNonOpt.fq \
---outFileNamePrefix ../results/moustique/STAR/ \
+--readFilesIn readMoustiqueNonOptClean.fq \
+--outFileNamePrefix ../results/moustique/STARClean/ \
 --outSAMtype BAM SortedByCoordinate \
 --outSAMunmapped Within \
 --outSAMattributes Standard \
@@ -177,16 +177,17 @@ wc -l ../../results/moustique/intersectionTENoDouble.txt
 less ../../results/STAR/Log.final.out
 ```
 
-Version capé par le génome de ref
+
+Version CLEAN 
 ```
-bedtools intersect -wb -a ../results/STAR/Aligned.sortedByCoord.out.bam -b AaegL5_TE_repeats.gff  > ../results/moustique/intersectionTE.txt
-bedtools intersect -wa -a ../results/STAR/Aligned.sortedByCoord.out.bam -b AaegL5_TE_repeats.gff  > ../results/moustique/intersectionKiss.txt
+bedtools intersect -wb -b ../results/moustique/STARClean/Aligned.sortedByCoord.out.bam -a AaegL5_TE_repeats.gff  > ../results/moustique/intersectionKissClean.txt
+bedtools intersect -wa -b ../results/moustique/STARClean/Aligned.sortedByCoord.out.bam -a AaegL5_TE_repeats.gff  > ../results/moustique/intersectionTEClean.txt
 cd ../stage-M2/scr/
-python3 suppDoublon.py ../../results/moustique/intersectionKiss.txt ../../results/moustique/intersectionKissNoDouble.txt -s 12
-python3 suppDoublon.py ../../results/moustique/intersectionTE.txt ../../results/moustique/intersectionTENoDouble.txt -t 8
-wc -l ../../results/moustique/intersectionKissNoDouble.txt 
-wc -l ../../results/moustique/intersectionTENoDouble.txt 
-less ../../results/STAR/Log.final.out
+python3 suppDoublon.py ../../results/moustique/intersectionKissClean.txt ../../results/moustique/intersectionKissCleanNoDouble.txt -s 12
+python3 suppDoublon.py ../../results/moustique/intersectionTEClean.txt ../../results/moustique/intersectionTECleanNoDouble.txt -t 8
+wc -l ../../results/moustique/intersectionKissCleanNoDouble.txt 
+wc -l ../../results/moustique/intersectionTECleanNoDouble.txt 
+less ../../results/moustique/STARClean/Log.final.out
 ```
 
 
@@ -212,7 +213,7 @@ python3 plot.py ../../data/outputGraphMoustique.txt reverse ../../results/mousti
 
 Version moustique version non optimisée:
 ```
-python3 reads_to_align.py ../../data/outputGraphMoustique.txt ../../results/moustique/seqNonOpt.txt 11 -reverse ../../results/moustique/intersectionNonOptKissNoDouble.txt
+python3 reads_to_align.py ../../data/outputGraphMoustique.txt ../../results/moustique/seqNonOptClean.txt 16 -reverse ../../results/moustique/intersectionKissCleanNoDouble.txt
 python3 plot.py ../../data/outputGraphMoustiqueNonOpt.txt reverse ../../results/moustique/seqNonOpt.txt
 ```
 
@@ -221,13 +222,15 @@ python3 plot.py ../../data/outputGraphMoustiqueNonOpt.txt reverse ../../results/
 ## Afficher une séquence sur Cytoscape:
 
 ```
-/data/home/vincent/TiffanyDelhomme$ ./nbh -n /localdata/pandata/students/Projet_KS/kissplice_moustique/graph_IR03_B_R1_IR03_C_R1_IR03_D_R1_IR03_E_R1_IR13_B_R1_IR13_C_R1_IR13_D_R1_IR13_E_R1_k41.nodes -e /localdata/pandata/students/Projet_KS/kissplice_moustique/graph_IR03_B_R1_IR03_C_R1_IR03_D_R1_IR03_E_R1_IR13_B_R1_IR13_C_R1_IR13_D_R1_IR13_E_R1_k41_C0.05.edges -k 41 -o /localdata/pandata/students/Projet_KS/DmGoth/data/nbh/graph -d 10 -q AGTAAATGTCACAGTTACAATCTCCGGCCATGGAAAAACCAGAAGTAATGAGCCGATCTCCGAGATGCTCAAGTGCAACACC
+/data/home/vincent/TiffanyDelhomme$ ./nbh -n /localdata/pandata/students/Projet_KS/kissplice_results/kissplice_moustique/graph_IR03_B_R1_IR03_C_R1_IR03_D_R1_IR03_E_R1_IR13_B_R1_IR13_C_R1_IR13_D_R1_IR13_E_R1_k41.nodes -e /localdata/pandata/students/Projet_KS/kissplice_results/kissplice_moustique/graph_IR03_B_R1_IR03_C_R1_IR03_D_R1_IR03_E_R1_IR13_B_R1_IR13_C_R1_IR13_D_R1_IR13_E_R1_k41_C0.05.edges -k 41 -o /localdata/pandata/students/Projet_KS/DmGoth/data/candidat/graph -d 10 -q CTGAATAGCTGCGCGTTTACCGCTACGGCTATCTGGGCCCC
 
-python3 labellingCytoscape.py ../../data/nbh/graph.edges ../../data/outputGraph.txt 8 ../../data/nbh/graph.label
+
+python3 labellingCytoscape.py ../../data/candidat/graph.edges ../../data/outputGraphMoustiqueNonOpt.txt 8 ../../data/candidat/graph.label
 
 Cytoscape &
 ```
 
+Seq à tester : `CTGAATAGCTGCGCGTTTACCGCTACGGCTATCTGGGCCCC`
 Puis File > Import > Import Network from file
 
 
@@ -236,7 +239,7 @@ Puis File > Import > Import Network from file
 
 ```
 g++ graph.cpp splitGraph.cpp -o split.exe
-./split.exe ../../../kissplice_results/kissplice_moustique/graph_IR03_B_R1_IR03_C_R1_IR03_D_R1_IR03_E_R1_IR13_B_R1_IR13_C_R1_IR13_D_R1_IR13_E_R1_k41.nodes ../../data/nbh/graph.nodes ../../data/nbh/graph.edges ../../data/nbh/graph
+./split.exe ../../../kissplice_results/kissplice_moustique/graph_IR03_B_R1_IR03_C_R1_IR03_D_R1_IR03_E_R1_IR13_B_R1_IR13_C_R1_IR13_D_R1_IR13_E_R1_k41.nodes ../../data/candidat/graph.nodes ../../data/candidat/graph.edges ../../data/candidat/graph
 
 ```
 
@@ -276,6 +279,12 @@ python3 ../../stage-M2/scr/reads_to_align.py ../../data/outputGraphMoustique.txt
 
 ## Premiers pas avec awk:
 
+La première ligne permet de récupérer les lignes d'un fichier dont la 3ème item est supérieur à 2000.
+
+Le seconde ligne permet d'obtenir l'abonance de l'unitig 6991943 (attention à bien faire un plus un, car à la 1ère ligne il y a l'unitig 0).
 ```
 awk '$3 > 2000' outputGraph300.txt 
+awk -v ligne=6991944 ' NR == ligne { print $0}' ../../../kissplice_results/kissplice_moustique/graph_IR03_B_R1_IR03_C_R1_IR03_D_R1_IR03_E_R1_IR13_B_R1_IR13_C_R1_IR13_D_R1_IR13_E_R1_k41.abundance 
 ```
+
+TTTTTTTTTTTGGATTTTTGGTATAATCTTAGAGAAATTTGCGGAAGAAATGTAGAGGGATCTCAGCAAGAATCCCAGAAGTATTATTAGAAGAATCCCAGAGAGTTTTGGATTTCCAGTAGAATTCCACATGAATTCCAGAAGAATCCAAAAGGAATTACCGCAAGTCCCCTAGCACCGCAACTAACATTTTAGTAACATATATAACACACGCTACGTACACAAAAGTTACATGAATGATGTGCAATGCTCAAAACATAAGTGCAAATTGCGGCAAGCTGAG
