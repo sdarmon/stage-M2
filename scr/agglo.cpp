@@ -133,6 +133,8 @@ int main(int argc, char** argv){
         for (int i = 1; i< compo.size(); i++){
             vu_total[compo[i]] = 1;
         }
+        val = index.back();
+        index.pop_back();
     }
 
     //Maintenant on construit nouveau graphe contracté
