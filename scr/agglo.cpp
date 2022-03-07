@@ -130,7 +130,7 @@ int main(int argc, char** argv){
         vector<int> compo;
         compo.clear();
         aVoir.clear();
-        aVoir.push_back(val);
+        aVoir.push_back(index);
         m++;
         G.BFS_func(threshold ,aVoir,compo);
 
