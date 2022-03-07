@@ -114,7 +114,7 @@ int main(int argc, char** argv){
     int val;
     val = index.back();
     index.pop_back();
-    while (G.Vertices[val].weight >= threshold and m < 20) //On cherche les composantes
+    while (G.Vertices[val].weight >= threshold and m < 3) //On cherche les composantes
     {
         if (vu_total[val]){
             val = index.back();
