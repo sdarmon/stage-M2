@@ -110,7 +110,6 @@ int main(int argc, char** argv){
     int index;
     vector<int> vu_total;
     for (int i=0; i<G.N ; i++){
-        index.push_back(i);
         vu_total.push_back(0);
     }
 
