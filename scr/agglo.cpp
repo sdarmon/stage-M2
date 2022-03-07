@@ -131,7 +131,7 @@ int main(int argc, char** argv){
         compo.clear();
         aVoir.clear();
         compo.push_back(index);
-        for (vector<Neighbor>::iterator it = Neighbors(index)->begin(); it != Neighbors(index)->end(); ++it){
+        for (vector<Neighbor>::iterator it = G.Neighbors(index)->begin(); it != G.Neighbors(index)->end(); ++it){
             aVoir.push_back(&(*it));
         }
         m++;
