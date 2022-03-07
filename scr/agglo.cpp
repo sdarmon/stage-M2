@@ -121,7 +121,7 @@ int main(int argc, char** argv){
     int m = 0;
     int val;
     index = indexMax(G,vu_total);
-    cout << index << " de poids " << G.Vertices[index] << endl;
+    cout << index << " de poids " << G.Vertices[index].weight << endl;
     vu_total[index]= 1;
     while (G.Vertices[index].weight >= threshold and m < 30) //On cherche les composantes
     {
@@ -139,7 +139,7 @@ int main(int argc, char** argv){
         }
         index = indexMax(G,vu_total);
         vu_total[index]= 1;
-    cout << index << " de poids " << G.Vertices[index] << endl;
+        cout << index << " de poids " << G.Vertices[index].weight << endl;
 
     }
 
