@@ -120,17 +120,18 @@ int main(int argc, char** argv){
     threshold =atoi(argv[4]);
     int m = 0;
     int val;
+    vector<Neighbor*> aVoir;
+
     index = indexMax(G,vu_total);
-    cout << index << " de poids " << G.Vertices[index].weight << endl;
+    //cout << index << " de poids " << G.Vertices[index].weight << endl;
     vu_total[index]= 1;
     while (G.Vertices[index].weight >= threshold and m < 30) //On cherche les composantes
     {
         vector<int> compo;
         compo.clear();
-        compo.push_back(val);
-        m++;
-        vector<Neighbor*> aVoir;
         aVoir.clear();
+        aVoir.push_back(val);
+        m++;
         G.BFS_func(threshold ,aVoir,compo);
 
         components.push_back(compo);
@@ -139,7 +140,7 @@ int main(int argc, char** argv){
         }
         index = indexMax(G,vu_total);
         vu_total[index]= 1;
-        cout << index << " de poids " << G.Vertices[index].weight << endl;
+        //cout << index << " de poids " << G.Vertices[index].weight << endl;
 
     }
 
