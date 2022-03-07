@@ -130,7 +130,10 @@ int main(int argc, char** argv){
         vector<int> compo;
         compo.clear();
         aVoir.clear();
-        aVoir.push_back(index);
+        compo.push_back(index);
+        for (vector<Neighbor>::iterator it = Neighbors(index)->begin(); it != Neighbors(index)->end(); ++it){
+            aVoir.push_back(&(*it));
+        }
         m++;
         G.BFS_func(threshold ,aVoir,compo);
 
