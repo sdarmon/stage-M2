@@ -122,9 +122,8 @@ int main(int argc, char** argv){
     int val;
     index = indexMax(G,vu_total);
     vu_total[index]= 1;
-    while (G.Vertices[index].weight >= threshold and m < 3) //On cherche les composantes
+    while (G.Vertices[index].weight >= threshold) //On cherche les composantes
     {
-        cout << "Une composante trouvée! " << endl;
         vector<int> compo;
         compo.clear();
         compo.push_back(val);
