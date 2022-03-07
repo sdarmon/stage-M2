@@ -396,7 +396,7 @@ void read_node_file_weighted( FILE* node_file, vector<Node>& seqs)
         p = strtok( buffer, "\t\n" );
               
         // Node seq
-        p = strtok( buffer, "\t\n"  );
+        p = strtok( NULL, "\t\n"  );
         seq = new char[strlen(p) + 1];
         strcpy( seq, p );
 
