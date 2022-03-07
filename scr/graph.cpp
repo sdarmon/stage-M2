@@ -103,7 +103,7 @@ Graph::Graph(vector<Node>& vertices, vector<Edge>& edges)  {
              }
     }
 
-
+ bool Graph::operator() (int i,int j) { return (i<j);}
 //================================================================
 //                  Public methodes  
 //================================================================
@@ -214,14 +214,37 @@ void Graph::BFS(int r, vector<Edge>& e ,vector<Neighbor*> &aVoir,vector<int> &vu
                 Edge edge(node->val,it->val,0,it->label);
                 e.push_back(edge);
             } else {
-                char r[2];
-                comp(it->label,r);
-                Edge edge(it->val,node->val,0,r);
+                char R[2];
+                comp(it->label,R);
+                Edge edge(it->val,node->val,0,R);
                 e.push_back(edge);
             }
         }
     }
     return BFS(r,e,aVoir,vu); //Sinon, on continue sans prendre en compte le sommet.
+}
+
+
+
+// BFS qui teste si les sommets vérifient bien une condition (par une fonction)
+void Graph::BFS_func(int threshold ,vector<Neighbor*> &aVoir,vector<int> &vu){
+    if (aVoir.size() == 0){ //Cas de terminaison, on a terminé le BFS
+        return;
+    }
+    Neighbor* node = aVoir.front();
+    aVoir.erase(aVoir.begin());
+    if (find(vu.begin(),vu.end(),node->val) != vu.end()){ //Cas où le sommet a été vu par le BFS
+        return BFS_func(threshold,aVoir,vu);
+    }
+    vu.push_back(node->val);
+    for (vector<Neighbor>::iterator it = Neighbors(node->val)->begin(); it != Neighbors(node->val)->end(); ++it){
+        //On boucle sur ses voisins
+        if (it->label[0] == node->label[1] && it->val >= threshold && find(vu.begin(),vu.end(),it->val) == vu.end()){ 
+            //Cas où l'arrêt est bien valide et sommet non vu avant, ce voisin est rajouté dans la file des visites
+            aVoir.push_back(&(*it));
+        }
+    }
+    return BFS_func(threshold,aVoir,vu); //Sinon, on continue sans prendre en compte le sommet.
 }
 
 

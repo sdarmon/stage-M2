@@ -138,7 +138,7 @@ cd ../../data
 STAR --genomeDir ../results \
 --runMode alignReads \
 --runThreadN 8 \
---readFilesIn readMoustiqueNonOptClean.fq \
+--readFilesIn readMoustiqueTop1.fq \
 --outFileNamePrefix ../results/moustique/STARClean/ \
 --outSAMtype BAM SortedByCoordinate \
 --outSAMunmapped Within \
@@ -286,6 +286,7 @@ Le seconde ligne permet d'obtenir l'abonance de l'unitig 6991943 (attention à b
 ```
 awk '$3 > 2000' outputGraph300.txt 
 awk -v ligne=6991944 ' NR == ligne { print $0}' ../../../kissplice_results/kissplice_moustique/graph_IR03_B_R1_IR03_C_R1_IR03_D_R1_IR03_E_R1_IR13_B_R1_IR13_C_R1_IR13_D_R1_IR13_E_R1_k41.abundance 
+sort -n -k 3 ../../data/outputGraphMoustiqueTop1Clean.txt
 ```
 
 TTTTTTTTTTTGGATTTTTGGTATAATCTTAGAGAAATTTGCGGAAGAAATGTAGAGGGATCTCAGCAAGAATCCCAGAAGTATTATTAGAAGAATCCCAGAGAGTTTTGGATTTCCAGTAGAATTCCACATGAATTCCAGAAGAATCCAAAAGGAATTACCGCAAGTCCCCTAGCACCGCAACTAACATTTTAGTAACATATATAACACACGCTACGTACACAAAAGTTACATGAATGATGTGCAATGCTCAAAACATAAGTGCAAATTGCGGCAAGCTGAG
