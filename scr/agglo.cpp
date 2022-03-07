@@ -71,7 +71,17 @@ int chemin(int i, int j, Graph &G, vector<vector<int>> &components){
     return 0;
 }
 
-
+int indexMax(Graph &G, vector<int> &vu_total){
+    int index;
+    int val = -1;
+    for (int i = 0; i<G.N; i++){
+        if (not vu_total[i] && G.Vertices[i].weight > val){
+            index = i;
+            val = G.Vertices[i].weight;
+        }
+    }
+    return index;
+}
 int main(int argc, char** argv){
     if (argc!=6){
         cout << "Expected use of this program: \n\n\t" <<argv[0] << " file.node file.edges -c value outputPrefixe\n" << endl;
@@ -97,17 +107,13 @@ int main(int argc, char** argv){
 
     cout << "Graphe chargé et construit" << endl;
 
-    vector<int> index;
+    int index;
     vector<int> vu_total;
-    index.clear();
     for (int i=0; i<G.N ; i++){
         index.push_back(i);
         vu_total.push_back(0);
     }
 
-    sort(index.begin(),index.end(),G);
-
-    cout << "Poids triés. Maximum : " << index.back() << endl;
     vector<vector<int>> components;
     components.clear();
 
@@ -115,15 +121,10 @@ int main(int argc, char** argv){
     threshold =atoi(argv[4]);
     int m = 0;
     int val;
-    val = index.back();
-    index.pop_back();
-    while (G.Vertices[val].weight >= threshold and m < 3) //On cherche les composantes
+    index = indexMax(G,vu_total);
+    vu_total[index]= 1;
+    while (G.Vertices[index].weight >= threshold and m < 3) //On cherche les composantes
     {
-        if (vu_total[val]){
-            val = index.back();
-            index.pop_back();
-            continue;
-        }
         cout << "Une composante trouvée! " << endl;
         vector<int> compo;
         compo.clear();
@@ -137,8 +138,9 @@ int main(int argc, char** argv){
         for (int i = 1; i< compo.size(); i++){
             vu_total[compo[i]] = 1;
         }
-        val = index.back();
-        index.pop_back();
+        index = indexMax(G,vu_total);
+        vu_total[index]= 1;
+
     }
 
     cout << "Fin de la recherche de composantes." << endl;
@@ -166,7 +168,7 @@ int main(int argc, char** argv){
     Graph H(V2,E2);
 
     cout << "Graphe aggloméré construit" << endl;
-    
+
     ofstream outputNodes;
     outputNodes.open((string) argv[5]+".nodes");
     printGraphVertices(H,outputNodes);
