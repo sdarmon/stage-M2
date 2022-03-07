@@ -43,7 +43,7 @@ int chemin(int i, int j, Graph &G, vector<vector<int>> &components){
     int modif = 1;
     int size = voisin1.size();
     Neighbor* node;
-    while (modif && step < 5) { //Tant qu'un sommet a été rajouté à la couche précédente, on regarde tous les sommets de cette couche là dans le BFS.
+    while (modif ) { //Tant qu'un sommet a été rajouté à la couche précédente, on regarde tous les sommets de cette couche là dans le BFS.
         modif = 0;
         size = voisin1.size();
         for (int k = 0; k<size; ++k){ //On boucle sur les sommets de la couche du BFS uniquement
@@ -122,7 +122,7 @@ int main(int argc, char** argv){
     int val;
     index = indexMax(G,vu_total);
     vu_total[index]= 1;
-    while (G.Vertices[index].weight >= threshold) //On cherche les composantes
+    while (G.Vertices[index].weight >= threshold and m < 30) //On cherche les composantes
     {
         vector<int> compo;
         compo.clear();
