@@ -95,6 +95,8 @@ int main(int argc, char** argv){
 
     Graph G(V,E);
 
+    cout << "Graphe chargé et construit" << endl;
+
     vector<int> index;
     vector<int> vu_total;
     index.clear();
@@ -105,6 +107,7 @@ int main(int argc, char** argv){
 
     sort(index.begin(),index.end(),G);
 
+    cout << "Poids triés. Maximum : " << index.back() << endl;
     vector<vector<int>> components;
     components.clear();
 
@@ -121,6 +124,7 @@ int main(int argc, char** argv){
             index.pop_back();
             continue;
         }
+        cout << "Une composante trouvée! " << endl;
         vector<int> compo;
         compo.clear();
         compo.push_back(val);
@@ -136,6 +140,8 @@ int main(int argc, char** argv){
         val = index.back();
         index.pop_back();
     }
+
+    cout << "Fin de la recherche de composantes." << endl;
 
     //Maintenant on construit nouveau graphe contracté
     vector<Edge> E2;
@@ -159,6 +165,8 @@ int main(int argc, char** argv){
 
     Graph H(V2,E2);
 
+    cout << "Graphe aggloméré construit" << endl;
+    
     ofstream outputNodes;
     outputNodes.open((string) argv[5]+".nodes");
     printGraphVertices(H,outputNodes);
