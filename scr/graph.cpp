@@ -396,15 +396,15 @@ void read_node_file_weighted( FILE* node_file, vector<Node>& seqs)
         p = strtok( buffer, "\t\n" );
               
         // Node seq
-        p = strtok( NULL, "\t\n"  );
+        p = strtok( buffer, "\t\n"  );
         seq = new char[strlen(p) + 1];
         strcpy( seq, p );
 
         // Node weight
-        p = strtok( buffer, "\t\n" );
+        p = strtok( NULL , "\t\n" );
         strcpy( u, p );
 
-        
+
         Node node(compt,atoi(u),seq);
         seqs.push_back(node);
         compt++;
