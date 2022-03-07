@@ -75,7 +75,7 @@ int indexMax(Graph &G, vector<int> &vu_total){
     int index;
     int val = -1;
     for (int i = 0; i<G.N; i++){
-        if (not vu_total[i] && G.Vertices[i].weight > val){
+        if (vu_total[i] == 0 && G.Vertices[i].weight > val){
             index = i;
             val = G.Vertices[i].weight;
         }
