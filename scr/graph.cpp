@@ -370,6 +370,51 @@ void read_node_file( FILE* node_file, vector<Node>& seqs)
     delete [] buffer;
 }
 
+
+//Lit un fichier contenant les sommets du graphe et les ajoute au vecteur seqs (réalisé par Pierre Peterlongo et Vincent Lacroix)
+void read_node_file_weighted( FILE* node_file, vector<Node>& seqs)
+{
+    seqs.clear();
+    char* buffer = new char[100 * MAX];
+    char* seq;
+    char* u = new char[MAX];
+
+    seqs.reserve(count_nb_lines(node_file));
+    int compt = 0;
+    while ( fgets(buffer, 100 * MAX, node_file) != NULL )
+    {
+        char* p;
+
+        if (strlen(buffer) == 100 * MAX)
+        {  
+          p = strtok(buffer, "\t\n");
+          fprintf(stdout, "ERROR: node %s with sequence larger than %d!", p, 100 * MAX);
+          exit(0);
+        }
+          
+        // Node label
+        p = strtok( buffer, "\t\n" );
+              
+        // Node seq
+        p = strtok( NULL, "\t\n"  );
+        seq = new char[strlen(p) + 1];
+        strcpy( seq, p );
+
+        // Node weight
+        p = strtok( buffer, "\t\n" );
+        strcpy( u, p );
+
+        
+        Node node(compt,atoi(u),seq);
+        seqs.push_back(node);
+        compt++;
+    }
+
+    delete [] buffer;
+  delete [] u;
+}
+
+
 //Lit un fichier d'arêtes et les ajoute au vecteur edges (réalisé par Pierre Peterlongo et Vincent Lacroix)
 void read_edge_file( FILE *edge_file, vector<Edge>& edges )
 {

@@ -91,7 +91,7 @@ int main(int argc, char** argv){
     nodes= fopen(nodesPath,"r");
 
     read_edge_file(edges,E);
-    read_node_file(nodes,V);
+    read_node_file_weighted(nodes,V);
 
     Graph G(V,E);
 
