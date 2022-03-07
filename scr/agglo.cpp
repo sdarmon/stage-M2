@@ -110,11 +110,11 @@ int main(int argc, char** argv){
 
     int threshold;
     threshold =atoi(argv[4]);
-
+    int m = 0;
     int val;
     val = index.back();
     index.pop_back();
-    while (G.Vertices[val].weight >= threshold) //On cherche les composantes
+    while (G.Vertices[val].weight >= threshold and m < 20) //On cherche les composantes
     {
         if (vu_total[val]){
             val = index.back();
@@ -124,7 +124,7 @@ int main(int argc, char** argv){
         vector<int> compo;
         compo.clear();
         compo.push_back(val);
-
+        m++;
         vector<Neighbor*> aVoir;
         aVoir.clear();
         G.BFS_func(threshold ,aVoir,compo);
