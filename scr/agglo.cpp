@@ -163,6 +163,7 @@ int main(int argc, char** argv){
     V2.clear();
     int c;
     for (int i = 0; i < components.size(); i++){
+        cout << "Calculs des chemins partant de " << i << endl;
         V2.push_back(Node(i,components[i].size(),""));
         for (int j = 0; j< components.size(); j++){
             if (i == j){
