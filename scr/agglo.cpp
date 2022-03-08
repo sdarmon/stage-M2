@@ -127,11 +127,12 @@ int main(int argc, char** argv){
     vector<Neighbor*> aVoir;
 
     index = indexMax(G,vu_total);
+    val = G.Vertices[index].weight;
     //cout << index << " de poids " << G.Vertices[index].weight << endl;
     vu_total[index]= 1;
 
     cout << "Début de la recherche des composantes" << endl;
-    while (G.Vertices[index].weight >= threshold and m < 50) //On cherche les composantes
+    while (val >= threshold and m < 50) //On cherche les composantes
     {
         vector<int> compo;
         compo.clear();
@@ -141,7 +142,8 @@ int main(int argc, char** argv){
             aVoir.push_back(&(*it));
         }
         m++;
-        G.BFS_func(threshold ,100, aVoir,compo);
+        //G.BFS_func(threshold ,100, aVoir,compo); //Cas pour tous
+        G.BFS_func(val*0.5 ,1000, aVoir,compo); //Cas seulement une proportion
 
         components.push_back(compo);
         for (int i = 1; i< compo.size(); i++){
@@ -150,6 +152,7 @@ int main(int argc, char** argv){
 
         cout << "Composante trouvée de départ " << index << " et de poids " << G.Vertices[index].weight << endl;
         index = indexMax(G,vu_total);
+        val = G.Vertices[index].weight;
         vu_total[index]= 1;
 
     }
