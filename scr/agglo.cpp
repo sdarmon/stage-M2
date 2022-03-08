@@ -143,7 +143,7 @@ int main(int argc, char** argv){
         }
         m++;
         //G.BFS_func(threshold ,100, aVoir,compo); //Cas pour tous
-        G.BFS_func(val*0.5 ,100000, aVoir,compo); //Cas seulement une proportion
+        G.BFS_func(val*0.5 ,50000, aVoir,compo); //Cas seulement une proportion
 
         components.push_back(compo);
         for (int i = 1; i< compo.size(); i++){
