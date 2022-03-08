@@ -43,6 +43,8 @@ int chemin(int i, int j, Graph &G, vector<vector<int>> &components){
     int modif = 1;
     int size = voisin1.size();
     Neighbor* node;
+
+    cout << "Initialisation chemin ok" << endl;
     while (modif && step < 5) { //Tant qu'un sommet a été rajouté à la couche précédente, on regarde tous les sommets de cette couche là dans le BFS.
         modif = 0;
         size = voisin1.size();
