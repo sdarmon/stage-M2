@@ -169,7 +169,7 @@ int main(int argc, char** argv){
             if (i == j){
                 continue;
             }
-            c = chemin(i,j,G,components,100);
+            c = chemin(i,j,G,components,10);
             if (c>=0) {                
                 char arete[2] = {'N','N'};
                 E2.push_back(Edge(i,j,c,arete));
