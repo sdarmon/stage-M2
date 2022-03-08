@@ -24,8 +24,8 @@ int chemin(int i, int j, Graph &G, vector<vector<int>> &components){
     comp1.clear();
     comp2.clear();
 
-    cout << " i: " << i << "\t j: " << j << endl;
-    cout << "Taille comp i: "<< components[i].size() << "\nTaille comp j: "<< components[j].size()<< endl;
+    //cout << " i: " << i << "\t j: " << j << endl;
+    //cout << "Taille comp i: "<< components[i].size() << "\nTaille comp j: "<< components[j].size()<< endl;
     for(int k= 0; k< components[i].size(); k++){
         comp1.push_back(components[i][k]);
         cout << components[i][k] << endl;
@@ -46,7 +46,7 @@ int chemin(int i, int j, Graph &G, vector<vector<int>> &components){
     int size;
     Neighbor* node;
 
-    cout << "Initialisation chemin ok" << endl;
+    //cout << "Initialisation chemin ok" << endl;
     while (modif && step < 5) { //Tant qu'un sommet a été rajouté à la couche précédente, on regarde tous les sommets de cette couche là dans le BFS.
         modif = 0;
         size = voisin1.size();
@@ -141,7 +141,6 @@ int main(int argc, char** argv){
             aVoir.push_back(&(*it));
         }
         m++;
-        cout << "ici?" << endl;
         G.BFS_func(threshold ,aVoir,compo);
 
         components.push_back(compo);
