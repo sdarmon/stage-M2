@@ -141,6 +141,7 @@ int main(int argc, char** argv){
             aVoir.push_back(&(*it));
         }
         m++;
+        cout << "ici?" << endl;
         G.BFS_func(threshold ,aVoir,compo);
 
         components.push_back(compo);
