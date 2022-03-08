@@ -125,6 +125,8 @@ int main(int argc, char** argv){
     index = indexMax(G,vu_total);
     //cout << index << " de poids " << G.Vertices[index].weight << endl;
     vu_total[index]= 1;
+
+    cout << "Début de la recherche des composantes" << endl;
     while (G.Vertices[index].weight >= threshold and m < 30) //On cherche les composantes
     {
         vector<int> compo;
@@ -141,9 +143,10 @@ int main(int argc, char** argv){
         for (int i = 1; i< compo.size(); i++){
             vu_total[compo[i]] = 1;
         }
+
+        cout << "Composante trouvée de départ " << index << " et de poids " << G.Vertices[index].weight << endl;
         index = indexMax(G,vu_total);
         vu_total[index]= 1;
-        //cout << index << " de poids " << G.Vertices[index].weight << endl;
 
     }
 
