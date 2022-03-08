@@ -72,7 +72,7 @@ int chemin(int i, int j, Graph &G, vector<vector<int>> &components, int profonde
         step ++; //On passe à la couche suivante
     }
     //Aucun nouveau sommet n'a été rajouté à traiter... Il n'y a pas de chemin de la composante i à j.
-    return 0;
+    return -1;
 }
 
 int indexMax(Graph &G, vector<int> &vu_total){
@@ -131,7 +131,7 @@ int main(int argc, char** argv){
     vu_total[index]= 1;
 
     cout << "Début de la recherche des composantes" << endl;
-    while (G.Vertices[index].weight >= threshold and m < 100) //On cherche les composantes
+    while (G.Vertices[index].weight >= threshold and m < 50) //On cherche les composantes
     {
         vector<int> compo;
         compo.clear();
