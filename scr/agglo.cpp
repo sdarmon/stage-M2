@@ -143,7 +143,7 @@ int main(int argc, char** argv){
         }
         m++;
         //G.BFS_func(threshold ,100, aVoir,compo); //Cas pour tous
-        G.BFS_func(val*0.5 ,1000, aVoir,compo); //Cas seulement une proportion
+        G.BFS_func(val*0.5 ,100000, aVoir,compo); //Cas seulement une proportion
 
         components.push_back(compo);
         for (int i = 1; i< compo.size(); i++){
@@ -166,7 +166,7 @@ int main(int argc, char** argv){
     V2.clear();
     int c;
     for (int i = 0; i < components.size(); i++){
-        cout << "Calculs des chemins partant de " << i << endl;
+        cout << "Calcul des chemins partant de " << i << endl;
         V2.push_back(Node(i,components[i].size(),""));
         for (int j = 0; j< components.size(); j++){
             if (i == j){
