@@ -15,7 +15,7 @@
 #define MAX 1024
 
 // Permet de déterminer s'il existe un chemin de la composante i à la composante j, et s'il existe, renvoie la distance.
-int chemin(int i, int j, Graph &G, vector<vector<int>> &components){
+int chemin(int i, int j, Graph &G, vector<vector<int>> &components, int profondeurMax){
     int step = 1;
     vector<int> comp1;
     vector<int> comp2;
@@ -28,7 +28,7 @@ int chemin(int i, int j, Graph &G, vector<vector<int>> &components){
     //cout << "Taille comp i: "<< components[i].size() << "\nTaille comp j: "<< components[j].size()<< endl;
     for(int k= 0; k< components[i].size(); k++){
         comp1.push_back(components[i][k]);
-        cout << components[i][k] << endl;
+        //cout << components[i][k] << endl;
         for (vector<Neighbor>::iterator it = G.Neighbors(components[i][k])->begin(); it != G.Neighbors(components[i][k])->end(); ++it){
             if (find(comp1.begin(),comp1.end(), it->val) == comp1.end()){ 
                 voisin1.push_back(&(*it));
@@ -47,7 +47,7 @@ int chemin(int i, int j, Graph &G, vector<vector<int>> &components){
     Neighbor* node;
 
     //cout << "Initialisation chemin ok" << endl;
-    while (modif) { //Tant qu'un sommet a été rajouté à la couche précédente, on regarde tous les sommets de cette couche là dans le BFS.
+    while (modif && step < profondeurMax) { //Tant qu'un sommet a été rajouté à la couche précédente, on regarde tous les sommets de cette couche là dans le BFS.
         modif = 0;
         size = voisin1.size();
         for (int k = 0; k<size; ++k){ //On boucle sur les sommets de la couche du BFS uniquement
@@ -131,7 +131,7 @@ int main(int argc, char** argv){
     vu_total[index]= 1;
 
     cout << "Début de la recherche des composantes" << endl;
-    while (G.Vertices[index].weight >= threshold and m < 30) //On cherche les composantes
+    while (G.Vertices[index].weight >= threshold and m < 100) //On cherche les composantes
     {
         vector<int> compo;
         compo.clear();
@@ -168,7 +168,7 @@ int main(int argc, char** argv){
             if (i == j){
                 continue;
             }
-            c = chemin(i,j,G,components);
+            c = chemin(i,j,G,components,100);
             if (c>=0) {                
                 char arete[2] = {'N','N'};
                 E2.push_back(Edge(i,j,c,arete));
