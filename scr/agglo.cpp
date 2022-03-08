@@ -24,13 +24,15 @@ int chemin(int i, int j, Graph &G, vector<vector<int>> &components){
     comp1.clear();
     comp2.clear();
 
+    cout << " i: " << i << "\t j: " << j << endl;
+    cout << "Taille comp i: "<< components[i].size() << "\nTaille comp j: "<< components[j].size()<< endl;
     for(int k= 0; k< components[i].size(); k++){
         comp1.push_back(components[i][k]);
+        cout << components[i][k] << endl;
         for (vector<Neighbor>::iterator it = G.Neighbors(components[i][k])->begin(); it != G.Neighbors(components[i][k])->end(); ++it){
-            if (find(comp1.begin(),comp1.end(), it->val) != comp1.end()){ 
-                continue;
+            if (find(comp1.begin(),comp1.end(), it->val) == comp1.end()){ 
+                voisin1.push_back(&(*it));
             }
-            voisin1.push_back(&(*it));
         }
     }
     for(int k= 0; k< components[j].size(); k++){
@@ -41,7 +43,7 @@ int chemin(int i, int j, Graph &G, vector<vector<int>> &components){
     }
 
     int modif = 1;
-    int size = voisin1.size();
+    int size;
     Neighbor* node;
 
     cout << "Initialisation chemin ok" << endl;
