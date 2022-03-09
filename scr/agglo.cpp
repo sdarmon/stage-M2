@@ -160,7 +160,7 @@ int main(int argc, char** argv){
         vector<int> compo;
         compo.clear();
         compo.reserve(sizeMax+1);
-        cout << "Espace pour une composante de taille max " << sizeMax << "a bien été réservée." << endl;
+        cout << "Espace pour une composante de taille max " << sizeMax << " a bien été réservée." << endl;
         aVoir.clear();
         compo.push_back(index);
         for (vector<Neighbor>::iterator it = G.Neighbors(index)->begin(); it != G.Neighbors(index)->end(); ++it){
