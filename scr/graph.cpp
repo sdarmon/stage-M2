@@ -228,7 +228,8 @@ void Graph::BFS(int r, vector<Edge>& e ,vector<Neighbor*> &aVoir,vector<int> &vu
 
 // BFS qui teste si les sommets vérifient bien une condition (par une fonction)
 void Graph::BFS_func(int threshold, int tailleMax ,vector<Neighbor*> &aVoir,vector<int> &vu){
-    cout << "Taille à voir: " << aVoir.size() ;
+    cout << "debut " ;
+    cout << "\t Taille à voir: " << aVoir.size() ;
     cout << "\t Taille vu: " << vu.size() ;
     cout << "\t Max_size: " << vu.capacity() << endl;
     if (aVoir.size() == 0 || vu.size() > tailleMax){ //Cas de terminaison, on a terminé le BFS
