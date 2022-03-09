@@ -228,32 +228,28 @@ void Graph::BFS(int r, vector<Edge>& e ,vector<Neighbor*> &aVoir,vector<int> &vu
 
 // BFS qui teste si les sommets vérifient bien une condition (par une fonction)
 void Graph::BFS_func(int threshold, int tailleMax ,vector<Neighbor*> &aVoir,vector<int> &vu){
-    cout << "debut " << endl;
-    cout << "\t Taille max: " << tailleMax << endl;
-    cout << "\t Taille vu: " << vu.size() << endl;
-    cout << "\t Taille à voir: " << aVoir.size() << endl;
-    if (aVoir.size() == 0 || vu.size() > tailleMax){ //Cas de terminaison, on a terminé le BFS
-        return;
-    }
-    cout << "ici0?" << endl;
-    Neighbor* node = aVoir.front();
-    aVoir.erase(aVoir.begin());
-    cout << "ici?" << endl;
-    if (find(vu.begin(),vu.end(),node->val) != vu.end()){ //Cas où le sommet a été vu par le BFS
-        return BFS_func(threshold,tailleMax-1,aVoir,vu);
-    }
-    cout << "ici2?" << endl;
-    vu.push_back(node->val);
-    cout << "ici3?" << endl;
-    for (vector<Neighbor>::iterator it = Neighbors(node->val)->begin(); it != Neighbors(node->val)->end(); ++it){
-        //On boucle sur ses voisins
-        if (it->label[0] == node->label[1] && it->val >= threshold && find(vu.begin(),vu.end(),it->val) == vu.end()){ 
-            //Cas où l'arrêt est bien valide et sommet non vu avant, ce voisin est rajouté dans la file des visites
-            aVoir.push_back(&(*it));
+
+    Neighbor* node ;
+    while (aVoir.size() != 0 && vu.size() <= tailleMax){ //Cas de terminaison, on a terminé le BFS
+
+        node = aVoir.front();
+        aVoir.erase(aVoir.begin());
+
+        if (find(vu.begin(),vu.end(),node->val) != vu.end()){ //Cas où le sommet a été vu par le BFS
+            continue;
+        }
+
+        vu.push_back(node->val);
+
+        for (vector<Neighbor>::iterator it = Neighbors(node->val)->begin(); it != Neighbors(node->val)->end(); ++it){
+            //On boucle sur ses voisins
+            if (it->label[0] == node->label[1] && it->val >= threshold && find(vu.begin(),vu.end(),it->val) == vu.end()){ 
+                //Cas où l'arrêt est bien valide et sommet non vu avant, ce voisin est rajouté dans la file des visites
+                aVoir.push_back(&(*it));
+            }
         }
     }
-    cout << "fin" << endl;
-    return BFS_func(threshold,tailleMax-1,aVoir,vu); //Sinon, on continue sans prendre en compte le sommet.
+    return;
 }
 
 
