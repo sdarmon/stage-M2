@@ -146,6 +146,7 @@ int main(int argc, char** argv){
     int m = 0;
     int val;
     int sizeMax;
+    vector<int> vu(G.N,0);
     sizeMax = 2000000;
     vector<Neighbor*> aVoir;
 
@@ -157,18 +158,27 @@ int main(int argc, char** argv){
     cout << "Début de la recherche des composantes" << endl;
     while (val >= threshold and m < 50) //On cherche les composantes
     {
+        for (int i = 0; i<G.N; i++){
+            vu[i] = 0;
+        }
         vector<int> compo;
         compo.clear();
         cout << "Espace pour une composante de taille max " << sizeMax << " a bien été réservée." << endl;
         aVoir.clear();
-        compo.push_back(index);
+        vu[index] = 1;
         for (vector<Neighbor>::iterator it = G.Neighbors(index)->begin(); it != G.Neighbors(index)->end(); ++it){
             aVoir.push_back(&(*it));
         }
         m++;
         //G.BFS_func(threshold ,100, aVoir,compo); //Cas pour tous
-        G.BFS_func(val*0.5 ,sizeMax, aVoir,compo); //Cas seulement une proportion
+        G.BFS_func(val*0.5 ,sizeMax, aVoir,vu); //Cas seulement une proportion
 
+
+        for (int i = 0; i<G.N; i++){
+            if (vu[i]){
+                compo.push_back(i);
+            }
+        }
         components.push_back(compo);
         for (int i = 1; i< compo.size(); i++){
             vu_total[compo[i]] = 1;

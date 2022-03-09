@@ -232,22 +232,22 @@ void Graph::BFS_func(int threshold, int tailleMax ,vector<Neighbor*> &aVoir,vect
     Neighbor* node ;
     int compt;
     while (aVoir.size() != 0 && vu.size() <= tailleMax){ //Cas de terminaison, on a terminé le BFS
-        if (compt%10000 == 0){
-            cout << compt/10000 << endl;
-        }
+        // if (compt%10000 == 0){
+        //     cout << compt/10000 << endl;
+        // }
         compt++;
         node = aVoir.front();
         aVoir.erase(aVoir.begin());
 
-        if (find(vu.begin(),vu.end(),node->val) != vu.end()){ //Cas où le sommet a été vu par le BFS
+        if (vu[node->val]){ //Cas où le sommet a été vu par le BFS
             continue;
         }
 
-        vu.push_back(node->val);
+        vu[node->val]=1;
 
         for (vector<Neighbor>::iterator it = Neighbors(node->val)->begin(); it != Neighbors(node->val)->end(); ++it){
             //On boucle sur ses voisins
-            if (it->label[0] == node->label[1] && it->val >= threshold && find(vu.begin(),vu.end(),it->val) == vu.end()){ 
+            if (it->label[0] == node->label[1] && it->val >= threshold && vu[it->val]==0){ 
                 //Cas où l'arrêt est bien valide et sommet non vu avant, ce voisin est rajouté dans la file des visites
                 aVoir.push_back(&(*it));
             }
