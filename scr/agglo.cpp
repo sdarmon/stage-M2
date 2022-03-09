@@ -176,7 +176,7 @@ int main(int argc, char** argv){
             vu_total[compo[i]] = 1;
         }
 
-        cout << "Composante trouvée de départ " << index << " et de poids " << G.Vertices[index].weight << endl;
+        cout << "Composante trouvée de départ " << index << " et de poids " << G.Vertices[index].weight << " et de taille " << compo.size() << endl;
         index = indexMax(G,vu_total);
         val = G.Vertices[index].weight;
         vu_total[index]= 1;
