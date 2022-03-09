@@ -146,7 +146,7 @@ int main(int argc, char** argv){
     int m = 0;
     int val;
     int sizeMax;
-    sizeMax = 2*10**6;
+    sizeMax = 2000000;
     vector<Neighbor*> aVoir;
 
     index = indexMax(G,vu_total);
