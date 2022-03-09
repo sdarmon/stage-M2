@@ -145,6 +145,8 @@ int main(int argc, char** argv){
     threshold =atoi(argv[4]);
     int m = 0;
     int val;
+    int sizeMax;
+    sizeMax = 2*10**6;
     vector<Neighbor*> aVoir;
 
     index = indexMax(G,vu_total);
@@ -157,6 +159,8 @@ int main(int argc, char** argv){
     {
         vector<int> compo;
         compo.clear();
+        compo.reserve(sizeMax+1);
+        cout << "Espace pour une composante de taille max " << sizeMax << "a bien été réservée." << endl;
         aVoir.clear();
         compo.push_back(index);
         for (vector<Neighbor>::iterator it = G.Neighbors(index)->begin(); it != G.Neighbors(index)->end(); ++it){
@@ -164,8 +168,9 @@ int main(int argc, char** argv){
         }
         m++;
         //G.BFS_func(threshold ,100, aVoir,compo); //Cas pour tous
-        G.BFS_func(val*0.5 ,50000, aVoir,compo); //Cas seulement une proportion
+        G.BFS_func(val*0.5 ,sizeMax, aVoir,compo); //Cas seulement une proportion
 
+        compo.shrink_to_fit();
         components.push_back(compo);
         for (int i = 1; i< compo.size(); i++){
             vu_total[compo[i]] = 1;

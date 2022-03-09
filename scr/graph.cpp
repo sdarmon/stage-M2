@@ -513,64 +513,6 @@ void printEdges(vector<Edge>& E,ofstream& output)
     int M = E.size();
     Edge* e;
     for (vector<Edge>::iterator it = E.begin(); it != E.end(); ++it) {
-        output << it->start << "\t" << it->end << "\t" << (string)it->label << "\n";
+        output << it->start << "\t" << it->end << "\t" << (string)it->label << "\t" << it->weight << "\n";
     }
 }
-
-
-
-
-
-//We do not allow to remove anything for the moment, maybe it will be mandatory for some future implementations....
-
-// bool Graph::remove(int valNode){
-//     for (int index = 0, index < N, index++){
-//         if (Vertices[index].val == valNode){
-//             pop(index);
-//             return 1;
-//         }
-//         return 0;
-//     }  
-// }
-
-// bool Graph::remove(Node n){
-//     for (int index = 0, index < N, index++){
-//         if (Vertices[index] == n){
-//             pop(index);
-//             return 1;
-//         }
-//         return 0;
-//     }  
-// }
-
-// bool Graph::remove(int startEdge, int endEdge){
-//     for (int index = 0, index < Adj[startEdge].size(), index++){
-//         if (Vertices[index] == n){
-//             pop(index);
-//             return 1;
-//         }
-//         return 0;
-//     }  
-// }
-
-// bool Graph::remove(Edge e){
-//     int start, end;
-//     for (int index = 0, index < N, index++){
-//         if (Vertices[index] == n){
-//             pop(index);
-//             return 1;
-//         }
-//         return 0;
-//     }  
-// }
-
-// Node Graph::pop(int index){
-//     int e;
-//     Node n(Vertices[index]);
-//     Vertices.erase(Vertices.begin()+index);
-//     e = Adj[index].size();
-//     Adj.erase(Adj.begin()+index);
-//     N--;
-//     M= M-e;
-//     return n;
-// }
