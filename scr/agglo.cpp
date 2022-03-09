@@ -44,7 +44,7 @@ void chemin(int i, vector<int> &endings, Graph &G, vector<vector<int>> &componen
             }
         }
     }
-
+    cout << "Data initialisée" << endl;
     int modif = 1;
     int trouve = 0;
     int size;
