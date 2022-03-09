@@ -15,7 +15,81 @@
 #define MAX 1024
 
 // Permet de déterminer s'il existe un chemin de la composante i à la composante j, et s'il existe, renvoie la distance.
-void chemin(int i, vector<int> &endings, Graph &G, vector<vector<int>> &components, int profondeurMax){
+
+void chemin_local(int i, vector<int> &endings, Graph &G, vector<vector<int>> &components, int profondeurMax){
+    int step = 1;
+    vector<int> comp1;
+    vector<Neighbor*> voisin1;
+    voisin1.clear();
+    comp1.clear();
+
+    //cout << " i: " << i << "\t j: " << j << endl;
+    //cout << "Taille comp i: "<< components[i].size() << "\nTaille comp j: "<< components[j].size()<< endl;
+    for(int k= 0; k< components[i].size(); k++){
+        comp1.push_back(components[i][k]);
+        //cout << components[i][k] << endl;
+        for (vector<Neighbor>::iterator it = G.Neighbors(components[i][k])->begin(); it != G.Neighbors(components[i][k])->end(); ++it){
+            if (find(comp1.begin(),comp1.end(), it->val) == comp1.end()){ 
+                voisin1.push_back(&(*it));
+            }
+        }
+    }
+    //On regarde si la j-eme composante s'intersecte avec la comp1
+    for (int j = 0; j<components.size(); j++){
+        for(int k= 0; k< components[j].size(); k++){
+            if (find(comp1.begin(),comp1.end(),components[j][k]) != comp1.end()){ 
+                endings[j] = 0;
+                continue;
+            }
+        }
+    }
+
+    int modif = 1;
+    int trouve = 0;
+    int size;
+    Neighbor* node;
+
+    //cout << "Initialisation chemin ok" << endl;
+    while (modif && step < profondeurMax) { //Tant qu'un sommet a été rajouté à la couche précédente, on regarde tous les sommets de cette couche là dans le BFS.
+        modif = 0;
+        trouve = 0;
+        size = voisin1.size();
+        for (int k = 0; k<size; ++k){ //On boucle sur les sommets de la couche du BFS uniquement
+            node = voisin1.front();
+            voisin1.erase(voisin1.begin());
+            if (find(comp1.begin(),comp1.end(), node->val) != comp1.end()){ // Sommet déjà présent
+                continue;
+            }
+            // Sommet également présent dans la composante d'arrivée
+            for (int j = 0; j<components.size(); j++){
+                if (find(components[j].begin(),components[j].end(),node->val) != components[j].end()){ 
+                    if (endings[j] == -1){ //On garde toujours le plus court chemin
+                        endings[j] = step;
+                    }
+                    trouve = 1;
+                    continue;
+                }
+            }
+            if (not trouve) {
+                //Sinon on rajoute ce sommet comme vu et on ajoute ses voisins à traiter dans le BFS pour la prochaine couche
+                comp1.push_back(node->val);
+                modif = 1;
+                for (vector<Neighbor>::iterator it = G.Neighbors(node->val)->begin(); it != G.Neighbors(node->val)->end(); ++it){ 
+                    if (it->label[0] != node->label[1]){ 
+                        continue;
+                    }
+                    voisin1.push_back(&(*it));
+                }
+            }
+        }
+        step ++; //On passe à la couche suivante
+    }
+    //Aucun nouveau sommet n'a été rajouté à traiter... Il n'y a plus de chemins à visiter...
+    return;
+}
+
+
+void chemin_space(int i, vector<int> &endings, Graph &G, vector<vector<int>> &components, int profondeurMax){
     int step = 1;
     vector<int> comp1;
     vector<Neighbor*> voisin1;
@@ -152,19 +226,19 @@ int main(int argc, char** argv){
     int threshold;
     threshold =atoi(argv[4]);
     int m = 0;
-    int val;
+    int weight;
     int sizeMax;
     vector<int> vu(G.N,0);
     sizeMax = 2000000;
     vector<Neighbor*> aVoir;
 
     index = indexMax(G,vu_total);
-    val = G.Vertices[index].weight;
+    weight = G.Vertices[index].weight;
     //cout << index << " de poids " << G.Vertices[index].weight << endl;
     vu_total[index]= 1;
 
     cout << "Début de la recherche des composantes" << endl;
-    while (val >= threshold and m < 50) //On cherche les composantes
+    while (weight >= threshold and m < 50) //On cherche les composantes
     {
         for (int i = 0; i<G.N; i++){
             vu[i] = 0;
@@ -192,7 +266,7 @@ int main(int argc, char** argv){
 
         cout << "Composante trouvée de départ " << index << " et de poids " << G.Vertices[index].weight << " et de taille " << compo.size() << endl;
         index = indexMax(G,vu_total);
-        val = G.Vertices[index].weight;
+        weight = G.Vertices[index].weight;
         vu_total[index]= 1;
 
     }
@@ -209,7 +283,7 @@ int main(int argc, char** argv){
     for (int i = 0; i < components.size(); i++){
         cout << "Calcul des chemins partant de " << i << endl;
         initVec(endings, components.size());
-        chemin(i,endings,G,components,5);
+        chemin_local(i,endings,G,components,5);
 
         V2.push_back(Node(i,components[i].size(),""));
 
