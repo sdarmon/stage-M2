@@ -230,8 +230,12 @@ void Graph::BFS(int r, vector<Edge>& e ,vector<Neighbor*> &aVoir,vector<int> &vu
 void Graph::BFS_func(int threshold, int tailleMax ,vector<Neighbor*> &aVoir,vector<int> &vu){
 
     Neighbor* node ;
+    int compt;
     while (aVoir.size() != 0 && vu.size() <= tailleMax){ //Cas de terminaison, on a terminé le BFS
-
+        if (compt%10000 == 0){
+            cout << compt/10000 << endl;
+        }
+        compt++;
         node = aVoir.front();
         aVoir.erase(aVoir.begin());
 

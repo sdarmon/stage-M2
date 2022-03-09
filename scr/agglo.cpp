@@ -159,7 +159,6 @@ int main(int argc, char** argv){
     {
         vector<int> compo;
         compo.clear();
-        compo.reserve(sizeMax+1);
         cout << "Espace pour une composante de taille max " << sizeMax << " a bien été réservée." << endl;
         aVoir.clear();
         compo.push_back(index);
@@ -170,7 +169,6 @@ int main(int argc, char** argv){
         //G.BFS_func(threshold ,100, aVoir,compo); //Cas pour tous
         G.BFS_func(val*0.5 ,sizeMax, aVoir,compo); //Cas seulement une proportion
 
-        compo.shrink_to_fit();
         components.push_back(compo);
         for (int i = 1; i< compo.size(); i++){
             vu_total[compo[i]] = 1;
