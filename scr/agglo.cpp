@@ -283,7 +283,7 @@ int main(int argc, char** argv){
     for (int i = 0; i < components.size(); i++){
         cout << "Calcul des chemins partant de " << i << endl;
         initVec(endings, components.size());
-        chemin_local(i,endings,G,components,10);
+        chemin_local(i,endings,G,components,100);
 
         V2.push_back(Node(i,components[i].size(),""));
 
