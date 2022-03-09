@@ -257,12 +257,10 @@ int main(int argc, char** argv){
         for (int i = 0; i<G.N; i++){
             if (vu[i]){
                 compo.push_back(i);
+                vu_total[i]=1;
             }
         }
         components.push_back(compo);
-        for (int i = 1; i< compo.size(); i++){
-            vu_total[compo[i]] = 1;
-        }
 
         cout << "Composante trouvée de départ " << index << " et de poids " << G.Vertices[index].weight << " et de taille " << compo.size() << endl;
         index = indexMax(G,vu_total);
