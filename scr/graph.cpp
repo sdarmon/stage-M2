@@ -234,10 +234,13 @@ void Graph::BFS_func(int threshold, int tailleMax ,vector<Neighbor*> &aVoir,vect
     cout << "Taille à voir: " << aVoir.size() << "\t Taille vu: " << vu.size() << "\t Max_size: " << vu.capacity() << endl;
     Neighbor* node = aVoir.front();
     aVoir.erase(aVoir.begin());
+    cout << "ici?" << endl;
     if (find(vu.begin(),vu.end(),node->val) != vu.end()){ //Cas où le sommet a été vu par le BFS
         return BFS_func(threshold,tailleMax,aVoir,vu);
     }
+    cout << "ici2?" << endl;
     vu.push_back(node->val);
+    cout << "ici3?" << endl;
     for (vector<Neighbor>::iterator it = Neighbors(node->val)->begin(); it != Neighbors(node->val)->end(); ++it){
         //On boucle sur ses voisins
         if (it->label[0] == node->label[1] && it->val >= threshold && find(vu.begin(),vu.end(),it->val) == vu.end()){ 
@@ -245,6 +248,7 @@ void Graph::BFS_func(int threshold, int tailleMax ,vector<Neighbor*> &aVoir,vect
             aVoir.push_back(&(*it));
         }
     }
+    cout << "ici4?" << endl;
     return BFS_func(threshold,tailleMax,aVoir,vu); //Sinon, on continue sans prendre en compte le sommet.
 }
 
