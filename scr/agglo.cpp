@@ -21,22 +21,24 @@ void chemin(int i, vector<int> &endings, Graph &G, vector<vector<int>> &componen
     vector<Neighbor*> voisin1;
     voisin1.clear();
     comp1.clear();
+    vector<int> vu(G.N,0);
+    vector<int> vu_ext(G.N,0);
 
-    //cout << " i: " << i << "\t j: " << j << endl;
-    //cout << "Taille comp i: "<< components[i].size() << "\nTaille comp j: "<< components[j].size()<< endl;
     for(int k= 0; k< components[i].size(); k++){
+        vu[components[i][k]] = 1;
         comp1.push_back(components[i][k]);
         //cout << components[i][k] << endl;
         for (vector<Neighbor>::iterator it = G.Neighbors(components[i][k])->begin(); it != G.Neighbors(components[i][k])->end(); ++it){
-            if (find(comp1.begin(),comp1.end(), it->val) == comp1.end()){ 
-                voisin1.push_back(&(*it));
-            }
+            voisin1.push_back(&(*it));
         }
     }
     //On regarde si la j-eme composante s'intersecte avec la comp1
     for (int j = 0; j<components.size(); j++){
         for(int k= 0; k< components[j].size(); k++){
-            if (find(comp1.begin(),comp1.end(),components[j][k]) != comp1.end()){ 
+            if(j!=i){
+                vu_ext[components[j][k]]=1;
+            }
+            if (vu[components[j][k]]){ 
                 endings[j] = 0;
                 continue;
             }
@@ -56,12 +58,12 @@ void chemin(int i, vector<int> &endings, Graph &G, vector<vector<int>> &componen
         for (int k = 0; k<size; ++k){ //On boucle sur les sommets de la couche du BFS uniquement
             node = voisin1.front();
             voisin1.erase(voisin1.begin());
-            if (find(comp1.begin(),comp1.end(), node->val) != comp1.end()){ // Sommet déjà présent
+            if (vu[node->val]){ // Sommet déjà présent
                 continue;
             }
             // Sommet également présent dans la composante d'arrivée
             for (int j = 0; j<components.size(); j++){
-                if (find(components[j].begin(),components[j].end(),node->val) != components[j].end()){ 
+                if (vu_ext[node->val]){ 
                     if (endings[j] == -1){ //On garde toujours le plus court chemin
                         endings[j] = step;
                     }
@@ -72,6 +74,7 @@ void chemin(int i, vector<int> &endings, Graph &G, vector<vector<int>> &componen
             if (not trouve) {
                 //Sinon on rajoute ce sommet comme vu et on ajoute ses voisins à traiter dans le BFS pour la prochaine couche
                 comp1.push_back(node->val);
+                vu[node->val] = 1;
                 modif = 1;
                 for (vector<Neighbor>::iterator it = G.Neighbors(node->val)->begin(); it != G.Neighbors(node->val)->end(); ++it){ 
                     if (it->label[0] != node->label[1]){ 
