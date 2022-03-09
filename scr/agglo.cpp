@@ -68,6 +68,7 @@ void chemin(int i, vector<int> &endings, Graph &G, vector<vector<int>> &componen
                     if (endings[j] == -1){ //On garde toujours le plus court chemin
                         endings[j] = step;
                     }
+                    vu[i][node->val] = 1;
                     trouve = 1;
                     continue;
                 }
