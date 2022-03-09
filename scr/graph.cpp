@@ -232,8 +232,6 @@ void Graph::BFS_func(int threshold ,vector<Neighbor*> &aVoir,vector<int> &vu){
     Neighbor* node ;
     int compt=0;
     while (aVoir.size() != 0){ //Cas de terminaison, on a terminé le BFS
-        cout << compt << endl;
-        compt++;
         node = aVoir.front();
         aVoir.erase(aVoir.begin());
 
@@ -244,7 +242,7 @@ void Graph::BFS_func(int threshold ,vector<Neighbor*> &aVoir,vector<int> &vu){
 
         for (vector<Neighbor>::iterator it = Neighbors(node->val)->begin(); it != Neighbors(node->val)->end(); ++it){
             //On boucle sur ses voisins
-            if (it->weight >= threshold && vu[it->val]==0){
+            if (Vertices[it->val].weight >= threshold && vu[it->val]==0){
                 //Cas où l'arrêt est bien valide et sommet non vu avant, ce voisin est rajouté dans la file des visites
                 aVoir.push_back(&(*it));
             }
