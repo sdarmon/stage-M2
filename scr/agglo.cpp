@@ -251,7 +251,7 @@ int main(int argc, char** argv){
             aVoir.push_back(&(*it));
         }
         m++;
-        G.BFS_func(threshold,sizeMax, aVoir,vu); 
+        G.BFS_func(threshold, aVoir,vu); 
 
 
         for (int i = 0; i<G.N; i++){
