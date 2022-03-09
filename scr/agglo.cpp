@@ -24,8 +24,13 @@ void chemin(int i, vector<int> &endings, Graph &G, vector<vector<int>> &componen
     vector<vector<int>> vu;
     vu.clear();
 
+    for (int j = 0; j<components.size(); j++){
+        vector<int> vu_row(G.N,0);
+        vu.push_back(vu_row);
+    }
 
     for(int k= 0; k< components[i].size(); k++){
+        vu[i][components[i][k]] = 1;
         comp1.push_back(components[i][k]);
         //cout << components[i][k] << endl;
         for (vector<Neighbor>::iterator it = G.Neighbors(components[i][k])->begin(); it != G.Neighbors(components[i][k])->end(); ++it){
@@ -34,8 +39,6 @@ void chemin(int i, vector<int> &endings, Graph &G, vector<vector<int>> &componen
     }
     //On regarde si la j-eme composante s'intersecte avec la comp1
     for (int j = 0; j<components.size(); j++){
-        vector<int> vu_row(G.N,0);
-        vu.push_back(vu_row);
         for(int k= 0; k< components[j].size(); k++){
             vu[j][components[j][k]]=1;
             if (vu[i][components[j][k]]){ 
