@@ -47,7 +47,7 @@ void chemin(int i, vector<int> &endings, Graph &G, vector<vector<int>> &componen
             }
         }
     }
-    cout << "Data initialisée" << endl;
+    cout << "\tData initialisée" << endl;
     int modif = 1;
     int trouve = 0;
     int size;
@@ -209,7 +209,7 @@ int main(int argc, char** argv){
     for (int i = 0; i < components.size(); i++){
         cout << "Calcul des chemins partant de " << i << endl;
         initVec(endings, components.size());
-        chemin(i,endings,G,components,1);
+        chemin(i,endings,G,components,5);
 
         V2.push_back(Node(i,components[i].size(),""));
 
