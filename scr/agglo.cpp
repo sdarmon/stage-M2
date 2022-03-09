@@ -238,7 +238,7 @@ int main(int argc, char** argv){
     vu_total[index]= 1;
 
     cout << "Début de la recherche des composantes" << endl;
-    while (weight >= threshold and m < 50) //On cherche les composantes
+    while (weight >= threshold and m < 100) //On cherche les composantes
     {
         for (int i = 0; i<G.N; i++){
             vu[i] = 0;
@@ -283,7 +283,7 @@ int main(int argc, char** argv){
     for (int i = 0; i < components.size(); i++){
         cout << "Calcul des chemins partant de " << i << endl;
         initVec(endings, components.size());
-        chemin_local(i,endings,G,components,5);
+        chemin_local(i,endings,G,components,10);
 
         V2.push_back(Node(i,components[i].size(),""));
 
