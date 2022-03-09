@@ -231,7 +231,7 @@ void Graph::BFS_func(int threshold, int tailleMax ,vector<Neighbor*> &aVoir,vect
     if (aVoir.size() == 0 || vu.size() > tailleMax){ //Cas de terminaison, on a terminé le BFS
         return;
     }
-    cout << "Taille à voir: " << aVoir.size() << "\t Taille vu: " << vu.size() << endl;
+    cout << "Taille à voir: " << aVoir.size() << "\t Taille vu: " << vu.size() << "\t Max_size: " << vu.max_size() << endl;
     Neighbor* node = aVoir.front();
     aVoir.erase(aVoir.begin());
     if (find(vu.begin(),vu.end(),node->val) != vu.end()){ //Cas où le sommet a été vu par le BFS
