@@ -163,15 +163,13 @@ int main(int argc, char** argv){
         }
         vector<int> compo;
         compo.clear();
-        cout << "Espace pour une composante de taille max " << sizeMax << " a bien été réservée." << endl;
         aVoir.clear();
         vu[index] = 1;
         for (vector<Neighbor>::iterator it = G.Neighbors(index)->begin(); it != G.Neighbors(index)->end(); ++it){
             aVoir.push_back(&(*it));
         }
         m++;
-        //G.BFS_func(threshold ,100, aVoir,compo); //Cas pour tous
-        G.BFS_func(val*0.5 ,sizeMax, aVoir,vu); //Cas seulement une proportion
+        G.BFS_func(threshold,sizeMax, aVoir,vu); 
 
 
         for (int i = 0; i<G.N; i++){
