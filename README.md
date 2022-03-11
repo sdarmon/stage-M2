@@ -295,6 +295,16 @@ TTTTTTTTTTTGGATTTTTGGTATAATCTTAGAGAAATTTGCGGAAGAAATGTAGAGGGATCTCAGCAAGAATCCCAGAA
 ## Agglomeration des graphes
 
 ```
+python3 reads_to_align.py ../../data/outputGraphMoustique.txt ./../data/outputClean.txt 0 -clean
 g++ graph.cpp agglo.cpp -o agglo.exe
-./agglo.exe ../../data/outputGraphMoustique.txt ../../../kissplice_results/kissplice_moustique/graph_IR03_B_R1_IR03_C_R1_IR03_D_R1_IR03_E_R1_IR13_B_R1_IR13_C_R1_IR13_D_R1_IR13_E_R1_k41_C0.05.edges -c 20 ../../results/moustique/compMous
+./agglo.exe ../../data/outputGraphMoustique.txt ../../../kissplice_results/kissplice_moustique/graph_IR03_B_R1_IR03_C_R1_IR03_D_R1_IR03_E_R1_IR13_B_R1_IR13_C_R1_IR13_D_R1_IR13_E_R1_k41_C0.05.edges -c 30 ../../results/moustique/compMous
+```
+
+
+version chien
+```
+python3 reads_to_align.py ../../data/outputGraphMoustique.txt ./../data/outputClean.txt 0 -clean
+g++ graph.cpp agglo.cpp -o agglo.exe
+./agglo.exe ../../data/chien/outputGraphClean.txt ../../../kissplice_results/kissplice_Chiens/graph_SRR15254976_1_SRR15254976_2_SRR15254978_1_SRR15254978_2_SRR15254980_1_SRR15254980_2_SRR15254982_1_SRR15254982_2_SRR15254985_1_SRR15254985_2_SRR15254986_1_SRR15254986_2_SRR15254989_1_SRR15254989_2_SRR1k41_C0.05.edges -c 25 ../../results/moustique/compChien
+
 ```

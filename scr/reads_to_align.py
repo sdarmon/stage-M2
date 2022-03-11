@@ -36,7 +36,7 @@ def isPoly(seq):
     return(False)
 
 if len(Arg) not in [4,5,6]:
-    print("Use : "+Arg[0]+ " input.txt output.fq threshold -reverse ref.txt -clean")
+    print("Use : "+Arg[0]+ " input.txt output.fq threshold [-reverse ref.txt] [-clean] \n Ne pas utiliser -reverse et -clean en même temps!")
     exit()
 if len(Arg) == 4:
     seqs = []
@@ -56,7 +56,7 @@ if len(Arg) == 4:
             f.write(">SEQ_"+str(compt)+"\n")
             compt+=1
             f.write(seq+"\n")
-elif len(Arg) == 5:
+elif len(Arg) == 5: #i.e. argument -clean
     seqs = []
     t = int(Arg[3])
     with open(Arg[1],'r') as f:
