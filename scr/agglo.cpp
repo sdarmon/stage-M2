@@ -1,5 +1,5 @@
 /*
- * Ce programme permet de faire une aglomération des composantes
+ * Ce programme permet de faire une agglomeration des composantes
  * des graphes.
  */
 
@@ -45,12 +45,11 @@ void chemin_local(int i, vector<int> &endings, Graph &G, vector<vector<int>> &co
     }
 
     int modif = 1;
-    int trouve = 0;
     int size;
     Neighbor* node;
 
     //cout << "Initialisation chemin ok" << endl;
-    while (modif && step < profondeurMax) { //Tant qu'un sommet a été rajouté à la couche précédente, on regarde tous les sommets de cette couche là dans le BFS.
+    while (modif && step < profondeurMax) { //Tant qu'un sommet a été rajouté à la couche précédente, on regarde tous les sommets de cette couche-là dans le BFS.
         modif = 0;
         trouve = 0;
         size = voisin1.size();
@@ -66,20 +65,17 @@ void chemin_local(int i, vector<int> &endings, Graph &G, vector<vector<int>> &co
                     if (endings[j] == -1){ //On garde toujours le plus court chemin
                         endings[j] = step;
                     }
-                    trouve = 1;
                     continue;
                 }
             }
-            if (not trouve) {
-                //Sinon on rajoute ce sommet comme vu et on ajoute ses voisins à traiter dans le BFS pour la prochaine couche
-                comp1.push_back(node->val);
-                modif = 1;
-                for (vector<Neighbor>::iterator it = G.Neighbors(node->val)->begin(); it != G.Neighbors(node->val)->end(); ++it){ 
-                    if (it->label[0] != node->label[1]){ 
-                        continue;
-                    }
-                    voisin1.push_back(&(*it));
+            //Sinon on rajoute ce sommet comme vu et on ajoute ses voisins à traiter dans le BFS pour la prochaine couche
+            comp1.push_back(node->val);
+            modif = 1;
+            for (vector<Neighbor>::iterator it = G.Neighbors(node->val)->begin(); it != G.Neighbors(node->val)->end(); ++it){
+                if (it->label[0] != node->label[1]){
+                    continue;
                 }
+                voisin1.push_back(&(*it));
             }
         }
         step ++; //On passe à la couche suivante
@@ -123,12 +119,11 @@ void chemin_space(int i, vector<int> &endings, Graph &G, vector<vector<int>> &co
     }
     cout << "\tData initialisée" << endl;
     int modif = 1;
-    int trouve = 0;
     int size;
     Neighbor* node;
 
     //cout << "Initialisation chemin ok" << endl;
-    while (modif && step < profondeurMax) { //Tant qu'un sommet a été rajouté à la couche précédente, on regarde tous les sommets de cette couche là dans le BFS.
+    while (modif && step < profondeurMax) { //Tant qu'un sommet a été rajouté à la couche précédente, on regarde tous les sommets de cette couche-là dans le BFS.
         modif = 0;
         trouve = 0;
         size = voisin1.size();
@@ -146,21 +141,18 @@ void chemin_space(int i, vector<int> &endings, Graph &G, vector<vector<int>> &co
                         endings[j] = step;
                     }
                     vu[i][node->val] = 1;
-                    trouve = 1;
                     continue;
                 }
             }
-            if (not trouve) {
-                //Sinon on rajoute ce sommet comme vu et on ajoute ses voisins à traiter dans le BFS pour la prochaine couche
-                comp1.push_back(node->val);
-                vu[i][node->val] = 1;
-                modif = 1;
-                for (vector<Neighbor>::iterator it = G.Neighbors(node->val)->begin(); it != G.Neighbors(node->val)->end(); ++it){ 
-                    if (it->label[0] != node->label[1]){ 
-                        continue;
-                    }
-                    voisin1.push_back(&(*it));
+            //Sinon on rajoute ce sommet comme vu et on ajoute ses voisins à traiter dans le BFS pour la prochaine couche
+            comp1.push_back(node->val);
+            vu[i][node->val] = 1;
+            modif = 1;
+            for (vector<Neighbor>::iterator it = G.Neighbors(node->val)->begin(); it != G.Neighbors(node->val)->end(); ++it){
+                if (it->label[0] != node->label[1]){
+                    continue;
                 }
+                voisin1.push_back(&(*it));
             }
         }
         step ++; //On passe à la couche suivante
@@ -191,7 +183,7 @@ void initVec(vector<int> &vec, int n){
 
 int main(int argc, char** argv){
     if (argc!=6){
-        cout << "Expected use of this program: \n\n\t" <<argv[0] << " file.node file.edges -c value outputPrefixe\n" << endl;
+        cout << "Expected use of this program: \n\n\t" <<argv[0] << " file.node file.edges -c value outputPrefix\n" << endl;
         return 0;
     }
 
@@ -227,9 +219,7 @@ int main(int argc, char** argv){
     threshold =atoi(argv[4]);
     int m = 0;
     int weight;
-    int sizeMax;
     vector<int> vu(G.N,0);
-    sizeMax = 2000000;
     vector<Neighbor*> aVoir;
 
     index = indexMax(G,vu_total);
@@ -277,7 +267,6 @@ int main(int argc, char** argv){
     vector<int> endings;
     E2.clear();
     V2.clear();
-    int c;
     for (int i = 0; i < components.size(); i++){
         cout << "Calcul des chemins partant de " << i << endl;
         initVec(endings, components.size());

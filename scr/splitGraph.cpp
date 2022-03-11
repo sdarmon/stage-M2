@@ -1,13 +1,12 @@
 /*
  * Ce programme permet de couper un graphe en deux par rapport
- * à une lecture dans le sens foward et dans le sens reverse
+ * à une lecture dans le sens forward et dans le sens reverse
  */
 
 #include <list>
 #include <vector>
 #include <iostream>
 #include <fstream>
-#include <string>
 #include <stdio.h>
 #include <cstring>
 #include <algorithm>
@@ -69,12 +68,12 @@ void read_node_file_4args( FILE* node_file, vector<Node>& seqs)
 int main(int argc, char** argv)
 {
     if (argc!=5){
-        cout << "Expected use of this program: \n\n\t" <<argv[0] << " originalFile.nodes file.node file.edges outputPrefixe\n" << endl;
+        cout << "Expected use of this program: \n\n\t" <<argv[0] << " originalFile.nodes file.node file.edges outputPrefix\n" << endl;
         return 0;
     }
 
     vector<Edge> E;
-    vector<Edge> foward;
+    vector<Edge> forward;
     vector<Edge> reverse;
     vector<Node> V;
     vector<Node> Vvu;
@@ -165,11 +164,11 @@ int main(int argc, char** argv)
 
 
 
-    ofstream edges_foward;
+    ofstream edges_forward;
     ofstream edges_reverse;
-    edges_foward.open((string)argv[4]+(string)"_foward.edges");
-    printEdges(foward,edges_foward);
-    edges_foward.close();
+    edges_forward.open((string)argv[4]+(string)"_forward.edges");
+    printEdges(foward,edges_forward);
+    edges_forward.close();
     edges_reverse.open((string)argv[4]+(string)"_reverse.edges");
     printEdges(reverse,edges_reverse);
     edges_reverse.close();

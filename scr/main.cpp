@@ -1,16 +1,14 @@
 /*
  * Ce programme permet de loader un graphe de De Bruijn
  * et de calculer les poids des arêtes et des sommets à
- * un rayon donnée en entrée.
+ * un rayon donné en entrée.
  */
 
 #include <list>
 #include <vector>
 #include <iostream>
 #include <fstream>
-#include <string>
 #include <stdio.h>
-#include <cstring>
 #include <algorithm>
 #include "graph.h"
 

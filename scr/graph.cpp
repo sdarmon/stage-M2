@@ -7,7 +7,7 @@
 
 /* 
  * Ce fichier permet de manipuler les graphes pondérés avec des classes adaptées 
- * Pour voir les défintions des classes, allez dans le fichier graph.h.
+ * Pour voir les definitions des classes, allez dans le fichier graph.h.
  * Ce fichier contient seulement les fonctions et méthodes liées aux classes
  * définies dans le fichier graph.h.
  */
@@ -17,7 +17,7 @@
  * All the data is coded with int data type. For graph with more than 2147483648
  * (> 2x10^9) nodes or edges, you will get trouble!
  * Instead of int, use unsigned int (for the same weight, extend this upper bound
- * to 4x10^9) or long long int (for twice the weight, extention to 2^63 ~ 10^19).
+ * to 4x10^9) or long long int (for twice the weight, extension to 2^63 ~ 10^19).
  *
  */
 
@@ -105,7 +105,7 @@ Graph::Graph(vector<Node>& vertices, vector<Edge>& edges)  {
 
  bool Graph::operator() (int i,int j) { return (i<j);}
 //================================================================
-//                  Public methodes  
+//                  Public methods
 //================================================================
 
 //Ajoute une arête (de type Edge) au graphe.
@@ -115,7 +115,7 @@ void Graph::add( Edge &e) {
    M++;
     }
 
-//Ajoute une arête (définie par ses quatres paramètres) au graphe.
+//Ajoute une arête (définie par ses quatre paramètres) au graphe.
 void Graph::add(int start,int end, int weight, char* labelEdge)   {
         Neighbor node(end,weight,labelEdge);
        (Adj[start].adjVec).push_back(node);
@@ -169,7 +169,7 @@ vector<Neighbor>* Graph::Neighbors(int n){
 }
 
 
-//Donne comme poids à toutes les arêtes la taille du label du sommet d'arrivé
+//Donne comme poids à toutes les arêtes la taille du label du sommet d'arrivée
 void Graph::weighing(){
     for (int index = 0; index < N; index++){
         for (vector<Neighbor>::iterator it = Neighbors(index)->begin(); it != Neighbors(index)->end(); ++it){
@@ -194,7 +194,7 @@ void comp(char* s, char* r){
     }
 }
 
-// BFS qui stocke les arêtes vus dans e. Le premier argument permet de dire dans quel sens on va
+// BFS qui stocke les arêtes vues dans e. Le premier argument permet de dire dans quel sens on va
 void Graph::BFS(int r, vector<Edge>& e ,vector<Neighbor*> &aVoir,vector<int> &vu){
     if (aVoir.size() == 0){ //Cas de terminaison, on a terminé le BFS
         return;
@@ -230,7 +230,6 @@ void Graph::BFS(int r, vector<Edge>& e ,vector<Neighbor*> &aVoir,vector<int> &vu
 void Graph::BFS_func(int threshold ,vector<Neighbor*> &aVoir,vector<int> &vu){
 
     Neighbor* node ;
-    int compt=0;
     while (aVoir.size() != 0){ //Cas de terminaison, on a terminé le BFS
         node = aVoir.front();
         aVoir.erase(aVoir.begin());
@@ -254,8 +253,8 @@ void Graph::BFS_func(int threshold ,vector<Neighbor*> &aVoir,vector<int> &vu){
 
 /* /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ 
  *   Petite approximation ici, je suppose que dès lors que l'on 
- *   voit un sommet par le sens foward, on ne le recroisera pas
- *   par le sens reverse! Cela semble peu probable d'arriver et
+ *   voit un sommet par le sens forward, on ne le recroisera pas
+ *   par le sens reverse ! Cela semble peu probable d'arriver et
  *   l'impact semble peu important (car BFS) mais on sous-estime
  *   la vraie valeur.
  *  /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ 
@@ -286,7 +285,7 @@ int Graph::BFSCount(vector<int> &rayons, int acc,vector<Neighbor*> &aVoir,vector
                 rayons.push_back(rayon-node->weight);
             }
         }
-        return BFSCount(rayons,acc+1,aVoir,vu); //On traite les cas suivants, en prennant en compte le sommet
+        return BFSCount(rayons,acc+1,aVoir,vu); //On traite les cas suivants, en prenant en compte le sommet
     }
 
     return BFSCount(rayons,acc,aVoir,vu); //Sinon, on continue sans prendre en compte le sommet.
@@ -308,7 +307,7 @@ void Graph::weighingANode(int source, int rayon) {
     Vertices[source].weight = BFSCount(rayons,1,aVoir,vu);
 }
 
-//PErmet de donner un poids à tous les sommets du graphe.
+//Permet de donner un poids à tous les sommets du graphe.
 void Graph::weighingAllNodes(int rayon) {
     for (vector<Node>::iterator it = Vertices.begin(); it != Vertices.end(); ++it){
         weighingANode(it->val, rayon);
@@ -319,7 +318,7 @@ void Graph::weighingAllNodes(int rayon) {
 //                  Reading functions
 //================================================================
 
-//Compte le nombre de ligne (réalisé par Pierre Peterlongo et Vincent Lacroix)
+//Compte le nombre de lignes (réalisé par Pierre Peterlongo et Vincent Lacroix)
 int count_nb_lines( FILE* file )
 {
   int number_of_lines = 0;
@@ -333,7 +332,7 @@ int count_nb_lines( FILE* file )
             break;
         }
     }
-  // Set the cursor back to the begining of the file.
+  // Set the cursor back to the beginning of the file.
   rewind(file);
   // Don't care if the last line has a '\n' or not. We over-estimate it.
   return number_of_lines; 
@@ -514,8 +513,6 @@ void printEdges(vector<Edge>& E)
 //Affiche les arêtes d'un graphe à partir d'un vecteur d'Edges
 void printEdges(vector<Edge>& E,ofstream& output)
 {
-    int M = E.size();
-    Edge* e;
     for (vector<Edge>::iterator it = E.begin(); it != E.end(); ++it) {
         output << it->start << "\t" << it->end << "\t" << (string)it->label << "\t" << it->weight << "\n";
     }

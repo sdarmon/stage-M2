@@ -12,7 +12,7 @@ using namespace std;
 // ===========================================================================
 
 /* 
- * Noeud d'un graphe 
+ * Nœud d'un graphe.
  * Il est défini par une valeur val et par un label (string).
  * On rajoute aussi un argument weight pour lui donner un poids (variable)
  */
@@ -25,7 +25,7 @@ public:
 
 
 /* 
- * Noeud dans la liste d'adjacence d'un graphe. 
+ * Nœud dans la liste d'adjacence d'un graphe.
  * Il est défini par une valeur val et par un label (ici deux caractères correspondant au type de l'arête).
  * On rajoute aussi un argument weight pour lui donner un poids (variable)
  */
@@ -37,7 +37,7 @@ public:
 };
 
 /* 
- * Liste des noeuds adajacents à un certain noeud donné. 
+ * Liste des nœuds adjacents à un certain nœud donné.
  * Il est défini seulement par un vecteur de Neighbor.
  * Je pense qu'ici il serait préférable de ne pas utiliser une classe...
  */
@@ -88,7 +88,7 @@ class Graph
     Graph(vector<Node>& vertices, vector<Edge>& edges);
 
     //---------------
-    // Methodes
+    // Methods
     //---------------
     bool operator() (int i,int j);
 
