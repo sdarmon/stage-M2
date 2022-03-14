@@ -23,12 +23,12 @@ process creaCarte {
 
     script:
     """
-    mkdir ../../results/${spe.name}
+    mkdir ../../results/${$spe.name}
     STAR --runThreadN 8 \
     --runMode genomeGenerate \
-    --genomeDir ../../results/${spe.name} \
-    --genomeFastaFiles ${spe.genome} \
-    --sjdbGTFfile ${spe.gtf} \
+    --genomeDir ../../results/${$spe.name} \
+    --genomeFastaFiles ${$spe.genome} \
+    --sjdbGTFfile ${$spe.gtf} \
     -sjdbOverhang 74 \
     --genomeSAindexNbases 13 \
     --genomeSAsparseD 4
