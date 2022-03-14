@@ -19,7 +19,7 @@ process creaCarte {
     env spe from donnees
 
     output:
-    path '../../results/${spe.name}/STAR' into STARDir
+    env spe into STARDir
 
     script:
     """
@@ -38,11 +38,10 @@ process creaCarte {
 
 process calculpoids {
     input:
-    env spe from donnees
-    path STAR from STARDir
+    env spe from STARDir
 
     output:
-    path '../../DmGoth/data/outputGraph${spe.name}.txt' into OutputGraph
+    env spe into OutputGraph
 
     script:
     """
