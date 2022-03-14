@@ -27,6 +27,7 @@ process creaCarte {
 
     """
     mkdir -p ../../results/${name}
+    echo '$PATH'
     STAR --runThreadN 8 \
     --runMode genomeGenerate \
     --genomeDir ../../results/${name} \
