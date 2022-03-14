@@ -22,13 +22,17 @@ process creaCarte {
     env spe into STARDir
 
     script:
+    name = spe.name
+    genome = spe.genome
+    gtf = spe.gtf
+
     """
-    mkdir ../../results/${${spe}.name}
+    mkdir ../../results/${$name}
     STAR --runThreadN 8 \
     --runMode genomeGenerate \
-    --genomeDir ../../results/${${spe}.name} \
-    --genomeFastaFiles ${${spe}.genome} \
-    --sjdbGTFfile ${${spe}.gtf} \
+    --genomeDir ../../results/${name} \
+    --genomeFastaFiles ${genome} \
+    --sjdbGTFfile ${gtf} \
     -sjdbOverhang 74 \
     --genomeSAindexNbases 13 \
     --genomeSAsparseD 4
