@@ -16,7 +16,7 @@ donnees = Channel.from(moust)
 
 process creaCarte {
     input:
-    env spe from donnes
+    env spe from donnees
 
     output:
     path '../../results/${spe.name}/STAR' into STARDir
@@ -38,7 +38,7 @@ process creaCarte {
 
 process calculpoids {
     input:
-    env spe from donnes
+    env spe from donnees
     path STAR from STARDir
 
     output:
