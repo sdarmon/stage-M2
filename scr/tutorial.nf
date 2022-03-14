@@ -1,6 +1,6 @@
 #!/usr/bin/env nextflow
 
-workDir = '/home/sdarmon/Documents/stage-M2/peda/DmGoth/stage-M2/scr'
+workDir = '/home/sdarmon/Documents/stage-M2/peda/DmGoth/stage-M2/scr/'
 
 println "\tDébut de la Pipeline Nextflow\nA executer dans le dossier scr du serveur pedago-ngs.\n"
 moust = ["name":"", "genome":"", "gtf":"", "nodes":"", "edges":""]
