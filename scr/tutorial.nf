@@ -2,7 +2,6 @@
 
 
 println "\tDébut de la Pipeline Nextflow\nA executer dans le dossier scr du serveur pedago-ngs.\n"
-workDir = '/home/sdarmon/Documents/stage-M2/peda/DmGoth/stage-M2/scr'
 moust = ["name":"", "genome":"", "gtf":"", "nodes":"", "edges":""]
 moust["name"] = "moustique"
 moust["genome"] = "data/ncbi-genomes-2022-02-11/GCF_002204515.2_AaegL5.0_genomic.fna"
@@ -26,8 +25,8 @@ process creaCarte {
     gtf = spe.gtf
 
     """
+    pwd
     mkdir -p ../../results/${name}
-    echo '$PATH'
     STAR --runThreadN 8 \
     --runMode genomeGenerate \
     --genomeDir ../../results/${name} \
