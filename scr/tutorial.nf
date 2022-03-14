@@ -5,7 +5,6 @@ println "\tDébut de la Pipeline Nextflow\nA executer dans le dossier scr du ser
 
 moust = ["name":"", "genome":"", "gtf":"", "nodes":"", "edges":""]
 moust["name"] = "moustique"
-println moust.name
 moust["genome"] = "../../data/ncbi-genomes-2022-02-11/GCF_002204515.2_AaegL5.0_genomic.fna"
 moust["gtf"] = "../../data/ncbi-genomes-2022-02-11/GCF_002204515.2_AaegL5.0_genomic.gtf"
 moust["nodes"] = "../../../kissplice_results/kissplice_moustique/graph_IR03_B_R1_IR03_C_R1_IR03_D_R1_IR03_E_R1_IR13_B_R1_IR13_C_R1_IR13_D_R1_IR13_E_R1_k41.nodes"
@@ -27,7 +26,7 @@ process creaCarte {
     gtf = spe.gtf
 
     """
-    mkdir ../../results/${name}
+    mkdir -p ../../results/${name}
     STAR --runThreadN 8 \
     --runMode genomeGenerate \
     --genomeDir ../../results/${name} \
