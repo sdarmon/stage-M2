@@ -27,7 +27,7 @@ process creaCarte {
     gtf = spe.gtf
 
     """
-    mkdir ../../results/${$name}
+    mkdir ../../results/${name}
     STAR --runThreadN 8 \
     --runMode genomeGenerate \
     --genomeDir ../../results/${name} \
