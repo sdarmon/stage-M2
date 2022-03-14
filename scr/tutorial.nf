@@ -48,8 +48,10 @@ process calculpoids {
     val spe into OutputGraph
 
     script:
+    nodes = spe.nodes
+    edges = spe.edges
     """
     g++ ${workDir}graph.cpp ${workDir}main.cpp -o ${workDir}graph.exe
-    ${workDir}graph.exe  10 -o ${workDir}../../DmGoth/data/outputGraph${spe.name}.txt
+    ${workDir}graph.exe  ${nodes} ${edges} 10 -o ${workDir}../../data/outputGraph${spe.name}.txt
     """
 }
