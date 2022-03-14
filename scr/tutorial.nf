@@ -16,10 +16,10 @@ donnees = Channel.from(moust)
 
 process creaCarte {
     input:
-    env spe from donnees
+    val spe from donnees
 
     output:
-    env spe into STARDir
+    val spe into STARDir
 
     script:
     name = spe.name
@@ -42,10 +42,10 @@ process creaCarte {
 
 process calculpoids {
     input:
-    env spe from STARDir
+    val spe from STARDir
 
     output:
-    env spe into OutputGraph
+    val spe into OutputGraph
 
     script:
     """
