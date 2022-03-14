@@ -1,5 +1,6 @@
 #!/usr/bin/env nextflow
 
+workDir = '/home/sdarmon/Documents/stage-M2/peda/DmGoth/stage-M2/scr'
 
 println "\tDébut de la Pipeline Nextflow\nA executer dans le dossier scr du serveur pedago-ngs.\n"
 moust = ["name":"", "genome":"", "gtf":"", "nodes":"", "edges":""]
@@ -26,10 +27,10 @@ process creaCarte {
 
     """
     pwd
-    mkdir -p ../../results/${name}
+    mkdir -p ${workDir}../../results/${name}
     STAR --runThreadN 8 \
     --runMode genomeGenerate \
-    --genomeDir ../../results/${name} \
+    --genomeDir ${workDir}../../results/${name} \
     --genomeFastaFiles ${genome} \
     --sjdbGTFfile ${gtf} \
     -sjdbOverhang 74 \
@@ -48,7 +49,7 @@ process calculpoids {
 
     script:
     """
-    g++ graph.cpp main.cpp -o graph.exe
-    graph.exe  10 -o ../../DmGoth/data/outputGraph${spe.name}.txt
+    g++ ${workDir}graph.cpp ${workDir}main.cpp -o ${workDir}graph.exe
+    graph.exe  10 -o ${workDir}../../DmGoth/data/outputGraph${spe.name}.txt
     """
 }
