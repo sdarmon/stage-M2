@@ -3,7 +3,6 @@
 
 println "\tDébut de la Pipeline Nextflow\nA executer dans le dossier scr du serveur pedago-ngs.\n"
 
-moust = []
 moust["name"] = "moustique"
 println moust.name
 moust["genome"] = "../../data/ncbi-genomes-2022-02-11/GCF_002204515.2_AaegL5.0_genomic.fna"
