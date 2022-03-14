@@ -50,6 +50,6 @@ process calculpoids {
     script:
     """
     g++ ${workDir}graph.cpp ${workDir}main.cpp -o ${workDir}graph.exe
-    graph.exe  10 -o ${workDir}../../DmGoth/data/outputGraph${spe.name}.txt
+    ${workDir}graph.exe  10 -o ${workDir}../../DmGoth/data/outputGraph${spe.name}.txt
     """
 }
