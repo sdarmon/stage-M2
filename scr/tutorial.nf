@@ -77,7 +77,7 @@ process top {
     """
     value = file('tempTop.txt').readLines()[0]
     """
-    rm tempTop.txt
+    rm ${workDir}tempTop.txt
     """
 }
 
