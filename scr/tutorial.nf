@@ -2,7 +2,7 @@
 
 workDir = '/home/sdarmon/Documents/stage-M2/peda/DmGoth/stage-M2/scr'
 
-println "\tDébut de la Pipeline Nextflow\nA executer dans le dossier scr du serveur pedago-ngs.\nExecution type: 'pwd | nextflow run tutorial.nf --path'\n "
+println "\tDébut de la Pipeline Nextflow\nA executer dans le dossier scr du serveur pedago-ngs.\nExecution type: \n\tnextflow run tutorial.nf --path [YourWorkDirPath]\n\t'pwd | xargs nextflow run tutorial.nf --path' : Permet de récupérer directement le WorkDir dedans\n "
 
 println params.path
 
@@ -108,6 +108,7 @@ process read_to_align {
     """
 
     """
+    mkdir -p ${workDir}/../../results/${name}/STAR_alignment
     STAR --genomeDir ${workDir}/../../results/${name} \
     --runMode alignReads \
     --runThreadN 8 \
