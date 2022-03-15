@@ -25,6 +25,11 @@ process test{
     exec:
     println "Hello"
 
+    script:
+    """
+    pwd
+    """
+
 }
 
 process creaCarte {
