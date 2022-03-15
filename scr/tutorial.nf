@@ -19,10 +19,13 @@ moust["edges"] = "${workDir}/../../../kissplice_results/kissplice_moustique/grap
 moust["TE"] = "${workDir}/../../data/AaegL5_TE_repeats.gff"
 
 
-topVal = "top10"
+topVal = Channel.from("top10")
 donnees = Channel.from() //moust
 aligner = Channel.from() //moust
-intersecter = Channel.from(moust)  //moust
+intersecter = Channel.from()  //moust
+
+topAgglo = Channel.from("top20")
+agglo = Channel.from(moust) //moust
 
 
 process creaCarte {
@@ -62,20 +65,27 @@ process calculpoids {
     """
     g++ ${workDir}/graph.cpp ${workDir}/main.cpp -o ${workDir}/graph.exe
     ${workDir}/graph.exe  ${nodes} ${edges} 10 -o ${workDir}/../../data/outputGraph${spe.name}.txt
+    python3 ${workDir}/reads_to_align.py ${workDir}/../../data/outputGraph${spe.name}.txt ./../data/outputGraph${spe.name}Clean.txt 0 -clean
     """
 }
+
+
 
 process top {
     input:
     val spe from aligner
+    val topV from topVal
 
     output:
     stdout value into top
     val spe into aligner2
-    script:
+
+    exec:
     name = spe.name
+
+    script:
     """
-    python3 ${workDir}/plot.py ${workDir}/../../data/outputGraph${name}.txt ${topVal}
+    python3 ${workDir}/plot.py ${workDir}/../../data/outputGraph${spe.name}Clean.txt ${topV}
     """
 }
 
@@ -91,7 +101,7 @@ process read_to_align {
 
     script:
     """
-    python3 ${workDir}/reads_to_align.py ${workDir}/../../data/outputGraph${name}.txt ${workDir}/../../data/read${name}.fq ${value}
+    python3 ${workDir}/reads_to_align.py ${workDir}/../../data/outputGraph${spe.name}Clean.txt ${workDir}/../../data/read${name}.fq ${value}
     mkdir -p ${workDir}/../../results/${name}/STAR_alignment
     STAR --genomeDir ${workDir}/../../results/${name} \
     --runMode alignReads \
@@ -134,5 +144,43 @@ process intersect {
     grep "Number of reads unmapped: too short" ${workDir}/../../results/${name}/STAR_alignment/Log.final.out >> ${workDir}/../../results/${name}/rapportIntersect.txt
     echo "\n" >> ${workDir}/../../results/${name}/rapportIntersect.txt
     grep "Number of reads unmapped: other" ${workDir}/../../results/${name}/STAR_alignment/Log.final.out >> ${workDir}/../../results/${name}/rapportIntersect.txt
+    """
+}
+
+process topA {
+    input:
+    val spe from agglo
+    val topV from topAgglo
+
+    output:
+    stdout value into topA
+    val spe into agglo2
+
+    exec:
+    name = spe.name
+
+    script:
+    """
+    python3 ${workDir}/plot.py ${workDir}/../../data/outputGraph${spe.name}Clean.txt ${topV}
+    """
+}
+
+
+process agglomeration {
+    input:
+    stdout value from topA
+    val spe from agglo2
+
+    exec:
+    name = spe.name
+    edges = spe.edges
+
+    script:
+    """
+    g++ graph.cpp agglo.cpp -o agglo.exe
+    ${workDir}/agglo.exe ${workDir}/../../data/outputGraph${name}.txt \
+    ${edges} \
+    -c ${value} \
+    ${workDir}/../../results/${name}/agglo
     """
 }
