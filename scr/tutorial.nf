@@ -27,17 +27,6 @@ aligner = Channel.from(moust) //moust
 intersecter = Channel.from()  //moust
 
 
-process test{
-    exec:
-    println "Hello"
-
-    script:
-    """
-    pwd > test.txt
-    """
-
-}
-
 process creaCarte {
     input:
     val spe from donnees
@@ -105,9 +94,6 @@ process read_to_align {
     script:
     """
     python3 ${workDir}/reads_to_align.py ${workDir}/../../data/outputGraph${name}.txt ${workDir}/../../data/read${name}.fq ${value}
-    """
-
-    """
     mkdir -p ${workDir}/../../results/${name}/STAR_alignment
     STAR --genomeDir ${workDir}/../../results/${name} \
     --runMode alignReads \
