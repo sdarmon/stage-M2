@@ -178,6 +178,11 @@ process agglomeration {
     script:
     """
     g++ ${workDir}/graph.cpp ${workDir}/agglo.cpp -o ${workDir}/agglo.exe
-    ${workDir}/agglo.exe ${workDir}/../../data/outputGraph${name}Clean.txt ${edges} -c ${value.replaceAll(/\n/, "")} "${workDir}/../../results/${name}/agglo"
+    ${workDir}/agglo.exe ${workDir}/../../data/outputGraph${name}Clean.txt \
+    ${edges} \
+    -c ${value.replaceAll(/\n/, "")} \
+    -d 100\
+    "${workDir}/../../results/${name}/agglo" \
+    > ${workDir}/../../results/${name}/rapportAgglo.txt
     """
 }
