@@ -27,9 +27,6 @@ process test {
     pwd > temp.txt
     """
     value = file('temp.txt').readLines()[0]
-    """
-    rm temp.txt
-    """
     println value
 }
 
