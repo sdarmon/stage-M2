@@ -21,6 +21,19 @@ donnees = Channel.from() //moust
 aligner = Channel.from() //moust
 intersecter = Channel.from()  //moust
 
+
+process test {
+    script
+    """
+    pwd > temp.txt
+    """
+    value = file('temp.txt').readLines()[0]
+    """
+    rm temp.txt
+    """
+    println value
+}
+
 process creaCarte {
     input:
     val spe from donnees
