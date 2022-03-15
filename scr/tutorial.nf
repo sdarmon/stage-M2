@@ -26,8 +26,6 @@ process test {
     """
     pwd > ${workDir}temp.txt
     """
-    value = file('temp.txt').readLines()[0]
-    println value
 }
 
 process creaCarte {
