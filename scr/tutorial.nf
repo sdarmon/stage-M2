@@ -76,7 +76,7 @@ process top {
     """
     python3 ${workDir}/plot.py ${workDir}/../../data/outputGraph${name}.txt ${topVal} > tempTop.txt
     """
-    value = int(file('tempTop').readLines()[0])
+    value = file('tempTop').readLines()[0]
     """
     rm tempTop.txt
     """
