@@ -27,7 +27,7 @@ process test{
 
     script:
     """
-    pwd
+    pwd > test.txt
     """
 
 }
