@@ -23,7 +23,7 @@ intersecter = Channel.from()  //moust
 
 
 process test {
-    script
+    script:
     """
     pwd > temp.txt
     """
