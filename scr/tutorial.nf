@@ -24,7 +24,7 @@ intersecter = Channel.from()  //moust
 process test {
     script:
     """
-    pwd > temp.txt
+    pwd > ${workDir}/temp.txt
     """
     value = file('temp.txt').readLines()[0]
     println value
