@@ -70,7 +70,7 @@ process top {
 
     output:
     val value into top
-
+    val spe from aligner2
     script:
     name = spe.name
     """
@@ -84,7 +84,7 @@ process top {
 
 process read_to_align {
     input:
-    val spe from aligner
+    val spe from aligner2
     val value from top
 
     script:
