@@ -67,15 +67,13 @@ process top {
     input:
     val spe from aligner
 
-    output:
-    val value into top
-    val spe into aligner2
     script:
     name = spe.name
     """
     python3 plot.py ${workDir}../../data/outputGraph${name}.txt ${topVal} > ${workDir}tempTop.txt
     """
     value = file('tempTop.txt').readLines()[0]
+    println value
     """
     rm ${workDir}tempTop.txt
     """
