@@ -77,39 +77,26 @@ process top {
     val spe from aligner
 
     output:
-    val value into top
+    stdout value into top
     val spe into aligner2
     script:
     name = spe.name
     """
-    python3 plot.py ${workDir}../../data/outputGraph${name}.txt ${topVal} > ${workDir}tempTop.txt
+    python3 plot.py ${workDir}../../data/outputGraph${name}.txt ${topVal}
     """
-    value = file('tempTop.txt').readLines()[0]
 }
 
 process read_to_align {
+
     input:
     val spe from aligner2
     val value from top
 
-    script:
+    exec:
     name = spe.name
-    """
-    python3 ${workDir}reads_to_align.py ${workDir}../../data/outputGraph${name}.txt ${workDir}../../data/read${name}.fq ${value}
-    """
+    println value
 
-    """
-    STAR --genomeDir ${workDir}../../results/${name} \
-    --runMode alignReads \
-    --runThreadN 8 \
-    --readFilesIn ${workDir}../../data/read${name}.fq \
-    --outFileNamePrefix ${workDir}../../results/${name}/STAR_alignment/ \
-    --outSAMtype BAM SortedByCoordinate \
-    --outSAMunmapped Within \
-    --outSAMattributes Standard \
-    --outFilterMultimapNmax 10000 \
-    --outReadsUnmapped Fastx
-    """
+
 }
 
 process intersect {
