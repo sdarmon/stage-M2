@@ -124,7 +124,6 @@ void chemin_space(int i, vector<int> &endings, Graph &G, vector<vector<int>> &co
     //cout << "Initialisation chemin ok" << endl;
     while (modif && step < profondeurMax) { //Tant qu'un sommet a été rajouté à la couche précédente, on regarde tous les sommets de cette couche-là dans le BFS.
         modif = 0;
-        trouve = 0;
         size = voisin1.size();
         for (int k = 0; k<size; ++k){ //On boucle sur les sommets de la couche du BFS uniquement
 
