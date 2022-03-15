@@ -303,8 +303,8 @@ g++ graph.cpp agglo.cpp -o agglo.exe
 
 version chien
 ```
-python3 reads_to_align.py ../../data/outputGraphMoustique.txt ./../data/outputClean.txt 0 -clean
+python3 reads_to_align.py ../../data/chien/outputGraph.txt ../../data/outputCleanChien.txt 0 -clean
 g++ graph.cpp agglo.cpp -o agglo.exe
-./agglo.exe ../../data/chien/outputGraphClean.txt ../../../kissplice_results/kissplice_Chiens/graph_SRR15254976_1_SRR15254976_2_SRR15254978_1_SRR15254978_2_SRR15254980_1_SRR15254980_2_SRR15254982_1_SRR15254982_2_SRR15254985_1_SRR15254985_2_SRR15254986_1_SRR15254986_2_SRR15254989_1_SRR15254989_2_SRR1k41_C0.05.edges -c 25 ../../results/moustique/compChien
+./agglo.exe ../../data/outputCleanChien.txt ../../../kissplice_results/kissplice_Chiens/graph_SRR15254976_1_SRR15254976_2_SRR15254978_1_SRR15254978_2_SRR15254980_1_SRR15254980_2_SRR15254982_1_SRR15254982_2_SRR15254985_1_SRR15254985_2_SRR15254986_1_SRR15254986_2_SRR15254989_1_SRR15254989_2_SRR1k41_C0.05.edges -c 25 ../../results/moustique/compChien
 
 ```

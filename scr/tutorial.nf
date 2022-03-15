@@ -1,17 +1,21 @@
 #!/usr/bin/env nextflow
 
-workDir = '/home/sdarmon/Documents/stage-M2/peda/DmGoth/stage-M2/scr/'
+workDir = '/home/sdarmon/Documents/stage-M2/peda/DmGoth/stage-M2/scr'
 
-println "\tDébut de la Pipeline Nextflow\nA executer dans le dossier scr du serveur pedago-ngs.\n"
+println "\tDébut de la Pipeline Nextflow\nA executer dans le dossier scr du serveur pedago-ngs.\nExecution type: 'pdw | nextflow run tutorial.nf --path'\n "
 
+println params.path
+
+if (params.path != ""){
+workDir = params.path}
 
 moust = ["name":"", "genome":"", "gtf":"", "nodes":"", "edges":""]
 moust["name"] = "moustique"
-moust["genome"] = "/home/sdarmon/Documents/stage-M2/peda/DmGoth/data/ncbi-genomes-2022-02-11/GCF_002204515.2_AaegL5.0_genomic.fna"
-moust["gtf"] = "/home/sdarmon/Documents/stage-M2/peda/DmGoth/data/ncbi-genomes-2022-02-11/GCF_002204515.2_AaegL5.0_genomic.gtf"
-moust["nodes"] = "/home/sdarmon/Documents/stage-M2/peda/kissplice_results/kissplice_moustique/graph_IR03_B_R1_IR03_C_R1_IR03_D_R1_IR03_E_R1_IR13_B_R1_IR13_C_R1_IR13_D_R1_IR13_E_R1_k41.nodes"
-moust["edges"] = "/home/sdarmon/Documents/stage-M2/peda/kissplice_results/kissplice_moustique/graph_IR03_B_R1_IR03_C_R1_IR03_D_R1_IR03_E_R1_IR13_B_R1_IR13_C_R1_IR13_D_R1_IR13_E_R1_k41_C0.05.edges"
-moust["TE"] = "${workDir}../../data/AaegL5_TE_repeats.gff"
+moust["genome"] = "${workDir}/../../data/ncbi-genomes-2022-02-11/GCF_002204515.2_AaegL5.0_genomic.fna"
+moust["gtf"] = "${workDir}/../../data/ncbi-genomes-2022-02-11/GCF_002204515.2_AaegL5.0_genomic.gtf"
+moust["nodes"] = "${workDir}/../../../kissplice_results/kissplice_moustique/graph_IR03_B_R1_IR03_C_R1_IR03_D_R1_IR03_E_R1_IR13_B_R1_IR13_C_R1_IR13_D_R1_IR13_E_R1_k41.nodes"
+moust["edges"] = "${workDir}/../../../kissplice_results/kissplice_moustique/graph_IR03_B_R1_IR03_C_R1_IR03_D_R1_IR03_E_R1_IR13_B_R1_IR13_C_R1_IR13_D_R1_IR13_E_R1_k41_C0.05.edges"
+moust["TE"] = "${workDir}/../../data/AaegL5_TE_repeats.gff"
 
 
 topVal = "top10"
@@ -33,10 +37,10 @@ process creaCarte {
 
     """
     pwd
-    mkdir -p ${workDir}../../results/${name}
+    mkdir -p ${workDir}/../../results/${name}
     STAR --runThreadN 8 \
     --runMode genomeGenerate \
-    --genomeDir ${workDir}../../results/${name} \
+    --genomeDir ${workDir}/../../results/${name} \
     --genomeFastaFiles ${genome} \
     --sjdbGTFfile ${gtf} \
     -sjdbOverhang 74 \
@@ -55,8 +59,8 @@ process calculpoids {
     nodes = spe.nodes
     edges = spe.edges
     """
-    g++ ${workDir}graph.cpp ${workDir}main.cpp -o ${workDir}graph.exe
-    ${workDir}graph.exe  ${nodes} ${edges} 10 -o ${workDir}../../data/outputGraph${spe.name}.txt
+    g++ ${workDir}/graph.cpp ${workDir}/main.cpp -o ${workDir}/graph.exe
+    ${workDir}/graph.exe  ${nodes} ${edges} 10 -o ${workDir}/../../data/outputGraph${spe.name}.txt
     """
 }
 
@@ -70,7 +74,7 @@ process top {
     script:
     name = spe.name
     """
-    python3 ${workDir}plot.py ${workDir}../../data/outputGraph${name}.txt ${topVal} > tempTop.txt
+    python3 ${workDir}/plot.py ${workDir}/../../data/outputGraph${name}.txt ${topVal} > tempTop.txt
     """
     value = int(file('tempTop').readLines()[0])
     """
@@ -86,15 +90,15 @@ process read_to_align {
     script:
     name = spe.name
     """
-    python3 ${workDir}reads_to_align.py ${workDir}../../data/outputGraph${name}.txt ${workDir}../../data/read${name}.fq ${value}
+    python3 ${workDir}/reads_to_align.py ${workDir}/../../data/outputGraph${name}.txt ${workDir}/../../data/read${name}.fq ${value}
     """
 
     """
-    STAR --genomeDir ${workDir}../../results/${name} \
+    STAR --genomeDir ${workDir}/../../results/${name} \
     --runMode alignReads \
     --runThreadN 8 \
-    --readFilesIn ${workDir}../../data/read${name}.fq \
-    --outFileNamePrefix ${workDir}../../results/${name}/STAR_alignment/ \
+    --readFilesIn ${workDir}/../../data/read${name}.fq \
+    --outFileNamePrefix ${workDir}/../../results/${name}/STAR_alignment/ \
     --outSAMtype BAM SortedByCoordinate \
     --outSAMunmapped Within \
     --outSAMattributes Standard \
@@ -113,10 +117,10 @@ process read_to_align {
     """
     bedtools intersect -wa -a ${TE} -b ../results/${name}/STAR_alignment/Aligned.sortedByCoord.out.bam > ../results/${name}/intersectionTE.txt
     bedtools intersect -wb -a ${TE} -b ../results/${name}/STAR_alignment/STAR/Aligned.sortedByCoord.out.bam > ../results/${name}/intersectionKiss.txt
-    python3 ${workDir}suppDoublon.py ${workDir}../../results/${name}/intersectionKiss.txt ${workDir}../../results/${name}/intersectionKissNoDouble.txt -s 12
-    python3 ${workDir}suppDoublon.py ${workDir}../../results/${name}/intersectionTE.txt ${workDir}../../results/${name}/intersectionTENoDouble.txt -t 8
-    wc -l ${workDir}../../results/${name}/intersectionKissNoDouble.txt
-    wc -l ${workDir}../../results/${name}/intersectionTENoDouble.txt
-    less ${workDir}../../results/${name}/STAR_alignment/Log.final.out
+    python3 ${workDir}/suppDoublon.py ${workDir}/../../results/${name}/intersectionKiss.txt ${workDir}/../../results/${name}/intersectionKissNoDouble.txt -s 12
+    python3 ${workDir}/suppDoublon.py ${workDir}/../../results/${name}/intersectionTE.txt ${workDir}/../../results/${name}/intersectionTENoDouble.txt -t 8
+    wc -l ${workDir}/../../results/${name}/intersectionKissNoDouble.txt
+    wc -l ${workDir}/../../results/${name}/intersectionTENoDouble.txt
+    less ${workDir}/../../results/${name}/STAR_alignment/Log.final.out
     """
 }
