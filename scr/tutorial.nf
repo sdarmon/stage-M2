@@ -107,7 +107,7 @@ process read_to_align {
     """
 }
 
-process read_to_align {
+process intersect {
     input:
     val spe from intersecter
 
