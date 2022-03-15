@@ -24,7 +24,7 @@ donnees = Channel.from() //moust
 aligner = Channel.from() //moust
 intersecter = Channel.from()  //moust
 
-topAgglo = Channel.from("top20")
+topAgglo = Channel.from("top1")
 agglo = Channel.from(moust) //moust
 
 
@@ -181,6 +181,6 @@ process agglomeration {
     ${workDir}/agglo.exe ${workDir}/../../data/outputGraph${name}Clean.txt \
     ${edges} \
     -c ${value} \
-    '${workDir}/../../results/${name}/agglo'
+    ${workDir}/../../results/${name}/agglo
     """
 }
