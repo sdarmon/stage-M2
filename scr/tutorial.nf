@@ -2,7 +2,7 @@
 
 workDir = '/home/sdarmon/Documents/stage-M2/peda/DmGoth/stage-M2/scr'
 
-println "\tDébut de la Pipeline Nextflow\nA executer dans le dossier scr du serveur pedago-ngs.\nExecution type: 'pdw | nextflow run tutorial.nf --path'\n "
+println "\tDébut de la Pipeline Nextflow\nA executer dans le dossier scr du serveur pedago-ngs.\nExecution type: 'pwd | nextflow run tutorial.nf --path'\n "
 
 if (params.path != null){
 workDir = params.path}
@@ -70,7 +70,7 @@ process top {
 
     output:
     val value into top
-    val spe from aligner2
+    val spe into aligner2
     script:
     name = spe.name
     """
