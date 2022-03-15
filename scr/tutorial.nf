@@ -4,7 +4,7 @@ workDir = '/home/sdarmon/Documents/stage-M2/peda/DmGoth/stage-M2/scr'
 
 println "\tDébut de la Pipeline Nextflow\nA executer dans le dossier scr du serveur pedago-ngs.\nExecution type: 'pdw | nextflow run tutorial.nf --path'\n "
 
-if (params.path == null){
+if (params.path != null){
 workDir = params.path}
 
 println workDir
