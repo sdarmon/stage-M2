@@ -110,12 +110,14 @@ process intersect {
     input:
     val spe from intersecter
 
-    script:
+    exec:
     name = spe.name
     TE = spe.TE
+
+    script:
     """
-    bedtools intersect -wa -a ${TE} -b ../results/${name}/STAR_alignment/Aligned.sortedByCoord.out.bam > ../results/${name}/intersectionTE.txt
-    bedtools intersect -wb -a ${TE} -b ../results/${name}/STAR_alignment/STAR/Aligned.sortedByCoord.out.bam > ../results/${name}/intersectionKiss.txt
+    bedtools intersect -wa -a ${TE} -b ${workDir}/../../results/${name}/STAR_alignment/Aligned.sortedByCoord.out.bam > ${workDir}/../../results/${name}/intersectionTE.txt
+    bedtools intersect -wb -a ${TE} -b ${workDir}/../../results/${name}/STAR_alignment/STAR/Aligned.sortedByCoord.out.bam > ${workDir}/../../results/${name}/intersectionKiss.txt
     python3 ${workDir}/suppDoublon.py ${workDir}/../../results/${name}/intersectionKiss.txt ${workDir}/../../results/${name}/intersectionKissNoDouble.txt -s 12
     python3 ${workDir}/suppDoublon.py ${workDir}/../../results/${name}/intersectionTE.txt ${workDir}/../../results/${name}/intersectionTENoDouble.txt -t 8
     wc -l ${workDir}/../../results/${name}/intersectionKissNoDouble.txt
