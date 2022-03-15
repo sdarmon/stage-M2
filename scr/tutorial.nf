@@ -17,16 +17,11 @@ moust["TE"] = "${workDir}../../data/AaegL5_TE_repeats.gff"
 
 topVal = "top10"
 donnees = Channel.from() //moust
-aligner = Channel.from() //moust
+aligner = Channel.from(moust) //moust
 intersecter = Channel.from()  //moust
 
 
-process test {
-    script:
-    """
-    pwd > ${workDir}temp.txt
-    """
-}
+
 
 process creaCarte {
     input:
@@ -41,7 +36,6 @@ process creaCarte {
     gtf = spe.gtf
 
     """
-    pwd
     mkdir -p ${workDir}../../results/${name}
     STAR --runThreadN 8 \
     --runMode genomeGenerate \
@@ -79,9 +73,9 @@ process top {
     script:
     name = spe.name
     """
-    python3 ${workDir}plot.py ${workDir}../../data/outputGraph${name}.txt ${topVal} > tempTop.txt
+    python3 plot.py ${workDir}../../data/outputGraph${name}.txt ${topVal} > ${workDir}tempTop.txt
     """
-    value = file('tempTop').readLines()[0]
+    value = file('tempTop.txt').readLines()[0]
     """
     rm tempTop.txt
     """
