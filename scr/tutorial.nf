@@ -24,6 +24,7 @@ intersecter = Channel.from()  //moust
 
 process test {
     script:
+    println NXF_WORK
     """
     pwd > temp.txt
     """
