@@ -177,7 +177,7 @@ process agglomeration {
 
     script:
     """
-    g++ graph.cpp agglo.cpp -o agglo.exe
+    g++ ${workDir}/graph.cpp ${workDir}/agglo.cpp -o ${workDir}/agglo.exe
     ${workDir}/agglo.exe ${workDir}/../../data/outputGraph${name}.txt \
     ${edges} \
     -c ${value} \
