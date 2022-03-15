@@ -17,7 +17,7 @@ moust["TE"] = "${workDir}../../data/AaegL5_TE_repeats.gff"
 
 topVal = "top10"
 donnees = Channel.from() //moust
-aligner = Channel.from() //moust
+aligner = Channel.from(moust) //moust
 intersecter = Channel.from()  //moust
 
 
