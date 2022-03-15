@@ -2,10 +2,9 @@
 
 workDir = '/home/sdarmon/Documents/stage-M2/peda/DmGoth/stage-M2/scr'
 
-println "\tDébut de la Pipeline Nextflow\nA executer dans le dossier scr du serveur pedago-ngs.\nExecution type: 'pwd | nextflow run tutorial.nf --path'\n "
+println "\tDébut de la Pipeline Nextflow\nA executer dans le dossier scr du serveur pedago-ngs.\nExecution type: 'nextflow run tutorial.nf'\n "
 
-if (params.path != null){
-workDir = params.path}
+
 
 moust = ["name":"", "genome":"", "gtf":"", "nodes":"", "edges":""]
 moust["name"] = "moustique"
