@@ -77,7 +77,7 @@ process top {
     val topV from topVal
 
     output:
-    stdout value into top
+    stdout into top
     val spe into aligner2
 
     exec:
@@ -153,7 +153,7 @@ process topA {
     val topV from topAgglo
 
     output:
-    stdout value into topA
+    stdout into topA
     val spe into agglo2
 
     exec:
