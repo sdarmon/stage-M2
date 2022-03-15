@@ -22,7 +22,7 @@ intersecter = Channel.from()  //moust
 
 
 process test{
-    script:
+    exec:
     println "Hello"
 
 }
