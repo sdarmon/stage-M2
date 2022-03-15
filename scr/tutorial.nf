@@ -2,9 +2,7 @@
 
 workDir = '/home/sdarmon/Documents/stage-M2/peda/DmGoth/stage-M2/scr'
 
-println "\tDébut de la Pipeline Nextflow\nA executer dans le dossier scr du serveur pedago-ngs.\nExecution type: \n\tnextflow run tutorial.nf --path [YourWorkDirPath]\n\t'pwd | xargs nextflow run tutorial.nf --path' : Permet de récupérer directement le WorkDir dedans\n "
-
-println params.path
+println "\tDébut de la Pipeline Nextflow\nA executer dans le dossier scr du serveur pedago-ngs.\nExecution type: \n\t-nextflow run tutorial.nf --path [YourWorkDirPath]\n\t-pwd | xargs nextflow run tutorial.nf --path : Permet de récupérer directement le WorkDir dedans\n "
 
 if (params.path != null){
 workDir = params.path
@@ -23,8 +21,8 @@ moust["TE"] = "${workDir}/../../data/AaegL5_TE_repeats.gff"
 
 topVal = "top10"
 donnees = Channel.from() //moust
-aligner = Channel.from(moust) //moust
-intersecter = Channel.from()  //moust
+aligner = Channel.from() //moust
+intersecter = Channel.from(moust)  //moust
 
 
 process creaCarte {
