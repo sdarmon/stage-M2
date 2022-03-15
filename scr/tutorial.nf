@@ -2,9 +2,12 @@
 
 workDir = '/home/sdarmon/Documents/stage-M2/peda/DmGoth/stage-M2/scr/'
 
-println "\tDébut de la Pipeline Nextflow\nA executer dans le dossier scr du serveur pedago-ngs.\nExecution type: 'nextflow run tutorial.nf'\n "
+println "\tDébut de la Pipeline Nextflow\nA executer dans le dossier scr du serveur pedago-ngs.\nExecution type: 'pwd | nextflow run tutorial.nf --path'\n "
 
-
+if (params.path != null){
+workDir = params.path
+println "Path loaded\n"
+}
 
 moust = ["name":"", "genome":"", "gtf":"", "nodes":"", "edges":""]
 moust["name"] = "moustique"
@@ -82,7 +85,7 @@ process top {
     script:
     name = spe.name
     """
-    python3 plot.py ${workDir}../../data/outputGraph${name}.txt ${topVal}
+    python3 ${workDir}plot.py ${workDir}../../data/outputGraph${name}.txt ${topVal}
     """
 }
 
@@ -96,7 +99,23 @@ process read_to_align {
     name = spe.name
     println value
 
+    script:
+    """
+    python3 ${workDir}reads_to_align.py ${workDir}../../data/outputGraph${name}.txt ${workDir}../../data/read${name}.fq ${value}
+    """
 
+    """
+    STAR --genomeDir ${workDir}../../results/${name} \
+    --runMode alignReads \
+    --runThreadN 8 \
+    --readFilesIn ${workDir}../../data/read${name}.fq \
+    --outFileNamePrefix ${workDir}../../results/${name}/STAR_alignment/ \
+    --outSAMtype BAM SortedByCoordinate \
+    --outSAMunmapped Within \
+    --outSAMattributes Standard \
+    --outFilterMultimapNmax 10000 \
+    --outReadsUnmapped Fastx
+    """
 }
 
 process intersect {
