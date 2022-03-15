@@ -168,7 +168,7 @@ process topA {
 
 process agglomeration {
     input:
-    stdout value from topA
+    val value from topA
     val spe from agglo2
 
     exec:
