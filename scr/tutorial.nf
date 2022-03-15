@@ -181,6 +181,6 @@ process agglomeration {
     ${workDir}/agglo.exe ${workDir}/../../data/outputGraph${name}.txt \
     ${edges} \
     -c ${value} \
-    ${workDir}/../../results/${name}/agglo
+    '${workDir}/../../results/${name}/agglo'
     """
 }
