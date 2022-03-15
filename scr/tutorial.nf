@@ -17,11 +17,15 @@ moust["TE"] = "${workDir}../../data/AaegL5_TE_repeats.gff"
 
 topVal = "top10"
 donnees = Channel.from() //moust
-aligner = Channel.from(moust) //moust
+aligner = Channel.from() //moust
 intersecter = Channel.from()  //moust
 
 
+process test{
+    script:
+    println "Hello"
 
+}
 
 process creaCarte {
     input:
@@ -78,6 +82,30 @@ process top {
     value = file('tempTop.txt').readLines()[0]
 }
 
+process read_to_align {
+    input:
+    val spe from aligner2
+    val value from top
+
+    script:
+    name = spe.name
+    """
+    python3 ${workDir}reads_to_align.py ${workDir}../../data/outputGraph${name}.txt ${workDir}../../data/read${name}.fq ${value}
+    """
+
+    """
+    STAR --genomeDir ${workDir}../../results/${name} \
+    --runMode alignReads \
+    --runThreadN 8 \
+    --readFilesIn ${workDir}../../data/read${name}.fq \
+    --outFileNamePrefix ${workDir}../../results/${name}/STAR_alignment/ \
+    --outSAMtype BAM SortedByCoordinate \
+    --outSAMunmapped Within \
+    --outSAMattributes Standard \
+    --outFilterMultimapNmax 10000 \
+    --outReadsUnmapped Fastx
+    """
+}
 
 process intersect {
     input:
