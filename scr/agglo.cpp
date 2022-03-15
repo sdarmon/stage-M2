@@ -181,7 +181,7 @@ void initVec(vector<int> &vec, int n){
 
 int main(int argc, char** argv){
     if (argc!=6){
-        cout << "Expected use of this program: \n\n\t" <<argv[0] << " file.node file.edges -c value outputPrefix\n" << endl;
+        cout << "Expected use of this program: \n\n\t" <<argv[0] << " file.nodes file.edges -c value outputPrefix\n" << endl;
         return 0;
     }
 
