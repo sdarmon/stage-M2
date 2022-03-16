@@ -42,9 +42,10 @@ process creaCarte {
 
     """
     mkdir -p ${workDir}/../../results/${name}
+    mkdir -p ${workDir}/../../results/${name}/genome
     STAR --runThreadN 8 \
     --runMode genomeGenerate \
-    --genomeDir ${workDir}/../../results/${name} \
+    --genomeDir ${workDir}/../../results/${name}/genome \
     --genomeFastaFiles ${genome} \
     --sjdbGTFfile ${gtf} \
     -sjdbOverhang 74 \
@@ -103,7 +104,7 @@ process read_to_align {
     """
     python3 ${workDir}/reads_to_align.py ${workDir}/../../data/outputGraph${spe.name}Clean.txt ${workDir}/../../data/read${name}.fq ${value}
     mkdir -p ${workDir}/../../results/${name}/STAR_alignment
-    STAR --genomeDir ${workDir}/../../results/${name} \
+    STAR --genomeDir ${workDir}/../../results/${name}/genome \
     --runMode alignReads \
     --runThreadN 8 \
     --readFilesIn ${workDir}/../../data/read${name}.fq \
@@ -171,6 +172,9 @@ process agglomeration {
     val value from topA
     val spe from agglo2
 
+    output:
+    val spe into agglomerate
+    val 0 into comp
     exec:
     name = spe.name
     edges = spe.edges
@@ -182,7 +186,45 @@ process agglomeration {
     ${edges} \
     -c ${value.replaceAll(/\n/, "")} \
     -d 100\
-    "${workDir}/../../results/${name}/agglo" \
+    "${workDir}/../../results/${name}" \
     > ${workDir}/../../results/${name}/rapportAgglo.txt
     """
+}
+
+process intersectComp {
+
+    input:
+    val spe from agglomerate
+    val i from comp.until{it.readLines().size()>100}
+
+    output:
+    val spe into agglomerate
+    val i+1 into comp
+    exec:
+    name = spe.name
+    edges = spe.edges
+
+    script:
+    """
+    python3 \
+    ${workDir}/reads_to_align.py ${workDir}/../../results/${name}/processing/comp${i}.txt \
+    ${workDir}/../../results/${name}/processing/comp${i}.fq \
+    0
+    mkdir -p ${workDir}/../../results/${name}/processing/STAR_alignment
+    STAR --genomeDir ${workDir}/../../results/${name}/genome \
+    --runMode alignReads \
+    --runThreadN 8 \
+    --readFilesIn ${workDir}/../../results/${name}/processing/comp${i}.fq  \
+    --outFileNamePrefix ${workDir}/../../results/${name}/processing/STAR_alignment/ \
+    --outSAMtype BAM SortedByCoordinate \
+    --outSAMunmapped Within \
+    --outSAMattributes Standard \
+    --outFilterMultimapNmax 10000 \
+    --outReadsUnmapped Fastx
+    bedtools intersect -wa -a ${TE} -b ${workDir}/../../results/${name}/processing/STAR_alignment/Aligned.sortedByCoord.out.bam > ${workDir}/../../results/${name}/processing/intersectionTE.txt
+    python3 ${workDir}/suppDoublon.py ${workDir}/../../results/${name}/processing/intersectionTE.txt ${workDir}/../../results/${name}/processing/intersectionTENoDouble${i}.txt -t 8
+    """
+
+
+
 }

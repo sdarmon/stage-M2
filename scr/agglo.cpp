@@ -111,6 +111,15 @@ void initVec(vector<int> &vec, int n){
     return;
 }
 
+void save_comp(Graph &G, vector<int> &compo, string &outputPrefix, int rang){
+    ofstream output;
+    output.open(outputPrefix+"/processing/comp"+str(rang)+".txt");
+    for (vector<int>::iterator it = compo.begin(), it != compo.end(), it++){
+        output << *it << "\t" << G.Vertices[*it].label << "\t" << G.Vertices[*it].weight  << "\n";
+    }
+    return;
+}
+
 int main(int argc, char** argv){
     if (argc!=8){
         cout << "Expected use of this program: \n\n\t" <<argv[0] << " file.nodes file.edges -c value -d dis outputPrefix\n" << endl;
@@ -182,7 +191,7 @@ int main(int argc, char** argv){
             }
         }
         components.push_back(compo);
-
+        save_comp(G,compo,argv[5],m);
         cout << "Composante trouvée de départ " << index << " et de poids " << G.Vertices[index].weight << " et de taille " << compo.size() << endl;
         index = indexMax(G,vu_total);
         weight = G.Vertices[index].weight;
@@ -218,12 +227,12 @@ int main(int argc, char** argv){
     cout << "Graphe aggloméré construit" << endl;
 
     ofstream outputNodes;
-    outputNodes.open((string) argv[5]+".nodes");
+    outputNodes.open((string) argv[5]+"/agglo.nodes");
     printGraphVertices(H,outputNodes);
     outputNodes.close();
 
     ofstream outputEdges;
-    outputEdges.open( (string) argv[5]+".edges");
+    outputEdges.open( (string) argv[5]+"/agglo.edges");
     printEdges(E2,outputEdges);
     outputEdges.close();
 }
