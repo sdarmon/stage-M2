@@ -109,8 +109,8 @@ process read_to_align {
     val value from top
 
     output:
-
     val spe to intersecter
+
     exec:
     name = spe.name
     println value
