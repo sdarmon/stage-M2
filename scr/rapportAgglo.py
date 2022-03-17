@@ -26,7 +26,6 @@ if len(Arg) == 4:
                     target = line.split("\t")[8][:-1]
                     if dicTE == [] or dicTE[target][-1] != i:
                         dicTE[target].append(i)
-
     X = [i for i in range(int(Arg[3]))]
     Y = [[0 for i in range(int(Arg[3]))]]
     for lst in dicTE.values():
