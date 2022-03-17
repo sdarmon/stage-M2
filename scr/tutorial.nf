@@ -10,7 +10,7 @@ println "Path loaded\n"
 }
 
 
-moust = ["name":"", "genome":"", "gtf":"", "nodes":"", "edges":""]
+moust = ["name":"", "genome":"", "gtf":"", "nodes":"", "edges":"", "TE":""]
 moust["name"] = "moustique"
 moust["genome"] = "${workDir}/../../data/moustique/ncbi-genomes-2022-02-11/GCF_002204515.2_AaegL5.0_genomic.fna"
 moust["gtf"] = "${workDir}/../../data/moustique/ncbi-genomes-2022-02-11/GCF_002204515.2_AaegL5.0_genomic.gtf"
@@ -18,15 +18,23 @@ moust["nodes"] = "${workDir}/../../../kissplice_results/kissplice_moustique/grap
 moust["edges"] = "${workDir}/../../../kissplice_results/kissplice_moustique/graph_IR03_B_R1_IR03_C_R1_IR03_D_R1_IR03_E_R1_IR13_B_R1_IR13_C_R1_IR13_D_R1_IR13_E_R1_k41_C0.05.edges"
 moust["TE"] = "${workDir}/../../data/moustique/AaegL5_TE_repeats.gff"
 
+chien = ["name":"", "genome":"", "gtf":"", "nodes":"", "edges":"", "TE":""]
+chien["name"] = "chien"
+chien["genome"] = "${workDir}/../../../fastq/SRR_Chiens/Canis_lupus_familiaris-GCA_011100685.1-unmasked.fa"
+chien["gtf"] = "${workDir}/../../../fastq/SRR_Chiens/Canis_lupus_familiaris-GCA_011100685.1-2021_03-genes.sorted.gtf"
+chien["nodes"] = "${workDir}/../../../kissplice_results/kissplice_Chiens/graph_SRR15254976_1_SRR15254976_2_SRR15254978_1_SRR15254978_2_SRR15254980_1_SRR15254980_2_SRR15254982_1_SRR15254982_2_SRR15254985_1_SRR15254985_2_SRR15254986_1_SRR15254986_2_SRR15254989_1_SRR15254989_2_SRR1k41.nodes"
+chien["edges"] = "${workDir}/../../../kissplice_results/kissplice_Chiens/graph_SRR15254976_1_SRR15254976_2_SRR15254978_1_SRR15254978_2_SRR15254980_1_SRR15254980_2_SRR15254982_1_SRR15254982_2_SRR15254985_1_SRR15254985_2_SRR15254986_1_SRR15254986_2_SRR15254989_1_SRR15254989_2_SRR1k41_C0.05.edges"
+chien["TE"] = "${workDir}/../../data/moustique/AaegL5_TE_repeats.gff"
+
 
 topVal = Channel.from("top10")
 topAgglo = Channel.from("top1")
 
 
 donnees = Channel.from(moust) //moust
-aligner = Channel.from() //moust
-intersecter = Channel.from()  //moust
-agglo = Channel.from() //moust
+// = Channel.from() //moust
+//intersecter = Channel.from()  //moust
+//agglo = Channel.from() //moust
 
 
 process creaCarte {
