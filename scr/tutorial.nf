@@ -198,6 +198,7 @@ process intersectComp {
     exec:
     name = spe.name
     edges = spe.edges
+    TE = spe.TE
 
     script:
     """
