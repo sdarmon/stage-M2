@@ -174,7 +174,6 @@ process agglomeration {
 
     output:
     val spe into agglomerate
-    val 0 into comp
     exec:
     name = spe.name
     edges = spe.edges
@@ -195,35 +194,38 @@ process intersectComp {
 
     input:
     val spe from agglomerate
-    val i from comp.until{it.readLines().size()>100}
 
-    output:
-    val spe into agglomerate
-    val next into comp
     exec:
     name = spe.name
     edges = spe.edges
-    next = i+1
 
     script:
     """
-    python3 \
-    ${workDir}/reads_to_align.py ${workDir}/../../results/${name}/processing/comp${i}.txt \
-    ${workDir}/../../results/${name}/processing/comp${i}.fq \
-    0
-    mkdir -p ${workDir}/../../results/${name}/processing/STAR_alignment
-    STAR --genomeDir ${workDir}/../../results/${name}/genome \
-    --runMode alignReads \
-    --runThreadN 8 \
-    --readFilesIn ${workDir}/../../results/${name}/processing/comp${i}.fq  \
-    --outFileNamePrefix ${workDir}/../../results/${name}/processing/STAR_alignment/ \
-    --outSAMtype BAM SortedByCoordinate \
-    --outSAMunmapped Within \
-    --outSAMattributes Standard \
-    --outFilterMultimapNmax 10000 \
-    --outReadsUnmapped Fastx
-    bedtools intersect -wa -a ${TE} -b ${workDir}/../../results/${name}/processing/STAR_alignment/Aligned.sortedByCoord.out.bam > ${workDir}/../../results/${name}/processing/intersectionTE.txt
-    python3 ${workDir}/suppDoublon.py ${workDir}/../../results/${name}/processing/intersectionTE.txt ${workDir}/../../results/${name}/processing/intersectionTENoDouble${i}.txt -t 8
+        for i in {0..100..1}
+        do
+            python3 \
+            ${workDir}/reads_to_align.py ${workDir}/../../results/${name}/processing/comp\$i.txt \
+            ${workDir}/../../results/${name}/processing/comp\$i.fq \
+            0
+            mkdir -p ${workDir}/../../results/${name}/processing/STAR_alignment
+            STAR --genomeDir ${workDir}/../../results/${name}/genome \
+            --runMode alignReads \
+            --runThreadN 8 \
+            --readFilesIn ${workDir}/../../results/${name}/processing/comp\$i.fq  \
+            --outFileNamePrefix ${workDir}/../../results/${name}/processing/STAR_alignment/ \
+            --outSAMtype BAM SortedByCoordinate \
+            --outSAMunmapped Within \
+            --outSAMattributes Standard \
+            --outFilterMultimapNmax 10000 \
+            --outReadsUnmapped Fastx
+            bedtools intersect -wa -a ${TE} \
+            -b ${workDir}/../../results/${name}/processing/STAR_alignment/Aligned.sortedByCoord.out.bam \
+            > ${workDir}/../../results/${name}/processing/intersectionTE.txt
+            python3 ${workDir}/suppDoublon.py \
+            ${workDir}/../../results/${name}/processing/intersectionTE.txt \
+            ${workDir}/../../results/${name}/processing/intersectionTENoDouble\$i.txt \
+            -t 8
+        done
     """
 
 
