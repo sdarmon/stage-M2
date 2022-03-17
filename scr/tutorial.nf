@@ -199,10 +199,11 @@ process intersectComp {
 
     output:
     val spe into agglomerate
-    val i+1 into comp
+    val next into comp
     exec:
     name = spe.name
     edges = spe.edges
+    next = i+1
 
     script:
     """
