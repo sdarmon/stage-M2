@@ -10,9 +10,7 @@ import sys
 Arg = sys.argv[:]
 
 if len(Arg) not in [4]:
-    print("Use : " + Arg[
-        0] + "TE.gff prefixCompTe nbComp"
-             "temps!")
+    print("Use : " + Arg[0] + " TE.gff prefixCompTe nbComponent")
     exit()
 if len(Arg) == 4:
 
@@ -41,3 +39,4 @@ if len(Arg) == 4:
     for i in range(1,len(Y)):
         plt.bar(X,Y[i],label = "Freq "+str(i), color = cm.hsv(i/len(Y)))
     plt.show()
+    plt.legend()

@@ -31,7 +31,7 @@ On a besoin tout d'abord des séquences ref_genome.fna, genome.gtf et TEgenome.g
 Moustique : 
 
 ```
-STAR --runThreadN 8 --runMode genomeGenerate --genomeDir ../results/ --genomeFastaFiles ncbi-genomes-2022-02-11/GCF_002204515.2_AaegL5.0_genomic.fna --sjdbGTFfile ncbi-genomes-2022-02-11/GCF_002204515.2_AaegL5.0_genomic.gtf -sjdbOverhang 74 --genomeSAindexNbases 13 --genomeSAsparseD 4
+STAR --runThreadN 8 --runMode genomeGenerate --genomeDir ../results/moustique/genome --genomeFastaFiles ncbi-genomes-2022-02-11/GCF_002204515.2_AaegL5.0_genomic.fna --sjdbGTFfile ncbi-genomes-2022-02-11/GCF_002204515.2_AaegL5.0_genomic.gtf -sjdbOverhang 74 --genomeSAindexNbases 13 --genomeSAsparseD 4
 ```
 
 Path pour le chien : home/sdarmon/Documents/stage-M2/peda/fastq/SRR_Chiens
