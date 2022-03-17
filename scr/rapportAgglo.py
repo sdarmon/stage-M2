@@ -4,6 +4,7 @@
 
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
+import numpy as np
 import sys
 
 Arg = sys.argv[:]
@@ -39,7 +40,7 @@ if len(Arg) == 4:
             Y[freq][comp] += 1
 
     for i in range(1, len(Y)):
-        plt.bar(X, Y[i], label=str(i), color=cm.hsv(i / len(Y)))
+        plt.bar(X, Y[i], label=str(i), color=cm.hsv(i / len(Y)), bottom=np.sum(Y[0:i],axis=0))
     plt.title("Nombre de TE dans chaque composante")
     plt.ylabel("Nombre de TE distincts")
     plt.xlabel("Numéro de composante")
