@@ -114,7 +114,7 @@ void initVec(vector<int> &vec, int n){
 void save_comp(Graph &G, vector<int> &compo, string &outputPrefix, int rang){
     ofstream output;
     output.open(outputPrefix+"/processing/comp"+to_string(rang)+".txt");
-    for (vector<int>::iterator it = compo.begin(), it != compo.end(), it++){
+    for (vector<int>::iterator it = compo.begin(); it != compo.end(); it++){
         output << *it << "\t" << G.Vertices[*it].label << "\t" << G.Vertices[*it].weight  << "\n";
     }
     return;
@@ -131,7 +131,7 @@ int main(int argc, char** argv){
 
     char* nodesPath = argv[1];
     char* edgesPath = argv[2];
-    int dis = argv[6];
+    int dis = atoi(argv[6]);
 
     FILE * edges;
     FILE * nodes;
