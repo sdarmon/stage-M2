@@ -111,7 +111,7 @@ void initVec(vector<int> &vec, int n){
     return;
 }
 
-void save_comp(Graph &G, vector<int> &compo, string &outputPrefix, int rang){
+void save_comp(Graph &G, vector<int> &compo, string outputPrefix, int rang){
     ofstream output;
     output.open(outputPrefix+"/processing/comp"+to_string(rang)+".txt");
     for (vector<int>::iterator it = compo.begin(); it != compo.end(); it++){
@@ -191,7 +191,7 @@ int main(int argc, char** argv){
             }
         }
         components.push_back(compo);
-        save_comp(G,compo,(string)argv[7],m);
+        save_comp(G,compo,argv[7],m);
         cout << "Composante trouvée de départ " << index << " et de poids " << G.Vertices[index].weight << " et de taille " << compo.size() << endl;
         index = indexMax(G,vu_total);
         weight = G.Vertices[index].weight;
