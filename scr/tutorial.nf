@@ -222,11 +222,7 @@ process intersectComp {
             --outReadsUnmapped Fastx
             bedtools intersect -wa -a ${TE} \
             -b ${workDir}/../../results/${name}/processing/STAR_alignment/Aligned.sortedByCoord.out.bam \
-            > ${workDir}/../../results/${name}/processing/intersectionTE.txt
-            python3 ${workDir}/suppDoublon.py \
-            ${workDir}/../../results/${name}/processing/intersectionTE.txt \
-            ${workDir}/../../results/${name}/processing/intersectionTENoDouble\$i.txt \
-            -t 8
+            > ${workDir}/../../results/${name}/processing/intersectionTE\$i.txt
         done
     """
 

@@ -17,12 +17,12 @@ if len(Arg) == 4:
     dicTE = {}
     with open(Arg[1], 'r') as f:
         for line in f:
-            dicTE[line[:-1]] = []
+            dicTE[line.split("\t")[8][:-1]] = []
 
     for i in range(int(Arg[3])):
         with open(Arg[2] + str(i) + ".txt", 'r') as f:
             for line in f:
-                dicTE[line[:-1]].append(i)
+                dicTE[line.split("\t")[8][:-1]].append(i)
 
     X = [i for i in range(int(Arg[3]))]
     Y = [[0 for i in range(int(Arg[3]))] ]
