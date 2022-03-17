@@ -191,7 +191,7 @@ int main(int argc, char** argv){
             }
         }
         components.push_back(compo);
-        save_comp(G,compo,atoi(argv[5]),m);
+        save_comp(G,compo,argv[7],m);
         cout << "Composante trouvée de départ " << index << " et de poids " << G.Vertices[index].weight << " et de taille " << compo.size() << endl;
         index = indexMax(G,vu_total);
         weight = G.Vertices[index].weight;
@@ -227,12 +227,12 @@ int main(int argc, char** argv){
     cout << "Graphe aggloméré construit" << endl;
 
     ofstream outputNodes;
-    outputNodes.open((string) argv[5]+"/agglo.nodes");
+    outputNodes.open((string) argv[7]+"/agglo.nodes");
     printGraphVertices(H,outputNodes);
     outputNodes.close();
 
     ofstream outputEdges;
-    outputEdges.open( (string) argv[5]+"/agglo.edges");
+    outputEdges.open( (string) argv[7]+"/agglo.edges");
     printEdges(E2,outputEdges);
     outputEdges.close();
 }
