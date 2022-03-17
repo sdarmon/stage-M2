@@ -201,6 +201,7 @@ process intersectComp {
 
     script:
     """
+        mkdir -p ${workDir}/../../results/${name}/processing
         for i in {0..100..1}
         do
             python3 \
