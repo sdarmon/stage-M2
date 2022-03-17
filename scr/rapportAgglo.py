@@ -17,7 +17,7 @@ if len(Arg) == 4:
     dicTE = {}
     with open(Arg[1], 'r') as f:
         for line in f:
-            if len(line) > 2:
+            if len(line) > 2 and line[0]!= '#':
                 print(line)
                 dicTE[line.split("\t")[8][:-1]] = []
 
