@@ -37,6 +37,9 @@ if len(Arg) == 4:
             Y[freq][comp] += 1
 
     for i in range(1,len(Y)):
-        plt.bar(X,Y[i],label = "Freq "+str(i), color = cm.hsv(i/len(Y)))
-    plt.legend()
+        plt.bar(X,Y[i],label = str(i), color = cm.hsv(i/len(Y)))
+    plt.title("Nombre de TE dans chaque composante")
+    plt.ylabel("Nombre de TE distincts")
+    plt.xlabel("Numéro de composante")
+    plt.legend(title = "Nombre de matchs dans des composantes distinctes")
     plt.show()
