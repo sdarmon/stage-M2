@@ -12,11 +12,11 @@ println "Path loaded\n"
 
 moust = ["name":"", "genome":"", "gtf":"", "nodes":"", "edges":""]
 moust["name"] = "moustique"
-moust["genome"] = "${workDir}/../../data/ncbi-genomes-2022-02-11/GCF_002204515.2_AaegL5.0_genomic.fna"
-moust["gtf"] = "${workDir}/../../data/ncbi-genomes-2022-02-11/GCF_002204515.2_AaegL5.0_genomic.gtf"
+moust["genome"] = "${workDir}/../../data/moustique/ncbi-genomes-2022-02-11/GCF_002204515.2_AaegL5.0_genomic.fna"
+moust["gtf"] = "${workDir}/../../data/moustique/ncbi-genomes-2022-02-11/GCF_002204515.2_AaegL5.0_genomic.gtf"
 moust["nodes"] = "${workDir}/../../../kissplice_results/kissplice_moustique/graph_IR03_B_R1_IR03_C_R1_IR03_D_R1_IR03_E_R1_IR13_B_R1_IR13_C_R1_IR13_D_R1_IR13_E_R1_k41.nodes"
 moust["edges"] = "${workDir}/../../../kissplice_results/kissplice_moustique/graph_IR03_B_R1_IR03_C_R1_IR03_D_R1_IR03_E_R1_IR13_B_R1_IR13_C_R1_IR13_D_R1_IR13_E_R1_k41_C0.05.edges"
-moust["TE"] = "${workDir}/../../data/AaegL5_TE_repeats.gff"
+moust["TE"] = "${workDir}/../../data/moustique/AaegL5_TE_repeats.gff"
 
 
 topVal = Channel.from("top10")
@@ -61,12 +61,13 @@ process calculpoids {
 
 
     script:
+    name = spe.name
     nodes = spe.nodes
     edges = spe.edges
     """
     g++ ${workDir}/graph.cpp ${workDir}/main.cpp -o ${workDir}/graph.exe
-    ${workDir}/graph.exe  ${nodes} ${edges} 10 -o ${workDir}/../../data/outputGraph${spe.name}.txt
-    python3 ${workDir}/reads_to_align.py ${workDir}/../../data/outputGraph${spe.name}.txt ${workDir}/../../data/outputGraph${spe.name}Clean.txt 0 -clean
+    ${workDir}/graph.exe  ${nodes} ${edges} 10 -o ${workDir}/../../data/${name}/outputGraph${spe.name}.txt
+    python3 ${workDir}/reads_to_align.py ${workDir}/../../data/${name}/outputGraph${spe.name}.txt ${workDir}/../../data/${name}/outputGraph${spe.name}Clean.txt 0 -clean
     """
 }
 
@@ -86,7 +87,7 @@ process top {
 
     script:
     """
-    python3 ${workDir}/plot.py ${workDir}/../../data/outputGraph${spe.name}Clean.txt ${topV}
+    python3 ${workDir}/plot.py ${workDir}/../../data/${name}/outputGraph${spe.name}Clean.txt ${topV}
     """
 }
 
@@ -102,12 +103,12 @@ process read_to_align {
 
     script:
     """
-    python3 ${workDir}/reads_to_align.py ${workDir}/../../data/outputGraph${spe.name}Clean.txt ${workDir}/../../data/read${name}.fq ${value}
+    python3 ${workDir}/reads_to_align.py ${workDir}/../../data/${name}/outputGraph${spe.name}Clean.txt ${workDir}/../../data/${name}/read${name}.fq ${value}
     mkdir -p ${workDir}/../../results/${name}/STAR_alignment
     STAR --genomeDir ${workDir}/../../results/${name}/genome \
     --runMode alignReads \
     --runThreadN 8 \
-    --readFilesIn ${workDir}/../../data/read${name}.fq \
+    --readFilesIn ${workDir}/../../data/${name}/read${name}.fq \
     --outFileNamePrefix ${workDir}/../../results/${name}/STAR_alignment/ \
     --outSAMtype BAM SortedByCoordinate \
     --outSAMunmapped Within \
@@ -162,7 +163,7 @@ process topA {
 
     script:
     """
-    python3 ${workDir}/plot.py ${workDir}/../../data/outputGraph${spe.name}Clean.txt ${topV}
+    python3 ${workDir}/plot.py ${workDir}/../../data/${name}/outputGraph${spe.name}Clean.txt ${topV}
     """
 }
 
@@ -182,7 +183,7 @@ process agglomeration {
     """
     mkdir -p ${workDir}/../../results/${name}/processing
     g++ ${workDir}/graph.cpp ${workDir}/agglo.cpp -o ${workDir}/agglo.exe
-    ${workDir}/agglo.exe ${workDir}/../../data/outputGraph${name}Clean.txt \
+    ${workDir}/agglo.exe ${workDir}/../../data/${name}/outputGraph${name}Clean.txt \
     ${edges} \
     -c ${value.replaceAll(/\n/, "")} \
     -d 100\

@@ -17,13 +17,13 @@ if len(Arg) == 4:
     with open(Arg[1], 'r') as f:
         for line in f:
             if len(line) > 2 and line[0] != '#':
-                dicTE[line.split("\t")[8][:-1]] = []
+                dicTE[line.split("\t")[8].split(" ")[0]] = []
 
     for i in range(int(Arg[3])):
         with open(Arg[2] + str(i) + ".txt", 'r') as f:
             for line in f:
                 if len(line) > 2:
-                    target = line.split("\t")[8][:-1]
+                    target = line.split("\t")[8].split(" ")[0]
                     if dicTE[target] == [] or dicTE[target][-1] != i:
                         dicTE[target].append(i)
     X = [i for i in range(int(Arg[3]))]
