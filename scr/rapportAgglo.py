@@ -38,5 +38,5 @@ if len(Arg) == 4:
 
     for i in range(1,len(Y)):
         plt.bar(X,Y[i],label = "Freq "+str(i), color = cm.hsv(i/len(Y)))
-    plt.show()
     plt.legend()
+    plt.show()
