@@ -2,6 +2,49 @@
 
 
 
+## Fonctions d'affichage
+
+### Analyse graphique de la distribution des poids
+
+Fonctionne également en `top20`, `top10`, `top1`.
+```
+python3 plot.py ../../data/moustique/outputGraphmoustique.txt top10
+```
+
+### Plotting des reads concernés
+
+On récupère les séquences de l'intersection dans seq.txt (l'output). Puis on les affiche avec la fonction plot.
+```
+python3 reads_to_align.py ../../data/outputGraphMoustique.txt ../../results/moustique/seq.txt 11 -reverse ../../results/moustique/intersectionKissNoDouble.txt
+python3 plot.py ../../data/outputGraphMoustique.txt reverse ../../results/moustique/seq.txt
+```
+
+### Afficher une séquence sur Cytoscape:
+
+```
+/data/home/vincent/TiffanyDelhomme$ ./nbh -n /localdata/pandata/students/Projet_KS/kissplice_results/kissplice_moustique/graph_IR03_B_R1_IR03_C_R1_IR03_D_R1_IR03_E_R1_IR13_B_R1_IR13_C_R1_IR13_D_R1_IR13_E_R1_k41.nodes -e /localdata/pandata/students/Projet_KS/kissplice_results/kissplice_moustique/graph_IR03_B_R1_IR03_C_R1_IR03_D_R1_IR03_E_R1_IR13_B_R1_IR13_C_R1_IR13_D_R1_IR13_E_R1_k41_C0.05.edges -k 41 -o /localdata/pandata/students/Projet_KS/DmGoth/data/candidat/graph -d 10 -q CTGAATAGCTGCGCGTTTACCGCTACGGCTATCTGGGCCCC
+python3 labellingCytoscape.py ../../data/candidat/graph.edges ../../data/moustique/outputGraphMoustiqueNonOpt.txt 8 ../../data/candidat/graph.label
+
+g++ graph.cpp splitGraph.cpp -o split.exe
+./split.exe ../../../kissplice_results/kissplice_moustique/graph_IR03_B_R1_IR03_C_R1_IR03_D_R1_IR03_E_R1_IR13_B_R1_IR13_C_R1_IR13_D_R1_IR13_E_R1_k41.nodes ../../data/candidat/graph.nodes ../../data/candidat/graph.edges ../../data/candidat/graph
+
+Cytoscape &
+```
+
+Seq à tester : `CTGAATAGCTGCGCGTTTACCGCTACGGCTATCTGGGCCCC`
+Puis File > Import > Import Network from file
+
+
+
+### Histogramme de l'agglomération
+
+```
+python3 ${workDir}/rapportAgglo.py ${workDir}/../../data/AaegL5_TE_repeats.gff ${workDir}/../../results/moustique/processing/intersectionTE 100
+```
+
+
+# Out of date
+
 ## Utiles
 
 ### Pour se connecter en sshfs:
@@ -28,7 +71,7 @@ On a besoin tout d'abord des séquences ref_genome.fna, genome.gtf et TEgenome.g
 
 ### Etape 2: Création de la carte
 
-Moustique : 
+Moustique :
 
 ```
 STAR --runThreadN 8 --runMode genomeGenerate --genomeDir ../results/moustique/genome --genomeFastaFiles ncbi-genomes-2022-02-11/GCF_002204515.2_AaegL5.0_genomic.fna --sjdbGTFfile ncbi-genomes-2022-02-11/GCF_002204515.2_AaegL5.0_genomic.gtf -sjdbOverhang 74 --genomeSAindexNbases 13 --genomeSAsparseD 4
@@ -178,7 +221,7 @@ less ../../results/STAR/Log.final.out
 ```
 
 
-Version CLEAN 
+Version CLEAN
 ```
 bedtools intersect -wb -b ../results/moustique/STARClean/Aligned.sortedByCoord.out.bam -a AaegL5_TE_repeats.gff  > ../results/moustique/intersectionKissClean.txt
 bedtools intersect -wa -b ../results/moustique/STARClean/Aligned.sortedByCoord.out.bam -a AaegL5_TE_repeats.gff  > ../results/moustique/intersectionTEClean.txt
@@ -201,46 +244,6 @@ python3 suppDoublon.py ../../results/moustique/intersectionTENonOpt.txt ../../re
 wc -l ../../results/moustique/intersectionKissNonOptNoDouble.txt 
 wc -l ../../results/moustique/intersectionTENonOptNoDouble.txt 
 less ../../results/moustique/STAR/Log.final.out
-```
-
-### Etape 7: Plotting des reads concernés
-
-On récupère les séquences de l'intersection dans seq.txt (l'output). Puis on les affiche avec la fonction plot.
-```
-python3 reads_to_align.py ../../data/outputGraphMoustique.txt ../../results/moustique/seq.txt 11 -reverse ../../results/moustique/intersectionKissNoDouble.txt
-python3 plot.py ../../data/outputGraphMoustique.txt reverse ../../results/moustique/seq.txt
-```
-
-Version moustique version non optimisée:
-```
-python3 reads_to_align.py ../../data/outputGraphMoustique.txt ../../results/moustique/seqNonOptClean.txt 16 -reverse ../../results/moustique/intersectionKissCleanNoDouble.txt
-python3 plot.py ../../data/outputGraphMoustiqueNonOpt.txt reverse ../../results/moustique/seqNonOpt.txt
-```
-
-
-
-## Afficher une séquence sur Cytoscape:
-
-```
-/data/home/vincent/TiffanyDelhomme$ ./nbh -n /localdata/pandata/students/Projet_KS/kissplice_results/kissplice_moustique/graph_IR03_B_R1_IR03_C_R1_IR03_D_R1_IR03_E_R1_IR13_B_R1_IR13_C_R1_IR13_D_R1_IR13_E_R1_k41.nodes -e /localdata/pandata/students/Projet_KS/kissplice_results/kissplice_moustique/graph_IR03_B_R1_IR03_C_R1_IR03_D_R1_IR03_E_R1_IR13_B_R1_IR13_C_R1_IR13_D_R1_IR13_E_R1_k41_C0.05.edges -k 41 -o /localdata/pandata/students/Projet_KS/DmGoth/data/candidat/graph -d 10 -q CTGAATAGCTGCGCGTTTACCGCTACGGCTATCTGGGCCCC
-
-
-python3 labellingCytoscape.py ../../data/candidat/graph.edges ../../data/outputGraphMoustiqueNonOpt.txt 8 ../../data/candidat/graph.label
-
-Cytoscape &
-```
-
-Seq à tester : `CTGAATAGCTGCGCGTTTACCGCTACGGCTATCTGGGCCCC`
-Puis File > Import > Import Network from file
-
-
-
-## Graphe foward et reverse
-
-```
-g++ graph.cpp splitGraph.cpp -o split.exe
-./split.exe ../../../kissplice_results/kissplice_moustique/graph_IR03_B_R1_IR03_C_R1_IR03_D_R1_IR03_E_R1_IR13_B_R1_IR13_C_R1_IR13_D_R1_IR13_E_R1_k41.nodes ../../data/candidat/graph.nodes ../../data/candidat/graph.edges ../../data/candidat/graph
-
 ```
 
 ## Différence entre les deux méthodes de distance :
@@ -308,4 +311,3 @@ g++ graph.cpp agglo.cpp -o agglo.exe
 ./agglo.exe ../../data/outputCleanChien.txt ../../../kissplice_results/kissplice_Chiens/graph_SRR15254976_1_SRR15254976_2_SRR15254978_1_SRR15254978_2_SRR15254980_1_SRR15254980_2_SRR15254982_1_SRR15254982_2_SRR15254985_1_SRR15254985_2_SRR15254986_1_SRR15254986_2_SRR15254989_1_SRR15254989_2_SRR1k41_C0.05.edges -c 25 ../../results/moustique/compChien
 
 ```
-        python3 ${workDir}/rapportAgglo.py ${workDir}/../../data/AaegL5_TE_repeats.gff ${workDir}/../../results/moustique/processing/intersectionTE 100

@@ -20,12 +20,13 @@ moust["TE"] = "${workDir}/../../data/moustique/AaegL5_TE_repeats.gff"
 
 
 topVal = Channel.from("top10")
-donnees = Channel.from() //moust
+topAgglo = Channel.from("top1")
+
+
+donnees = Channel.from(moust) //moust
 aligner = Channel.from() //moust
 intersecter = Channel.from()  //moust
-
-topAgglo = Channel.from("top1")
-agglo = Channel.from(moust) //moust
+agglo = Channel.from() //moust
 
 
 process creaCarte {
@@ -59,6 +60,8 @@ process calculpoids {
     input:
     val spe from STARDir
 
+    output:
+    val spe into aligner
 
     script:
     name = spe.name
@@ -121,6 +124,9 @@ process read_to_align {
 process intersect {
     input:
     val spe from intersecter
+
+    output:
+    val spe into agglo
 
     exec:
     name = spe.name
@@ -226,7 +232,4 @@ process intersectComp {
             > ${workDir}/../../results/${name}/processing/intersectionTE\$i.txt
         done
     """
-
-
-
 }
