@@ -113,7 +113,7 @@ void initVec(vector<int> &vec, int n){
 
 void save_comp(Graph &G, vector<int> &compo, string &outputPrefix, int rang){
     ofstream output;
-    output.open(outputPrefix+"/processing/comp"+str(rang)+".txt");
+    output.open(outputPrefix+"/processing/comp"+to_string(rang)+".txt");
     for (vector<int>::iterator it = compo.begin(), it != compo.end(), it++){
         output << *it << "\t" << G.Vertices[*it].label << "\t" << G.Vertices[*it].weight  << "\n";
     }
