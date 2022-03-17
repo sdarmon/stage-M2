@@ -1,6 +1,9 @@
 # Executables
 *.exe
 
+# Hidden file
+.*
+
 #Directory
 data/
 peda/
