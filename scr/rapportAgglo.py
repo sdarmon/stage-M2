@@ -41,5 +41,5 @@ if len(Arg) == 4:
     plt.title("Nombre de TE dans chaque composante")
     plt.ylabel("Nombre de TE distincts")
     plt.xlabel("Numéro de composante")
-    plt.legend(title = "Nombre de matchs dans des composantes distinctes")
+    plt.legend(title = "TE contenu dans X composante(s)")
     plt.show()
