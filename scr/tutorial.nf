@@ -180,6 +180,7 @@ process agglomeration {
 
     script:
     """
+    mkdir -p ${workDir}/../../results/${name}/processing
     g++ ${workDir}/graph.cpp ${workDir}/agglo.cpp -o ${workDir}/agglo.exe
     ${workDir}/agglo.exe ${workDir}/../../data/outputGraph${name}Clean.txt \
     ${edges} \
@@ -202,7 +203,6 @@ process intersectComp {
 
     script:
     """
-        mkdir -p ${workDir}/../../results/${name}/processing
         for i in {0..100..1}
         do
             python3 \
