@@ -380,13 +380,10 @@ void read_node_file_weighted( FILE* node_file, vector<Node>& seqs)
     char* seq;
     char* u = new char[MAX];
     char* v = new char[MAX];
-    int compt = 0;
     seqs.reserve(count_nb_lines(node_file));
     while ( fgets(buffer, 100 * MAX, node_file) != NULL )
     {
         char* p;
-        cout<<compt << endl;
-        compt++;
         if (strlen(buffer) == 100 * MAX)
         {  
           p = strtok(buffer, "\t\n");
@@ -395,11 +392,11 @@ void read_node_file_weighted( FILE* node_file, vector<Node>& seqs)
         }
           
         // Node label
-        p = strtok( NULL, "\t\n" );
+        p = strtok( buffer, "\t\n" );
         strcpy( v, p );
               
         // Node seq
-        p = strtok( NULL, "\t\n"  );
+        p = strtok( buffer, "\t\n"  );
         seq = new char[strlen(p) + 1];
         strcpy( seq, p );
 
