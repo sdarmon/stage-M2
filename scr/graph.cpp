@@ -389,7 +389,7 @@ void read_edge_file( ifstream &edge_file, vector<Edge>& edges ) {
         cout << line << endl;
         getline(ss, substr, '\t');
         cout<<"vivant?"<< endl;
-        cout<<substr<<"\t" ;
+        cout<<substr<<endl ;
         Edge e(u,v,0,p);
         edges.push_back(e);
     }
