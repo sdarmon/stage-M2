@@ -407,7 +407,7 @@ void read_node_file_weighted( FILE* node_file, vector<Node>& seqs)
         strcpy( u, p );
 
 
-        Node node(atoi(u),atoi(u),string(seq));
+        Node node(atoi(v),atoi(u),string(seq));
         seqs.push_back(node);
     }
 
