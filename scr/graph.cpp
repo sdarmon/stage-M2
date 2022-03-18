@@ -386,7 +386,7 @@ void read_edge_file( ifstream &edge_file, vector<Edge>& edges ) {
         istringstream ss(line);
         compt=0;
         cout << line << endl;
-        for (string substr; getline(ss, substr, '\t')) {
+        for (string substr; getline(ss, substr, '\t');) {
             cout<<substr<<"\t" ;
             if (compt == 0) {
                 u = stoi(substr);
