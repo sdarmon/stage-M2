@@ -135,12 +135,16 @@ int main(int argc, char** argv){
 
     FILE * edges;
     FILE * nodes;
-
+    cout << "ici?" <<endl;
     edges = fopen(edgesPath,"r");
+    cout << "ici2?" <<endl;
     nodes= fopen(nodesPath,"r");
+    cout << "ici3?" <<endl;
 
     read_edge_file(edges,E);
+    cout << "ici4?" <<endl;
     read_node_file_weighted(nodes,V);
+    cout << "ici5?" <<endl;
 
     Graph G(V,E);
 
