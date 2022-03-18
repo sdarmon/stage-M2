@@ -24,14 +24,13 @@ chien["genome"] = "${workDir}/../../../fastq/SRR_Chiens/Canis_lupus_familiaris-G
 chien["gtf"] = "${workDir}/../../../fastq/SRR_Chiens/Canis_lupus_familiaris-GCA_011100685.1-2021_03-genes.sorted.gtf"
 chien["nodes"] = "${workDir}/../../../kissplice_results/kissplice_Chiens/graph_SRR15254976_1_SRR15254976_2_SRR15254978_1_SRR15254978_2_SRR15254980_1_SRR15254980_2_SRR15254982_1_SRR15254982_2_SRR15254985_1_SRR15254985_2_SRR15254986_1_SRR15254986_2_SRR15254989_1_SRR15254989_2_SRR1k41.nodes"
 chien["edges"] = "${workDir}/../../../kissplice_results/kissplice_Chiens/graph_SRR15254976_1_SRR15254976_2_SRR15254978_1_SRR15254978_2_SRR15254980_1_SRR15254980_2_SRR15254982_1_SRR15254982_2_SRR15254985_1_SRR15254985_2_SRR15254986_1_SRR15254986_2_SRR15254989_1_SRR15254989_2_SRR1k41_C0.05.edges"
-chien["TE"] = "${workDir}/../../data/moustique/AaegL5_TE_repeats.gff"
+chien["TE"] = "${workDir}/../../data/chien/Cfam_GSD_TE.gtf"
 
 
-topVal = Channel.from("top10")
-topAgglo = Channel.from("top1")
+topVal = Channel.from("top10","top10")
+topAgglo = Channel.from("top1","top1")
 
-
-donnees = Channel.from(moust) //moust
+donnees = Channel.from(moust,chien) //moust
 // = Channel.from() //moust
 //intersecter = Channel.from()  //moust
 //agglo = Channel.from() //moust

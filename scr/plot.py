@@ -7,8 +7,7 @@
 # L'option "reverse" permet d'afficher les courbes avec les poids
 # matchant avec un TE ou une répétition connu.
 
-import numpy as np 
-import matplotlib.pyplot as plt
+import numpy as np
 import sys
 
 
@@ -18,6 +17,8 @@ if len(Arg) not in [3,4]:
 	print("Wrong input used.\n Use : "+Arg[0]+" output.txt format optional_input.txt\n Where format is 'dot', 'his', 'top1', 'top10', 'top20' or 'reverse', the format of the plot.")
 
 elif Arg[2] == "dot":
+
+	import matplotlib.pyplot as plt
 	y = []
 	m = 0
 	with open(Arg[1]) as f:

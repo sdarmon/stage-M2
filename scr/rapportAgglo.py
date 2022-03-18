@@ -9,22 +9,29 @@ import sys
 
 Arg = sys.argv[:]
 
-if len(Arg) not in [4]:
-    print("Use : " + Arg[0] + " TE.gff prefixCompTe nbComponent")
+if len(Arg) not in [5]:
+    print("Use : " + Arg[0] + " TE.gff prefixCompTe nbComponent [-whole/-target]")
     exit()
-if len(Arg) == 4:
+if len(Arg) == 5:
 
     dicTE = {}
     with open(Arg[1], 'r') as f:
         for line in f:
+            if Arg[4] == "-target":
+                target = line.split("\t")[8].split(" ")[0]
+            else:
+                target = line.split("\t")[8][:-1]
             if len(line) > 2 and line[0] != '#':
-                dicTE[line.split("\t")[8].split(" ")[0]] = []
+                dicTE[target] = []
 
     for i in range(int(Arg[3])):
         with open(Arg[2] + str(i) + ".txt", 'r') as f:
             for line in f:
                 if len(line) > 2:
-                    target = line.split("\t")[8].split(" ")[0]
+                    if Arg[4] == "-target":
+                        target = line.split("\t")[8].split(" ")[0]
+                    else:
+                        target = line.split("\t")[8][:-1]
                     if dicTE[target] == [] or dicTE[target][-1] != i:
                         dicTE[target].append(i)
     X = [i for i in range(int(Arg[3]))]
