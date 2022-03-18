@@ -98,7 +98,7 @@ elif Arg[2] == "top1":
     size = 1
     with open(Arg[1]) as f:
         for line in f:
-            if len(line) < 2:
+            if len(line) < 2 or int(L[2][:-1]) < 0:
                 break
             L = line.split('\t')
             y.append(int(L[2][:-1]))
@@ -122,7 +122,7 @@ elif Arg[2] == "top10":
     size = 1
     with open(Arg[1]) as f:
         for line in f:
-            if len(line) < 2:
+            if len(line) < 2 or int(L[2][:-1]) < 0:
                 break
             L = line.split('\t')
             y.append(int(L[2][:-1]))
@@ -145,7 +145,7 @@ elif Arg[2] == "top20":
     size = 1
     with open(Arg[1]) as f:
         for line in f:
-            if len(line) < 2:
+            if len(line) < 2 or int(L[2][:-1]) < 0:
                 break
             L = line.split('\t')
             y.append(int(L[2][:-1]))
