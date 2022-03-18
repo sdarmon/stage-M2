@@ -326,7 +326,7 @@ void read_node_file( ifstream &node_file, vector<Node>& seqs)
     string p;
     int compt;
     while (getline(node_file, line)) {
-        istringstream ss(line);
+        istringstream ss(line, std::ios::binary);
         string substr;
         compt=0;
         while (getline(ss, substr, '\t')) {
@@ -334,7 +334,7 @@ void read_node_file( ifstream &node_file, vector<Node>& seqs)
                 u = stoi(substr);
             }
             else {
-                strcpy( p, substr );
+                p=substr;
             }
             compt++;
         }
@@ -352,7 +352,7 @@ void read_node_file_weighted( ifstream &node_file,vector<Node>& seqs)
     string p;
     int compt;
     while (getline(node_file, line)) {
-        istringstream ss(line);
+        istringstream ss(line, std::ios::binary);
         string substr;
         compt=0;
         while (getline(ss, substr, '\t')) {
@@ -360,7 +360,7 @@ void read_node_file_weighted( ifstream &node_file,vector<Node>& seqs)
                 u = stoi(substr);
             }
             else if (compt == 1){
-                strcpy( p, substr );
+                p=substr;
             } else {
                 v = stoi(substr);
             }
@@ -380,7 +380,7 @@ void read_edge_file( ifstream &edge_file, vector<Edge>& edges ) {
     char* p;
     int compt;
     while (getline(edge_file, line)) {
-        istringstream ss(line);
+        istringstream ss(line, std::ios::binary);
         string substr;
         compt=0;
         while (getline(ss, substr, '\t')) {
