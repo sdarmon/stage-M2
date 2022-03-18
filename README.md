@@ -311,3 +311,9 @@ g++ graph.cpp agglo.cpp -o agglo.exe
 ./agglo.exe ../../data/outputCleanChien.txt ../../../kissplice_results/kissplice_Chiens/graph_SRR15254976_1_SRR15254976_2_SRR15254978_1_SRR15254978_2_SRR15254980_1_SRR15254980_2_SRR15254982_1_SRR15254982_2_SRR15254985_1_SRR15254985_2_SRR15254986_1_SRR15254986_2_SRR15254989_1_SRR15254989_2_SRR1k41_C0.05.edges -c 25 ../../results/moustique/compChien
 
 ```
+
+## Valgrind
+
+```
+  valgrind --leak-check=yes myprog arg1 arg2 
+```

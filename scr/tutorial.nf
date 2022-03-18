@@ -30,7 +30,7 @@ chien["TE"] = "${workDir}/../../data/chien/Cfam_GSD_TE.gtf"
 topVal = Channel.from("top10","top10")
 topAgglo = Channel.from("top1","top1")
 
-donnees = Channel.from(moust,chien) //moust
+donnees = Channel.from(moust) //moust
 // = Channel.from() //moust
 //intersecter = Channel.from()  //moust
 //agglo = Channel.from() //moust
@@ -38,7 +38,7 @@ donnees = Channel.from(moust,chien) //moust
 
 process creaCarte {
     input:
-    val spe from donnees
+    val spe from agglomerate
 
     output:
     val spe into STARDir
@@ -144,6 +144,19 @@ process intersect {
 
     script:
     """
+    bedtools intersect -wa -a ${TE} -b ${workDir}/../../results/${name}/STAR_alignment/Aligned.sortedByCoord.out.bam > ${workDir}/../../results/${name}/intersectionTE.txt
+    bedtools intersect -wb -a ${TE} -b ${workDir}/../../results/${name}/STAR_alignment/Aligned.sortedByCoord.out.bam > ${workDir}/../../results/${name}/intersectionKiss.txt
+    python3 ${workDir}/suppDoublon.py ${workDir}/../../results/${name}/intersectionKiss.txt ${workDir}/../../results/${name}/intersectionKissNoDouble.txt -s 12
+    python3 ${workDir}/suppDoublon.py ${workDir}/../../results/${name}/intersectionTE.txt ${workDir}/../../results/${name}/intersectionTENoDouble.txt -t 8
+    echo "Intersections uniques dans KisSplice : " > ${workDir}/../../results/${name}/rapportIntersect.txt
+    wc -l ${workDir}/../../results/${name}/intersectionKissNoDouble.txt >> ${workDir}/../../results/${name}/rapportIntersect.txt
+    echo "\nIntersections uniques dans les TE : " >> ${workDir}/../../results/${name}/rapportIntersect.txt
+    wc -l ${workDir}/../../results/${name}/intersectionTENoDouble.txt >> ${workDir}/../../results/${name}/rapportIntersect.txt
+    echo "\n" >> ${workDir}/../../results/${name}/rapportIntersect.txt
+    grep "Number of input reads" ${workDir}/../../results/${name}/STAR_alignment/Log.final.out >> ${workDir}/../../results/${name}/rapportIntersect.txt
+    echo "\n" >> ${workDir}/../../results/${name}/rapportIntersect.txt
+    grep "Uniquely mapped reads number" ${workDir}/../../results/${name}/STAR_alignment/Log.final.out >> ${workDir}/../../results/${name}/rapportIntersect.txt
+    echo "\n" >> ${workDir}/../../results/${name}/rapportIntersect.txt
     """
 }
 
@@ -198,7 +211,7 @@ process agglomeration {
 process intersectComp {
 
     input:
-    val spe from agglomerate
+    val spe from donnees
 
     exec:
     name = spe.name
@@ -210,14 +223,14 @@ process intersectComp {
         for i in {0..100..1}
         do
             python3 \
-            ${workDir}/reads_to_align.py ${workDir}/../../results/${name}/processing/comp\$i.txt \
-            ${workDir}/../../results/${name}/processing/comp\$i.fq \
+            ${workDir}/reads_to_align.py ${workDir}/../../results/${name}/processing/comp$i.txt \
+            ${workDir}/../../results/${name}/processing/comp$i.fq \
             0
             mkdir -p ${workDir}/../../results/${name}/processing/STAR_alignment
             STAR --genomeDir ${workDir}/../../results/${name}/genome \
             --runMode alignReads \
             --runThreadN 8 \
-            --readFilesIn ${workDir}/../../results/${name}/processing/comp\$i.fq  \
+            --readFilesIn ${workDir}/../../results/${name}/processing/comp$i.fq  \
             --outFileNamePrefix ${workDir}/../../results/${name}/processing/STAR_alignment/ \
             --outSAMtype BAM SortedByCoordinate \
             --outSAMunmapped Within \
@@ -226,7 +239,7 @@ process intersectComp {
             --outReadsUnmapped Fastx
             bedtools intersect -wa -a ${TE} \
             -b ${workDir}/../../results/${name}/processing/STAR_alignment/Aligned.sortedByCoord.out.bam \
-            > ${workDir}/../../results/${name}/processing/intersectionTE\$i.txt
+            > ${workDir}/../../results/${name}/processing/intersectionTE$i.txt
         done
     """
 }
