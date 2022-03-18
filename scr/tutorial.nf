@@ -189,8 +189,6 @@ process agglomeration {
     val value from topA
     val spe from agglo2
 
-    output:
-    val spe into agglomerate
     exec:
     name = spe.name
     edges = spe.edges
