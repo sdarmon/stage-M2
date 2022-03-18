@@ -105,10 +105,12 @@ elif len(Arg) == 5:  # i.e. argument -clean
     with open(Arg[2], 'w') as f:
         compt = 0
         for seq in seqs:
-            seq = cleaning(seq)
+            L = seq.split('\t')
+            seqq = cleaning(L[1])
             if isPoly(seq):
-                continue
-            f.write(seq)
+                f.write(L[0]+"\t"+seqq+"\t0\n")
+            else:
+                f.write(L[0]+"\t"+seqq+"\t"+L[2]+"\n")
 else:
     seqs = []
     ref = set()

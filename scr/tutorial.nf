@@ -198,7 +198,7 @@ process agglomeration {
     script:
     """
     mkdir -p ${workDir}/../../results/${name}/processing
-    g++ -g -O2 ${workDir}/graph.cpp ${workDir}/agglo.cpp -o ${workDir}/agglo.exe
+    g++ -g ${workDir}/graph.cpp ${workDir}/agglo.cpp -o ${workDir}/agglo.exe
     ${workDir}/agglo.exe ${workDir}/../../data/${name}/outputGraph${name}Clean.txt \
     ${edges} \
     -c 35 \
