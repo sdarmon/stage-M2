@@ -34,7 +34,7 @@ donnees = Channel.from(moust) //moust
 // = Channel.from() //moust
 //intersecter = Channel.from()  //moust
 //agglo = Channel.from() //moust
-
+agglomerate = Channel.from()
 
 process creaCarte {
     input:
