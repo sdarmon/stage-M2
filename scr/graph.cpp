@@ -378,7 +378,7 @@ void read_edge_file( ifstream &edge_file, vector<Edge>& edges ) {
     edges.clear();
     string line;
     int u,v;
-    char* p;
+    char p[2];
     int compt;
 
     cout << "ici?6" << endl;
