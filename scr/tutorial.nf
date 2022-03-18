@@ -157,11 +157,7 @@ process intersect {
     echo "\n" >> ${workDir}/../../results/${name}/rapportIntersect.txt
     grep "Uniquely mapped reads number" ${workDir}/../../results/${name}/STAR_alignment/Log.final.out >> ${workDir}/../../results/${name}/rapportIntersect.txt
     echo "\n" >> ${workDir}/../../results/${name}/rapportIntersect.txt
-    grep " too many mismatches" ${workDir}/../../results/${name}/STAR_alignment/Log.final.out >> ${workDir}/../../results/${name}/rapportIntersect.txt
-    echo "\n" >> ${workDir}/../../results/${name}/rapportIntersect.txt
-    grep " too short" ${workDir}/../../results/${name}/STAR_alignment/Log.final.out >> ${workDir}/../../results/${name}/rapportIntersect.txt
-    echo "\n" >> ${workDir}/../../results/${name}/rapportIntersect.txt
-    grep "Number of reads unmapped: other" ${workDir}/../../results/${name}/STAR_alignment/Log.final.out >> ${workDir}/../../results/${name}/rapportIntersect.txt
+    grep "Number of reads unmapped" ${workDir}/../../results/${name}/STAR_alignment/Log.final.out >> ${workDir}/../../results/${name}/rapportIntersect.txt
     """
 }
 
