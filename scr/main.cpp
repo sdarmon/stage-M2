@@ -27,12 +27,8 @@ int main(int argc, char** argv)
     char* nodesPath = argv[1];
     char* edgesPath = argv[2];
 
-
-    FILE * edges;
-    FILE * nodes;
-
-    edges = fopen(edgesPath,"r");
-    nodes= fopen(nodesPath,"r");
+    ifstream edges(edgesPath, std::ios::binary);
+    ifstream nodes(nodesPath, std::ios::binary);
 
     read_edge_file(edges,E);
     read_node_file(nodes,V);

@@ -316,138 +316,87 @@ void Graph::weighingAllNodes(int rayon) {
 //                  Reading functions
 //================================================================
 
-//Compte le nombre de lignes (réalisé par Pierre Peterlongo et Vincent Lacroix)
-int count_nb_lines( FILE* file )
-{
-  int number_of_lines = 0;
-  char ch;
-  while (true) {
-        ch=fgetc(file);
-        if (ch == (int)'\n') {
-            number_of_lines++;
-        } 
-        if (ch == EOF){
-            break;
-        }
-    }
-  // Set the cursor back to the beginning of the file.
-  rewind(file);
-  // Don't care if the last line has a '\n' or not. We over-estimate it.
-  return number_of_lines; 
-}
 
 //Lit un fichier contenant les sommets du graphe et les ajoute au vecteur seqs (réalisé par Pierre Peterlongo et Vincent Lacroix)
-void read_node_file( FILE* node_file, vector<Node>& seqs)
+void read_node_file( ifstream &node_file, vector<Node>& seqs)
 {
     seqs.clear();
-    char* buffer = new char[100 * MAX];
-    char* seq;
-
-    seqs.reserve(count_nb_lines(node_file));
-    int compt = 0;
-    while ( fgets(buffer, 100 * MAX, node_file) != NULL )
-    {
-        char* p;
-
-        if (strlen(buffer) == 100 * MAX)
-        {  
-          p = strtok(buffer, "\t\n");
-          fprintf(stdout, "ERROR: node %s with sequence larger than %d!", p, 100 * MAX);
-          exit(0);
+    string line;
+    int u,v;
+    string p;
+    int compt;
+    while (getline(edge_file, line)) {
+        istringstream ss(line);
+        string substr;
+        compt=0;
+        while (getline(ss, substr, '\t')) {
+            if (compt == 0) {
+                u = atoi(substr);
+            }
+            else {
+                strcpy( p, substr );
+            }
+            compt++;
         }
-          
-        // Node label
-        p = strtok( buffer, "\t\n" );
-              
-        // Node seq
-        p = strtok( NULL, "\t\n"  );
-        seq = new char[strlen(p) + 1];
-        strcpy( seq, p );
-        Node node(compt,0,seq);
+        Node node(u,0,p);
         seqs.push_back(node);
-        compt++;
     }
+}
 
-    delete [] buffer;
+//Lit un fichier contenant les sommets du graphe et les ajoute au vecteur seqs
+void read_node_file_weighted( ifstream &,vector<Node>& seqs)
+{
+    seqs.clear();
+    string line;
+    int u,v;
+    string p;
+    int compt;
+    while (getline(edge_file, line)) {
+        istringstream ss(line);
+        string substr;
+        compt=0;
+        while (getline(ss, substr, '\t')) {
+            if (compt == 0) {
+                u = atoi(substr);
+            }
+            else if (compt == 1){
+                strcpy( p, substr );
+            } else {
+                v = atoi(substr);
+            }
+            compt++;
+        }
+        Node node(u,v,p);
+        seqs.push_back(node);
+    }
 }
 
 
-//Lit un fichier contenant les sommets du graphe et les ajoute au vecteur seqs (réalisé par Pierre Peterlongo et Vincent Lacroix)
-void read_node_file_weighted( FILE* node_file, vector<Node>& seqs)
-{
-    seqs.clear();
-    char* buffer = new char[100 * MAX];
-    char* seq;
-    char* u = new char[MAX];
-    char* v = new char[MAX];
-    int compt=0;
-    seqs.reserve(count_nb_lines(node_file));
-    while ( fgets(buffer, 100 * MAX, node_file) != NULL )
-    {
-        cout << compt << endl;
-        compt++;
-        char* p;
-        if (strlen(buffer) == 100 * MAX)
-        {  
-          p = strtok(buffer, "\t\n");
-          fprintf(stdout, "ERROR: node %s with sequence larger than %d!", p, 100 * MAX);
-          exit(0);
-        }
-
-          
-        // Node label
-        p = strtok( buffer, "\t\n" );
-        strcpy( v, p );
-              
-        // Node seq
-        p = strtok( NULL, "\t\n"  );
-        seq = new char[strlen(p) + 1];
-        strcpy( seq, p );
-
-        // Node weight
-        p = strtok( NULL , "\t\n" );
-        strcpy( u, p );
-
-        Node node(atoi(v),atoi(u),string(seq));
-        seqs.push_back(node);
-    }
-
-    delete [] buffer;
-    delete [] u;
-    delete [] v;
-}
-
-
-//Lit un fichier d'arêtes et les ajoute au vecteur edges (réalisé par Pierre Peterlongo et Vincent Lacroix)
-void read_edge_file( FILE *edge_file, vector<Edge>& edges )
-{
-  char* buffer = new char[100 * MAX];
-  char* u = new char[MAX];
-  char* v = new char[MAX];
-
-  edges.clear();
-  edges.reserve(count_nb_lines(edge_file));
-  while ( fgets(buffer, 100 * MAX, edge_file) != NULL )
-  {
+//Lit un fichier d'arêtes et les ajoute au vecteur edges
+void read_edge_file( ifstream &edge_file, vector<Edge>& edges ) {
+    edges.clear();
+    string line;
+    int u,v;
     char* p;
-
-    // outgoing node
-    p = strtok( buffer, "\t\n" );
-    strcpy( u, p );
-
-    // incoming node
-    p = strtok( NULL, "\t\n" );
-    strcpy( v, p );
-
-    // Edge label
-    p = strtok( NULL, "\t\n" );
-  
-    Edge e(atoi(u),atoi(v),0,p);
-    edges.push_back(e);
-  }
-  delete [] buffer;
-  delete [] u;
-  delete [] v;
+    int compt;
+    while (getline(edge_file, line)) {
+        istringstream ss(line);
+        string substr;
+        compt=0;
+        while (getline(ss, substr, '\t')) {
+            if (compt == 0) {
+                u = atoi(substr);
+            }
+            else if (compt == 1){
+                v = atoi(substr);
+            } else {
+                strcpy( p, substr );
+            }
+            compt++;
+        }
+        Edge e(u,v,0,p);
+        edges.push_back(e);
+    }
 }
 
 

@@ -111,10 +111,9 @@ class Graph
 
 //Other functions
 void comp(char* s, char* r);
-int count_nb_lines( FILE* file );
-void read_node_file( FILE* node_file, vector<Node>& seqs);
-void read_node_file_weighted( FILE* node_file, vector<Node>& seqs);
-void read_edge_file( FILE *edge_file, vector<Edge>& edges );
+void read_node_file( ifstream &node_file, vector<Node>& seqs);
+void read_node_file_weighted( ifstream &node_file, vector<Node>& seqs);
+void read_edge_file( ifstream &edge_file, vector<Edge>& edges );
 
 void printGraphVertices(Graph& G);
 void printGraphVertices(Graph& G,ofstream& output);
