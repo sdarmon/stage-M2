@@ -16,33 +16,33 @@ def cleaning(sequence):
     Entrée : une séquence de nucléotides
     Sortie : la séquence sans queue poly A de longueur au moins 15, en autorisant au plus une erreur
     """
-    n=len(sequence)
+    n = len(sequence)
     misstake = 1
     compt = 1
     last = sequence[0]
-    while (compt < n and (sequence[compt] == last or misstake)):
-        if sequence[compt] != last :
+    while compt < n and (sequence[compt] == last or misstake):
+        if sequence[compt] != last:
             misstake = 0
-            if compt+1 < n and sequence[compt+1] != last:
+            if compt + 1 < n and sequence[compt + 1] != last:
                 break
-        compt+=1
+        compt += 1
 
     misstake = 1
     compt2 = 1
-    last = sequence[n-1]
-    while (compt2 < n and (sequence[n-compt2-1] == last or misstake)):
-        if sequence[n-compt2-1] != last :
+    last = sequence[n - 1]
+    while compt2 < n and (sequence[n - compt2 - 1] == last or misstake):
+        if sequence[n - compt2 - 1] != last:
             misstake = 0
-            if n-compt2-2 < 0 and sequence[n-compt2-2] != last:
+            if n - compt2 - 2 < 0 and sequence[n - compt2 - 2] != last:
                 break
-        compt2+=1
+        compt2 += 1
 
     if compt > 14 and compt2 > 14:
-        return sequence[compt:n-compt2]
+        return sequence[compt:n - compt2]
     elif compt > 14:
         return sequence[compt:]
     elif compt2 > 14:
-        return sequence[:n-compt2]
+        return sequence[:n - compt2]
     return sequence
 
 
@@ -108,9 +108,9 @@ elif len(Arg) == 5:  # i.e. argument -clean
             L = seq.split('\t')
             seqq = cleaning(L[1])
             if isPoly(seq):
-                f.write(L[0]+"\t"+seqq+"\t-1\n")
+                f.write(L[0] + "\t" + seqq + "\t-1\n")
             else:
-                f.write(L[0]+"\t"+seqq+"\t"+L[2])
+                f.write(L[0] + "\t" + seqq + "\t" + L[2])
 else:
     seqs = []
     ref = set()
