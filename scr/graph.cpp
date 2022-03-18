@@ -232,7 +232,6 @@ void Graph::BFS_func(int threshold ,vector<Neighbor*> &aVoir,vector<int> &vu){
     while (aVoir.size() != 0){ //Cas de terminaison, on a terminé le BFS
         node = aVoir.front();
         aVoir.erase(aVoir.begin());
-        cout << "Sommet " << node->val << " vu, de poids " << node->weight << " et de voisins ";
         if (vu[node->val]){ //Cas où le sommet a été vu par le BFS
             continue;
         }
