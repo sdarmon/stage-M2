@@ -380,10 +380,14 @@ void read_edge_file( ifstream &edge_file, vector<Edge>& edges ) {
     int u,v;
     char* p;
     int compt;
+
+    cout << "ici?6" << endl;
     while (getline(edge_file, line)) {
         istringstream ss(line);
         string substr;
         compt=0;
+
+        cout << "ici?7" << endl;
         while (getline(ss, substr, '\t')) {
             if (compt == 0) {
                 u = stoi(substr);
