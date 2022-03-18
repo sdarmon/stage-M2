@@ -32,6 +32,7 @@
 #include <stdio.h>
 #include <cstring>
 #include <algorithm>
+#include <sstream>
 
 // ===========================================================================
 //                             Include Project Files
