@@ -389,17 +389,6 @@ void read_edge_file( ifstream &edge_file, vector<Edge>& edges ) {
         cout << line << endl;
         getline(ss, substr, '\t');
         cout<<substr<<"\t" ;
-        while (getline(ss, substr, '\t')) {
-            if (compt == 0) {
-                u = stoi(substr);
-            }
-            else if (compt == 1){
-                v = stoi(substr);
-            } else {
-                strcpy( p, substr.c_str() );
-            }
-            compt++;
-        }
         Edge e(u,v,0,p);
         edges.push_back(e);
     }
