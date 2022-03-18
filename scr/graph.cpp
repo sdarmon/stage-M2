@@ -325,7 +325,7 @@ void read_node_file( ifstream &node_file, vector<Node>& seqs)
     int u,v;
     string p;
     int compt;
-    while (getline(edge_file, line)) {
+    while (getline(node_file, line)) {
         istringstream ss(line);
         string substr;
         compt=0;
@@ -344,14 +344,14 @@ void read_node_file( ifstream &node_file, vector<Node>& seqs)
 }
 
 //Lit un fichier contenant les sommets du graphe et les ajoute au vecteur seqs
-void read_node_file_weighted( ifstream &,vector<Node>& seqs)
+void read_node_file_weighted( ifstream &node_file,vector<Node>& seqs)
 {
     seqs.clear();
     string line;
     int u,v;
     string p;
     int compt;
-    while (getline(edge_file, line)) {
+    while (getline(node_file, line)) {
         istringstream ss(line);
         string substr;
         compt=0;
