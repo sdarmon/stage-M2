@@ -395,6 +395,7 @@ void read_edge_file( ifstream &edge_file, vector<Edge>& edges ) {
             } else if (compt == 2){
                 strcpy( p, substr.c_str() );
             }
+            cout << substr << endl;
             compt++;
         }
         Edge e(u,v,0,p);
