@@ -179,7 +179,7 @@ process topA {
 
     script:
     """
-    python3 ${workDir}/plot.py ${workDir}/../../data/${name}/outputGraph${spe.name}Clean.txt ${topV}
+    python3 ${workDir}/plot.py ${workDir}/../../data/${name}/outputGraph${name}Clean.txt ${topV}
     """
 }
 

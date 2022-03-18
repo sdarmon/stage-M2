@@ -100,7 +100,7 @@ elif Arg[2] == "top1":
         for line in f:
             L = line.split('\t')
             if len(line) < 2 or int(L[2][:-1]) < 0:
-                break
+                continue
             y.append(int(L[2][:-1]))
             m = max(m, y[-1])
     x = np.arange(1, m + 1, 1)
@@ -124,7 +124,7 @@ elif Arg[2] == "top10":
         for line in f:
             L = line.split('\t')
             if len(line) < 2 or int(L[2][:-1]) < 0:
-                break
+                continue
             y.append(int(L[2][:-1]))
             m = max(m, y[-1])
     x = np.arange(1, m + 1, 1)
@@ -147,7 +147,7 @@ elif Arg[2] == "top20":
         for line in f:
             L = line.split('\t')
             if len(line) < 2 or int(L[2][:-1]) < 0:
-                break
+                continue
             y.append(int(L[2][:-1]))
             m = max(m, y[-1])
     x = np.arange(1, m + 1, 1)
@@ -172,8 +172,8 @@ elif Arg[2] == "reverse":
     with open(Arg[3]) as f:
         for line in f:
             L = line.split('\t')
-            if len(line) < 2:
-                break
+            if len(line) < 2 or int(L[2][:-1]) < 0:
+                continue
             ref.append(int(L[2][:-1]))
     with open(Arg[1]) as f:
         for line in f:
