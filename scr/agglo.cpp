@@ -132,16 +132,12 @@ int main(int argc, char** argv){
     char* nodesPath = argv[1];
     char* edgesPath = argv[2];
     int dis = atoi(argv[6]);
-    cout << "ici?" << endl;
+
     ifstream edges(edgesPath, std::ios::binary);
-    cout << "ici?2" << endl;
     ifstream nodes(nodesPath, std::ios::binary);
-    cout << "ici3?" << endl;
 
     read_edge_file(edges,E);
-    cout << "ici4?" << endl;
-    read_node_file(nodes,V);
-    cout << "ic5i?" << endl;
+    read_node_file_weighted(nodes,V);
 
     Graph G(V,E);
 
