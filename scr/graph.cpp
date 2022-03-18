@@ -380,8 +380,6 @@ void read_edge_file( ifstream &edge_file, vector<Edge>& edges ) {
     int u,v;
     char p[2];
     int compt;
-
-    cout << "ici?6" << endl;
     while (getline(edge_file, line)) {
         istringstream ss(line);
         string substr;
@@ -395,7 +393,6 @@ void read_edge_file( ifstream &edge_file, vector<Edge>& edges ) {
             } else if (compt == 2){
                 strcpy( p, substr.c_str() );
             }
-            cout << substr << endl;
             compt++;
         }
         Edge e(u,v,0,p);
