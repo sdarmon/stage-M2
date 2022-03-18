@@ -390,21 +390,25 @@ void read_node_file_weighted( FILE* node_file, vector<Node>& seqs)
           fprintf(stdout, "ERROR: node %s with sequence larger than %d!", p, 100 * MAX);
           exit(0);
         }
+
+        cout << "On essaie ce que l'on peut...If" << endl;
           
         // Node label
         p = strtok( buffer, "\t\n" );
         strcpy( v, p );
+        cout << "On essaie ce que l'on peut...LAb" << endl;
               
         // Node seq
-        p = strtok( buffer, "\t\n"  );
+        p = strtok( NULL, "\t\n"  );
         seq = new char[strlen(p) + 1];
         strcpy( seq, p );
 
+        cout << "On essaie ce que l'on peut...Seq" << endl;
         // Node weight
         p = strtok( NULL , "\t\n" );
         strcpy( u, p );
 
-
+        cout << "On essaie ce que l'on peut..." << endl;
         Node node(atoi(v),atoi(u),string(seq));
         seqs.push_back(node);
     }
