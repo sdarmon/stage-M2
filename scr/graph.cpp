@@ -331,7 +331,7 @@ void read_node_file( ifstream &node_file, vector<Node>& seqs)
         compt=0;
         while (getline(ss, substr, '\t')) {
             if (compt == 0) {
-                u = atoi(substr);
+                u = stoi(substr);
             }
             else {
                 strcpy( p, substr );
@@ -357,12 +357,12 @@ void read_node_file_weighted( ifstream &,vector<Node>& seqs)
         compt=0;
         while (getline(ss, substr, '\t')) {
             if (compt == 0) {
-                u = atoi(substr);
+                u = stoi(substr);
             }
             else if (compt == 1){
                 strcpy( p, substr );
             } else {
-                v = atoi(substr);
+                v = stoi(substr);
             }
             compt++;
         }
@@ -385,10 +385,10 @@ void read_edge_file( ifstream &edge_file, vector<Edge>& edges ) {
         compt=0;
         while (getline(ss, substr, '\t')) {
             if (compt == 0) {
-                u = atoi(substr);
+                u = stoi(substr);
             }
             else if (compt == 1){
-                v = atoi(substr);
+                v = stoi(substr);
             } else {
                 strcpy( p, substr.c_str() );
             }
