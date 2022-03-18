@@ -23,7 +23,7 @@ elif Arg[2] == "dot":
 	m = 0
 	with open(Arg[1]) as f:
 		for line in f:
-			if (len(line)<2):
+			if (len(line)<2 or int(L[2][:-1]) < 0):
 				break
 			L = line.split('\t')
 			y.append(int(L[2][:-1]))

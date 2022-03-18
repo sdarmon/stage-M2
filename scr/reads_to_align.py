@@ -108,7 +108,7 @@ elif len(Arg) == 5:  # i.e. argument -clean
             L = seq.split('\t')
             seqq = cleaning(L[1])
             if isPoly(seq):
-                f.write(L[0]+"\t"+seqq+"\t0\n")
+                f.write(L[0]+"\t"+seqq+"\t-1\n")
             else:
                 f.write(L[0]+"\t"+seqq+"\t"+L[2]+"\n")
 else:
