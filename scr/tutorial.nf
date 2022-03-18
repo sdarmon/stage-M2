@@ -30,15 +30,15 @@ chien["TE"] = "${workDir}/../../data/chien/Cfam_GSD_TE.gtf"
 topVal = Channel.from("top10","top10")
 topAgglo = Channel.from("top1","top1")
 
-donnees = Channel.from(moust) //moust
+donnees = Channel.from(moust,chien) //moust
 // = Channel.from() //moust
 //intersecter = Channel.from()  //moust
 //agglo = Channel.from() //moust
-agglomerate = Channel.from()
+
 
 process creaCarte {
     input:
-    val spe from agglomerate
+    val spe from donnees
 
     output:
     val spe into STARDir
@@ -75,7 +75,7 @@ process calculpoids {
     nodes = spe.nodes
     edges = spe.edges
     """
-    g++ ${workDir}/graph.cpp ${workDir}/main.cpp -o ${workDir}/graph.exe
+    g++ -g -O2 ${workDir}/graph.cpp ${workDir}/main.cpp -o ${workDir}/graph.exe
     ${workDir}/graph.exe  ${nodes} ${edges} 10 -o ${workDir}/../../data/${name}/outputGraph${spe.name}.txt
     python3 ${workDir}/reads_to_align.py ${workDir}/../../data/${name}/outputGraph${spe.name}.txt ${workDir}/../../data/${name}/outputGraph${spe.name}Clean.txt 0 -clean
     """
@@ -157,14 +157,14 @@ process intersect {
     echo "\n" >> ${workDir}/../../results/${name}/rapportIntersect.txt
     grep "Uniquely mapped reads number" ${workDir}/../../results/${name}/STAR_alignment/Log.final.out >> ${workDir}/../../results/${name}/rapportIntersect.txt
     echo "\n" >> ${workDir}/../../results/${name}/rapportIntersect.txt
+    grep "Number of reads unmapped: too many mismatches" ${workDir}/../../results/${name}/STAR_alignment/Log.final.out >> ${workDir}/../../results/${name}/rapportIntersect.txt
+    echo "\n" >> ${workDir}/../../results/${name}/rapportIntersect.txt
+    grep "Number of reads unmapped: too short" ${workDir}/../../results/${name}/STAR_alignment/Log.final.out >> ${workDir}/../../results/${name}/rapportIntersect.txt
+    echo "\n" >> ${workDir}/../../results/${name}/rapportIntersect.txt
+    grep "Number of reads unmapped: other" ${workDir}/../../results/${name}/STAR_alignment/Log.final.out >> ${workDir}/../../results/${name}/rapportIntersect.txt
     """
 }
 
-//    grep "Number of reads unmapped" ${workDir}/../../results/${name}/STAR_alignment/Log.final.out >> ${workDir}/../../results/${name}/rapportIntersect.txt
-//    echo "\n" >> ${workDir}/../../results/${name}/rapportIntersect.txt
-//    grep "Number of reads unmapped: too short" ${workDir}/../../results/${name}/STAR_alignment/Log.final.out >> ${workDir}/../../results/${name}/rapportIntersect.txt
-//    echo "\n" >> ${workDir}/../../results/${name}/rapportIntersect.txt
-//    grep "Number of reads unmapped: other" ${workDir}/../../results/${name}/STAR_alignment/Log.final.out >> ${workDir}/../../results/${name}/rapportIntersect.txt
 process topA {
     input:
     val spe from agglo
@@ -189,6 +189,8 @@ process agglomeration {
     val value from topA
     val spe from agglo2
 
+    output:
+    val spe into agglomerate
     exec:
     name = spe.name
     edges = spe.edges
@@ -196,7 +198,7 @@ process agglomeration {
     script:
     """
     mkdir -p ${workDir}/../../results/${name}/processing
-    g++ ${workDir}/graph.cpp ${workDir}/agglo.cpp -o ${workDir}/agglo.exe
+    g++ -g -O2 ${workDir}/graph.cpp ${workDir}/agglo.cpp -o ${workDir}/agglo.exe
     ${workDir}/agglo.exe ${workDir}/../../data/${name}/outputGraph${name}Clean.txt \
     ${edges} \
     -c ${value.replaceAll(/\n/, "")} \
@@ -209,7 +211,7 @@ process agglomeration {
 process intersectComp {
 
     input:
-    val spe from donnees
+    val spe from agglomerate
 
     exec:
     name = spe.name
@@ -218,7 +220,7 @@ process intersectComp {
 
     script:
     """
-        for i in {0..100..1}
+        for i in {0..99..1}
         do
             python3 \
             ${workDir}/reads_to_align.py ${workDir}/../../results/${name}/processing/comp\$i.txt \

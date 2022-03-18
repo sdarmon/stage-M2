@@ -39,7 +39,7 @@ Puis File > Import > Import Network from file
 ### Histogramme de l'agglomération
 
 ```
-python3 ${workDir}/rapportAgglo.py ${workDir}/../../data/AaegL5_TE_repeats.gff ${workDir}/../../results/moustique/processing/intersectionTE 100
+python3 ${workDir}/rapportAgglo.py ${workDir}/../../data/moustique/AaegL5_TE_repeats.gff ${workDir}/../../results/moustique/processing/intersectionTE 100
 ```
 
 

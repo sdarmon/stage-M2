@@ -17,11 +17,11 @@ if len(Arg) == 5:
     dicTE = {}
     with open(Arg[1], 'r') as f:
         for line in f:
-            if Arg[4] == "-target":
-                target = line.split("\t")[8].split(" ")[0]
-            else:
-                target = line.split("\t")[8][:-1]
             if len(line) > 2 and line[0] != '#':
+                if Arg[4] == "-target":
+                    target = line.split("\t")[8].split(" ")[0]
+                else:
+                    target = line.split("\t")[8][:-1]
                 dicTE[target] = []
 
     for i in range(int(Arg[3])):
