@@ -23,7 +23,7 @@ def cleaning(sequence):
     while (compt < n and (sequence[compt] == last or misstake)):
         if sequence[compt] != last :
             misstake = 0
-            if compt+1 < n or sequence[compt+1] != last:
+            if compt+1 < n and sequence[compt+1] != last:
                 break
         compt+=1
 
@@ -33,7 +33,7 @@ def cleaning(sequence):
     while (compt2 < n and (sequence[n-compt2-1] == last or misstake)):
         if sequence[n-compt2-1] != last :
             misstake = 0
-            if n-compt2-2 < 0 or sequence[n-compt2-2] != last:
+            if n-compt2-2 < 0 and sequence[n-compt2-2] != last:
                 break
         compt2+=1
 
