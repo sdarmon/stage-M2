@@ -110,7 +110,7 @@ elif len(Arg) == 5:  # i.e. argument -clean
             if isPoly(seq):
                 f.write(L[0]+"\t"+seqq+"\t-1\n")
             else:
-                f.write(L[0]+"\t"+seqq+"\t"+L[2]+"\n")
+                f.write(L[0]+"\t"+seqq+"\t"+L[2])
 else:
     seqs = []
     ref = set()
