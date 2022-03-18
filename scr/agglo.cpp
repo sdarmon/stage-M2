@@ -227,12 +227,12 @@ int main(int argc, char** argv){
     cout << "Graphe aggloméré construit" << endl;
 
     ofstream outputNodes;
-    outputNodes.open((string) argv[7]+"/agglo.nodes");
+    outputNodes.open(string(argv[7])+"/agglo.nodes");
     printGraphVertices(H,outputNodes);
     outputNodes.close();
 
     ofstream outputEdges;
-    outputEdges.open( (string) argv[7]+"/agglo.edges");
+    outputEdges.open( string(argv[7])+"/agglo.edges");
     printEdges(E2,outputEdges);
     outputEdges.close();
 }

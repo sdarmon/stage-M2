@@ -190,7 +190,8 @@ process agglomeration {
     ${edges} \
     -c ${value.replaceAll(/\n/, "")} \
     -d 100\
-    "${workDir}/../../results/${name}"
+    "${workDir}/../../results/${name}" \
+    > ${workDir}/../../results/${name}/rapportAgglo.txt
     """
 }
 
