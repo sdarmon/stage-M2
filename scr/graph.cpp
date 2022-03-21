@@ -377,7 +377,7 @@ void read_edge_file( ifstream &edge_file, vector<Edge>& edges ) {
     edges.clear();
     string line;
     int u,v;
-    char p[2];
+    char p[3];
     int compt;
     while (getline(edge_file, line)) {
         istringstream ss(line);
@@ -390,7 +390,7 @@ void read_edge_file( ifstream &edge_file, vector<Edge>& edges ) {
             else if (compt == 1){
                 v = stoi(substr);
             } else if (compt == 2){
-                p=substr;
+                strcpy( p, substr.c_str() );
             }
             compt++;
         }
