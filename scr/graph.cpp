@@ -335,8 +335,6 @@ void read_node_file( ifstream &node_file, vector<Node>& seqs)
             }
             else if (compt == 1){
                 p=substr;
-            } else {
-                break;
             }
             compt++;
         }
@@ -365,8 +363,6 @@ void read_node_file_weighted( ifstream &node_file,vector<Node>& seqs)
                 p=substr;
             } else if (compt == 2){
                 v = stoi(substr);
-            } else {
-                break;
             }
             compt++;
         }
