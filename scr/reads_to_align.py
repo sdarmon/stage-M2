@@ -86,9 +86,6 @@ if len(Arg) == 4:
     with open(Arg[2], 'w') as f:
         compt = 0
         for seq in seqs:
-            seq = cleaning(seq)
-            if isPoly(seq):
-                continue
             f.write(">SEQ_" + str(compt) + "\n")
             compt += 1
             f.write(seq + "\n")
