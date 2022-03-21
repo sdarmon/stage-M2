@@ -63,7 +63,7 @@ def isPoly(sequence):
             compteur = 1
             last = sequence[i]
     m = max(m, compteur)
-    if m > 14:
+    if m > 14 or n == 0:
         return True
     return False
 
@@ -86,6 +86,8 @@ if len(Arg) == 4:
     with open(Arg[2], 'w') as f:
         compt = 0
         for seq in seqs:
+            if len(seq) == 0 :
+                continue
             f.write(">SEQ_" + str(compt) + "\n")
             compt += 1
             f.write(seq + "\n")
