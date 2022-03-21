@@ -335,6 +335,8 @@ void read_node_file( ifstream &node_file, vector<Node>& seqs)
             }
             else if (compt == 1){
                 p=substr;
+            } else {
+                break;
             }
             compt++;
         }
@@ -363,6 +365,8 @@ void read_node_file_weighted( ifstream &node_file,vector<Node>& seqs)
                 p=substr;
             } else if (compt == 2){
                 v = stoi(substr);
+            } else {
+                break;
             }
             compt++;
         }
@@ -391,6 +395,8 @@ void read_edge_file( ifstream &edge_file, vector<Edge>& edges ) {
                 v = stoi(substr);
             } else if (compt == 2){
                 strcpy( p, substr.c_str() );
+            }  else {
+                break;
             }
             compt++;
         }
