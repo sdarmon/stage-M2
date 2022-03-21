@@ -390,7 +390,7 @@ void read_edge_file( ifstream &edge_file, vector<Edge>& edges ) {
             else if (compt == 1){
                 v = stoi(substr);
             } else if (compt == 2){
-                strcpy( p, substr.c_str() );
+                p=substr;
             }
             compt++;
         }
