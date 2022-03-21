@@ -94,7 +94,6 @@ process top {
 
     exec:
     name = spe.name
-
     script:
     """
     python3 ${workDir}/plot.py ${workDir}/../../data/${name}/outputGraph${spe.name}Clean.txt ${topV}
