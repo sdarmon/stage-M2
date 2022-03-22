@@ -57,7 +57,10 @@ sshfs sdarmon@pedago-ngs:/localdata/pandata/students/Projet_KS/DmGoth peda/
 ```
 scp -p ../../Bureau/genome_assemblies_genome_fasta.tar sdarmon@pedago-ngs:/localdata/pandata/students/Projet_KS/DmGoth/data/chien
 ```
-
+### Pour modifier une colonne d'un fichier avec awk
+```
+awk '{split($6,a,"."); $6=a[1]; print $0}' /localdata/pandata/students/Projet_KS/DmGoth/stage-M2/scr/../../data/chien/Cfam_GSD_TE.gtf.gz
+```
 
 ## proto
 
