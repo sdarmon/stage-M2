@@ -151,15 +151,10 @@ process intersect {
     wc -l ${workDir}/../../results/${name}/intersectionKissNoDouble.txt >> ${workDir}/../../results/${name}/rapportIntersect.txt
     echo "\nIntersections uniques dans les TE : " >> ${workDir}/../../results/${name}/rapportIntersect.txt
     wc -l ${workDir}/../../results/${name}/intersectionTENoDouble.txt >> ${workDir}/../../results/${name}/rapportIntersect.txt
-    echo "\n" >> ${workDir}/../../results/${name}/rapportIntersect.txt
     grep -F "Number of input reads" ${workDir}/../../results/${name}/STAR_alignment/Log.final.out >> ${workDir}/../../results/${name}/rapportIntersect.txt
-    echo "\n" >> ${workDir}/../../results/${name}/rapportIntersect.txt
     grep -F "Uniquely mapped reads number" ${workDir}/../../results/${name}/STAR_alignment/Log.final.out >> ${workDir}/../../results/${name}/rapportIntersect.txt
-    echo "\n" >> ${workDir}/../../results/${name}/rapportIntersect.txt
     grep -F "Number of reads unmapped: too many mismatches" ${workDir}/../../results/${name}/STAR_alignment/Log.final.out >> ${workDir}/../../results/${name}/rapportIntersect.txt
-    echo "\n" >> ${workDir}/../../results/${name}/rapportIntersect.txt
     grep -F "Number of reads unmapped: too short" ${workDir}/../../results/${name}/STAR_alignment/Log.final.out >> ${workDir}/../../results/${name}/rapportIntersect.txt
-    echo "\n" >> ${workDir}/../../results/${name}/rapportIntersect.txt
     grep -F "Number of reads unmapped: other" ${workDir}/../../results/${name}/STAR_alignment/Log.final.out >> ${workDir}/../../results/${name}/rapportIntersect.txt
     """
 }
