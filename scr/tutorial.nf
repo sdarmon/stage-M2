@@ -195,7 +195,7 @@ process agglomeration {
     g++ -g ${workDir}/graph.cpp ${workDir}/agglo.cpp -o ${workDir}/agglo.exe
     ${workDir}/agglo.exe ${workDir}/../../data/${name}/outputGraph${name}Clean.txt \
     ${edges} \
-    -c ${value} \
+    -c ${value.replaceAll(/\n/, "")} \
     -d 10 \
     "${workDir}/../../results/${name}" \
     > ${workDir}/../../results/${name}/rapportAgglo.txt
