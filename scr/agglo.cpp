@@ -82,7 +82,7 @@ void chemin_local(int i, vector<int> &endings, Graph &G, vector<vector<int>> &co
                     continue;
                 }
                 voisin1.push_back(&(*it));
-                pronf.push_back(G.Vertices[it->val].label.size()-40);
+                pronf.push_back(pro+G.Vertices[it->val].label.size()-40);
             }
         }
         step ++; //On passe à la couche suivante
