@@ -236,6 +236,7 @@ void Graph::BFS_func(int threshold ,vector<Neighbor*> &aVoir,vector<int> &vu){
         if (vu[node->val]){ //Cas où le sommet a été vu par le BFS
             continue;
         }
+
         vu[node->val]=1;
 
         for (vector<Neighbor>::iterator it = Neighbors(node->val)->begin(); it != Neighbors(node->val)->end(); ++it){
