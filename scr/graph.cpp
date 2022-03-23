@@ -215,7 +215,7 @@ void Graph::BFS(int r, vector<Edge>& e ,vector<Neighbor*> &aVoir,vector<int> &vu
                 Edge edge(node->val,it->val,0,it->label);
                 e.push_back(edge);
             } else {
-                char R[2];
+                char R[3];
                 comp(it->label,R);
                 Edge edge(it->val,node->val,0,R);
                 e.push_back(edge);
