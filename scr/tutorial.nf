@@ -187,7 +187,6 @@ process agglomeration {
     exec:
     name = spe.name
     edges = spe.edges
-    name2 = spe.name
     script:
     """
     mkdir -p ${workDir}/../../results/${name}/processing
