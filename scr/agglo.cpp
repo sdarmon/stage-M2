@@ -213,7 +213,7 @@ int main(int argc, char** argv){
 
         for (int j = 0; j< components.size(); j++){
             if (endings[j] >= 0){             
-                char arete[2] = {'N','N'};
+                char arete[3] = {'N','N'};
                 E2.push_back(Edge(i,j,endings[j],arete));
             }
         }
