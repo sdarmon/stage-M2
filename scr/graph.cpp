@@ -242,7 +242,7 @@ void Graph::BFS_func(int threshold ,vector<Neighbor*> &aVoir,vector<int> &vu){
             //On boucle sur ses voisins
             if (Vertices[it->val].weight >= threshold and vu[it->val]==0){
                 //Cas où l'arrêt est bien valide et sommet non vu avant, ce voisin est rajouté dans la file des visites
-                aVoir.push_back(it);
+                aVoir.push_back(&(*it));
             }
         }
     }
