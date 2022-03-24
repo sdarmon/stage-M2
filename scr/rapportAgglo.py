@@ -25,8 +25,7 @@ if len(Arg) == 5:
 
                 if '(' in target and ')n' in target:
                     continue
-                else:
-                    dicTE[target] = []
+                dicTE[target] = []
 
     for i in range(int(Arg[3])):
         with open(Arg[2] + str(i) + ".txt", 'r') as f:
