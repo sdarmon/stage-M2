@@ -215,14 +215,14 @@ process intersectComp {
         for i in {0..99..1}
         do
             python3 \
-            ${workDir}/reads_to_align.py ${workDir}/../../results/${name}/processing/comp\$i.txt \
-            ${workDir}/../../results/${name}/processing/comp\$i.fq \
+            ${workDir}/reads_to_align.py ${workDir}/../../results/${name}/processing/comp$i.txt \
+            ${workDir}/../../results/${name}/processing/comp$i.fq \
             0
             mkdir -p ${workDir}/../../results/${name}/processing/STAR_alignment
             STAR --genomeDir ${workDir}/../../results/${name}/genome \
             --runMode alignReads \
             --runThreadN 8 \
-            --readFilesIn ${workDir}/../../results/${name}/processing/comp\$i.fq  \
+            --readFilesIn ${workDir}/../../results/${name}/processing/comp$i.fq  \
             --outFileNamePrefix ${workDir}/../../results/${name}/processing/STAR_alignment/ \
             --outSAMtype BAM SortedByCoordinate \
             --outSAMunmapped Within \
@@ -231,7 +231,7 @@ process intersectComp {
             --outReadsUnmapped Fastx
             bedtools intersect -wa -a ${TE} \
             -b ${workDir}/../../results/${name}/processing/STAR_alignment/Aligned.sortedByCoord.out.bam \
-            > ${workDir}/../../results/${name}/processing/intersectionTE\$i.txt
+            > ${workDir}/../../results/${name}/processing/intersectionTE$i.txt
         done
     """
 }
