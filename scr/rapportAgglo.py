@@ -24,7 +24,7 @@ if len(Arg) == 5:
                     target = line.split("\t")[8].split(";")[0]
 
                 if '(' in target and ')n' in target:
-                    dicTE["sat"] = []
+                    continue
                 else:
                     dicTE[target] = []
 
