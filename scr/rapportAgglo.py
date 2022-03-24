@@ -39,6 +39,7 @@ if len(Arg) == 5:
                     if '(' in target and ')n' in target:
                         target="sat"
                         continue
+
                     if dicTE[target] == [] or dicTE[target][-1] != i:
                         dicTE[target].append(i)
     X = [i for i in range(int(Arg[3]))]
