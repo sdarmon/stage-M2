@@ -37,6 +37,7 @@ if len(Arg) == 5:
                     else:
                         target = line.split("\t")[8].split(";")[0]
                     if '(' in target and ')n' in target:
+                        print(target)
                         continue
                     if dicTE[target] == [] or dicTE[target][-1] != i:
                         dicTE[target].append(i)
