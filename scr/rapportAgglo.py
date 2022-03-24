@@ -10,7 +10,7 @@ import sys
 Arg = sys.argv[:]
 
 if len(Arg) not in [5]:
-    print("Use : " + Arg[0] + " TE.gff prefixCompTe nbComponent [-whole/-target]")
+    print("Use : " + Arg[0] + " TE.gff prefixCompTe nbComponent [-chien/-target]")
     exit()
 if len(Arg) == 5:
 
@@ -21,7 +21,7 @@ if len(Arg) == 5:
                 if Arg[4] == "-target":
                     target = line.split("\t")[8].split(" ")[0]
                 else:
-                    target = line.split("\t")[8][:-1].split(";")[0]
+                    target = line.split("\t")[8].split(";")[0]
 
                 if '(' in target and ')n' in target:
                     dicTE["sat"] = []
@@ -35,13 +35,12 @@ if len(Arg) == 5:
                     if Arg[4] == "-target":
                         target = line.split("\t")[8].split(" ")[0]
                     else:
-                        target = line.split("\t")[8][:-1].split(";")[0]
+                        target = line.split("\t")[8].split(";")[0]
                     if '(' in target and ')n' in target:
-                        target="sat"
                         continue
-
                     if dicTE[target] == [] or dicTE[target][-1] != i:
                         dicTE[target].append(i)
+
     X = [i for i in range(int(Arg[3]))]
     Y = [[0 for i in range(int(Arg[3]))]]
     for lst in dicTE.values():
