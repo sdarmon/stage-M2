@@ -54,7 +54,7 @@ if len(Arg) == 5:
             Y[freq][comp] += 1
     Z = [[] for el in Y]
     for target,lst in dicTE.items():
-        Z[freq].append(target)
+        Z[len(lst)].append(target)
     for i in range(1,len(Z)):
         print("Found in "+str(i)+" componants :",Z[i])
     for i in range(1, len(Y)):
