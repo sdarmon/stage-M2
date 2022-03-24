@@ -21,8 +21,12 @@ if len(Arg) == 5:
                 if Arg[4] == "-target":
                     target = line.split("\t")[8].split(" ")[0]
                 else:
-                    target = line.split("\t")[8][:-1]
-                dicTE[target] = []
+                    target = line.split("\t")[8][:-1].split(";")[0]
+
+                if '(' in target and ')n' in target:
+                    dicTE["sat"] = []
+                else:
+                    dicTE[target] = []
 
     for i in range(int(Arg[3])):
         with open(Arg[2] + str(i) + ".txt", 'r') as f:
@@ -31,7 +35,9 @@ if len(Arg) == 5:
                     if Arg[4] == "-target":
                         target = line.split("\t")[8].split(" ")[0]
                     else:
-                        target = line.split("\t")[8][:-1]
+                        target = line.split("\t")[8][:-1].split(";")[0]
+                    if '(' in target and ')n' in target:
+                        target="sat"
                     if dicTE[target] == [] or dicTE[target][-1] != i:
                         dicTE[target].append(i)
     X = [i for i in range(int(Arg[3]))]
