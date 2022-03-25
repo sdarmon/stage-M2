@@ -19,5 +19,5 @@ if len(Arg) == 5:
             index = 0
             for line in f:
                 if index in seq:
-                    print(line)
+                    print(line[:-1])
                 index+=1
