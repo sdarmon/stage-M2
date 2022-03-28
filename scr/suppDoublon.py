@@ -9,36 +9,40 @@ Arg = sys.argv[:]
 
 if len(Arg) not in [3,5]:
     print("Use : "+Arg[0]+ " input.txt output.txt -s pos")
-elif len(Arg) == 5 and Arg[3] == "-s":
+elif len(Arg) == 5 and Arg[3] == "-s": #Cas Kissplice :
     with open(Arg[1],'r') as f:
         with open(Arg[2],'w') as o:
             Vu = []
             for line in f:
-                if line[:2] == "##":
+                if line[0] == "#":
                     continue
-                target = int((line.split("\t")[int(Arg[4])]).split("_")[1])
+                target = int((line.split("\t")[int(Arg[4])]).split("_")[1]) #On récupère le numéro de la séquence
                 if target >= len(Vu):
-                    for i in range(len(Vu),target+10):
+                    for i in range(len(Vu),target+2): #On cherche à savoir quelles séquences on a déjà vu.
                         Vu.append(False)
-                if Vu[target]:
+                if Vu[target]: #Si on a déjà vu cette sequence, on continue
                     continue
-                else:
+                else:#Sinon on garde la ligne
                     o.write(line)
                     Vu[target] = True
-elif len(Arg) == 5 and Arg[3] == "-t":
+elif len(Arg) == 5 and Arg[3] == "-t": #Cas TE:
     with open(Arg[1],'r') as f:
         with open(Arg[2],'w') as o:
             Vu = set()
             for line in f:
-                if line[:2] == "##":
+                if line[0] == "#":
                     continue
-                target = line.split("\t")[int(Arg[4])]
-                if target in Vu:
+                target = line.split("\t")[int(Arg[4])] #On récupère la target
+                if ';' in target: #On fait un découpage plus fin de la target afin de garder uniquement le gène et non le transcrit
+                    target = target.split(';')[0]
+                elif ' ' in target:
+                    target = target.split(' ')[0]
+                if target in Vu: #Si on a déjà vu cette sequence, on continue
                     continue
-                else:
+                else: #Sinon on garde la ligne
                     o.write(line)
                     Vu.add(target[:])
-else:
+else: #Supprime les lignes identiques se suivant
     with open(Arg[1],'r') as f:
         with open(Arg[2],'w') as o:
             oldline = ""
