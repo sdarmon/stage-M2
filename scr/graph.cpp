@@ -321,11 +321,14 @@ void Graph::weighingANode(int source, int rayon) {
         }
         if (firstTime){
             mini=BFSCount(rayons,1,aVoir,vu); // On garde que le minimum des valeurs trouvées
+            firstTime=0;
         } else{
-            mini = min(mini,BFSCount(rayons,1,aVoir,vu)); // On garde que le minimum des valeurs trouvées}
+            mini = min(mini,BFSCount(rayons,1,aVoir,vu)); // On garde que le minimum des valeurs trouvées
+            }
     }
     Vertices[source].weight = mini;
 }
+
 
 //Permet de donner un poids à tous les sommets du graphe.
 void Graph::weighingAllNodes(int rayon) {
