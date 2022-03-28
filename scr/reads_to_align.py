@@ -110,7 +110,7 @@ elif len(Arg) == 5:  # i.e. argument -clean
                 f.write(L[0] + "\t" + seqq + "\t-1\n")
             else:
                 f.write(L[0] + "\t" + seqq + "\t" + L[2])
-else:
+else: #i.e. argument -reverse
     seqs = []
     ref = set()
     t = int(Arg[3])
