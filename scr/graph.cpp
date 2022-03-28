@@ -303,6 +303,7 @@ void Graph::weighingANode(int source, int rayon) {
     //rayons en fonction de toutes les positions possibles dans le graphe de De Bruijn non compacté et de choisir la
     //valeur de poids minimal.
     int mini = 0;
+    int firstTime = 1;
     int taille = Vertices[source].label.size() - 40;
     for(int position = 0; position < taille; position++){ //On boucle sur toutes les positions
         rayons.clear();
@@ -318,7 +319,10 @@ void Graph::weighingANode(int source, int rayon) {
                 rayons.push_back(rayon-taille+position+1);
             }
         }
-        mini = min(mini,BFSCount(rayons,1,aVoir,vu)); // On garde que le minimum des valeurs trouvées
+        if (firstTime){
+            mini=BFSCount(rayons,1,aVoir,vu); // On garde que le minimum des valeurs trouvées
+        } else{
+            mini = min(mini,BFSCount(rayons,1,aVoir,vu)); // On garde que le minimum des valeurs trouvées}
     }
     Vertices[source].weight = mini;
 }
