@@ -28,7 +28,11 @@ if len(Arg) == 5:
                 dicTE[target] = []
 
     for i in range(int(Arg[3])):
-        with open(Arg[2] + str(i) + ".txt", 'r') as f:
+        if int(Arg[3]) == 1 :
+            file = Arg[2]
+        else:
+            file = Arg[2] + str(i) + ".txt"
+        with open(file, 'r') as f:
             for line in f:
                 if len(line) > 2:
                     if Arg[4] == "-target":
