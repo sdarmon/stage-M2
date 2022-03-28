@@ -295,15 +295,26 @@ void Graph::weighingANode(int source, int rayon) {
     vector<Neighbor*> aVoir;
     vector<int> vu;
     vector<int> rayons;
-    rayons.clear();
-    aVoir.clear();
-    vu.clear();
-    vu.push_back(source);
-    for (vector<Neighbor>::iterator it = Neighbors(source)->begin(); it != Neighbors(source)->end(); ++it){
-        aVoir.push_back(&(*it));
-        rayons.push_back(rayon);
+    int mini = 0;
+    int taille = Vertices[source].label.size() - 40;
+    for(int position = 0; position < taille; position++){
+        rayons.clear();
+        aVoir.clear();
+        vu.clear();
+        vu.push_back(source);
+        for (vector<Neighbor>::iterator it = Neighbors(source)->begin(); it != Neighbors(source)->end(); ++it){
+            if (it->label[0] == 'F'){
+                aVoir.push_back(&(*it));
+                rayons.push_back(rayon-position);
+            } else {
+                aVoir.push_back(&(*it));
+                rayons.push_back(rayon-taille+position+1);
+            }
+        }
+        mini = min(mini,BFSCount(rayons,1,aVoir,vu));
     }
-    Vertices[source].weight = BFSCount(rayons,1,aVoir,vu);
+    Vertices[source].weight = mini;
+
 }
 
 //Permet de donner un poids à tous les sommets du graphe.
