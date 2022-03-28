@@ -28,10 +28,10 @@ if len(Arg) == 5:
                 dicTE[target] = []
 
     for i in range(int(Arg[3])):
-        if int(Arg[3]) == 1 :
+        if int(Arg[3]) == 1 : #Cas où l'on ne veut analyser qu'un seul fichier
             file = Arg[2]
         else:
-            file = Arg[2] + str(i) + ".txt"
+            file = Arg[2] + str(i) + ".txt" #Cas on veut bien analyser plusieurs fichiers
         with open(file, 'r') as f:
             for line in f:
                 if len(line) > 2:

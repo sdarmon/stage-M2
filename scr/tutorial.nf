@@ -26,11 +26,19 @@ chien["nodes"] = "${workDir}/../../../kissplice_results/kissplice_Chiens/graph_S
 chien["edges"] = "${workDir}/../../../kissplice_results/kissplice_Chiens/graph_SRR15254976_1_SRR15254976_2_SRR15254978_1_SRR15254978_2_SRR15254980_1_SRR15254980_2_SRR15254982_1_SRR15254982_2_SRR15254985_1_SRR15254985_2_SRR15254986_1_SRR15254986_2_SRR15254989_1_SRR15254989_2_SRR1k41_C0.05.edges"
 chien["TE"] = "${workDir}/../../data/chien/Cfam_GSD_TE.gtf"
 
+chien2 = ["name":"", "genome":"", "gtf":"", "nodes":"", "edges":"", "TE":""]
+chien2["name"] = "chien2"
+chien2["genome"] = "${workDir}/../../data/chien2/canFam4.fa"
+chien2["gtf"] = "${workDir}/../../data/chien2/refGene.gtf"
+chien2["nodes"] = "${workDir}/../../../kissplice_results/kissplice_Chiens/graph_SRR15254976_1_SRR15254976_2_SRR15254978_1_SRR15254978_2_SRR15254980_1_SRR15254980_2_SRR15254982_1_SRR15254982_2_SRR15254985_1_SRR15254985_2_SRR15254986_1_SRR15254986_2_SRR15254989_1_SRR15254989_2_SRR1k41.nodes"
+chien2["edges"] = "${workDir}/../../../kissplice_results/kissplice_Chiens/graph_SRR15254976_1_SRR15254976_2_SRR15254978_1_SRR15254978_2_SRR15254980_1_SRR15254980_2_SRR15254982_1_SRR15254982_2_SRR15254985_1_SRR15254985_2_SRR15254986_1_SRR15254986_2_SRR15254989_1_SRR15254989_2_SRR1k41_C0.05.edges"
+chien2["TE"] = "${workDir}/../../data/chien2/Cfam_GSD_TE_Americain.gtf"
+
 
 topVal = Channel.from("top10","top10")
 topAgglo = Channel.from("top1","top1")
 
-donnees = Channel.from(moust) //moust,chien
+donnees = Channel.from(chien2) //moust,chien
 // = Channel.from() //moust
 //intersecter = Channel.from()  //moust
 //agglo = Channel.from() //moust
@@ -235,52 +243,4 @@ process intersectComp {
         done
     """
 }
-
-
-    """
-        for i in {0..99..1}
-        do
-        STAR --genomeDir ${workDir}/../../results/${name}/genome \
-                      --runMode alignReads \
-                      --runThreadN 8 \
-                      --readFilesIn ${workDir}/../../results/${name}/processing/comp$i.fq  \
-                      --outFileNamePrefix ${workDir}/../../results/${name}/processing/STAR_alignment/ \
-                      --outSAMtype BAM SortedByCoordinate \
-                      --outSAMunmapped Within \
-                      --outSAMattributes Standard \
-                      --outFilterMultimapNmax 10000 \
-                      --outReadsUnmapped Fastx
-            bedtools intersect -wb -a ${workDir}/../../data/chien/SINEC2A1_CF.gtf \
-            -b ${workDir}/../../results/${name}/processing/STAR_alignment/Aligned.sortedByCoord.out.bam \
-            > ${workDir}/../../results/${name}/processing/intersectionSINEC2A1_CF$i.txt
-        python3 ${workDir}/suppDoublon.py ${workDir}/../../results/${name}/processing/intersectionSINEC2A1_CF$i.txt \
-            ${workDir}/../../results/${name}/processing/intersectionSINEC2A1_CFNoDouble$i.txt -s 12
-        done
-        for i in {0..99..1}
-                do
-                echo ${workDir}/../../results/${name}/processing/intersectionSINEC2A1_CFNoDouble$i.txt >> ${workDir}/../../results/${name}/stackSINEC2A1_CF.txt
-                done
-        python3 recupSeq.py ../../results/chien/processing/intersectionSINEC2A1_CFNoDouble ../../results/chien/processing/comp 100 12 > ../../results/chien/seqSINEC2A1_CF.txt
-
-        python3 \
-            ${workDir}/reads_to_align.py ${workDir}/../../results/${name}/seqSINEC2A1_CF.txt \
-            ${workDir}/../../results/${name}/seqSINEC2A1_CF.fq \
-            0
-        mkdir -p ${workDir}/../../results/${name}/processing/STAR_alignment
-        STAR --genomeDir ${workDir}/../../results/${name}/genome \
-            --runMode alignReads \
-            --runThreadN 8 \
-            --readFilesIn ${workDir}/../../results/${name}/seqSINEC2A1_CF.fq  \
-            --outFileNamePrefix ${workDir}/../../results/${name}/processing/STAR_alignment/ \
-            --outSAMtype BAM SortedByCoordinate \
-            --outSAMunmapped Within \
-            --outSAMattributes Standard \
-            --outFilterMultimapNmax 10000 \
-            --outReadsUnmapped Fastx
-        bedtools intersect -wa -a ${TE} \
-            -b ${workDir}/../../results/${name}/processing/STAR_alignment/Aligned.sortedByCoord.out.bam \
-            > ${workDir}/../../results/${name}/intersectionTECompSeqSINEC2A1_CF.txt
-        python3 ${workDir}/suppDoublon.py ${workDir}/../../results/${name}/intersectionTECompSeqSINEC2A1_CF.txt \
-                    ${workDir}/../../results/${name}/intersectionTECompSeqSINEC2A1_CFNoDouble.txt -t 8
-    """
 
