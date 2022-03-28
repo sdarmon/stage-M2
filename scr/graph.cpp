@@ -292,12 +292,19 @@ int Graph::BFSCount(vector<int> &rayons, int acc,vector<Neighbor*> &aVoir,vector
 
 //Permet de donner un poids à un sommet, correspondant aux nombres de sommets présents dans un rayon donné.
 void Graph::weighingANode(int source, int rayon) {
+    //Initialisation des files pour le bfs. Il serait plus judicieux ici d'utiliser un set<int> pour vu!!!!
     vector<Neighbor*> aVoir;
     vector<int> vu;
-    vector<int> rayons;
+    vector<int> rayons; //Ici on a une file de rayons car comme on calcule la distance en termes de nucléotides, cette
+                        // métrique est différente de la distance entre sommets dans le graphe compacté
+
+    //De plus, pour la définition de la boule autour d'un unitig, il faut prendre en compte le fait que ce dernier est
+    //peut-être bien plus grand qu'un k-mer! Le critère choisi pour prendre en compte ce paramètre est de pondérer les
+    //rayons en fonction de toutes les positions possibles dans le graphe de De Bruijn non compacté et de choisir la
+    //valeur de poids minimal.
     int mini = 0;
     int taille = Vertices[source].label.size() - 40;
-    for(int position = 0; position < taille; position++){
+    for(int position = 0; position < taille; position++){ //On boucle sur toutes les positions
         rayons.clear();
         aVoir.clear();
         vu.clear();
@@ -311,10 +318,9 @@ void Graph::weighingANode(int source, int rayon) {
                 rayons.push_back(rayon-taille+position+1);
             }
         }
-        mini = min(mini,BFSCount(rayons,1,aVoir,vu));
+        mini = min(mini,BFSCount(rayons,1,aVoir,vu)); // On garde que le minimum des valeurs trouvées
     }
     Vertices[source].weight = mini;
-
 }
 
 //Permet de donner un poids à tous les sommets du graphe.

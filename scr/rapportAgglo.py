@@ -28,10 +28,10 @@ if len(Arg) == 5:
                 dicTE[target] = []
 
     for i in range(int(Arg[3])):
-        if int(Arg[3]) == 1 : #Cas où l'on ne veut analyser qu'un seul fichier
+        if int(Arg[3]) == 1:  # Cas où l'on ne veut analyser qu'un seul fichier
             file = Arg[2]
         else:
-            file = Arg[2] + str(i) + ".txt" #Cas on veut bien analyser plusieurs fichiers
+            file = Arg[2] + str(i) + ".txt"  # Cas on veut bien analyser plusieurs fichiers
         with open(file, 'r') as f:
             for line in f:
                 if len(line) > 2:
@@ -46,7 +46,7 @@ if len(Arg) == 5:
 
     X = [i for i in range(int(Arg[3]))]
     Y = [[0 for i in range(int(Arg[3]))]]
-    for target,lst in dicTE.items():
+    for target, lst in dicTE.items():
         if not lst:
             continue
         freq = len(lst)
@@ -56,12 +56,12 @@ if len(Arg) == 5:
                     Y.append([0 for j in range(int(Arg[3]))])
             Y[freq][comp] += 1
     Z = [[] for el in Y]
-    for target,lst in dicTE.items():
+    for target, lst in dicTE.items():
         Z[len(lst)].append(target)
-    for i in range(1,len(Z)):
-        print("Found in "+str(i)+" componants :",Z[i])
+    for i in range(1, len(Z)):
+        print("Found in " + str(i) + " componants :", Z[i])
     for i in range(1, len(Y)):
-        plt.bar(X, Y[i], label=str(i), color=cm.hsv(i / len(Y)), bottom=np.sum(Y[0:i],axis=0))
+        plt.bar(X, Y[i], label=str(i), color=cm.hsv(i / len(Y)), bottom=np.sum(Y[0:i], axis=0))
     plt.title("Nombre de TE dans chaque composante")
     plt.ylabel("Nombre de TE distincts")
     plt.xlabel("Numéro de composante")
