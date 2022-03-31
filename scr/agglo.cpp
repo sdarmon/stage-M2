@@ -150,11 +150,8 @@ int main(int argc, char** argv){
     cout << "Graphe chargé et construit" << endl;
 
     int index;
-    //Construction du vector `vu_total`, vector<int> vu_total(0,G.N) doit fonctionner en une ligne!
-    vector<int> vu_total;
-    for (int i=0; i<G.N ; i++){
-        vu_total.push_back(0);
-    }
+    //Construction du vector `vu_total`
+    vector<int> vu_total(G.N,0);
 
     vector<vector<int>> components;
     components.clear();
