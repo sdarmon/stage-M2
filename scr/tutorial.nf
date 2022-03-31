@@ -38,7 +38,7 @@ chien2["TE"] = "${workDir}/../../data/chien2/Cfam_GSD_TE_Americain.gtf"
 topVal = Channel.from("top10","top10")
 topAgglo = Channel.from("top1","top1")
 
-donnees = Channel.from(moust) //moust,chien
+donnees = Channel.from(chien) //moust,chien
 // = Channel.from() //moust
 //intersecter = Channel.from()  //moust
 //agglo = Channel.from() //moust
@@ -243,5 +243,4 @@ process intersectComp {
         done
     """
 }
-
 
