@@ -182,7 +182,7 @@ int main(int argc, char** argv){
         aVoir.clear();
         vu[index] = 1;
         for (vector<Neighbor>::iterator it = G.Neighbors(index)->begin(); it != G.Neighbors(index)->end(); ++it){
-            if (it->weight  >= threshold){
+            if (G.Vertices[it->val].weight  >= threshold){
                 aVoir.push_back(&(*it));
             }
         }
