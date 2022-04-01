@@ -182,7 +182,9 @@ int main(int argc, char** argv){
         aVoir.clear();
         vu[index] = 1;
         for (vector<Neighbor>::iterator it = G.Neighbors(index)->begin(); it != G.Neighbors(index)->end(); ++it){
-            aVoir.push_back(&(*it));
+            if (it->weight  >= threshold){
+                aVoir.push_back(&(*it));
+            }
         }
         G.BFS_func(threshold, aVoir,vu); 
 
