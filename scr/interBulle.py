@@ -37,7 +37,7 @@ if len(Arg) not in [4]:
 if len(Arg) == 4:
     seq = ""
     titre = ""
-    comp = [[] for i in range(Arg[3])]
+    comp = [[] for i in range(int(Arg[3]))]
     kmer = dict()
     unitig = dict()
     k= 41
