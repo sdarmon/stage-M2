@@ -42,7 +42,7 @@ if len(Arg) == 4:
     seq = ""
     titre = ""
     comp = [[] for i in range(int(Arg[3]))]
-    kmer = dict()
+    kmerFrom = dict()
     unitig = dict()
     k = 41
     for i in range(int(Arg[3])):
@@ -51,10 +51,13 @@ if len(Arg) == 4:
                 if len(line) < 2:
                     continue
                 L = line.split("\t")
-                kmer[L[1][:k]] = int(L[0])
-                kmer[reverseC([1])[:k]] = int(L[0])
-                unitig[int(L[0])] = L[1]
-                comp[i].append(int(L[0]))
+                #kmer[L[1][:k]] = int(L[0])
+                #kmer[reverseC([1])[:k]] = int(L[0])
+                kmerFrom[L[1][:k]] = i
+                kmerFrom[reverseC([1])[:k]] = i
+
+                #unitig[int(L[0])] = L[1]
+                #comp[i].append(int(L[0]))
 
     with open(Arg[2], 'r') as f:
         upper = 0
@@ -74,7 +77,7 @@ if len(Arg) == 4:
             comp_possible = [0 for x in range(int(Arg[3]))]
             for pos in range(len(seq) - k + 1):
                 mer = seq[pos: pos + k]
-                ind = kmer.get(mer, -1)
+                ind = kmerFrom.get(mer, -1)
                 if ind != -1:
                     comp_possible[ind]+=1
             if upper:
