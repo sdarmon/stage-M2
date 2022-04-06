@@ -47,9 +47,9 @@ if len(Arg) == 4:
     k = 41
     for i in range(int(Arg[3])):
         with open(Arg[1] + "comp" + str(i) + ".txt", 'r') as f:
-            if len(line) < 2:
-                continue
             for line in f:
+                if len(line) < 2:
+                    continue
                 L = line.split("\t")
                 kmer[L[1][:k]] = int(L[0])
                 kmer[reverseC([1])[:k]] = int(L[0])
