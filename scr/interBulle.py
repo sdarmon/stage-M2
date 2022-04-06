@@ -73,7 +73,7 @@ if len(Arg) == 4:
             seq = maj(seq)
             comp_possible = [0 for x in range(int(Arg[3]))]
             for pos in range(len(seq) - k + 1):
-                mer = seq[pos, pos + k]
+                mer = seq[pos: pos + k]
                 L = kmer.get(mer, [])
                 for comp in L:
                     comp_possible[comp] += 1
