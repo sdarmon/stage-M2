@@ -74,9 +74,9 @@ if len(Arg) == 4:
             comp_possible = [0 for x in range(int(Arg[3]))]
             for pos in range(len(seq) - k + 1):
                 mer = seq[pos: pos + k]
-                L = kmer.get(mer, [])
-                for comp in L:
-                    comp_possible[comp] += 1
+                ind = kmer.get(mer, -1)
+                if ind != -1:
+                    comp_possible[ind]+=1
             if upper:
                 seqUpper = line[:-1]
                 upperComp = set()
