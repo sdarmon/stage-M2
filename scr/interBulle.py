@@ -1,7 +1,6 @@
 #
 
 import sys
-import numpy as np
 
 Arg = sys.argv[:]
 
@@ -32,10 +31,10 @@ def maj(sequ):
             s=s+el
     return(s)
 
-if len(Arg) not in [3]:
-    print("Use : " + Arg[0] + "dirComp bulle.fa nbComp")
+if len(Arg) not in [4]:
+    print("Use : " + Arg[0] + " dirComp bulle.fa nbComp")
     exit()
-if len(Arg) == 3:
+if len(Arg) == 4:
     seq = ""
     titre = ""
     comp = [[] for i in range(Arg[3])]
