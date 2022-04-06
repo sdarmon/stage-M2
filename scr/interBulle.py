@@ -41,7 +41,7 @@ if len(Arg) == 4:
     kmer = dict()
     unitig = dict()
     k= 41
-    for i in range(Arg[3]):
+    for i in range(int(Arg[3])):
         with open(Arg[1] + "comp" + str(i) + ".txt", 'r') as f:
             if len(line) < 2:
                 continue
@@ -67,7 +67,7 @@ if len(Arg) == 4:
                 continue
             seq = line[:-1]
             seq=maj(seq)
-            comp_possible = [0 for x in range(Arg[3])]
+            comp_possible = [0 for x in range(int(Arg[3]))]
             for pos in range(len(seq)-k+1):
                 mer=seq[pos,pos+k]
                 L=kmer.get(mer,[])
