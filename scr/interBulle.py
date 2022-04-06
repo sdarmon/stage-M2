@@ -93,10 +93,10 @@ if len(Arg) == 4:
                     if comp_possible[i] != 0:
                         underComp.add(i)
                 if len(underComp) != 0 or len(upperComp) != 0:
-                    print(titreUpper)
-                    print(seqUpper)
-                    print(titreUnder)
-                    print(seqUnder)
+                    #print(titreUpper)
+                    #print(seqUpper)
+                    #print(titreUnder)
+                    #print(seqUnder)
                     print("Both found in components:", upperComp & underComp, "\t Only in upper:",
                           upperComp - underComp, "\t Only in under:", underComp - upperComp)
 
