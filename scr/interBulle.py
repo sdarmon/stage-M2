@@ -56,7 +56,7 @@ if len(Arg) in [4,5]:
                 compl= reverseC(L[1])
                 for pos in range(len(L[1])-k+1):
                     kmerFrom[L[1][pos:k+pos]] = i
-                    #kmerFrom[compl[pos:k+pos]] = i
+                    kmerFrom[compl[pos:k+pos]] = i
 
     #On parcourt maintenant les bulles
     with open(Arg[2], 'r') as f:

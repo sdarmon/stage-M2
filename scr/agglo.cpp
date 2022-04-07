@@ -125,124 +125,196 @@ void save_comp(Graph &G, vector<int> &compo, string outputPrefix, int rang){
     return;
 }
 
-int main(int argc, char** argv){
-    if (argc!=8){
-        cout << "Expected use of this program: \n\n\t" <<argv[0] << " file.nodes file.edges -c value -d dis outputPrefix\n" << endl;
+int main(int argc, char** argv) {
+    if (argc != 8 and argc != 9) {
+        cout << "Expected use of this program: \n\n\t" << argv[0]
+             << " file.nodes file.edges -c value -d dis outputPrefix [-clean]\n" << endl;
         return 0;
     }
 
     //On charge le graphe
-    vector<Edge> E;
-    vector<Node> V;
+    vector <Edge> E;
+    vector <Node> V;
 
-    char* nodesPath = argv[1];
-    char* edgesPath = argv[2];
+    char *nodesPath = argv[1];
+    char *edgesPath = argv[2];
     int dis = atoi(argv[6]);
 
     ifstream edges(edgesPath, std::ios::binary);
     ifstream nodes(nodesPath, std::ios::binary);
 
-    read_edge_file(edges,E);
-    read_node_file_weighted(nodes,V);
+    read_edge_file(edges, E);
+    read_node_file_weighted(nodes, V);
 
-    Graph G(V,E);
+    Graph G(V, E);
 
     cout << "Graphe chargé et construit" << endl;
 
     int index;
     //Construction du vector `vu_total`
-    vector<int> vu_total(G.N,0);
+    vector<int> vu_total(G.N, 0);
 
-    vector<vector<int>> components;
+    vector <vector<int>> components;
     components.clear();
 
     //Ici le critère choisi pour définir une composante est juste d'être le sous-graphe connexe maximum du graphe G
     //auquel on a enlevé tous les sommets de poids inférieur au seuil `threshold`.
     int threshold;
-    threshold =atoi(argv[4]);
+    threshold = atoi(argv[4]);
     int m = 0;
     int weight;
-    vector<int> vu(G.N,0);
-    vector<Neighbor*> aVoir;
+    vector<int> vu(G.N, 0);
+    vector < Neighbor * > aVoir;
 
-    index = indexMax(G,vu_total);
+    index = indexMax(G, vu_total);
     weight = G.Vertices[index].weight;
-    vu_total[index]= 1;
+    vu_total[index] = 1;
 
     cout << "Début de la recherche des composantes" << endl;
     while (weight >= threshold and m < 100) //On cherche des composantes tant qu'il existe encore un sommet vérifiant
         //le critère et dans la limite des 100 composantes.
     {
         //On réalise alors un BFS depuis le sommet/graine `index`
-        for (int i = 0; i<G.N; i++){
+        for (int i = 0; i < G.N; i++) {
             vu[i] = 0;
         }
         vector<int> compo;
         compo.clear();
         aVoir.clear();
         vu[index] = 1;
-        for (vector<Neighbor>::iterator it = G.Neighbors(index)->begin(); it != G.Neighbors(index)->end(); ++it){
-            if (G.Vertices[it->val].weight  >= threshold){
+        for (vector<Neighbor>::iterator it = G.Neighbors(index)->begin(); it != G.Neighbors(index)->end(); ++it) {
+            if (G.Vertices[it->val].weight >= threshold) {
                 aVoir.push_back(&(*it));
             }
         }
-        G.BFS_func(threshold, aVoir,vu); 
+        G.BFS_func(threshold, aVoir, vu);
 
         //Puis on ajoute les sommets trouvés à la composante
-        for (int i = 0; i<G.N; i++){
-            if (vu[i]){
+        for (int i = 0; i < G.N; i++) {
+            if (vu[i]) {
                 compo.push_back(i);
-                vu_total[i]=1;
+                vu_total[i] = 1;
             }
         }
-        save_comp(G,compo,argv[7],m); //On enregistre la composante sur l'ordinateur
+        save_comp(G, compo, argv[7], m); //On enregistre la composante sur l'ordinateur
         components.push_back(compo); //Et on ajoute la composante au vecteur de composantes
-        cout << "Composante trouvée de départ " << index << " et de poids " << G.Vertices[index].weight << " et de taille " << compo.size() << endl;
+        cout << "Composante trouvée de départ " << index << " et de poids " << G.Vertices[index].weight
+             << " et de taille " << compo.size() << endl;
 
         //Finalement, on recommence la boucle while
         m++;
-        index = indexMax(G,vu_total);
+        index = indexMax(G, vu_total);
         weight = G.Vertices[index].weight;
-        vu_total[index]= 1;
+        vu_total[index] = 1;
 
     }
 
     cout << "Fin de la recherche de composantes." << endl;
 
     //Maintenant on construit nouveau graphe contracté
-    vector<Edge> E2;
-    vector<Node> V2;
+    vector <Edge> E2;
+    vector <Node> V2;
     vector<int> endings;
     E2.clear();
     V2.clear();
 
-    for (int i = 0; i < components.size(); i++){//On boucle sur les nouveaux sommets i.e. les composantes
+    for (int i = 0; i < components.size(); i++) {//On boucle sur les nouveaux sommets i.e. les composantes
         cout << "Calcul des chemins partant de " << i << endl;
         initVec(endings, components.size());
-        chemin_local(i, endings, G, components,dis); //On calcule s'il existe des chemins entre les composantes
+        chemin_local(i, endings, G, components, dis); //On calcule s'il existe des chemins entre les composantes
 
-        V2.push_back(Node(i,components[i].size(),""));//On rajoute le sommet au graphe
+        V2.push_back(Node(i, components[i].size(), ""));//On rajoute le sommet au graphe
 
-        for (int j = 0; j< components.size(); j++){//Puis on rajoute les arêtes au graphe
-            if (endings[j] >= 0){             
-                char arete[3] = {'N','N'};
-                E2.push_back(Edge(i,j,endings[j],arete));
+        for (int j = 0; j < components.size(); j++) {//Puis on rajoute les arêtes au graphe
+            if (endings[j] >= 0) {
+                char arete[3] = {'N', 'N'};
+                E2.push_back(Edge(i, j, endings[j], arete));
             }
         }
     }
 
-    Graph H(V2,E2);
+    Graph H(V2, E2);
 
     cout << "Graphe aggloméré construit" << endl;
 
     //Enfin, on enregistre le graphe créé.
     ofstream outputNodes;
-    outputNodes.open(string(argv[7])+"/agglo.nodes");
-    printGraphVertices(H,outputNodes);
+    outputNodes.open(string(argv[7]) + "/agglo.nodes");
+    printGraphVertices(H, outputNodes);
     outputNodes.close();
 
     ofstream outputEdges;
-    outputEdges.open( string(argv[7])+"/agglo.edges");
-    printEdges(E2,outputEdges);
+    outputEdges.open(string(argv[7]) + "/agglo.edges");
+    printEdges(E2, outputEdges);
     outputEdges.close();
+
+    if (argc == 9 and argv[8] == "-clean") {
+        //Finalement, on crée le graphe de faible complexité
+        vector <Edge> E3;
+        vector <Node> V3;
+        E3.clear();
+        V3.clear();
+        vector<int> seen(G.N, 0);
+        int compt = 0;
+        //seen est le tableau de correspondance entre les anciens sommets et les nouveaux.
+        //Pour les sommets des composantes on les flag avec des indices négatifs
+        for (vector < vector < int >> ::iterator comp = components.begin(); comp != components.end();
+        ++comp){
+            compt--;
+            for (vector<int>::iterator it = comp->begin(); it != comp->end(); ++it) {
+                seen[(*it)] = compt;
+            }
+        }
+        index = 0;
+        //On commence par récupérer les sommets de composantes
+        for (vector < vector < int >> ::iterator comp = components.begin(); comp != components.end();
+        ++comp){
+            V3.push_back(Node(index, 0, "-Comp" + to_string(index) + "-"));
+            index++;
+        }
+        //Puis les sommets restants
+        for (int i = 0; i < G.N; i++) {
+            if (seen[i] == 0) {
+                V3.push_back(Node(index, i, G.Vertices[i].label));
+                seen[i] = index;
+                index++;
+            }
+        }
+        //Maintenant on s'occupe des arêtes en faisant attention au fait que l'on ne maitrise rien dans les composantes.
+        //Ici j'ai fait le choix de sur-évaluer le nombre d'arêtes en rajoutant toutes les interactions possibles.
+        for (vector<Edge>::iterator edge = E.begin(); edge != E.end(); edge++) {
+            if (seen[edge->start] < 0 and seen[edge->end] < 0) { //This case shouldn't happen
+                char l1[3] = {'F', 'F'};
+                char l2[3] = {'R', 'R'};
+                char l3[3] = {'F', 'R'};
+                char l4[3] = {'R', 'F'};
+                E3.push_back(Edge(1 - seen[edge->start], 1 - seen[edge->end], edge->weight, l1));
+                E3.push_back(Edge(1 - seen[edge->start], 1 - seen[edge->end], edge->weight, l2));
+                E3.push_back(Edge(1 - seen[edge->start], 1 - seen[edge->end], edge->weight, l3));
+                E3.push_back(Edge(1 - seen[edge->start], 1 - seen[edge->end], edge->weight, l4));
+            } else if (seen[edge->start] < 0) {
+                char l1[3] = {'F', edge->label[1]};
+                char l2[3] = {'R', edge->label[1]};
+                E3.push_back(Edge(1 - seen[edge->start], seen[edge->end], edge->weight, l1));
+                E3.push_back(Edge(1 - seen[edge->start], seen[edge->end], edge->weight, l2));
+            } else if (seen[edge->end] < 0) {
+                char l1[3] = {edge->label[0], 'F'};
+                char l2[3] = {edge->label[0], 'R'};
+                E3.push_back(Edge(seen[edge->start], 1 - seen[edge->end], edge->weight, l1));
+                E3.push_back(Edge(seen[edge->start], 1 - seen[edge->end], edge->weight, l2));
+            } else {
+                E3.push_back(Edge(seen[edge->start], seen[edge->end], edge->weight, edge->label));
+            }
+        }
+        //Enfin, on enregistre le graphe créé.
+        ofstream outputNodes2;
+        outputNodes2.open(string(argv[7]) + "/clean.nodes");
+        printVerticesBcalm(V3, outputNodes2);
+        outputNodes2.close();
+
+        ofstream outputEdges2;
+        outputEdges2.open(string(argv[7]) + "/clean.edges");
+        printEdgesBcalm(E3, outputEdges2);
+        outputEdges2.close();
+    }
 }

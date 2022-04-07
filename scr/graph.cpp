@@ -459,6 +459,15 @@ void printVertices(vector<Node>& V)
     cout << endl;
 }
 
+//Affiche les sommets d'un graphe à partir d'un vecteur de Nodes sans les poids
+void printVerticesBcalm(vector<Node>& V,ofstream& output)
+{
+    for (vector<Node>::iterator it = V.begin(); it != V.end(); ++it) {
+        output << it->val << "\t" << (string)it->label << "\n";
+    }
+    cout << endl;
+}
+
 //Affiche les arêtes d'un graphe
 void printGraphEdges(Graph& G)
 {
@@ -489,5 +498,13 @@ void printEdges(vector<Edge>& E,ofstream& output)
 {
     for (vector<Edge>::iterator it = E.begin(); it != E.end(); ++it) {
         output << it->start << "\t" << it->end << "\t" << (string)it->label << "\t" << it->weight << "\n";
+    }
+}
+
+//Affiche les arêtes d'un graphe à partir d'un vecteur d'Edges sans le poids
+void printEdgesBcalm(vector<Edge>& E,ofstream& output)
+{
+    for (vector<Edge>::iterator it = E.begin(); it != E.end(); ++it) {
+        output << it->start << "\t" << it->end << "\t" << (string)it->label << "\n";
     }
 }

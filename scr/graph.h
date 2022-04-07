@@ -118,8 +118,10 @@ void read_edge_file( ifstream &edge_file, vector<Edge>& edges );
 void printGraphVertices(Graph& G);
 void printGraphVertices(Graph& G,ofstream& output);
 void printVertices(vector<Node>& V);
+void printVerticesBcalm(vector<Node>& V,ofstream& output);
 void printGraphEdges(Graph& G);
 void printEdges(vector<Edge>& E);
 void printEdges(vector<Edge>& E,ofstream& output);
+void printEdgesBcalm(vector<Edge>& E,ofstream& output);
 
 #endif //def_graph
