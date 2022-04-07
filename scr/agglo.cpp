@@ -258,7 +258,6 @@ int main(int argc, char** argv) {
         int compt = 0;
         //seen est le tableau de correspondance entre les anciens sommets et les nouveaux.
         //Pour les sommets des composantes on les flag avec des indices négatifs
-
         for (vector < vector < int >> ::iterator comp = components.begin(); comp != components.end();
         ++comp){
             compt--;
