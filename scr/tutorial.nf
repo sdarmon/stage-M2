@@ -204,6 +204,7 @@ process agglomeration {
     -c ${value.replaceAll(/\n/, "")} \
     -d 10 \
     "${workDir}/../../results/${name}" \
+    -clean \
     > ${workDir}/../../results/${name}/rapportAgglo.txt
     """
 }
