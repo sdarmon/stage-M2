@@ -319,6 +319,9 @@ int main(int argc, char** argv) {
                     aVoir.clear();
                     vu.clear();
                     int i = 0;
+
+                    vu[(*it)] = 1; //On voit bien le sommet duquel on part
+
                     //On fait un BFS à partir de chaque sommet afin de savoir quels sommets du périmètre sont
                     //atteignables à partir de chaque sommet du périmètre
                     //Cas en partant du foward
@@ -342,7 +345,7 @@ int main(int argc, char** argv) {
                         }
                     }
                     G.BFS_comp(seen, vu, aVoir, sons, aretes);
-                    //On modifie les arêtes ainsi trouvées pour marquer qu'elles proviennent du sens forward
+                    //On modifie les arêtes ainsi trouvées pour marquer qu'elles proviennent du sens reverse
                     while (i < aretes.size()) {
                         aretes[i]->label[0] = 'R';
                         i++;
@@ -405,7 +408,7 @@ int main(int argc, char** argv) {
                                          setVoisin[j].begin(), setVoisin[j].end(), inserter(inter, inter.begin()));
                         if (inter.size() == setVoisin[i].size()) { //Cas i inclus dans j; on rappelle que le
                             //vecteur est trié par cardinal décroissant.
-                            fusion[i] = indexation[j];
+                            fusion[i] = j;
                             seen[indexation[i]] = -seen[indexation[i]]; //On retire le sommet comme étant en péri
                             break;
                         }
@@ -421,7 +424,7 @@ int main(int argc, char** argv) {
                     correspondingVertex[indexation[i]] = index;
                     index++;
                 } else {
-                    correspondingVertex[indexation[i]] = correspondingVertex[fusion[i]];
+                    correspondingVertex[indexation[i]] = correspondingVertex[indexation[fusion[i]]];
                 }
             }
 
