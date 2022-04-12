@@ -252,7 +252,7 @@ int main(int argc, char** argv) {
     outputEdges.close();
 }
     if (argc == 9 and argv[8] == "-clean") {
-        //Finalement, on crée le graphe de faible complexité
+        cout << "Début construction graphe aggloméré" << endl;
         vector <Edge> E3;
         vector <Node> V3;
         E3.clear();
@@ -288,7 +288,7 @@ int main(int argc, char** argv) {
                 }
             }
         }
-
+        cout << "Sommets en périmètre trouvés" << endl;
         //Après, on fait un BFS à partir de chaque sommet dans la composante afin d'obtenir les voisins du périmètre.
         set<int> vu;
         vector<vector<int>> neighborsPeri;
@@ -299,6 +299,7 @@ int main(int argc, char** argv) {
         int val;
         index = 0;
         int modif;
+        int compteurDeBoucle = 0;
         //On boucle sur les composantes
         for (vector < vector < int >> ::iterator comp = components.begin(); comp != components.end();
         ++comp){
@@ -306,6 +307,8 @@ int main(int argc, char** argv) {
             neighborsAretes.clear();
             indexation.clear();
             //On boucles sur les sommets de la composante
+            cout << "Pré-calcul pour la composante "<<compteurDeBoucle << endl;
+            compteurDeBoucle++;
             for (vector<int>::iterator it = comp->begin(); it != comp->end(); ++it) {
                 if (seen[(*it)] < 0) { //Cas sommet en périphérie
                     vector<int> sons;
@@ -350,6 +353,7 @@ int main(int argc, char** argv) {
                     //du sommet
                 }
             } //On termine de traiter tous les sommets de la composante
+            cout << "BFS sur tous les sommets terminés" << endl;
 
             //On trie par cardinal décroissant le vecteur neighborsPeri, un tri bulle suffit car algo suivant en n²
             //aussi
@@ -367,7 +371,7 @@ int main(int argc, char** argv) {
                     break;
                 }
             }
-
+            cout << "Ensemble de voisins trié" << endl;
             //Ici, on ne veut garder que la plus grande antichaine de sommets (en terme d'inclusion des voisinages)
             //Et alors, on veut fusionner les sommets comparables.
             fusion.clear(); //Ce vecteur contiendra -1 si le sommet ne doit pas fusionner dans un autre sommet, et
@@ -394,7 +398,7 @@ int main(int argc, char** argv) {
                 }
             }
             //Ici on est sûr que fusion indique bien les sommets étant dans sous-cas des autres.
-
+            cout << "Antichaine maximal de l'ensemble de voisins faite" << endl;
             //On peut donc passer la construction du graphe. Commençons par les sommets.
             for (int i = 0; i < indexation.size(); i++) {
                 if (fusion[i] < 0) {
@@ -418,7 +422,8 @@ int main(int argc, char** argv) {
                     }
                 }
             }
-        }
+        } //On vient de terminer cette composante !
+
         //Maintenant que les composantes ont bien été ajouté, on s'occupe des sommets restants
         for (int i = 0; i < G.N; i++) {
             if (seen[i] == 0) {
@@ -427,6 +432,7 @@ int main(int argc, char** argv) {
                 index++;
             }
         }
+        cout << "Sommets restants ajoutés" << endl;
 
         //Maintenant on s'occupe des arêtes
         for (int i = 0; i<G.N ; i++) {
@@ -443,6 +449,7 @@ int main(int argc, char** argv) {
                 }
             }
         }
+        cout << "Arêtes restantes ajoutées" << endl;
 
         //Enfin, on enregistre le graphe créé.
         ofstream outputNodes2;
@@ -454,5 +461,6 @@ int main(int argc, char** argv) {
         outputEdges2.open(string(argv[7]) + "/clean.edges");
         printEdgesBcalm(E3, outputEdges2);
         outputEdges2.close();
+        cout << "Graphe enregistré" << endl;
     }
 }
