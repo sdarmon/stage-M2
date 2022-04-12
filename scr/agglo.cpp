@@ -320,7 +320,7 @@ int main(int argc, char** argv) {
                     vu.clear();
                     int i = 0;
 
-                    vu[(*it)] = 1; //On voit bien le sommet duquel on part
+                    vu.insert((*it)); //On voit bien le sommet duquel on part
 
                     //On fait un BFS à partir de chaque sommet afin de savoir quels sommets du périmètre sont
                     //atteignables à partir de chaque sommet du périmètre
