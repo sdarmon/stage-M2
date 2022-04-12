@@ -283,7 +283,8 @@ int main(int argc, char** argv) {
                     }
                 }
                 if (out){
-                    seen[(*it)] = -seen[(*it)];
+                    seen[(*it)] = min(-seen[(*it)],seen[(*it)]); //Pour être sûr de prendre une valeur négative;
+                    // normalement n'est pas censé servir car composantes distantes d'au moins 2 deux à deux
                 }
             }
         }
@@ -297,20 +298,24 @@ int main(int argc, char** argv) {
         int val;
         index = 0;
         int modif;
+        //On boucle sur les composantes
         for (vector < vector < int >> ::iterator comp = components.begin(); comp != components.end();
         ++comp){
             neighborsPeri.clear(); //Vecteur qui contiendra l'ensemble des voisins de chaque sommet en périmètre.
             neighborsAretes.clear();
             indexation.clear();
+            //On boucles sur les sommets de la composante
             for (vector<int>::iterator it = comp->begin(); it != comp->end(); ++it) {
-                if (seen[(*it)] < 0) {
+                if (seen[(*it)] < 0) { //Cas sommet en périphérie
                     vector<int> sons;
                     sons.clear();
-                    vector<Node> aretes;
+                    vector <Node> aretes;
                     aretes.clear();
                     aVoir.clear();
                     vu.clear();
                     int i = 0;
+                    //On fait un BFS à partir de chaque sommet afin de savoir quels sommets du périmètre sont
+                    //atteignables à partir de chaque sommet du périmètre
                     //Cas en partant du foward
                     for (vector<Neighbor>::iterator voisin = G.Neighbors((*it))->begin();
                          voisin != G.Neighbors((*it))->end(); ++voisin) {
@@ -319,6 +324,7 @@ int main(int argc, char** argv) {
                         }
                     }
                     G.BFS_comp(seen, vu, aVoir, sons, aretes);
+                    //On modifie les arêtes ainsi trouvées pour marquer qu'elles proviennent du sens forward
                     while (i < aretes.size()) {
                         aretes[i].label[0] = 'F';
                         i++;
@@ -331,6 +337,7 @@ int main(int argc, char** argv) {
                         }
                     }
                     BFS_comp((*it), G, seen, vu, aVoir, sons, aretes);
+                    //On modifie les arêtes ainsi trouvées pour marquer qu'elles proviennent du sens forward
                     while (i < aretes.size()) {
                         aretes[i].label[0] = 'R';
                         i++;
@@ -340,69 +347,72 @@ int main(int argc, char** argv) {
                     neighborsAretes.push_back(aretes);
                     indexation.push_back((*it)); //On garde en mémoire la correspondance entre l'index et la position
                     //du sommet
+                }
+            } //On termine de traiter tous les sommets de la composante
 
-                    //On trie par cardinal décroissant le vecteur neighborsPeri, un tri bulle suffit car algo suivant en n²
-                    //aussi
-                    for (int i = indexation.size() - 1; i > 0; i++) {
-                        modif = 0;
-                        for (int j = 0; j < i; j++) {
-                            if (neighborsPeri[j + 1].size() > neighborsPeri[j].size()) {
-                                swap(neighborsPeri[j + 1], neighborsPeri[j]);
-                                swap(neighborsAretes[j + 1], neighborsAretes[j]);
-                                swap(indexation[j + 1], indexation[j]);
-                                modif = 1;
-                            }
-                        }
-                        if (!modif) {
+            //On trie par cardinal décroissant le vecteur neighborsPeri, un tri bulle suffit car algo suivant en n²
+            //aussi
+            for (int i = indexation.size() - 1; i > 0; i++) {
+                modif = 0;
+                for (int j = 0; j < i; j++) {
+                    if (neighborsPeri[j + 1].size() > neighborsPeri[j].size()) {
+                        swap(neighborsPeri[j + 1], neighborsPeri[j]);
+                        swap(neighborsAretes[j + 1], neighborsAretes[j]);
+                        swap(indexation[j + 1], indexation[j]);
+                        modif = 1;
+                    }
+                }
+                if (!modif) {
+                    break;
+                }
+            }
+
+            //Ici, on ne veut garder que la plus grande antichaine de sommets (en terme d'inclusion des voisinages)
+            //Et alors, on veut fusionner les sommets comparables.
+            fusion.clear(); //Ce vecteur contiendra -1 si le sommet ne doit pas fusionner dans un autre sommet, et
+            //i s'il correspond à un sous-ensemble du i-ème sommet
+            //Ainsi on parcourt les sommets pour former l'antichaine
+            for (int i = 0; i < indexation.size(); i++) {
+                fusion.push_back(-1);
+                inter.clear();
+                //Maintenant, on regarde si un précédent cas correspond à un sur-ensemble de notre i-ème cas
+                for (int j = 0; j < i; j++) {
+                    if (fusion[j] < 0 and neighborsPeri[i].size() <
+                                          neighborsPeri[j].size()) { //Cas où le sommet n'est pas déjà marqué comme à fusionner avec un autre sommet
+                        //Pour savoir si l'un est inclus dans l'autre, on fait l'intersection des deux puis on
+                        //vérifie si le cardinal de l'intersection correspond à celui de l'un des deux sommets
+                        set_intersection(neighborsPeri[i].begin(), neighborsPeri[j].end(),
+                                         neighborsPeri[i].begin(), neighborsPeri[j].end(), inter.begin());
+                        if (inter.size() == neighborsPeri[i].size()) { //Cas i inclus dans j; on rappelle que le
+                            //vecteur est trié par cardinal décroissant.
+                            fusion[i] = indexation[j];
+                            seen[indexation[i]] = -seen[indexation[i]]; //On retire le sommet comme étant en péri
                             break;
                         }
                     }
+                }
+            }
+            //Ici on est sûr que fusion indique bien les sommets étant dans sous-cas des autres.
 
-                    //Ici, on ne veut garder que la plus grande antichaine de sommets (en terme d'inclusion des voisinages)
-                    //Et alors, on veut fusionner les sommets comparables.
-                    fusion.clear(); //Ce vecteur contiendra -1 si le sommet ne doit pas fusionner dans un autre sommet, et
-                    //i s'il correspond à un sous-ensemble du i-ème sommet
-                    for (int i = 0; i < indexation.size(); i++) {
-                        fusion.push_back(-1);
-                        inter.clear();
-                        //Maintenant, on regarde si un précédent cas correspond à un sur-ensemble de notre i-ème cas
-                        for (int j = 0; j < i; j++) {
-                            if (fusion[j] < 0 and neighborsPeri[i].size() <
-                                                  neighborsPeri[j].size()) { //Cas où le sommet n'est pas déjà marqué comme à fusionner avec un autre sommet
-                                //Pour savoir si l'un est inclus dans l'autre, on fait l'intersection des deux puis on
-                                //vérifie si le cardinal de l'intersection correspond à celui de l'un des deux sommets
-                                set_intersection(neighborsPeri[i].begin(), neighborsPeri[j].end(),
-                                                 neighborsPeri[i].begin(), neighborsPeri[j].end(), inter.begin());
-                                if (inter.size() == neighborsPeri[i].size()) { //Cas i inclus dans j; on rappelle que le
-                                    //vecteur est trié par cardinal décroissant.
-                                    fusion[i] = indexation[j];
-                                    seen[indexation[i]] = -seen[indexation[i]]; //On retire le sommet comme étant en péri
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                    //Ici on est sûr que fusion indique bien les sommets étant dans sous-cas des autres.
-                    //On peut donc passer la construction du graphe. Commençons par les sommets.
-                    for (int i = 0; i < indexation.size(); i++) {
-                        if (fusion[i] < 0) {
-                            V3.push_back(index);
-                            correspondingVertex[indexation[i]] = index;
-                            index++;
-                        } else {
-                            correspondingVertex[indexation[i]] = correspondingVertex[fusion[i]];
-                        }
-                    }
-                    //Puis les arêtes au sein de la composante :
-                    for (int i = 0; i < indexation.size(); i++) {
-                        if (seen[indexation[i]] < 0) {
-                            for (int j = 0; j < neighborsPeri[i].size(); j++) {
-                                if (seen[neighborsPeri[i][j]] < 0) {
-                                    E3.push_back(Edge(correspondingVertex[indexation[i]],
-                                                      correspondingVertex[neighborsPeri[i][j]], 0,
-                                                      neighborsAretes[i][j]));
-                                }
-                            }
+            //On peut donc passer la construction du graphe. Commençons par les sommets.
+            for (int i = 0; i < indexation.size(); i++) {
+                if (fusion[i] < 0) {
+                    V3.push_back(index);
+                    correspondingVertex[indexation[i]] = index;
+                    index++;
+                } else {
+                    correspondingVertex[indexation[i]] = correspondingVertex[fusion[i]];
+                }
+            }
+
+            //Puis les arêtes au sein de la composante :
+            for (int i = 0; i < indexation.size(); i++) {
+                if (seen[indexation[i]] < 0) {
+                    for (int j = 0; j < neighborsPeri[i].size(); j++) {
+                        if (seen[neighborsPeri[i][j]] < 0) {
+                            E3.push_back(Edge(correspondingVertex[indexation[i]],
+                                              correspondingVertex[neighborsPeri[i][j]], 0,
+                                              neighborsAretes[i][j]));
                         }
                     }
                 }
@@ -416,6 +426,7 @@ int main(int argc, char** argv) {
                 index++;
             }
         }
+
         //Maintenant on s'occupe des arêtes
         for (int i = 0; i<G.N ; i++) {
             if (seen[i] == 0){
@@ -423,13 +434,15 @@ int main(int argc, char** argv) {
                     E3.push_back(Edge(correspondingVertex[i],correspondingVertex[node->val],0,node->label));
                 }
             } else {
-                for(vector<Node>::iterator node = G.Neighbors(i)->begin(); node != G.Neighbors(i)->end(); ++node){
-                    if (seen[node->val] < 0){ //Ici on regarde que les négatifs car tous les positifs ont été fusionné
+                for (vector<Node>::iterator node = G.Neighbors(i)->begin(); node != G.Neighbors(i)->end(); ++node) {
+                    if (seen[node->val] < 0) { //Ici on regarde que les négatifs car tous les positifs ont été fusionné
                         //avec des sur-ensembles de leurs voisins, donc normalement c'est bon, on n'a pas d'arêtes en double!
-                        E3.push_back(Edge(correspondingVertex[i],correspondingVertex[node->val],0,node->label));
+                        E3.push_back(Edge(correspondingVertex[i], correspondingVertex[node->val], 0, node->label));
                     }
                 }
+            }
         }
+
         //Enfin, on enregistre le graphe créé.
         ofstream outputNodes2;
         outputNodes2.open(string(argv[7]) + "/clean.nodes");
