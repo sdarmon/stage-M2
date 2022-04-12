@@ -296,6 +296,7 @@ int main(int argc, char** argv) {
         vector<int> indexation;
         vector<int> fusion;
         set<int> inter;
+        vector<set<int>> setVoisin;
         int val;
         index = 0;
         int modif;
@@ -371,24 +372,38 @@ int main(int argc, char** argv) {
                     break;
                 }
             }
-            cout << "Ensembles de voisins triés" << endl;
+            cout << "Ensembles des " << indexation.size() << " voisins triés" << endl;
             //Ici, on ne veut garder que la plus grande antichaine de sommets (en terme d'inclusion des voisinages)
             //Et alors, on veut fusionner les sommets comparables.
             fusion.clear(); //Ce vecteur contiendra -1 si le sommet ne doit pas fusionner dans un autre sommet, et
             //i s'il correspond à un sous-ensemble du i-ème sommet
-            //Ainsi on parcourt les sommets pour former l'antichaine
+
+            //On récupère les voisins hors composante
+            setVoisin.clear();
+            for (int i = 0; i < indexation.size(); i++) {
+                set<int> setA;
+                setA.clear();
+                for (vector<int>::iterator el =neighborsPeri[i].begin(); el!= neighborsPeri[i].end(); ++el ){
+                    if (seen[(*it)] == 0){
+                        setA.insert((*it));
+                    }
+                }
+                setVoisin.push_back(setA);
+            }
+
+            //Ainsi on peut parcourir les sommets pour former l'antichaine
             for (int i = 0; i < indexation.size(); i++) {
                 fusion.push_back(-1);
                 inter.clear();
                 //Maintenant, on regarde si un précédent cas correspond à un sur-ensemble de notre i-ème cas
                 for (int j = 0; j < i; j++) {
-                    if (fusion[j] < 0 and neighborsPeri[i].size() <
-                                          neighborsPeri[j].size()) { //Cas où le sommet n'est pas déjà marqué comme à fusionner avec un autre sommet
+                    if (fusion[j] < 0 and setVoisin[i].size() <
+                                                  setVoisin[j].size()) { //Cas où le sommet n'est pas déjà marqué comme à fusionner avec un autre sommet
                         //Pour savoir si l'un est inclus dans l'autre, on fait l'intersection des deux puis on
                         //vérifie si le cardinal de l'intersection correspond à celui de l'un des deux sommets
-                        set_intersection(neighborsPeri[i].begin(), neighborsPeri[i].end(),
-                                         neighborsPeri[j].begin(), neighborsPeri[j].end(), inserter(inter, inter.begin()));
-                        if (inter.size() == neighborsPeri[i].size()) { //Cas i inclus dans j; on rappelle que le
+                        set_intersection(setVoisin[i].begin(), setVoisin[i].end(),
+                                         setVoisin[j].begin(), setVoisin[j].end(), inserter(inter, inter.begin()));
+                        if (inter.size() == setVoisin[i].size()) { //Cas i inclus dans j; on rappelle que le
                             //vecteur est trié par cardinal décroissant.
                             fusion[i] = indexation[j];
                             seen[indexation[i]] = -seen[indexation[i]]; //On retire le sommet comme étant en péri

@@ -257,10 +257,14 @@ void Graph::BFS_comp(vector<int> &seen,set<int> &vu, vector<Neighbor*> &aVoir,ve
             continue;
         }
         vu.insert(node->val);
-        if (seen[node->val] == 0) { //Cas où le sommet est en périphérie
+        if (seen[node->val] == 0) { //Cas où le sommet est en dehors du périmètre, on sort
             sons.push_back(node->val);
             aretes.push_back(node);
             continue;
+        }
+        if (seen[node->val] < 0) { //Cas où le sommet est en périphérie, on lui regarde quand-même ses voisins
+            sons.push_back(node->val);
+            aretes.push_back(node);
         }
         for (vector<Neighbor>::iterator it = Neighbors(node->val)->begin(); it != Neighbors(node->val)->end(); ++it) {
             //On boucle sur ses voisins
