@@ -430,11 +430,11 @@ int main(int argc, char** argv) {
         //Maintenant on s'occupe des arêtes
         for (int i = 0; i<G.N ; i++) {
             if (seen[i] == 0){
-                for(vector<Node>::iterator node = G.Neighbors(i)->begin(); node != G.Neighbors(i)->end(); ++node){
+                for(vector<Neighbor>::iterator node = G.Neighbors(i)->begin(); node != G.Neighbors(i)->end(); ++node){
                     E3.push_back(Edge(correspondingVertex[i],correspondingVertex[node->val],0,node->label));
                 }
             } else {
-                for (vector<Node>::iterator node = G.Neighbors(i)->begin(); node != G.Neighbors(i)->end(); ++node) {
+                for (vector<Neighbor>::iterator node = G.Neighbors(i)->begin(); node != G.Neighbors(i)->end(); ++node) {
                     if (seen[node->val] < 0) { //Ici on regarde que les négatifs car tous les positifs ont été fusionné
                         //avec des sur-ensembles de leurs voisins, donc normalement c'est bon, on n'a pas d'arêtes en double!
                         E3.push_back(Edge(correspondingVertex[i], correspondingVertex[node->val], 0, node->label));
