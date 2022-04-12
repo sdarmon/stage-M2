@@ -359,6 +359,7 @@ int main(int argc, char** argv) {
                         swap(neighborsPeri[j + 1], neighborsPeri[j]);
                         swap(neighborsAretes[j + 1], neighborsAretes[j]);
                         swap(indexation[j + 1], indexation[j]);
+                        swap(limiteAretes[j+1],limiteAretes[j]);
                         modif = 1;
                     }
                 }
