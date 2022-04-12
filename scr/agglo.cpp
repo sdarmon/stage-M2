@@ -336,7 +336,7 @@ int main(int argc, char** argv) {
                             aVoir.push_back(&(*voisin));
                         }
                     }
-                    BFS_comp((*it), G, seen, vu, aVoir, sons, aretes);
+                    G.BFS_comp(seen, vu, aVoir, sons, aretes);
                     //On modifie les arêtes ainsi trouvées pour marquer qu'elles proviennent du sens forward
                     while (i < aretes.size()) {
                         aretes[i]->label[0] = 'R';
