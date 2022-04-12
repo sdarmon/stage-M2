@@ -384,8 +384,8 @@ int main(int argc, char** argv) {
                 set<int> setA;
                 setA.clear();
                 for (vector<int>::iterator el =neighborsPeri[i].begin(); el!= neighborsPeri[i].end(); ++el ){
-                    if (seen[(*it)] == 0){
-                        setA.insert((*it));
+                    if (seen[(*el)] == 0){
+                        setA.insert((*el));
                     }
                 }
                 setVoisin.push_back(setA);
