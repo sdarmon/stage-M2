@@ -291,6 +291,7 @@ int main(int argc, char** argv) {
         set<int> vu;
         vector<vector<int>> neighborsPeri;
         vector<vector<Neighbor*>> neighborsAretes;
+        vector<int> limiteAretes;
         vector<int> indexation;
         vector<int> fusion;
         set<int> inter;
@@ -304,6 +305,7 @@ int main(int argc, char** argv) {
             neighborsPeri.clear(); //Vecteur qui contiendra l'ensemble des voisins de chaque sommet en périmètre.
             neighborsAretes.clear();
             indexation.clear();
+            limiteAretes.clear();
             //On boucles sur les sommets de la composante
             cout << "Pré-calcul pour la composante "<<compteurDeBoucle << endl;
             compteurDeBoucle++;
@@ -315,8 +317,6 @@ int main(int argc, char** argv) {
                     aretes.clear();
                     aVoir.clear();
                     vu.clear();
-                    int i = 0;
-
                     vu.insert((*it)); //On voit bien le sommet duquel on part
 
                     //On fait un BFS à partir de chaque sommet afin de savoir quels sommets du périmètre sont
@@ -329,11 +329,10 @@ int main(int argc, char** argv) {
                         }
                     }
                     G.BFS_comp(seen, vu, aVoir, sons, aretes);
-                    //On modifie les arêtes ainsi trouvées pour marquer qu'elles proviennent du sens forward
-                    while (i < aretes.size()) {
-                        aretes[i]->label[0] = 'F';
-                        i++;
-                    }
+
+                    limiteAretes.push_back(aretes.size()); //On fait ça pour garder en mémoire le fait que ce ne sont
+                    //pas les mêmes arêtes
+
                     //Cas en partant du reverse
                     for (vector<Neighbor>::iterator voisin = G.Neighbors((*it))->begin();
                          voisin != G.Neighbors((*it))->end(); ++voisin) {
@@ -342,11 +341,6 @@ int main(int argc, char** argv) {
                         }
                     }
                     G.BFS_comp(seen, vu, aVoir, sons, aretes);
-                    //On modifie les arêtes ainsi trouvées pour marquer qu'elles proviennent du sens reverse
-                    while (i < aretes.size()) {
-                        aretes[i]->label[0] = 'R';
-                        i++;
-                    }
 
                     neighborsPeri.push_back(sons);
                     neighborsAretes.push_back(aretes);
@@ -430,9 +424,17 @@ int main(int argc, char** argv) {
                 if (seen[indexation[i]] < 0) {
                     for (int j = 0; j < neighborsPeri[i].size(); j++) {
                         if (seen[neighborsPeri[i][j]] < 0) {
-                            E3.push_back(Edge(correspondingVertex[indexation[i]],
-                                              correspondingVertex[neighborsPeri[i][j]], 0,
-                                              neighborsAretes[i][j]->label));
+                            if (j<limiteAretes[i]){
+                                char aret[3] = {'F', neighborsAretes[i][j]->label[1]};
+                                E3.push_back(Edge(correspondingVertex[indexation[i]],
+                                                  correspondingVertex[neighborsPeri[i][j]], 0, aret
+                                                  ));
+                            } else {
+                                char aret[3] = {'R', neighborsAretes[i][j]->label[1]};
+                                E3.push_back(Edge(correspondingVertex[indexation[i]],
+                                                  correspondingVertex[neighborsPeri[i][j]], 0, aret
+                                ));
+                            }
                         }
                     }
                 }
