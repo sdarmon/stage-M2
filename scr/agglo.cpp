@@ -357,7 +357,7 @@ int main(int argc, char** argv) {
 
             //On trie par cardinal décroissant le vecteur neighborsPeri, un tri bulle suffit car algo suivant en n²
             //aussi
-            for (int i = indexation.size() - 1; i > 0; i++) {
+            for (int i = indexation.size() - 1; i > 0; i--) {
                 modif = 0;
                 for (int j = 0; j < i; j++) {
                     if (neighborsPeri[j + 1].size() > neighborsPeri[j].size()) {
