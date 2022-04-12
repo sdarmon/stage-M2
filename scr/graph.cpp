@@ -208,8 +208,8 @@ void Graph::BFS(int r, vector<Edge>& e ,vector<Neighbor*> &aVoir,vector<int> &vu
     vu.push_back(node->val);
     for (vector<Neighbor>::iterator it = Neighbors(node->val)->begin(); it != Neighbors(node->val)->end(); ++it){
         //On boucle sur ses voisins
-        if (it->label[0] == node->label[1] && find(vu.begin(),vu.end(),it->val) == vu.end()){ 
-            //Cas où l'arrêt est bien valide et sommet non vu avant, ce voisin est rajouté dans la file des visites
+        if (it->label[0] == node->label[1]){
+            //Cas où l'arrêt est bien valide, ce voisin est rajouté dans la file des visites
             aVoir.push_back(&(*it));
             if (r){
                 Edge edge(node->val,it->val,0,it->label);
@@ -248,7 +248,28 @@ void Graph::BFS_func(int threshold ,vector<Neighbor*> &aVoir,vector<int> &vu){
     }
     return;
 }
-
+void Graph::BFS_comp(vector<int> &seen,set<int> &vu, vector<Neighbor*> &aVoir,vector<int> &sons,vector<Node> &aretes){
+    while (aVoir.size() != 0) { //Cas de terminaison, on a terminé le BFS
+        Neighbor *node = aVoir.front();
+        aVoir.erase(aVoir.begin());
+        if (vu.find(node->val) != vu.end()) { //Cas où le sommet a été vu par le BFS
+            continue;
+        }
+        vu.insert(node->val);
+        if (seen[node->val] < 0) { //Cas où le sommet est en périphérie
+            sons.push_back(node->val);
+            aretes.push_back(node->label);
+        }
+        for (vector<Neighbor>::iterator it = Neighbors(node->val)->begin(); it != Neighbors(node->val)->end(); ++it) {
+            //On boucle sur ses voisins
+            if (it->label[0] == node->label[1] and seen[*it->val] != 0) {
+                //Cas où l'arrêt est bien valide et sommet non vu avant, ce voisin est rajouté dans la file des visites
+                aVoir.push_back(&(*it));
+            }
+        }
+    }
+    return;
+}
 
 /* /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ 
  *   Petite approximation ici, je suppose que dès lors que l'on 
@@ -347,7 +368,7 @@ void read_node_file( ifstream &node_file, vector<Node>& seqs)
 {
     seqs.clear();
     string line;
-    int u,v;
+    int u;
     string p;
     int compt;
     while (getline(node_file, line)) {

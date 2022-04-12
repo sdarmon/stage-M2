@@ -306,7 +306,7 @@ int main(int argc, char** argv) {
                 if (seen[(*it)] < 0) {
                     vector<int> sons;
                     sons.clear();
-                    vector <Node> aretes;
+                    vector<Node> aretes;
                     aretes.clear();
                     aVoir.clear();
                     vu.clear();
@@ -318,7 +318,7 @@ int main(int argc, char** argv) {
                             aVoir.push_back(voisin);
                         }
                     }
-                    BFS_comp((*it), G, seen, vu, aVoir, sons, aretes);
+                    G.BFS_comp(seen, vu, aVoir, sons, aretes);
                     while (i < aretes.size()) {
                         aretes[i].label[0] = 'F';
                         i++;
