@@ -213,7 +213,7 @@ int main(int argc, char** argv) {
     }
 
     cout << "Fin de la recherche de composantes." << endl;
-    if (argc < 9 or argv[8] != "-clean") {
+    if (argc < 9 ) {
     //Maintenant on construit nouveau graphe contracté
     vector <Edge> E2;
     vector <Node> V2;
@@ -251,7 +251,7 @@ int main(int argc, char** argv) {
     printEdges(E2, outputEdges);
     outputEdges.close();
 }
-    if (argc == 9 and argv[8] == "-clean") {
+    if (argc == 9) {
         cout << "Début construction graphe aggloméré" << endl;
         vector <Edge> E3;
         vector <Node> V3;
