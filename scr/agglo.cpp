@@ -398,7 +398,7 @@ int main(int argc, char** argv) {
             //On peut donc passer la construction du graphe. Commençons par les sommets.
             for (int i = 0; i < indexation.size(); i++) {
                 if (fusion[i] < 0) {
-                    V3.push_back(index);
+                    V3.push_back(Node(index,G.Vertices[indexation[i]].weight,G.Vertices[indexation[i]].label));
                     correspondingVertex[indexation[i]] = index;
                     index++;
                 } else {
@@ -422,7 +422,7 @@ int main(int argc, char** argv) {
         //Maintenant que les composantes ont bien été ajouté, on s'occupe des sommets restants
         for (int i = 0; i < G.N; i++) {
             if (seen[i] == 0) {
-                V3.push_back(Node(index, i, G.Vertices[i].label));
+                V3.push_back(Node(index, G.Vertices[i].weight, G.Vertices[i].label));
                 correspondingVertex[i] = index;
                 index++;
             }
