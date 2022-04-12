@@ -320,7 +320,7 @@ int main(int argc, char** argv) {
                     for (vector<Neighbor>::iterator voisin = G.Neighbors((*it))->begin();
                          voisin != G.Neighbors((*it))->end(); ++voisin) {
                         if (seen[voisin->val] != 0 and voisin->label[0] == 'F') {
-                            aVoir.push_back(voisin);
+                            aVoir.push_back(&(*voisin));
                         }
                     }
                     G.BFS_comp(seen, vu, aVoir, sons, aretes);
@@ -333,7 +333,7 @@ int main(int argc, char** argv) {
                     for (vector<Neighbor>::iterator voisin = G.Neighbors((*it))->begin();
                          voisin != G.Neighbors((*it))->end(); ++voisin) {
                         if (seen[voisin->val] != 0 and voisin->label[0] == 'R') {
-                            aVoir.push_back(voisin);
+                            aVoir.push_back(&(*voisin));
                         }
                     }
                     BFS_comp((*it), G, seen, vu, aVoir, sons, aretes);
