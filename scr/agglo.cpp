@@ -382,8 +382,8 @@ int main(int argc, char** argv) {
                                           neighborsPeri[j].size()) { //Cas où le sommet n'est pas déjà marqué comme à fusionner avec un autre sommet
                         //Pour savoir si l'un est inclus dans l'autre, on fait l'intersection des deux puis on
                         //vérifie si le cardinal de l'intersection correspond à celui de l'un des deux sommets
-                        set_intersection(neighborsPeri[i].begin(), neighborsPeri[j].end(),
-                                         neighborsPeri[i].begin(), neighborsPeri[j].end(), inter.begin());
+                        set_intersection(neighborsPeri[i].begin(), neighborsPeri[i].end(),
+                                         neighborsPeri[j].begin(), neighborsPeri[j].end(), inter.begin());
                         if (inter.size() == neighborsPeri[i].size()) { //Cas i inclus dans j; on rappelle que le
                             //vecteur est trié par cardinal décroissant.
                             fusion[i] = indexation[j];
