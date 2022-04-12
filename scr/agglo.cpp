@@ -295,7 +295,7 @@ int main(int argc, char** argv) {
         vector<vector<Neighbor*>> neighborsAretes;
         vector<int> indexation;
         vector<int> fusion;
-        vector<int> inter;
+        set<int> inter;
         int val;
         index = 0;
         int modif;
@@ -371,7 +371,7 @@ int main(int argc, char** argv) {
                     break;
                 }
             }
-            cout << "Ensemble de voisins trié" << endl;
+            cout << "Ensembles de voisins triés" << endl;
             //Ici, on ne veut garder que la plus grande antichaine de sommets (en terme d'inclusion des voisinages)
             //Et alors, on veut fusionner les sommets comparables.
             fusion.clear(); //Ce vecteur contiendra -1 si le sommet ne doit pas fusionner dans un autre sommet, et
@@ -387,7 +387,7 @@ int main(int argc, char** argv) {
                         //Pour savoir si l'un est inclus dans l'autre, on fait l'intersection des deux puis on
                         //vérifie si le cardinal de l'intersection correspond à celui de l'un des deux sommets
                         set_intersection(neighborsPeri[i].begin(), neighborsPeri[i].end(),
-                                         neighborsPeri[j].begin(), neighborsPeri[j].end(), inter.begin());
+                                         neighborsPeri[j].begin(), neighborsPeri[j].end(), inserter(inter, inter.begin()));
                         if (inter.size() == neighborsPeri[i].size()) { //Cas i inclus dans j; on rappelle que le
                             //vecteur est trié par cardinal décroissant.
                             fusion[i] = indexation[j];
