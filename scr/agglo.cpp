@@ -292,7 +292,7 @@ int main(int argc, char** argv) {
         //Après, on fait un BFS à partir de chaque sommet dans la composante afin d'obtenir les voisins du périmètre.
         set<int> vu;
         vector<set<int>> neighborsPeri;
-        vector<vector<Node>> neighborsAretes;
+        vector<vector<Neighbor*>> neighborsAretes;
         vector<int> indexation;
         vector<int> fusion;
         int val;
@@ -309,7 +309,7 @@ int main(int argc, char** argv) {
                 if (seen[(*it)] < 0) { //Cas sommet en périphérie
                     vector<int> sons;
                     sons.clear();
-                    vector <Neighbor> aretes;
+                    vector<Neighbor*> aretes;
                     aretes.clear();
                     aVoir.clear();
                     vu.clear();
@@ -326,7 +326,7 @@ int main(int argc, char** argv) {
                     G.BFS_comp(seen, vu, aVoir, sons, aretes);
                     //On modifie les arêtes ainsi trouvées pour marquer qu'elles proviennent du sens forward
                     while (i < aretes.size()) {
-                        aretes[i].label[0] = 'F';
+                        aretes[i]->label[0] = 'F';
                         i++;
                     }
                     //Cas en partant du reverse
@@ -339,7 +339,7 @@ int main(int argc, char** argv) {
                     BFS_comp((*it), G, seen, vu, aVoir, sons, aretes);
                     //On modifie les arêtes ainsi trouvées pour marquer qu'elles proviennent du sens forward
                     while (i < aretes.size()) {
-                        aretes[i].label[0] = 'R';
+                        aretes[i]->label[0] = 'R';
                         i++;
                     }
 

@@ -249,7 +249,7 @@ void Graph::BFS_func(int threshold ,vector<Neighbor*> &aVoir,vector<int> &vu){
     }
     return;
 }
-void Graph::BFS_comp(vector<int> &seen,set<int> &vu, vector<Neighbor*> &aVoir,vector<int> &sons,vector<Neighbor> &aretes){
+void Graph::BFS_comp(vector<int> &seen,set<int> &vu, vector<Neighbor*> &aVoir,vector<int> &sons,vector<Neighbor*> &aretes){
     while (aVoir.size() != 0) { //Cas de terminaison, on a terminé le BFS
         Neighbor *node = aVoir.front();
         aVoir.erase(aVoir.begin());
