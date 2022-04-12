@@ -8,8 +8,6 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include <stdio.h>
-#include <cstring>
 #include <algorithm>
 #include <set>
 #include "graph.h"
@@ -284,7 +282,7 @@ int main(int argc, char** argv) {
                 }
                 if (out){
                     seen[(*it)] = min(-seen[(*it)],seen[(*it)]); //Pour être sûr de prendre une valeur négative;
-                    // normalement n'est pas censé servir car composantes distantes d'au moins 2 deux à deux
+                    // normalement le min n'est pas censé servir car composantes distantes d'au moins 2 deux à deux
                 }
             }
         }
@@ -297,7 +295,6 @@ int main(int argc, char** argv) {
         vector<int> fusion;
         set<int> inter;
         vector<set<int>> setVoisin;
-        int val;
         index = 0;
         int modif;
         int compteurDeBoucle = 0;
@@ -327,7 +324,7 @@ int main(int argc, char** argv) {
                     //Cas en partant du foward
                     for (vector<Neighbor>::iterator voisin = G.Neighbors((*it))->begin();
                          voisin != G.Neighbors((*it))->end(); ++voisin) {
-                        if (seen[voisin->val] != 0 and voisin->label[0] == 'F') {
+                        if (voisin->label[0] == 'F') {
                             aVoir.push_back(&(*voisin));
                         }
                     }
@@ -340,7 +337,7 @@ int main(int argc, char** argv) {
                     //Cas en partant du reverse
                     for (vector<Neighbor>::iterator voisin = G.Neighbors((*it))->begin();
                          voisin != G.Neighbors((*it))->end(); ++voisin) {
-                        if (seen[voisin->val] != 0 and voisin->label[0] == 'R') {
+                        if (voisin->label[0] == 'R') {
                             aVoir.push_back(&(*voisin));
                         }
                     }
@@ -364,7 +361,7 @@ int main(int argc, char** argv) {
             for (int i = indexation.size() - 1; i > 0; i--) {
                 modif = 0;
                 for (int j = 0; j < i; j++) {
-                    if (neighborsPeri[j + 1].size() > neighborsPeri[j].size()) {
+                    if (neighborsPeri[j].size() < neighborsPeri[j+1].size()) {
                         swap(neighborsPeri[j + 1], neighborsPeri[j]);
                         swap(neighborsAretes[j + 1], neighborsAretes[j]);
                         swap(indexation[j + 1], indexation[j]);
@@ -400,7 +397,7 @@ int main(int argc, char** argv) {
                 inter.clear();
                 //Maintenant, on regarde si un précédent cas correspond à un sur-ensemble de notre i-ème cas
                 for (int j = 0; j < i; j++) {
-                    if (fusion[j] < 0 and setVoisin[i].size() <
+                    if (fusion[j] < 0 and setVoisin[i].size() <=
                                                   setVoisin[j].size()) { //Cas où le sommet n'est pas déjà marqué comme à fusionner avec un autre sommet
                         //Pour savoir si l'un est inclus dans l'autre, on fait l'intersection des deux puis on
                         //vérifie si le cardinal de l'intersection correspond à celui de l'un des deux sommets
@@ -409,7 +406,7 @@ int main(int argc, char** argv) {
                         if (inter.size() == setVoisin[i].size()) { //Cas i inclus dans j; on rappelle que le
                             //vecteur est trié par cardinal décroissant.
                             fusion[i] = j;
-                            seen[indexation[i]] = -seen[indexation[i]]; //On retire le sommet comme étant en péri
+                            seen[indexation[i]] = max(-seen[indexation[i]],seen[indexation[i]]); //On retire le sommet comme étant en péri
                             break;
                         }
                     }
