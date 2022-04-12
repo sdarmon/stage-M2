@@ -295,6 +295,7 @@ int main(int argc, char** argv) {
         vector<vector<Neighbor*>> neighborsAretes;
         vector<int> indexation;
         vector<int> fusion;
+        set<int> inter;
         int val;
         index = 0;
         int modif;
