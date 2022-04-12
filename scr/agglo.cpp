@@ -413,7 +413,7 @@ int main(int argc, char** argv) {
                         if (seen[neighborsPeri[i][j]] < 0) {
                             E3.push_back(Edge(correspondingVertex[indexation[i]],
                                               correspondingVertex[neighborsPeri[i][j]], 0,
-                                              neighborsAretes[i][j]));
+                                              neighborsAretes[i][j]->label));
                         }
                     }
                 }
