@@ -309,7 +309,7 @@ int main(int argc, char** argv) {
                 if (seen[(*it)] < 0) { //Cas sommet en périphérie
                     vector<int> sons;
                     sons.clear();
-                    vector <Node> aretes;
+                    vector <Neighbor> aretes;
                     aretes.clear();
                     aVoir.clear();
                     vu.clear();

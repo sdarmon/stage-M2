@@ -249,7 +249,7 @@ void Graph::BFS_func(int threshold ,vector<Neighbor*> &aVoir,vector<int> &vu){
     }
     return;
 }
-void Graph::BFS_comp(vector<int> &seen,set<int> &vu, vector<Neighbor*> &aVoir,vector<int> &sons,vector<Node> &aretes){
+void Graph::BFS_comp(vector<int> &seen,set<int> &vu, vector<Neighbor*> &aVoir,vector<int> &sons,vector<Neighbor> &aretes){
     while (aVoir.size() != 0) { //Cas de terminaison, on a terminé le BFS
         Neighbor *node = aVoir.front();
         aVoir.erase(aVoir.begin());
@@ -259,7 +259,7 @@ void Graph::BFS_comp(vector<int> &seen,set<int> &vu, vector<Neighbor*> &aVoir,ve
         vu.insert(node->val);
         if (seen[node->val] < 0) { //Cas où le sommet est en périphérie
             sons.push_back(node->val);
-            aretes.push_back(node->label);
+            aretes.push_back(node);
         }
         for (vector<Neighbor>::iterator it = Neighbors(node->val)->begin(); it != Neighbors(node->val)->end(); ++it) {
             //On boucle sur ses voisins
