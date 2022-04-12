@@ -291,7 +291,7 @@ int main(int argc, char** argv) {
 
         //Après, on fait un BFS à partir de chaque sommet dans la composante afin d'obtenir les voisins du périmètre.
         set<int> vu;
-        vector<set<int>> neighborsPeri;
+        vector<vector<int>> neighborsPeri;
         vector<vector<Neighbor*>> neighborsAretes;
         vector<int> indexation;
         vector<int> fusion;
