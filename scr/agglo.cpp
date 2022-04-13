@@ -323,7 +323,7 @@ int main(int argc, char** argv) {
         vector<vector<int>> setVoisinOutF;
         vector<vector<int>> setVoisinOutR;
         index = 0;
-        int pos;
+        vector<int>* pos;
         int modif;
         int compteurDeBoucle = 0;
         //On boucle sur les composantes
