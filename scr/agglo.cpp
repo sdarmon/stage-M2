@@ -457,7 +457,6 @@ int main(int argc, char** argv) {
             //Ainsi on peut parcourir les sommets pour former l'antichaine
             for (int i = 0; i < indexation.size(); i++) {
                 fusion.push_back(-1);
-                inter.clear();
                 //Maintenant, on regarde si un précédent cas correspond à un sur-ensemble de notre i-ème cas
                 for (int j = 0; j < i; j++) {
                     if (fusion[j] < 0) {
