@@ -323,7 +323,6 @@ int main(int argc, char** argv) {
         vector<vector<int>> setVoisinOutF;
         vector<vector<int>> setVoisinOutR;
         index = 0;
-        vector<int>* pos;
         int modif;
         int compteurDeBoucle = 0;
         //On boucle sur les composantes
@@ -366,7 +365,7 @@ int main(int argc, char** argv) {
                         if (voisin->label[0] == 'F') {
                             aVoir.push_back(&(*voisin));
                         } else {
-                            pos= upper_bound(inF.begin(),inF.end(),voisin->val);
+                            auto pos= upper_bound(inF.begin(),inF.end(),voisin->val);
                             inF.insert(pos,voisin->val);
                             nodeInF.insert(pos,&(*voisin));
                         }
@@ -382,7 +381,7 @@ int main(int argc, char** argv) {
                         if (voisin->label[0] == 'R') {
                             aVoir.push_back(&(*voisin));
                         } else {
-                            pos= upper_bound(inR.begin(),inR.end(),voisin->val);
+                            auto pos= upper_bound(inR.begin(),inR.end(),voisin->val);
                             inR.insert(pos,voisin->val);
                             nodeInR.insert(pos,&(*voisin));
                         }
@@ -439,12 +438,12 @@ int main(int argc, char** argv) {
                 for (int j = 0; j< neighborsPeri[i].size(); ++j ){
                     if (j<limiteAretes[i]){
                         if (seen[neighborsPeri[i][j]] == 0){
-                            pos = upper_bound(setOutF.begin(),setOutF.end(),neighborsPeri[i][j]);
+                            auto pos = upper_bound(setOutF.begin(),setOutF.end(),neighborsPeri[i][j]);
                             setOutF.insert(pos,neighborsPeri[i][j]);
                         }
                     } else{
                         if (seen[neighborsPeri[i][j]] == 0){
-                            pos = upper_bound(setOutF.begin(),setOutF.end(),neighborsPeri[i][j]);
+                            auto pos = upper_bound(setOutF.begin(),setOutF.end(),neighborsPeri[i][j]);
                             setOutR.insert(pos,neighborsPeri[i][j]);
                         }
                     }
