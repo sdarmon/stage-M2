@@ -384,7 +384,7 @@ int main(int argc, char** argv) {
                         if (voisin->label[0] == 'R') {
                             aVoir.push_back(&(*voisin));
                         } else {
-                            pos= distance(inF.begin(), upper_bound(inF.begin(),inF.end(),voisin->val));
+                            pos= distance(inR.begin(), upper_bound(inR.begin(),inR.end(),voisin->val));
                             inR.insert(inR.begin()+pos,voisin->val);
                             nodeInR.insert(nodeInR.begin()+ pos,&(*voisin));
                         }
@@ -441,12 +441,14 @@ int main(int argc, char** argv) {
                 for (int j = 0; j< neighborsPeri[i].size(); ++j ){
                     if (j<limiteAretes[i]){
                         if (seen[neighborsPeri[i][j]] == 0){
-                            pos= distance(setOutF.begin(), upper_bound(setOutF.begin(),inF.end(),neighborsPeri[i][j]));
+                            pos= distance(setOutF.begin(), upper_bound(setOutF.begin(),setOutF.end(),
+                                                                       neighborsPeri[i][j]));
                             setOutF.insert(setOutF.begin()+pos,neighborsPeri[i][j]);
                         }
                     } else{
                         if (seen[neighborsPeri[i][j]] == 0){
-                            pos= distance(setOutR.begin(), upper_bound(setOutR.begin(),inF.end(),neighborsPeri[i][j]));
+                            pos= distance(setOutR.begin(), upper_bound(setOutR.begin(),setOutR.end(),
+                                                                       neighborsPeri[i][j]));
                             setOutR.insert(setOutR.begin()+pos,neighborsPeri[i][j]);
                         }
                     }
