@@ -116,6 +116,7 @@ void initVec(vector<int> &vec, int n){
     }
     return;
 }
+
 //Fonction permettant d'enregistrer une composante du graphe `G` dans un fichier
 void save_comp(Graph &G, vector<int> &compo, string outputPrefix, int rang){
     ofstream output;
@@ -124,6 +125,28 @@ void save_comp(Graph &G, vector<int> &compo, string outputPrefix, int rang){
         output << *it << "\t" << G.Vertices[*it].label << "\t" << G.Vertices[*it].weight  << "\n";
     }
     return;
+}
+
+//Fonction indiquant si le setA est un sous-ensemble du setB. Le setA et le setB doivent être triés.
+int subset(vector<int> &setA, vector<int> &setB){
+    if (setA.size() > setB.size()){
+        return 0;
+    }
+    int posi = 0;
+    int posj = 0;
+    while(posi< setA.size() and posj < setB.size()) {
+        if (setA[posi] == setB[posj]){
+            posi++;
+            posj++;
+        } else if (setA[posi] < setB[posj]){ //Cas où le i-ème élément n'a pas été trouvé dans le setB
+            return 0;
+        }
+        else {
+            posj++;
+            err++;
+        }
+    }
+    return posi == setA.size();
 }
 
 int main(int argc, char** argv) {
@@ -290,23 +313,32 @@ int main(int argc, char** argv) {
         //Après, on fait un BFS à partir de chaque sommet dans la composante afin d'obtenir les voisins du périmètre.
         set<int> vu;
         vector<vector<int>> neighborsPeri;
+        vector<vector<Neighbor*>> neighborsInF;
+        vector<vector<Neighbor*>> neighborsInR;
         vector<vector<Neighbor*>> neighborsAretes;
         vector<int> limiteAretes;
         vector<int> indexation;
         vector<int> fusion;
-        set<int> inter;
-        vector<set<int>> setVoisin;
+        vector<vector<int>> setVoisinInF;
+        vector<vector<int>> setVoisinInR;
+        vector<vector<int>> setVoisinOutF;
+        vector<vector<int>> setVoisinOutR;
         index = 0;
+        int pos;
         int modif;
         int compteurDeBoucle = 0;
         //On boucle sur les composantes
         for (vector < vector < int >> ::iterator comp = components.begin(); comp != components.end();
         ++comp){
+            setVoisinInF.clear();
+            setVoisinInR.clear();
             neighborsPeri.clear(); //Vecteur qui contiendra l'ensemble des voisins de chaque sommet en périmètre.
             neighborsAretes.clear();
+            neighborsInF.clear();
+            neighborsInR.clear();
             indexation.clear();
             limiteAretes.clear();
-            //On boucles sur les sommets de la composante
+            //On boucle sur les sommets de la composante
             cout << "Pré-calcul pour la composante "<<compteurDeBoucle << endl;
             compteurDeBoucle++;
             for (vector<int>::iterator it = comp->begin(); it != comp->end(); ++it) {
@@ -315,6 +347,14 @@ int main(int argc, char** argv) {
                     sons.clear();
                     vector<Neighbor*> aretes;
                     aretes.clear();
+                    vector<int> inF;
+                    vector<int> inR;
+                    inF.clear();
+                    inR.clear();
+                    vector<Neighbor*> nodeInF;
+                    vector<Neighbor*> nodeInR;
+                    nodeInF.clear();
+                    nodeInR.clear();
                     aVoir.clear();
                     vu.clear();
                     vu.insert((*it)); //On voit bien le sommet duquel on part
@@ -326,6 +366,10 @@ int main(int argc, char** argv) {
                          voisin != G.Neighbors((*it))->end(); ++voisin) {
                         if (voisin->label[0] == 'F') {
                             aVoir.push_back(&(*voisin));
+                        } else {
+                            pos= upper_bound(inF.begin(),inF.end(),voisin->val);
+                            inF.insert(pos,voisin->val);
+                            nodeInF.insert(pos,&(*voisin));
                         }
                     }
                     G.BFS_comp(seen, vu, aVoir, sons, aretes);
@@ -338,12 +382,20 @@ int main(int argc, char** argv) {
                          voisin != G.Neighbors((*it))->end(); ++voisin) {
                         if (voisin->label[0] == 'R') {
                             aVoir.push_back(&(*voisin));
+                        } else {
+                            pos= upper_bound(inR.begin(),inR.end(),voisin->val);
+                            inR.insert(pos,voisin->val);
+                            nodeInR.insert(pos,&(*voisin));
                         }
                     }
                     G.BFS_comp(seen, vu, aVoir, sons, aretes);
 
                     neighborsPeri.push_back(sons);
                     neighborsAretes.push_back(aretes);
+                    neighborsInF.push_back(nodeInF);
+                    neighborsInR.push_back(nodeInR);
+                    setVoisinInF.push_back(inF);
+                    setVoisinInR.push_back(inR);
                     indexation.push_back((*it)); //On garde en mémoire la correspondance entre l'index et la position
                     //du sommet
                 }
@@ -358,6 +410,10 @@ int main(int argc, char** argv) {
                     if (neighborsPeri[j].size() < neighborsPeri[j+1].size()) {
                         swap(neighborsPeri[j + 1], neighborsPeri[j]);
                         swap(neighborsAretes[j + 1], neighborsAretes[j]);
+                        swap(neighborsInF[j+1],neighborsInF[j]);
+                        swap(neighborsInR[j+1],neighborsInR[j]);
+                        swap(setVoisinInF[j+1],setVoisinInF[j]);
+                        swap(setVoisinInR[j+1],setVoisinInR[j]);
                         swap(indexation[j + 1], indexation[j]);
                         swap(limiteAretes[j+1],limiteAretes[j]);
                         modif = 1;
@@ -374,16 +430,28 @@ int main(int argc, char** argv) {
             //i s'il correspond à un sous-ensemble du i-ème sommet
 
             //On récupère les voisins hors composante
-            setVoisin.clear();
+            setVoisinOutF.clear();
+            setVoisinOutR.clear();
             for (int i = 0; i < indexation.size(); i++) {
-                set<int> setA;
-                setA.clear();
-                for (vector<int>::iterator el =neighborsPeri[i].begin(); el!= neighborsPeri[i].end(); ++el ){
-                    if (seen[(*el)] == 0){
-                        setA.insert((*el));
+                vector<int> setOutF;
+                vector<int> setOutR;
+                setOutF.clear();
+                setOutR.clear();
+                for (int j = 0; j< neighborsPeri[i].size(); ++j ){
+                    if (j<limiteAretes[i]){
+                        if (seen[neighborsPeri[i][j]] == 0){
+                            pos = upper_bound(setOutF.begin(),setOutF.end(),neighborsPeri[i][j]);
+                            setOutF.insert(pos,neighborsPeri[i][j]);
+                        }
+                    } else{
+                        if (seen[neighborsPeri[i][j]] == 0){
+                            pos = upper_bound(setOutF.begin(),setOutF.end(),neighborsPeri[i][j]);
+                            setOutR.insert(pos,neighborsPeri[i][j]);
+                        }
                     }
                 }
-                setVoisin.push_back(setA);
+                setVoisinOutF.push_back(setOutF);
+                setVoisinOutR.push_back(setOutR);
             }
 
             //Ainsi on peut parcourir les sommets pour former l'antichaine
@@ -392,14 +460,20 @@ int main(int argc, char** argv) {
                 inter.clear();
                 //Maintenant, on regarde si un précédent cas correspond à un sur-ensemble de notre i-ème cas
                 for (int j = 0; j < i; j++) {
-                    if (fusion[j] < 0 and setVoisin[i].size() <=
-                                                  setVoisin[j].size()) { //Cas où le sommet n'est pas déjà marqué comme à fusionner avec un autre sommet
-                        //Pour savoir si l'un est inclus dans l'autre, on fait l'intersection des deux puis on
-                        //vérifie si le cardinal de l'intersection correspond à celui de l'un des deux sommets
-                        set_intersection(setVoisin[i].begin(), setVoisin[i].end(),
-                                         setVoisin[j].begin(), setVoisin[j].end(), inserter(inter, inter.begin()));
-                        if (inter.size() == setVoisin[i].size()) { //Cas i inclus dans j; on rappelle que le
-                            //vecteur est trié par cardinal décroissant.
+                    if (fusion[j] < 0) {
+                        //Cas où ça matche F/F
+                        if (subset(setVoisinInF[i],setVoisinInF[j])
+                        and subset(setVoisinInR[i],setVoisinInR[j])
+                        and subset(setVoisinOutF[i],setVoisinOutF[j])
+                        and subset(setVoisinOutR[i],setVoisinOutR[j])){
+                            fusion[i] = j;
+                            seen[indexation[i]] = max(-seen[indexation[i]],seen[indexation[i]]); //On retire le sommet comme étant en péri
+                            break;
+                            //Cas où ça matche F/R
+                        } else if (subset(setVoisinInF[i],setVoisinInR[j])
+                                  and subset(setVoisinInR[i],setVoisinInF[j])
+                                  and subset(setVoisinOutF[i],setVoisinOutR[j])
+                                  and subset(setVoisinOutR[i],setVoisinOutF[j])){
                             fusion[i] = j;
                             seen[indexation[i]] = max(-seen[indexation[i]],seen[indexation[i]]); //On retire le sommet comme étant en péri
                             break;
@@ -440,6 +514,7 @@ int main(int argc, char** argv) {
                     }
                 }
             }
+
         } //On vient de terminer cette composante !
 
         //Maintenant que les composantes ont bien été ajouté, on s'occupe des sommets restants
