@@ -143,7 +143,6 @@ int subset(vector<int> &setA, vector<int> &setB){
         }
         else {
             posj++;
-            err++;
         }
     }
     return posi == setA.size();
@@ -441,12 +440,12 @@ int main(int argc, char** argv) {
                     if (j<limiteAretes[i]){
                         if (seen[neighborsPeri[i][j]] == 0){
                             pos = upper_bound(setOutF.begin(),setOutF.end(),neighborsPeri[i][j]);
-                            setOutF.insert(pos,(const int)neighborsPeri[i][j]);
+                            setOutF.insert(pos,neighborsPeri[i][j]);
                         }
                     } else{
                         if (seen[neighborsPeri[i][j]] == 0){
                             pos = upper_bound(setOutF.begin(),setOutF.end(),neighborsPeri[i][j]);
-                            setOutR.insert(pos,(const int)neighborsPeri[i][j]);
+                            setOutR.insert(pos,neighborsPeri[i][j]);
                         }
                     }
                 }
