@@ -10,6 +10,7 @@
 #include <string>
 #include <algorithm>
 #include <set>
+#include <iterator>
 #include "graph.h"
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wstring-compare"
@@ -147,6 +148,7 @@ int subset(vector<int> &setA, vector<int> &setB){
     }
     return posi == setA.size();
 }
+
 
 int main(int argc, char** argv) {
     if (argc != 8 and argc != 9) {
@@ -323,6 +325,7 @@ int main(int argc, char** argv) {
         vector<vector<int>> setVoisinOutF;
         vector<vector<int>> setVoisinOutR;
         index = 0;
+        int pos;
         int modif;
         int compteurDeBoucle = 0;
         //On boucle sur les composantes
@@ -365,9 +368,9 @@ int main(int argc, char** argv) {
                         if (voisin->label[0] == 'F') {
                             aVoir.push_back(&(*voisin));
                         } else {
-                            auto pos= upper_bound(inF.begin(),inF.end(),voisin->val);
-                            inF.insert(pos,voisin->val);
-                            nodeInF.insert(pos,&(*voisin));
+                            pos= distance(inF.begin(), upper_bound(inF.begin(),inF.end(),voisin->val));
+                            inF.insert(inF.begin()+pos,voisin->val);
+                            nodeInF.insert(nodeInF.begin()+ pos,&(*voisin));
                         }
                     }
                     G.BFS_comp(seen, vu, aVoir, sons, aretes);
@@ -381,9 +384,9 @@ int main(int argc, char** argv) {
                         if (voisin->label[0] == 'R') {
                             aVoir.push_back(&(*voisin));
                         } else {
-                            auto pos= upper_bound(inR.begin(),inR.end(),voisin->val);
-                            inR.insert(pos,voisin->val);
-                            nodeInR.insert(pos,&(*voisin));
+                            pos= distance(inF.begin(), upper_bound(inF.begin(),inF.end(),voisin->val));
+                            inR.insert(inR.begin()+pos,voisin->val);
+                            nodeInR.insert(nodeInR.begin()+ pos,&(*voisin));
                         }
                     }
                     G.BFS_comp(seen, vu, aVoir, sons, aretes);
@@ -438,13 +441,13 @@ int main(int argc, char** argv) {
                 for (int j = 0; j< neighborsPeri[i].size(); ++j ){
                     if (j<limiteAretes[i]){
                         if (seen[neighborsPeri[i][j]] == 0){
-                            auto pos = upper_bound(setOutF.begin(),setOutF.end(),neighborsPeri[i][j]);
-                            setOutF.insert(pos,neighborsPeri[i][j]);
+                            pos= distance(setOutF.begin(), upper_bound(setOutF.begin(),inF.end(),neighborsPeri[i][j]));
+                            setOutF.insert(setOutF.begin()+pos,neighborsPeri[i][j]);
                         }
                     } else{
                         if (seen[neighborsPeri[i][j]] == 0){
-                            auto pos = upper_bound(setOutF.begin(),setOutF.end(),neighborsPeri[i][j]);
-                            setOutR.insert(pos,neighborsPeri[i][j]);
+                            pos= distance(setOutR.begin(), upper_bound(setOutR.begin(),inF.end(),neighborsPeri[i][j]));
+                            setOutR.insert(setOutR.begin()+pos,neighborsPeri[i][j]);
                         }
                     }
                 }
