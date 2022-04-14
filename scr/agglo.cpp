@@ -565,7 +565,7 @@ int main(int argc, char** argv) {
         vector<int> A3(V3.size(),0);
         read_abundance_file(ab,A);
         for (int i = 0; i<A.size();i++){
-            A3[correspondingVertex[i]+= A[i]];
+            A3[correspondingVertex[i]]+= A[i];
         }
 
         ofstream outputAb;
