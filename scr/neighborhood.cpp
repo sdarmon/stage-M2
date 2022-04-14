@@ -10,7 +10,6 @@
 #include <string>
 #include <algorithm>
 #include <set>
-#include <iterator>
 #include "graph.h"
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wstring-compare"
@@ -96,7 +95,7 @@ int main(int argc, char** argv) {
 
         for (vector<Neighbor>::iterator it = G.Neighbors(node->val)->begin(); it != G.Neighbors(node->val)->end(); ++it){
             //On boucle sur ses voisins
-            if (Vertices[it->val].weight >= threshold and vu[it->val]==0){
+            if (G.Vertices[it->val].weight >= threshold and vu[it->val]==0 and p<= dis){
                 //Cas où l'arrêt est bien valide et sommet non vu avant, ce voisin est rajouté dans la file des visites
                 aVoir.push_back(&(*it));
                 pronf.push_back(p+1);
