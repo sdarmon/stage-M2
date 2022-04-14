@@ -455,19 +455,8 @@ void read_edge_file( ifstream &edge_file, vector<Edge>& edges ) {
 void read_abundance_file( ifstream &ab, vector<int>& A ) {
     string line;
     string substr;
-    int compteur;
     while (getline(ab, line)) {
-        istringstream ss(line);
-        compteur = 0;
-        while (getline(ss, substr, '\t')) {
-            if (compteur == 0) {
-                compteur++;
-                continue;
-            } else if (compteur == 1) {
-                A.push_back(stoi(substr));
-            }
-            compteur++;
-        }
+        A.push_back(stoi(line));
     }
     return;
 }
@@ -501,7 +490,7 @@ void printGraphVertices(Graph& G,ofstream& output)
 void printAbundance(vector<int> &A,ofstream& output)
 {
     for (int i = 0; i < A.size(); i++) {
-        output << i << "\t" <<A[i] << "\n";
+        output <<A[i] << "\n";
     }
     return;
 }

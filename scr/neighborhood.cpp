@@ -30,7 +30,7 @@ void save_comp(Graph &G, vector<int> &compo, string outputPrefix, int rang){
 int main(int argc, char** argv) {
     if (argc != 8 and argc != 9) {
         cout << "Expected use of this program: \n\n\t" << argv[0]
-             << " file.nodes file.edges node_number [-c value] [-d dis] \n" << endl;
+             << " file.nodes file.edges node_id [-c value] [-d dis] \n" << endl;
         return 0;
     }
 
