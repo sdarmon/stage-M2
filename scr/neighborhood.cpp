@@ -58,7 +58,7 @@ int main(int argc, char** argv) {
 
     char *nodesPath = argv[1];
     char *edgesPath = argv[2];
-    int node_id = argv[3];
+    int node_id = atoi(argv[3]);
     ifstream edges(edgesPath, std::ios::binary);
     ifstream nodes(nodesPath, std::ios::binary);
 
