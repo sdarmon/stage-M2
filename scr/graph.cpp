@@ -452,11 +452,11 @@ void read_edge_file( ifstream &edge_file, vector<Edge>& edges ) {
     }
 }
 
-void read_abundance_file( ifstream &ab, vector<int>& A ) {
+void read_abundance_file( ifstream &ab, vector<double>& A ) {
     string line;
     string substr;
     while (getline(ab, line)) {
-        A.push_back(stoi(line));
+        A.push_back(stod(line));
     }
     return;
 }
@@ -487,7 +487,7 @@ void printGraphVertices(Graph& G,ofstream& output)
 }
 
 //Affiche l'abondance dans une autre sortie (dans un fichier par exemple)
-void printAbundance(vector<int> &A,ofstream& output)
+void printAbundance(vector<double> &A,ofstream& output)
 {
     for (int i = 0; i < A.size(); i++) {
         output <<A[i] << "\n";

@@ -115,12 +115,12 @@ void comp(char* s, char* r);
 void read_node_file( ifstream &node_file, vector<Node>& seqs);
 void read_node_file_weighted( ifstream &node_file, vector<Node>& seqs);
 void read_edge_file( ifstream &edge_file, vector<Edge>& edges );
-void read_abundance_file( ifstream &ab_file, vector<int>& A );
+void read_abundance_file( ifstream &ab_file, vector<double>& A );
 
 void printGraphVertices(Graph& G);
 void printGraphVertices(Graph& G,ofstream& output);
 void printVertices(vector<Node>& V);
-void printAbundance(vector<int> &A,ofstream& output);
+void printAbundance(vector<double> &A,ofstream& output);
 void printVerticesBcalm(vector<Node>& V,ofstream& output);
 void printGraphEdges(Graph& G);
 void printEdges(vector<Edge>& E);

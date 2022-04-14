@@ -558,11 +558,11 @@ int main(int argc, char** argv) {
         outputEdges2.close();
 
         //On récupère aussi l'abondance qui est nécessaire pour kissplice
-        vector <int> A;
+        vector <double> A;
         string abPath = argv[1];
         abPath.resize(abPath.size()-5);
         ifstream ab(abPath+"abundance", std::ios::binary);
-        vector<int> A3(V3.size(),0);
+        vector<double> A3(V3.size(),0);
         read_abundance_file(ab,A);
         for (int i = 0; i<A.size();i++){
             A3[correspondingVertex[i]]+= A[i];

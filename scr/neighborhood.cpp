@@ -28,9 +28,27 @@ void save_comp(Graph &G, vector<int> &compo, string outputPrefix, int rang){
 }
 
 int main(int argc, char** argv) {
-    if (argc != 8 and argc != 9) {
+    int c,dis;
+    if (argc == 4) {
+        c = 0;
+        dis = 1;
+    } else if (argc == 6 and argv[4] == "-d"){
+        int dis = atoi(argv[5]);
+        c= 0;
+    }else if (argc == 6 and argv[4] == "-c"){
+        int c = atoi(argv[5]);
+        dis = 1;
+    }else if (argc == 8 and argv[4] == "-c"){
+        int c = atoi(argv[5]);
+        dis = atoi(argv[7]);
+    }else if (argc == 8 and argv[4] == "-d"){
+        int c = atoi(argv[7]);
+        dis = atoi(argv[5]);
+    } else {
         cout << "Expected use of this program: \n\n\t" << argv[0]
-             << " file.nodes file.edges node_id [-c value] [-d dis] \n" << endl;
+             << " file.nodes file.edges node_id [-c value] [-d dis] \n"
+             << "The option c allows to give a threshold to the weight of visited vertices (default 0) and the option d gives the "
+                "depth of neighbor gathered (default 1)" << endl;
         return 0;
     }
 
@@ -40,8 +58,7 @@ int main(int argc, char** argv) {
 
     char *nodesPath = argv[1];
     char *edgesPath = argv[2];
-    int dis = atoi(argv[6]);
-
+    int node_id = argv[3];
     ifstream edges(edgesPath, std::ios::binary);
     ifstream nodes(nodesPath, std::ios::binary);
 
@@ -52,7 +69,4 @@ int main(int argc, char** argv) {
 
     cout << "Graphe chargé et construit" << endl;
 
-    if (argc == 9) {
-
-    }
 }
