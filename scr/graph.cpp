@@ -452,7 +452,7 @@ void read_edge_file( ifstream &edge_file, vector<Edge>& edges ) {
     }
 }
 
-void read_abundance_file( ifstream &ab_file, vector<int>& A ) {
+void read_abundance_file( ifstream &ab, vector<int>& A ) {
     string line;
     string substr;
     while (getline(ab, line)) {
