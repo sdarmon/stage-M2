@@ -369,7 +369,7 @@ void Graph::weighingAllNodes(int rayon) {
 //================================================================
 
 
-//Lit un fichier contenant les sommets du graphe et les ajoute au vecteur seqs (réalisé par Pierre Peterlongo et Vincent Lacroix)
+//Lit un fichier contenant les sommets du graphe et les ajoute au vecteur seqs
 void read_node_file( ifstream &node_file, vector<Node>& seqs)
 {
     seqs.clear();
@@ -457,6 +457,7 @@ void read_abundance_file( ifstream &ab, vector<double>& A ) {
     string substr;
     while (getline(ab, line)) {
         A.push_back(stod(line));
+        cout << stod(line) << endl;
     }
     return;
 }
