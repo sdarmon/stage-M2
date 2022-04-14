@@ -461,12 +461,12 @@ void read_abundance_file( ifstream &ab, vector<int>& A ) {
         compteur = 0;
         while (getline(ss, substr, '\t')) {
             if (compteur == 0) {
-                compt++;
+                compteur++;
                 continue;
             } else if (compteur == 1) {
                 A.push_back(stoi(substr));
             }
-            compt++;
+            compteur++;
         }
     }
     return;
