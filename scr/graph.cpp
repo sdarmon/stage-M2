@@ -454,10 +454,8 @@ void read_edge_file( ifstream &edge_file, vector<Edge>& edges ) {
 
 void read_abundance_file( ifstream &ab, vector<double>& A ) {
     string line;
-    string substr;
     while (getline(ab, line)) {
         A.push_back(stod(line));
-        cout << stod(line) << endl;
     }
     return;
 }

@@ -151,9 +151,9 @@ int subset(vector<int> &setA, vector<int> &setB){
 
 
 int main(int argc, char** argv) {
-    if (argc != 8 and argc != 9) {
+    if (argc != 8 and argc != 10) {
         cout << "Expected use of this program: \n\n\t" << argv[0]
-             << " file.nodes file.edges -c value -d dis outputPrefix [-clean]\n" << endl;
+             << " file.nodes file.edges -c value -d dis outputPrefix [-clean file.abundance]\n" << endl;
         return 0;
     }
 
@@ -273,7 +273,7 @@ int main(int argc, char** argv) {
     printEdges(E2, outputEdges);
     outputEdges.close();
 }
-    if (argc == 9) {
+    if (argc == 10) {
         cout << "Début construction graphe aggloméré" << endl;
         vector <Edge> E3;
         vector <Node> V3;
@@ -558,12 +558,11 @@ int main(int argc, char** argv) {
         outputEdges2.close();
 
         //On récupère aussi l'abondance qui est nécessaire pour kissplice
+        ifstream ab(argv[9], std::ios::binary);
+
         vector <double> A;
-        string abPath = argv[1];
-        abPath.resize(abPath.size()-5);
-        ifstream ab(abPath+"abundance", std::ios::binary);
-        vector<double> A3(V3.size(),0.0);
         read_abundance_file(ab,A);
+        vector<double> A3(V3.size(),0.0);
         for (int i = 0; i<A.size();i++){
             A3[correspondingVertex[i]]+= A[i];
         }
