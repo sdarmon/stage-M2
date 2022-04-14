@@ -421,11 +421,12 @@ void read_node_file_weighted( ifstream &node_file,vector<Node>& seqs)
         Node node(u,v,p);
         seqs.push_back(node);
     }
+    return;
 }
 
 
 //Lit un fichier d'arêtes et les ajoute au vecteur edges
-
+void read_edge_file( ifstream &edge_file, vector<Edge>& edges ) {
     edges.clear();
     string line;
     int u,v;
