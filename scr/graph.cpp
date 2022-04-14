@@ -425,7 +425,7 @@ void read_node_file_weighted( ifstream &node_file,vector<Node>& seqs)
 
 
 //Lit un fichier d'arêtes et les ajoute au vecteur edges
-void read_edge_file( ifstream &edge_file, vector<Edge>& edges ) {
+
     edges.clear();
     string line;
     int u,v;
@@ -451,6 +451,24 @@ void read_edge_file( ifstream &edge_file, vector<Edge>& edges ) {
     }
 }
 
+void read_abundance_file( ifstream &ab_file, vector<int>& A ) {
+    string line;
+    string substr;
+    while (getline(ab, line)) {
+        istringstream ss(line);
+        compt = 0;
+        while (getline(ss, substr, '\t')) {
+            if (compt == 0) {
+                compt++;
+                continue;
+            } else if (compt == 1) {
+                A.push_back(stoi(substr));
+            }
+            compt++;
+        }
+    }
+    return;
+}
 
 //================================================================
 //                  Fonctions d'affichage
@@ -475,6 +493,15 @@ void printGraphVertices(Graph& G,ofstream& output)
     for (vector<Node>::iterator it = V.begin(); it != V.end(); ++it) {
         output << it->val << "\t" <<(string)it->label << "\t" << it->weight << "\n";
     }
+}
+
+//Affiche l'abondance dans une autre sortie (dans un fichier par exemple)
+void printAbundance(vector<int> &A,ofstream& output)
+{
+    for (int i = 0; i < A.size(); i++) {
+        output << i << "\t" <<A[i] << "\n";
+    }
+    return;
 }
 
 //Affiche les sommets d'un graphe à partir d'un vecteur de Nodes
