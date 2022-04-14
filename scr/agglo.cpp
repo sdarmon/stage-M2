@@ -562,7 +562,7 @@ int main(int argc, char** argv) {
         string abPath = argv[1];
         abPath.resize(abPath.size()-5);
         ifstream ab(abPath+"abundance", std::ios::binary);
-        vector<double> A3(V3.size(),0);
+        vector<double> A3(V3.size(),0.0);
         read_abundance_file(ab,A);
         for (int i = 0; i<A.size();i++){
             A3[correspondingVertex[i]]+= A[i];

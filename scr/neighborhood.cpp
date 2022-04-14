@@ -28,21 +28,21 @@ void save_comp(Graph &G, vector<int> &compo, string outputPrefix, int rang){
 }
 
 int main(int argc, char** argv) {
-    int c,dis;
+    int threshold,dis;
     if (argc == 4) {
-        c = 0;
+        threshold = 0;
         dis = 1;
     } else if (argc == 6 and argv[4] == "-d"){
         int dis = atoi(argv[5]);
-        c= 0;
+        threshold= 0;
     }else if (argc == 6 and argv[4] == "-c"){
-        int c = atoi(argv[5]);
+        int threshold = atoi(argv[5]);
         dis = 1;
     }else if (argc == 8 and argv[4] == "-c"){
-        int c = atoi(argv[5]);
+        int threshold = atoi(argv[5]);
         dis = atoi(argv[7]);
     }else if (argc == 8 and argv[4] == "-d"){
-        int c = atoi(argv[7]);
+        int threshold = atoi(argv[7]);
         dis = atoi(argv[5]);
     } else {
         cout << "Expected use of this program: \n\n\t" << argv[0]
@@ -66,7 +66,48 @@ int main(int argc, char** argv) {
     read_node_file_weighted(nodes, V);
 
     Graph G(V, E);
+    vector<Neighbor*> aVoir;
+    aVoir.clear();
+    vector<int> pronf;
+    pronf.clear();
+    Neighbor* node ;
+    int p ;
+    vector<int> vu(G.N,0);
+    vu[node_id]=-1; //On le marque comme sommet d'entrée
 
-    cout << "Graphe chargé et construit" << endl;
+    //On ajoute les voisins à visiter
+    for (vector<Neighbor>::iterator it = G.Neighbors(node_id)->begin(); it != G.Neighbors(node_id)->end(); ++it) {
+        if (G.Vertices[it->val].weight >= threshold) {
+            aVoir.push_back(&(*it));
+            pronf.push_back(1);
+        }
+    }
+
+    //On fait un BFS
+    while (aVoir.size() != 0){ //Cas de terminaison, on a terminé le BFS
+        node = aVoir.front();
+        aVoir.erase(aVoir.begin());
+        p = pronf.front();
+        pronf.erase(pronf.begin());
+        if (vu[node->val]){ //Cas où le sommet a été vu par le BFS
+            continue;
+        }
+        vu[node->val]=p;
+
+        for (vector<Neighbor>::iterator it = Neighbors(node->val)->begin(); it != Neighbors(node->val)->end(); ++it){
+            //On boucle sur ses voisins
+            if (Vertices[it->val].weight >= threshold and vu[it->val]==0){
+                //Cas où l'arrêt est bien valide et sommet non vu avant, ce voisin est rajouté dans la file des visites
+                aVoir.push_back(&(*it));
+                pronf.push_back(p+1);
+            }
+        }
+    }
+
+    for (int i = 0; i < G.N ; i++){
+        if (vu[i]){
+            cout << i << "\t" << G.Vertices[i].label << "\t" << ((vu[i] < 0) ? 0 : vu[i]) << "\t" << G.Vertices[i].weight << endl;
+        }
+    }
 
 }
