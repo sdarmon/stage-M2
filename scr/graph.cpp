@@ -455,14 +455,15 @@ void read_edge_file( ifstream &edge_file, vector<Edge>& edges ) {
 void read_abundance_file( ifstream &ab, vector<int>& A ) {
     string line;
     string substr;
+    int compteur;
     while (getline(ab, line)) {
         istringstream ss(line);
-        compt = 0;
+        compteur = 0;
         while (getline(ss, substr, '\t')) {
-            if (compt == 0) {
+            if (compteur == 0) {
                 compt++;
                 continue;
-            } else if (compt == 1) {
+            } else if (compteur == 1) {
                 A.push_back(stoi(substr));
             }
             compt++;
