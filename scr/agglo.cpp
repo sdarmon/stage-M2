@@ -521,7 +521,6 @@ int main(int argc, char** argv) {
 
         //Maintenant que les composantes ont bien été ajouté, on s'occupe des sommets restants
         for (int i = 0; i < G.N; i++) {
-
             if (seen[i] == 0 and G.Vertices[i].label.size()>0) {
                 V3.push_back(Node(index, G.Vertices[i].weight, G.Vertices[i].label));
                 correspondingVertex[i] = index;
@@ -569,7 +568,9 @@ int main(int argc, char** argv) {
         read_abundance_file(ab,A);
         vector<double> A3(V3.size(),0.0);
         for (int i = 0; i<A.size();i++){
-            A3[correspondingVertex[i]]+= A[i];
+            if(correspondingVertex[i] >= 0){
+                A3[correspondingVertex[i]]+= A[i];
+            }
         }
 
         ofstream outputAb;
