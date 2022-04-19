@@ -75,7 +75,7 @@ int main(int argc, char** argv) {
     vector<int> nodes_id;
     nodes_id.clear();
     string arg = argv[3];
-    if (arg.find('.') != npos){
+    if (arg.find('.') != string::npos){
         char *idPath =argv[3];
         ifstream ids(idPath, std::ios::binary);
         string line;
