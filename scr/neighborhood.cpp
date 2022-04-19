@@ -32,6 +32,7 @@ int main(int argc, char** argv) {
     int threshold,dis;
     string prefixOutput;
     if (argc == 4) {
+        prefixOutput = "./";
         threshold = 0;
         dis = 1;
     } else if (argc == 6 and argv[4] == "-o"){
