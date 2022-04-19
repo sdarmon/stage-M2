@@ -74,8 +74,8 @@ int main(int argc, char** argv) {
     char *edgesPath = argv[2];
     vector<int> nodes_id;
     nodes_id.clear();
-
-    if (argv[3].find('.') != argv[3].end()){
+    string arg = argv[3];
+    if (arg.find('.') != arg.end()){
         char *idPath =argv[3];
         ifstream ids(idPath, std::ios::binary);
         string line;
@@ -107,7 +107,7 @@ int main(int argc, char** argv) {
         for (int i = 0; i<G.N; i++){
             vu.push_back(0);
         }
-        node_id = nodes_id.front());
+        node_id = nodes_id.front();
         nodes_id.erase(nodes_id.begin());
         vu[node_id] = -1; //On le marque comme sommet d'entrée
 
@@ -140,6 +140,6 @@ int main(int argc, char** argv) {
                 }
             }
         }
-        save_comp(G, vu, outputPrefix, rang);
+        save_comp(G, vu, prefixOutput, rang);
     }
 }
