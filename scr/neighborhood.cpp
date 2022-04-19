@@ -35,28 +35,27 @@ int main(int argc, char** argv) {
         prefixOutput = "./";
         threshold = 0;
         dis = 1;
-    }else if (argc == 6 and argv[4] == "-o"){
+    }else if (argc == 6 and (string)argv[4] == "-o"){
         prefixOutput = argv[5];
         threshold = 0;
         dis = 1;
-        cout << "vraiment????" << endl;
-    }else if (argc == 6 and argv[4] == "-c"){
+    }else if (argc == 6 and (string)argv[4] == "-c"){
         prefixOutput = "./";
         threshold = atoi(argv[5]);
         dis = 1;
-    }else if (argc == 6 and argv[4] == "-d"){
+    }else if (argc == 6 and (string)argv[4] == "-d"){
         prefixOutput = "./";
         threshold = 0;
         dis = atoi(argv[5]);
-    }else if (argc == 8 and argv[4] == "-o" and argv[6] == "-d"){
+    }else if (argc == 8 and (string)argv[4] == "-o" and (string)argv[6] == "-d"){
         prefixOutput = argv[5];
         dis = atoi(argv[7]);
         threshold = 0;
-    }else if (argc == 8 and argv[4] == "-c" and argv[6] == "-d"){
+    }else if (argc == 8 and (string)argv[4] == "-c" and (string)argv[6] == "-d"){
         threshold = atoi(argv[5]);
         dis = atoi(argv[7]);
         prefixOutput = "./";
-    }else if (argc == 10 and argv[4] == "-o" and argv[6] == "-c" and argv[8] == "-c"){
+    }else if (argc == 10 and (string)argv[4] == "-o" and (string)argv[6] == "-c" and (string)argv[8] == "-c"){
         prefixOutput = argv[5];
         threshold = atoi(argv[7]);
         dis = atoi(argv[9]);
