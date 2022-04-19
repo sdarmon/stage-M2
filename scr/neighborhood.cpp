@@ -35,10 +35,11 @@ int main(int argc, char** argv) {
         prefixOutput = "./";
         threshold = 0;
         dis = 1;
-    } else if (argc == 6 and argv[4] == "-o"){
+    }else if (argc == 6 and argv[4] == "-o"){
         prefixOutput = argv[5];
         threshold = 0;
         dis = 1;
+        cout << "vraiment????" << endl;
     }else if (argc == 6 and argv[4] == "-c"){
         prefixOutput = "./";
         threshold = atoi(argv[5]);
