@@ -64,7 +64,11 @@ int main(int argc, char** argv) {
              << " file.nodes file.edges node_id/input.txt [-o prefixOutput] [-c value] [-d dis] \n"
              << "The option c allows to give a threshold to the weight of visited vertices (default 0) and the option d gives the "
                 "depth of neighbor gathered (default 1)" << endl;
-        cout << argc << " arguments have been used" << endl;
+        cout << argc << " arguments have been used " ;
+        for(int i =0; i<argc ; i++){
+            cout << "arg" << i << ": " << argv[i] << "\t" ;
+        }
+        cout << endl;
         return 0;
     }
 
