@@ -196,8 +196,9 @@ int main(int argc, char** argv) {
     vu_total[index] = 1;
 
     cout << "Début de la recherche des composantes" << endl;
-    while (weight >= threshold and m < 100) //On cherche des composantes tant qu'il existe encore un sommet vérifiant
+    while (weight >= threshold) //On cherche des composantes tant qu'il existe encore un sommet vérifiant
         //le critère et dans la limite des 100 composantes.
+        //Condition m < 100 enlevée
     {
         //On réalise alors un BFS depuis le sommet/graine `index`
         for (int i = 0; i < G.N; i++) {
@@ -433,14 +434,15 @@ int main(int argc, char** argv) {
             //On récupère les voisins hors composante
             setVoisinOutF.clear();
             setVoisinOutR.clear();
-            for (int i = 0; i < indexation.size(); i++) {
+            for (int i = 0; i < indexation.size(); i++) { //On parcourt tous les sommets sortants
                 vector<int> setOutF;
                 vector<int> setOutR;
                 setOutF.clear();
                 setOutR.clear();
-                for (int j = 0; j< neighborsPeri[i].size(); ++j ){
-                    if (j<limiteAretes[i]){
-                        if (seen[neighborsPeri[i][j]] == 0){
+                for (int j = 0; j< neighborsPeri[i].size(); ++j ){ //On regarde les j-ème sommets en Peri de i
+                    if (j<limiteAretes[i]){ //Cas i vu dans le sens foward
+                        if (seen[neighborsPeri[i][j]] == 0){ //Si c'est un sommet hors comp
+                            //On insère le sommet dans setOutF une liste triée
                             pos= distance(setOutF.begin(), upper_bound(setOutF.begin(),setOutF.end(),
                                                                        neighborsPeri[i][j]));
                             setOutF.insert(setOutF.begin()+pos,neighborsPeri[i][j]);
