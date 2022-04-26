@@ -236,7 +236,9 @@ process intersectComp {
 
     script:
     """
-        for i in {0..99..1}
+    maxi=$(ls comp*.txt | wc -l)
+    maxi=$(($maxi-1))
+        for i in {0..${maxi}..1}
         do
             python3 \
                 ${workDir}/reads_to_align.py ${workDir}/../../results/${name}/processing/comp\$i.txt \
@@ -260,5 +262,4 @@ process intersectComp {
         python3 rapportAgglo.py ${TE} ${workDir}/../../results/${name}/processing/intersectionTE 100 -target > ${workDir}/../../results/${name}/rapportHisto.txt
     """
 }
-
 
