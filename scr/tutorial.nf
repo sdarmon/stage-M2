@@ -28,6 +28,15 @@ chien["abundance"] = "${workDir}/../../../kissplice_results/kissplice_Chiens/gra
 chien["edges"] = "${workDir}/../../../kissplice_results/kissplice_Chiens/graph_SRR15254976_1_SRR15254976_2_SRR15254978_1_SRR15254978_2_SRR15254980_1_SRR15254980_2_SRR15254982_1_SRR15254982_2_SRR15254985_1_SRR15254985_2_SRR15254986_1_SRR15254986_2_SRR15254989_1_SRR15254989_2_SRR1k41_C0.05.edges"
 chien["TE"] = "${workDir}/../../data/chien/Cfam_GSD_TE.gtf"
 
+chienFastP = ["name":"", "genome":"", "gtf":"", "nodes":"","abundance":"",  "edges":"", "TE":""]
+chienFastP["name"] = "chienFastP"
+chienFastP["genome"] = "${workDir}/../../../fastq/SRR_Chiens/Canis_lupus_familiaris-GCA_011100685.1-unmasked.fa"
+chienFastP["gtf"] = "${workDir}/../../../fastq/SRR_Chiens/Canis_lupus_familiaris-GCA_011100685.1-2021_03-genes.sorted.gtf"
+chienFastP["nodes"] = "${workDir}/../../../kissplice_results/kissplice_Chiens_fastp/graph_fastp_control_1_1_fastp_control_1_2_fastp_control_2_1_fastp_control_2_2_fastp_control_3_1_fastp_control_3_2_fastp_control_4_1_fastp_control_4_2_fastp_control_5_1_fastp_control_5_2_fastp_tumor_1_1_fastk41.nodes"
+chienFastP["abundance"] = "${workDir}/../../../kissplice_results/kissplice_Chiens_fastp/graph_fastp_control_1_1_fastp_control_1_2_fastp_control_2_1_fastp_control_2_2_fastp_control_3_1_fastp_control_3_2_fastp_control_4_1_fastp_control_4_2_fastp_control_5_1_fastp_control_5_2_fastp_tumor_1_1_fastk41.abundance"
+chienFastP["edges"] = "${workDir}/../../../kissplice_results/kissplice_Chiens_fastp/graph_fastp_control_1_1_fastp_control_1_2_fastp_control_2_1_fastp_control_2_2_fastp_control_3_1_fastp_control_3_2_fastp_control_4_1_fastp_control_4_2_fastp_control_5_1_fastp_control_5_2_fastp_tumor_1_1_fastk41_C0.05.edges"
+chienFastP["TE"] = "${workDir}/../../data/chien/Cfam_GSD_TE.gtf"
+
 chien2 = ["name":"", "genome":"", "gtf":"", "nodes":"","abundance":"",  "edges":"", "TE":""]
 chien2["name"] = "chien2"
 chien2["genome"] = "${workDir}/../../data/chien2/canFam4.fa"
@@ -51,7 +60,7 @@ human["TE"] = "${workDir}/../../../fastq/Human/Human_TE.gtf"
 topVal = Channel.from("top10","top10")
 topAgglo = Channel.from("top1","top1")
 
-donnees = Channel.from(human,chien) //moust,chien
+donnees = Channel.from(chienFastP) //moust,chien
 // = Channel.from() //moust
 //intersecter = Channel.from()  //moust
 //agglo = Channel.from() //moust
@@ -261,5 +270,4 @@ process intersectComp {
         python3 rapportAgglo.py ${TE} ${workDir}/../../results/${name}/processing/intersectionTE 100 -target > ${workDir}/../../results/${name}/rapportHisto.txt
     """
 }
-
 
