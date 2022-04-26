@@ -259,7 +259,3 @@ process intersectComp {
         python3 rapportAgglo.py ${TE} ${workDir}/../../results/${name}/processing/intersectionTE 100 -target > ${workDir}/../../results/${name}/rapportHisto.txt
     """
 }
-
-"""
-
-
