@@ -40,8 +40,8 @@ chien2["TE"] = "${workDir}/../../data/chien2/Cfam_GSD_TE_Americain.gtf"
 
 human = ["name":"", "genome":"", "gtf":"", "nodes":"","abundance":"", "edges":"", "TE":""]
 human["name"] = "human"
-human["genome"] = "${workDir}/../../../fastq/Human/hg38.fa.align"
-human["gtf"] = "${workDir}/../../../fastq/Human/hg38.knownGene.gtf"
+human["genome"] = "${workDir}/../../../fastq/Human/ref_genome_Homo.fa"
+human["gtf"] = "${workDir}/../../../fastq/Human/hg38.ncbiRefSeq.gtf"
 human["nodes"] = "${workDir}/../../../kissplice_results/kissplice_human_fastp/graph_fastp_SknshRACellRep1_10M_fastp_SknshRACellRep2_10M_fastp_SknshCellRep3_10M_fastp_SknshCellRep4_10M_k41.nodes"
 human["abundance"] = "${workDir}/../../../kissplice_results/kissplice_human_fastp/graph_fastp_SknshRACellRep1_10M_fastp_SknshRACellRep2_10M_fastp_SknshCellRep3_10M_fastp_SknshCellRep4_10M_k41.abundance"
 human["edges"] = "${workDir}/../../../kissplice_results/kissplice_human_fastp/graph_fastp_SknshRACellRep1_10M_fastp_SknshRACellRep2_10M_fastp_SknshCellRep3_10M_fastp_SknshCellRep4_10M_k41_C0.05.edges"
@@ -259,3 +259,7 @@ process intersectComp {
         python3 rapportAgglo.py ${TE} ${workDir}/../../results/${name}/processing/intersectionTE 100 -target > ${workDir}/../../results/${name}/rapportHisto.txt
     """
 }
+
+"""
+
+
