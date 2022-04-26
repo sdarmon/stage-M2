@@ -51,7 +51,7 @@ human["TE"] = "${workDir}/../../fastq/Human/Human_TE.gtf"
 topVal = Channel.from("top10","top10")
 topAgglo = Channel.from("top1","top1")
 
-donnees = Channel.from(human,chien) //moust,chien
+donnees = Channel.from(human) //moust,chien
 // = Channel.from() //moust
 //intersecter = Channel.from()  //moust
 //agglo = Channel.from() //moust
