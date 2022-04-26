@@ -236,9 +236,9 @@ process intersectComp {
 
     script:
     """
-    maxi=$(ls comp*.txt | wc -l)
-    maxi=$(($maxi-1))
-        for i in {0..${maxi}..1}
+    maxi=\$(ls comp*.txt | wc -l)
+    maxi=\$((\$maxi-1))
+        for i in {0..\${maxi}..1}
         do
             python3 \
                 ${workDir}/reads_to_align.py ${workDir}/../../results/${name}/processing/comp\$i.txt \
