@@ -70,7 +70,7 @@ if len(Arg) == 5:
 
     #On plt.plot les histogrammes des fréquences ainsi trouvée (avec des jolies couleurs et les bars se superposant
     YY = [np.array(Y[0])]
-    for i in range(1, len(Y)):
+    for i in range(0, len(Y)):
         YY.append(YY[-1]+np.array(Y[i]))
     for i in range(1, len(Y)):
         plt.bar(X, Y[i], label=str(i), color=cm.hsv(i / len(Y)), bottom=YY[i])
