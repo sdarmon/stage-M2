@@ -67,6 +67,7 @@ if len(Arg) == 5:
         Z[len(lst)].append(target)
     for i in range(1, len(Z)): #Afin d'afficher les stastistiques des composantes
         print("Found in " + str(i) + " componants :", Z[i])
+
     #On plt.plot les histogrammes des fréquences ainsi trouvée (avec des jolies couleurs et les bars se superposant
     YY = [np.array(Y[0])]
     for i in range(0, len(Y)):

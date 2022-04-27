@@ -499,6 +499,7 @@ int main(int argc, char** argv) {
             }
 
             //Puis les arêtes au sein de la composante :
+            /* essaie sans ces arêtes
             for (int i = 0; i < indexation.size(); i++) {
                 if (seen[indexation[i]] < 0) {
                     for (int j = 0; j < neighborsPeri[i].size(); j++) {
@@ -518,6 +519,7 @@ int main(int argc, char** argv) {
                     }
                 }
             }
+             */
 
         } //On vient de terminer cette composante !
 
