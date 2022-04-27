@@ -69,7 +69,7 @@ if len(Arg) == 5:
         print("Found in " + str(i) + " componants :", Z[i])
 
     #On plt.plot les histogrammes des fréquences ainsi trouvée (avec des jolies couleurs et les bars se superposant
-    YY = [np.array(Y[0]))
+    YY = [np.array(Y[0])]
     for i in range(1, len(Y)):
         YY.append(YY[-1]+np.array(Y[i]))
     for i in range(1, len(Y)):
