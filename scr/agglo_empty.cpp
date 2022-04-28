@@ -409,60 +409,6 @@ int main(int argc, char** argv) {
             } //On termine de traiter tous les sommets de la composante
             cout << "BFS sur tous les sommets terminés" << endl;
 
-            //On trie par cardinal décroissant le vecteur neighborsPeri, un tri bulle suffit car algo suivant en n²
-            //aussi
-            for (int i = indexation.size() - 1; i > 0; i--) {
-                modif = 0;
-                for (int j = 0; j < i; j++) {
-                    if (neighborsPeri[j].size() < neighborsPeri[j+1].size()) {
-                        swap(neighborsPeri[j + 1], neighborsPeri[j]);
-                        swap(neighborsAretes[j + 1], neighborsAretes[j]);
-                        swap(neighborsInF[j+1],neighborsInF[j]);
-                        swap(neighborsInR[j+1],neighborsInR[j]);
-                        swap(setVoisinInF[j+1],setVoisinInF[j]);
-                        swap(setVoisinInR[j+1],setVoisinInR[j]);
-                        swap(indexation[j + 1], indexation[j]);
-                        swap(limiteAretes[j+1],limiteAretes[j]);
-                        modif = 1;
-                    }
-                }
-                if (!modif) {
-                    break;
-                }
-            }
-            cout << "Ensembles des " << indexation.size() << " voisins triés" << endl;
-            //Ici, on ne veut garder que la plus grande antichaine de sommets (en terme d'inclusion des voisinages)
-            //Et alors, on veut fusionner les sommets comparables.
-            fusion.clear(); //Ce vecteur contiendra -1 si le sommet ne doit pas fusionner dans un autre sommet, et
-            //i s'il correspond à un sous-ensemble du i-ème sommet
-
-            //On récupère les voisins hors composante
-            setVoisinOutF.clear();
-            setVoisinOutR.clear();
-            for (int i = 0; i < indexation.size(); i++) { //On parcourt tous les sommets sortants
-                vector<int> setOutF;
-                vector<int> setOutR;
-                setOutF.clear();
-                setOutR.clear();
-                for (int j = 0; j< neighborsPeri[i].size(); ++j ){ //On regarde les j-ème sommets en Peri de i
-                    if (j<limiteAretes[i]){ //Cas i vu dans le sens foward
-                        if (seen[neighborsPeri[i][j]] == 0){ //Si c'est un sommet hors comp
-                            //On insère le sommet dans setOutF une liste triée
-                            pos= distance(setOutF.begin(), upper_bound(setOutF.begin(),setOutF.end(),
-                                                                       neighborsPeri[i][j]));
-                            setOutF.insert(setOutF.begin()+pos,neighborsPeri[i][j]);
-                        }
-                    } else{
-                        if (seen[neighborsPeri[i][j]] == 0){
-                            pos= distance(setOutR.begin(), upper_bound(setOutR.begin(),setOutR.end(),
-                                                                       neighborsPeri[i][j]));
-                            setOutR.insert(setOutR.begin()+pos,neighborsPeri[i][j]);
-                        }
-                    }
-                }
-                setVoisinOutF.push_back(setOutF);
-                setVoisinOutR.push_back(setOutR);
-            }
 
 
             //On peut donc passer la construction du graphe. Commençons par les sommets.
@@ -481,10 +427,10 @@ int main(int argc, char** argv) {
                 V3.push_back(Node(index, G.Vertices[i].weight, G.Vertices[i].label));
                 correspondingVertex[i] = index;
                 index++;
-            } else if (seen[i] < 0) {
+            } else if (seen[i] != 0) {
                 continue; //Cas déjà traité précédemment
             } else {
-                correspondingVertex[i] = -1; //Cas sommet fusionné ou de label trop court
+                correspondingVertex[i] = -1; //Cas sommet de label trop court
             }
         }
         cout << "Sommets restants ajoutés" << endl;
@@ -497,7 +443,7 @@ int main(int argc, char** argv) {
                         E3.push_back(Edge(correspondingVertex[i],correspondingVertex[node->val],0,node->label));
                     }
                 }
-            } else if (seen[i] < 0 ){
+            } else if (seen[i] != 0 ){
                 for (vector<Neighbor>::iterator node = G.Neighbors(i)->begin(); node != G.Neighbors(i)->end(); ++node) {
                     if (seen[node->val] == 0 and correspondingVertex[node->val]>=0) { //Voisin hors comp et valide
                         E3.push_back(Edge(correspondingVertex[i], correspondingVertex[node->val], 0, node->label));
