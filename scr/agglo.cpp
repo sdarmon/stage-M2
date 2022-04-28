@@ -188,6 +188,7 @@ int main(int argc, char** argv) {
     threshold = atoi(argv[4]);
     int m = 0;
     int weight;
+    int compt;
     vector<int> vu(G.N, 0);
     vector < Neighbor * > aVoir;
 
@@ -216,16 +217,20 @@ int main(int argc, char** argv) {
         G.BFS_func(threshold, aVoir, vu);
 
         //Puis on ajoute les sommets trouvés à la composante
+        compt=0;
         for (int i = 0; i < G.N; i++) {
             if (vu[i]) {
+                compt++;
                 compo.push_back(i);
                 vu_total[i] = 1;
             }
         }
-        save_comp(G, compo, argv[7], m); //On enregistre la composante sur l'ordinateur
-        components.push_back(compo); //Et on ajoute la composante au vecteur de composantes
-        cout << "Composante trouvée de départ " << index << " et de poids " << G.Vertices[index].weight
-             << " et de taille " << compo.size() << endl;
+        if (compt > 1){
+            save_comp(G, compo, argv[7], m); //On enregistre la composante sur l'ordinateur
+            components.push_back(compo); //Et on ajoute la composante au vecteur de composantes
+            cout << "Composante trouvée de départ " << index << " et de poids " << G.Vertices[index].weight
+                 << " et de taille " << compo.size() << endl;
+        }
 
         //Finalement, on recommence la boucle while
         m++;
@@ -499,7 +504,6 @@ int main(int argc, char** argv) {
             }
 
             //Puis les arêtes au sein de la composante :
-            /* essaie sans ces arêtes
             for (int i = 0; i < indexation.size(); i++) {
                 if (seen[indexation[i]] < 0) {
                     for (int j = 0; j < neighborsPeri[i].size(); j++) {
@@ -519,7 +523,6 @@ int main(int argc, char** argv) {
                     }
                 }
             }
-             */
 
         } //On vient de terminer cette composante !
 
@@ -529,24 +532,25 @@ int main(int argc, char** argv) {
                 V3.push_back(Node(index, G.Vertices[i].weight, G.Vertices[i].label));
                 correspondingVertex[i] = index;
                 index++;
+            } else if (seen[i] < 0) {
+                continue; //Cas déjà traité précédemment
             } else {
-                correspondingVertex[i] = -1;
+                correspondingVertex[i] = -1; //Cas sommet fusionné ou de label trop court
             }
         }
         cout << "Sommets restants ajoutés" << endl;
 
         //Maintenant on s'occupe des arêtes
         for (int i = 0; i<G.N ; i++) {
-            if (seen[i] == 0 and correspondingVertex[i]>=0){
+            if (seen[i] == 0 and correspondingVertex[i]>=0){//Cas sommet hors comp et valide
                 for(vector<Neighbor>::iterator node = G.Neighbors(i)->begin(); node != G.Neighbors(i)->end(); ++node){
-                    if (correspondingVertex[node->val]>=0){
+                    if (correspondingVertex[node->val]>=0){ //Cas voisin valide
                         E3.push_back(Edge(correspondingVertex[i],correspondingVertex[node->val],0,node->label));
                     }
                 }
-            } else {
+            } else if (seen[i] < 0 ){
                 for (vector<Neighbor>::iterator node = G.Neighbors(i)->begin(); node != G.Neighbors(i)->end(); ++node) {
-                    if (seen[node->val] < 0 and correspondingVertex[node->val]>=0) { //Ici on regarde que les négatifs car tous les positifs ont été fusionné
-                        //avec des sur-ensembles de leurs voisins, donc normalement c'est bon, on n'a pas d'arêtes en double!
+                    if (seen[node->val] == 0 and correspondingVertex[node->val]>=0) { //Voisin hors comp et valide
                         E3.push_back(Edge(correspondingVertex[i], correspondingVertex[node->val], 0, node->label));
                     }
                 }
