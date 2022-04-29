@@ -302,7 +302,7 @@ int Graph::BFSCount(vector<int> &rayons, int acc,vector<Neighbor*> &aVoir,vector
         return BFSCount(rayons,acc,aVoir,vu);
     }
     vu.push_back(node->val);
-    if (node->weight <= rayon+kmer-1){ //Cas où le sommet est bien dans la boule
+    if (node->weight -kmer+1 <= rayon){ //Cas où le sommet est bien dans la boule
         for (vector<Neighbor>::iterator it = Neighbors(node->val)->begin(); it != Neighbors(node->val)->end(); ++it){
             //On boucle sur ses voisins
             if (it->label[0] == node->label[1] && find(vu.begin(),vu.end(),it->val) == vu.end()){ 
@@ -339,8 +339,8 @@ void Graph::weighingANode(int source, int rayon) {
         vu.push_back(source);
         for (vector<Neighbor>::iterator it = Neighbors(source)->begin(); it != Neighbors(source)->end(); ++it){
             if (it->label[0] == 'F'){
-                aVoir.push_back(&(*it));
-                rayons.push_back(rayon-position);
+                //aVoir.push_back(&(*it));
+                //rayons.push_back(rayon-position);
             } else {
                 aVoir.push_back(&(*it));
                 rayons.push_back(rayon-taille-1+position);
