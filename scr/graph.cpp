@@ -339,11 +339,11 @@ void Graph::weighingANode(int source, int rayon) {
         vu.push_back(source);
         for (vector<Neighbor>::iterator it = Neighbors(source)->begin(); it != Neighbors(source)->end(); ++it){
             if (it->label[0] == 'F'){
-                //aVoir.push_back(&(*it));
-                //rayons.push_back(rayon-position);
-            } else {
                 aVoir.push_back(&(*it));
-                rayons.push_back(rayon-taille-1+position);
+                rayons.push_back(rayon-position);
+            } else {
+                //aVoir.push_back(&(*it));
+                //rayons.push_back(rayon-taille-1+position);
             }
         }
         maxi = max(maxi,BFSCount(rayons,1,aVoir,vu)); // On garde que le maximum des valeurs trouvées
