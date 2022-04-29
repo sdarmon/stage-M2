@@ -342,8 +342,8 @@ void Graph::weighingANode(int source, int rayon) {
                 aVoir.push_back(&(*it));
                 rayons.push_back(rayon-position);
             } else {
-                //aVoir.push_back(&(*it));
-                //rayons.push_back(rayon-taille-1+position);
+                aVoir.push_back(&(*it));
+                rayons.push_back(rayon-taille+1+position);
             }
         }
         maxi = max(maxi,BFSCount(rayons,1,aVoir,vu)); // On garde que le maximum des valeurs trouvées
