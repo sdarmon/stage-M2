@@ -302,13 +302,13 @@ int Graph::BFSCount(vector<int> &rayons, int acc,vector<Neighbor*> &aVoir,vector
         return BFSCount(rayons,acc,aVoir,vu);
     }
     vu.push_back(node->val);
-    if (node->weight <= rayon+40){ //Cas où le sommet est bien dans la boule
+    if (node->weight <= rayon+kmer-1){ //Cas où le sommet est bien dans la boule
         for (vector<Neighbor>::iterator it = Neighbors(node->val)->begin(); it != Neighbors(node->val)->end(); ++it){
             //On boucle sur ses voisins
             if (it->label[0] == node->label[1] && find(vu.begin(),vu.end(),it->val) == vu.end()){ 
                 //Cas où l'arrêt est bien valide et sommet non vu avant, ce voisin est rajouté dans la file des visites
                 aVoir.push_back(&(*it));
-                rayons.push_back(rayon+40-node->weight);
+                rayons.push_back(rayon+kmer-1-node->weight);
             }
         }
         return BFSCount(rayons,acc+1,aVoir,vu); //On traite les cas suivants, en prenant en compte le sommet
@@ -331,7 +331,7 @@ void Graph::weighingANode(int source, int rayon) {
     //valeur de poids minimal.
     int mini = 0;
     int firstTime = 1;
-    int taille = Vertices[source].label.size() - 40;
+    int taille = Vertices[source].label.size() - kmer+1;
     for(int position = 0; position < taille; position++){ //On boucle sur toutes les positions
         rayons.clear();
         aVoir.clear();

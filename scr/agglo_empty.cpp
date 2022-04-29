@@ -151,9 +151,9 @@ int subset(vector<int> &setA, vector<int> &setB){
 
 
 int main(int argc, char** argv) {
-    if (argc != 8 and argc != 10) {
+    if (argc != 8 and argc != 10 and argc != 12) {
         cout << "Expected use of this program: \n\n\t" << argv[0]
-             << " file.nodes file.edges -c value -d dis outputPrefix [-clean file.abundance]\n" << endl;
+             << " file.nodes file.edges -c value -d dis [-k kmer] outputPrefix [-clean file.abundance]\n" << endl;
         return 0;
     }
 
@@ -172,6 +172,9 @@ int main(int argc, char** argv) {
     read_node_file_weighted(nodes, V);
 
     Graph G(V, E);
+    if(argc >= 9 and argv[7][1]=='k' ){
+        G.kmer = stoi(argv[8]);
+    }
 
     cout << "Graphe chargé et construit" << endl;
 

@@ -34,7 +34,7 @@ void chemin_local(int i, vector<int> &endings, Graph &G, vector<vector<int>> &co
         for (vector<Neighbor>::iterator it = G.Neighbors(components[i][k])->begin(); it != G.Neighbors(components[i][k])->end(); ++it){
             if (find(comp1.begin(),comp1.end(), it->val) == comp1.end()){ 
                 voisin1.push_back(&(*it));
-                pronf.push_back(G.Vertices[it->val].label.size()-40);
+                pronf.push_back(G.Vertices[it->val].label.size()-G.kmer+1);
             }
         }
     }
@@ -86,7 +86,7 @@ void chemin_local(int i, vector<int> &endings, Graph &G, vector<vector<int>> &co
                     continue;
                 }
                 voisin1.push_back(&(*it));
-                pronf.push_back(pro+G.Vertices[it->val].label.size()-40);
+                pronf.push_back(pro+G.Vertices[it->val].label.size()-G.kmer+1);
             }
         }
         step ++; //On passe à la couche suivante
@@ -151,9 +151,9 @@ int subset(vector<int> &setA, vector<int> &setB){
 
 
 int main(int argc, char** argv) {
-    if (argc != 8 and argc != 10) {
+    if (argc != 8 and argc != 10 and argc != 12) {
         cout << "Expected use of this program: \n\n\t" << argv[0]
-             << " file.nodes file.edges -c value -d dis outputPrefix [-clean file.abundance]\n" << endl;
+             << " file.nodes file.edges -c value -d dis [-k kmer] outputPrefix [-clean file.abundance]\n" << endl;
         return 0;
     }
 
@@ -172,6 +172,9 @@ int main(int argc, char** argv) {
     read_node_file_weighted(nodes, V);
 
     Graph G(V, E);
+    if(argc >= 9 and argv[7][1]=='k' ){
+        G.kmer = stoi(argv[8]);
+    }
 
     cout << "Graphe chargé et construit" << endl;
 
@@ -528,7 +531,7 @@ int main(int argc, char** argv) {
 
         //Maintenant que les composantes ont bien été ajouté, on s'occupe des sommets restants
         for (int i = 0; i < G.N; i++) {
-            if (seen[i] == 0 and G.Vertices[i].label.size()>40) {
+            if (seen[i] == 0 and G.Vertices[i].label.size()>G.kmer-1) {
                 V3.push_back(Node(index, G.Vertices[i].weight, G.Vertices[i].label));
                 correspondingVertex[i] = index;
                 index++;

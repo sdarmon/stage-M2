@@ -79,6 +79,7 @@ class Graph
 
     int N;  // number of nodes in the graph
     int M; //number of edges in the graph
+    int kmer = 41; //size of the kmers, by default = 41
     vector<LstNode> Adj;                //adjacency list as a vector of adjNodes
     vector<Node> Vertices;         //the vertices list as a vector of embNodes
 

@@ -16,8 +16,8 @@
 // graph implementation
 int main(int argc, char** argv)
 {
-    if (argc!=4 and argc!=6){
-        cout << "Expected use of this program: \n\n\t" <<argv[0] << " file.nodes file.edges radius -o output.txt\n" << endl;
+    if (argc!=4 and argc!=6 and argc!=8){
+        cout << "Expected use of this program: \n\n\t" <<argv[0] << " file.nodes file.edges radius -k kmer -o output.txt\n" << endl;
         return 0;
     }
 
@@ -34,16 +34,24 @@ int main(int argc, char** argv)
     read_node_file(nodes,V);
 
     Graph G(V,E);
+    if(argc >= 6 and argv[4][1]=='k' ){
+        G.kmer = stoi(argv[5]);
+    }
 
     G.weighing();
     G.weighingAllNodes(atoi(argv[3]));
 
-    if(argc == 6){
+    if(argc == 6 and argv[4][1]=='o'){
         ofstream output;
         output.open(argv[5]);
         printGraphVertices(G,output);
         output.close();
-    } else{
+    } else if(argc == 8 and argv[6][1]=='o'){
+        ofstream output;
+        output.open(argv[7]);
+        printGraphVertices(G,output);
+        output.close();
+    } else {
         printGraphVertices(G);
     }
     return 0;
