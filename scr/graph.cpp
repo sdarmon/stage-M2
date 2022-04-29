@@ -328,7 +328,7 @@ void Graph::weighingANode(int source, int rayon) {
     //De plus, pour la définition de la boule autour d'un unitig, il faut prendre en compte le fait que ce dernier est
     //peut-être bien plus grand qu'un k-mer! Le critère choisi pour prendre en compte ce paramètre est de pondérer les
     //rayons en fonction de toutes les positions possibles dans le graphe de De Bruijn non compacté et de choisir la
-    //valeur de poids minimal.
+    //valeur de poids minimal. POURQUOI MINIMAL!?!?!
     int maxi = 0;
     int firstTime = 1;
     int taille = Vertices[source].label.size() - kmer+1;
@@ -346,12 +346,7 @@ void Graph::weighingANode(int source, int rayon) {
                 rayons.push_back(rayon-taille+position+1);
             }
         }
-        if (firstTime){
-            maxi=BFSCount(rayons,1,aVoir,vu); // On garde que le minimum des valeurs trouvées
-            firstTime=0;
-        } else{
-            maxi = max(maxi,BFSCount(rayons,1,aVoir,vu)); // On garde que le minimum des valeurs trouvées
-            }
+        maxi = max(maxi,BFSCount(rayons,1,aVoir,vu)); // On garde que le maximum des valeurs trouvées
     }
     Vertices[source].weight = maxi;
 }
