@@ -34,7 +34,7 @@ void chemin_local(int i, vector<int> &endings, Graph &G, vector<vector<int>> &co
         for (vector<Neighbor>::iterator it = G.Neighbors(components[i][k])->begin(); it != G.Neighbors(components[i][k])->end(); ++it){
             if (find(comp1.begin(),comp1.end(), it->val) == comp1.end()){
                 voisin1.push_back(&(*it));
-                pronf.push_back(G.Vertices[it->val].label.size()-40);
+                pronf.push_back(G.Vertices[it->val].label.size()-(G.kmer -1));
             }
         }
     }
@@ -86,7 +86,7 @@ void chemin_local(int i, vector<int> &endings, Graph &G, vector<vector<int>> &co
                     continue;
                 }
                 voisin1.push_back(&(*it));
-                pronf.push_back(pro+G.Vertices[it->val].label.size()-40);
+                pronf.push_back(pro+G.Vertices[it->val].label.size()-(G.kmer -1));
             }
         }
         step ++; //On passe à la couche suivante
@@ -244,7 +244,7 @@ int main(int argc, char** argv) {
     }
 
     cout << "Fin de la recherche de composantes." << endl;
-    if (argc < 9 ) {
+    if (argc < 11 ) {
         //Maintenant on construit nouveau graphe contracté
         vector <Edge> E2;
         vector <Node> V2;
@@ -282,7 +282,7 @@ int main(int argc, char** argv) {
         printEdges(E2, outputEdges);
         outputEdges.close();
     }
-    if (argc == 10) {
+    if (argc == 12) {
         cout << "Début construction graphe aggloméré" << endl;
         vector <Edge> E3;
         vector <Node> V3;
@@ -426,7 +426,7 @@ int main(int argc, char** argv) {
 
         //Maintenant que les composantes ont bien été ajouté, on s'occupe des sommets restants
         for (int i = 0; i < G.N; i++) {
-            if (seen[i] == 0 and G.Vertices[i].label.size()>40) {
+            if (seen[i] == 0 and G.Vertices[i].label.size()>G.kmer -1) {
                 V3.push_back(Node(index, G.Vertices[i].weight, G.Vertices[i].label));
                 correspondingVertex[i] = index;
                 index++;
@@ -458,17 +458,17 @@ int main(int argc, char** argv) {
 
         //Enfin, on enregistre le graphe créé.
         ofstream outputNodes2;
-        outputNodes2.open(string(argv[7]) + "/clean.nodes");
+        outputNodes2.open(string(argv[9]) + "/clean.nodes");
         printVerticesBcalm(V3, outputNodes2);
         outputNodes2.close();
 
         ofstream outputEdges2;
-        outputEdges2.open(string(argv[7]) + "/clean.edges");
+        outputEdges2.open(string(argv[9]) + "/clean.edges");
         printEdgesBcalm(E3, outputEdges2);
         outputEdges2.close();
 
         //On récupère aussi l'abondance qui est nécessaire pour kissplice
-        ifstream ab(argv[9], std::ios::binary);
+        ifstream ab(argv[11], std::ios::binary);
 
         vector <double> A;
         read_abundance_file(ab,A);
@@ -480,7 +480,7 @@ int main(int argc, char** argv) {
         }
 
         ofstream outputAb;
-        outputAb.open(string(argv[7]) + "/clean.abundance");
+        outputAb.open(string(argv[9]) + "/clean.abundance");
         printAbundance(A3,outputAb);
         cout << "Graphe enregistré" << endl;
     }
