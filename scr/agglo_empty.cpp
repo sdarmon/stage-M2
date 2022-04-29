@@ -420,6 +420,7 @@ int main(int argc, char** argv) {
                     V3.push_back(Node(index,G.Vertices[indexation[i]].weight,G.Vertices[indexation[i]].label));
                     correspondingVertex[indexation[i]] = index;
                     index++;
+                }
             }
         } //On vient de terminer cette composante !
 
