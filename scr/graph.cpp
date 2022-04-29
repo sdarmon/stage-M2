@@ -331,7 +331,7 @@ void Graph::weighingANode(int source, int rayon) {
     //valeur de poids minimal. POURQUOI MINIMAL!?!?!
     int maxi = 0;
     int firstTime = 1;
-    int taille = Vertices[source].label.size() - kmer+1;
+    int taille = Vertices[source].label.size();
     for(int position = 0; position < taille; position++){ //On boucle sur toutes les positions
         rayons.clear();
         aVoir.clear();
