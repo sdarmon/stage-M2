@@ -416,9 +416,10 @@ int main(int argc, char** argv) {
 
             //On peut donc passer la construction du graphe. Commençons par les sommets.
             for (int i = 0; i < indexation.size(); i++) {
-                V3.push_back(Node(index,G.Vertices[indexation[i]].weight,G.Vertices[indexation[i]].label));
-                correspondingVertex[indexation[i]] = index;
-                index++;
+                if (seen[indexation[i]] != 0) {
+                    V3.push_back(Node(index,G.Vertices[indexation[i]].weight,G.Vertices[indexation[i]].label));
+                    correspondingVertex[indexation[i]] = index;
+                    index++;
             }
         } //On vient de terminer cette composante !
 
