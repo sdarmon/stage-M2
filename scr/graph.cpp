@@ -229,7 +229,7 @@ void Graph::BFS(int r, vector<Edge>& e ,vector<Neighbor*> &aVoir,vector<int> &vu
 
 
 // BFS qui teste si les sommets vérifient bien une condition (par une fonction)
-void Graph::BFS_func(int threshold ,queue<Neighbor*> &aVoir,vector<int> &vu){
+void Graph::BFS_func(int threshold ,queue<Neighbor*> &aVoir,vector<int> &vu, set<int> & setVu){
     Neighbor* node ;
     while (aVoir.size() != 0){ //Cas de terminaison, on a terminé le BFS
         node = aVoir.front();
@@ -238,6 +238,7 @@ void Graph::BFS_func(int threshold ,queue<Neighbor*> &aVoir,vector<int> &vu){
             continue;
         }
         vu[node->val]=1;
+        setVu.insert(node->val);
 
         for (vector<Neighbor>::iterator it = Neighbors(node->val)->begin(); it != Neighbors(node->val)->end(); ++it){
             //On boucle sur ses voisins

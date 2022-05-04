@@ -124,6 +124,7 @@ int main(int argc, char** argv) {
     int m = 0;
     int compt;
     vector<int> vu(G.N, 0);
+    set<int> setVu;
     queue < Neighbor * > aVoir;
 
     cout << "Début du tas min" << endl;
@@ -143,9 +144,10 @@ int main(int argc, char** argv) {
         //Condition m < 100 enlevée
     {
         //On réalise alors un BFS depuis le sommet `index`
-        for (int i = 0; i < G.N; i++) {
-            vu[i] = 0;
+        for (iterator::set<int> it = setVu.begin(); it != setVu.end() ; it++) {
+            vu[(*it)] = 0;
         }
+        setVu.clear();
         vector<int> compo;
         compo.clear();
         //aVoir étant une queue de BFS; est toujours censé être vide ici. Pour la sanité des algos qui suivent on la
@@ -154,12 +156,13 @@ int main(int argc, char** argv) {
             aVoir.pop();
         }
         vu[index] = 1;
+        setVu.insert(index);
         for (vector<Neighbor>::iterator it = G.Neighbors(index)->begin(); it != G.Neighbors(index)->end(); ++it) {
             if (G.Vertices[it->val].weight >= threshold) {
                 aVoir.push(&(*it));
             }
         }
-        G.BFS_func(threshold, aVoir, vu);
+        G.BFS_func(threshold, aVoir, vu, setVu);
 
         //Puis on ajoute les sommets trouvés à la composante
         compt=0;
