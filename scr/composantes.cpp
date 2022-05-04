@@ -144,7 +144,7 @@ int main(int argc, char** argv) {
         //Condition m < 100 enlevée
     {
         //On réalise alors un BFS depuis le sommet `index`
-        for (iterator::set<int> it = setVu.begin(); it != setVu.end() ; it++) {
+        for (set<int>::iterator it = setVu.begin(); it != setVu.end() ; it++) {
             vu[(*it)] = 0;
         }
         setVu.clear();
