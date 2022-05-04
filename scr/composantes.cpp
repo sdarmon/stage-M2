@@ -121,7 +121,7 @@ int main(int argc, char** argv) {
     struct indexDic {
         int key;
         int weight;
-        friend bool operator() (indexDic const& lhs, indexDic const& rhs) {
+        bool operator() (indexDic const& lhs, indexDic const& rhs) {
             return (lhs.weight <= rhs.weight);
         }
     };
@@ -178,7 +178,7 @@ int main(int argc, char** argv) {
 
         //Finalement, on recommence la boucle while
         m++;
-        while (!indexTrie.empty() and vu_total[indexTrie.top()]){
+        while (!indexTrie.empty() and vu_total[indexTrie.top().weight]){
             indexTrie.pop();
         }
         if (!indexTrie.empty()){
