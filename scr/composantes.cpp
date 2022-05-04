@@ -121,7 +121,7 @@ int main(int argc, char** argv) {
     struct indexDic {
         int key;
         int weight;
-        bool operator() (indexDic const& lhs, indexDic const& rhs) {
+        bool operator() (indexDic& lhs, indexDic& rhs) {
             return (lhs.weight <= rhs.weight);
         }
     };
