@@ -34,7 +34,7 @@
 #include <cstring>
 #include <algorithm>
 #include <sstream>
-
+#include <queue>
 // ===========================================================================
 //                             Include Project Files
 // ===========================================================================
@@ -229,11 +229,11 @@ void Graph::BFS(int r, vector<Edge>& e ,vector<Neighbor*> &aVoir,vector<int> &vu
 
 
 // BFS qui teste si les sommets vérifient bien une condition (par une fonction)
-void Graph::BFS_func(int threshold ,vector<Neighbor*> &aVoir,vector<int> &vu){
+void Graph::BFS_func(int threshold ,queue<Neighbor*> &aVoir,vector<int> &vu){
     Neighbor* node ;
     while (aVoir.size() != 0){ //Cas de terminaison, on a terminé le BFS
         node = aVoir.front();
-        aVoir.erase(aVoir.begin());
+        aVoir.pop();
         if (vu[node->val]){ //Cas où le sommet a été vu par le BFS
             continue;
         }
@@ -243,7 +243,7 @@ void Graph::BFS_func(int threshold ,vector<Neighbor*> &aVoir,vector<int> &vu){
             //On boucle sur ses voisins
             if (Vertices[it->val].weight >= threshold and vu[it->val]==0){
                 //Cas où l'arrêt est bien valide et sommet non vu avant, ce voisin est rajouté dans la file des visites
-                aVoir.push_back(&(*it));
+                aVoir.push(&(*it));
             }
         }
     }
@@ -328,8 +328,8 @@ void Graph::weighingANode(int source, int rayon) {
     //De plus, pour la définition de la boule autour d'un unitig, il faut prendre en compte le fait que ce dernier est
     //peut-être bien plus grand qu'un k-mer! Le critère choisi pour prendre en compte ce paramètre est de pondérer les
     //rayons en fonction de toutes les positions possibles dans le graphe de De Bruijn non compacté et de choisir la
-    //valeur de poids minimal. POURQUOI MINIMAL!?!?!
-    int maxi = 0;
+    //valeur de poids minimal pour bloquer gros unitigs. Voir cahier.
+    int mini = 0;
     int firstTime = 1;
     int taille = Vertices[source].label.size() - kmer+1;
     for(int position = 0; position < taille; position++){ //On boucle sur toutes les positions
@@ -346,9 +346,14 @@ void Graph::weighingANode(int source, int rayon) {
                 rayons.push_back(rayon-taille+1+position);
             }
         }
-        maxi = max(maxi,BFSCount(rayons,1,aVoir,vu)); // On garde que le maximum des valeurs trouvées
+        if (firstTime) {
+            mini = BFSCount(rayons,1,aVoir,vu);
+            firstTime = 0;
+        } else {
+            mini = mini(mini,BFSCount(rayons,1,aVoir,vu)); // On garde que le minimum des valeurs trouvées
+        }
     }
-    Vertices[source].weight = maxi;
+    Vertices[source].weight = mini;
 }
 
 
