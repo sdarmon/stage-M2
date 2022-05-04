@@ -12,6 +12,7 @@
 #include <set>
 #include <iterator>
 #include <queue>
+#include <map>
 #include "graph.h"
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wstring-compare"
@@ -120,8 +121,14 @@ int main(int argc, char** argv) {
     int compt;
     vector<int> vu(G.N, 0);
     queue < Neighbor * > aVoir;
-
-    index = indexMax(G, vu_total);
+    vector<int> indexTrie;
+    indexTrie.clear();
+    for (int sommet = 0; sommet < G.N ; sommet++){
+        indexTrie.push_back(sommet);
+    }
+    sort(indexTrie.begin(),indexTrie.end(),G.compWeight);
+    index = indexTrie.back();
+    indexTrie.pop_back();
     weight = G.Vertices[index].weight;
     vu_total[index] = 1;
 
@@ -167,7 +174,11 @@ int main(int argc, char** argv) {
 
         //Finalement, on recommence la boucle while
         m++;
-        index = indexMax(G, vu_total);
+        while (vu_total[indexTrie.back()]){
+            indexTrie.pop_back();
+        }
+        index = indexTrie.back();
+        indexTrie.pop_back();
         weight = G.Vertices[index].weight;
         vu_total[index] = 1;
 
