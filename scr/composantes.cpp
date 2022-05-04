@@ -126,7 +126,7 @@ int main(int argc, char** argv) {
     for (int sommet = 0; sommet < G.N ; sommet++){
         indexTrie.push_back(sommet);
     }
-    sort(indexTrie.begin(),indexTrie.end(),G.compWeight);
+    sort(indexTrie.begin(),indexTrie.end(),G);
     index = indexTrie.back();
     indexTrie.pop_back();
     weight = G.Vertices[index].weight;
