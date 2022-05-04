@@ -136,7 +136,11 @@ int main(int argc, char** argv) {
         }
         vector<int> compo;
         compo.clear();
-        aVoir.clear();
+        //aVoir étant une queue de BFS; est toujours censé être vide ici. Pour la sanité des algos qui suivent on la
+        //vide au cas où...
+        while (!aVoir.empty()){
+            aVoir.pop();
+        }
         vu[index] = 1;
         for (vector<Neighbor>::iterator it = G.Neighbors(index)->begin(); it != G.Neighbors(index)->end(); ++it) {
             if (G.Vertices[it->val].weight >= threshold) {
