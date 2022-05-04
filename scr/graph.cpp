@@ -350,7 +350,7 @@ void Graph::weighingANode(int source, int rayon) {
             mini = BFSCount(rayons,1,aVoir,vu);
             firstTime = 0;
         } else {
-            mini = mini(mini,BFSCount(rayons,1,aVoir,vu)); // On garde que le minimum des valeurs trouvées
+            mini = min(mini,BFSCount(rayons,1,aVoir,vu)); // On garde que le minimum des valeurs trouvées
         }
     }
     Vertices[source].weight = mini;
