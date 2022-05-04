@@ -356,7 +356,7 @@ void Graph::weighingANode(int source, int rayon) {
     Vertices[source].weight = mini;
 }
 
-bool Graph::compWeight(int i, int j) {
+bool Graph::operator()(int i, int j) {
     return(Vertices[i].weight <= Vertices[j].weight);
 }
 //Permet de donner un poids à tous les sommets du graphe.
