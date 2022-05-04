@@ -10,9 +10,7 @@
 #include <string>
 #include <algorithm>
 #include <set>
-#include <iterator>
 #include <queue>
-#include <map>
 #include "graph.h"
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wstring-compare"
@@ -120,17 +118,22 @@ int main(int argc, char** argv) {
     int compt;
     vector<int> vu(G.N, 0);
     queue < Neighbor * > aVoir;
-    vector<int> indexTrie;
-    indexTrie.clear();
+    struct indexDic {
+        int key;
+        int weight;
+        friend bool operator< (indexDic const& lhs, indexDic const& rhs) {
+            return (lhs.weight < rhs.weight);
+        }
+    };
+    cout << "Début du tas min" << endl;
+    priority_queue<indexDic> indexTrie;
     for (int sommet = 0; sommet < G.N ; sommet++){
         if (G.Vertices[sommet].weight >= threshold){
-            indexTrie.push_back(sommet);
+            indexTrie.push_back(indexDic{sommet,G.Vertices[sommet].weight});
         }
-    }
-    cout << "Début du tri des " << indexTrie.size() << " sommets en fonction de leur poids" << endl;
-    sort(indexTrie.begin(),indexTrie.end(),G);
-    index = indexTrie.back();
-    indexTrie.pop_back();
+    } //Attention ici il y a une opti possible : on est en N log N mais c'est clairement possible de faire en N
+    index = indexTrie.top();
+    indexTrie.pop();
     vu_total[index] = 1;
 
     cout << "Début de la recherche des composantes" << endl;
@@ -175,12 +178,12 @@ int main(int argc, char** argv) {
 
         //Finalement, on recommence la boucle while
         m++;
-        while (!indexTrie.empty() and vu_total[indexTrie.back()]){
-            indexTrie.pop_back();
+        while (!indexTrie.empty() and vu_total[indexTrie.top()]){
+            indexTrie.pop();
         }
         if (!indexTrie.empty()){
-            index = indexTrie.back();
-            indexTrie.pop_back();
+            index = indexTrie.top();
+            indexTrie.pop();
             vu_total[index] = 1;
         }
 
