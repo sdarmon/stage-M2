@@ -129,7 +129,7 @@ int main(int argc, char** argv) {
     priority_queue<indexDic> indexTrie;
     for (int sommet = 0; sommet < G.N ; sommet++){
         if (G.Vertices[sommet].weight >= threshold){
-            indexTrie.push_back(indexDic{sommet,G.Vertices[sommet].weight});
+            indexTrie.push(indexDic{sommet,G.Vertices[sommet].weight});
         }
     } //Attention ici il y a une opti possible : on est en N log N mais c'est clairement possible de faire en N
     index = indexTrie.top().weight;
