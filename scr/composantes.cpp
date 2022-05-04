@@ -132,7 +132,7 @@ int main(int argc, char** argv) {
             indexTrie.push_back(indexDic{sommet,G.Vertices[sommet].weight});
         }
     } //Attention ici il y a une opti possible : on est en N log N mais c'est clairement possible de faire en N
-    index = indexTrie.top();
+    index = indexTrie.top().weight;
     indexTrie.pop();
     vu_total[index] = 1;
 
@@ -182,7 +182,7 @@ int main(int argc, char** argv) {
             indexTrie.pop();
         }
         if (!indexTrie.empty()){
-            index = indexTrie.top();
+            index = indexTrie.top().weight;
             indexTrie.pop();
             vu_total[index] = 1;
         }
