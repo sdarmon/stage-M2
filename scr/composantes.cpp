@@ -74,7 +74,7 @@ int subset(vector<int> &setA, vector<int> &setB){
 struct indexDic {
     int key;
     int weight;
-    friend bool operator< (indexDic& lhs, indexDic& rhs) {
+    friend bool operator< (indexDic const& lhs, indexDic const& rhs) {
         return (lhs.weight < rhs.weight);
     }
 };
