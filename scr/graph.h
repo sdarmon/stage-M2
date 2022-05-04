@@ -110,6 +110,9 @@ class Graph
     void BFS_comp(vector<int> &seen,set<int> &vu, vector<Neighbor*> &aVoir,vector<int> &sons,vector<Neighbor*> &aretes);
     void weighingANode(int source, int rayon);
     void weighingAllNodes(int rayon);
+    bool operator()(int i, int j) {
+        return(Vertices[i].weight <= Vertices[j].weight);
+    }
 };
 
 
