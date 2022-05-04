@@ -124,7 +124,7 @@ int main(int argc, char** argv) {
     vector<int> indexTrie;
     indexTrie.clear();
     for (int sommet = 0; sommet < G.N ; sommet++){
-        if (G.Vertices[sommet].weight >= seuil){
+        if (G.Vertices[sommet].weight >= threshold){
             indexTrie.push_back(sommet);
         }
     }
