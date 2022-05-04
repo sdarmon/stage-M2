@@ -105,7 +105,7 @@ Graph::Graph(vector<Node>& vertices, vector<Edge>& edges)  {
              }
     }
 
- bool Graph::operator() (int i,int j) { return (i<j);}
+ bool Graph::operator() (int i,int j) { return (Vertices[i].weight <= Vertices[j].weight);}
 //================================================================
 //                  Public methods
 //================================================================
