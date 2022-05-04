@@ -121,8 +121,8 @@ int main(int argc, char** argv) {
     struct indexDic {
         int key;
         int weight;
-        bool operator() (indexDic& lhs, indexDic& rhs) {
-            return (lhs.weight <= rhs.weight);
+        bool operator< (indexDic& lhs, indexDic& rhs) {
+            return (lhs.weight < rhs.weight);
         }
     };
     cout << "Début du tas min" << endl;
