@@ -117,7 +117,6 @@ int main(int argc, char** argv) {
     int threshold;
     threshold = atoi(argv[4]);
     int m = 0;
-    int weight;
     int compt;
     vector<int> vu(G.N, 0);
     queue < Neighbor * > aVoir;
@@ -128,14 +127,14 @@ int main(int argc, char** argv) {
             indexTrie.push_back(sommet);
         }
     }
+    cout << "Début du tri des " << indexTrie.size() << " sommets en fonction de leur poids" << endl;
     sort(indexTrie.begin(),indexTrie.end(),G);
     index = indexTrie.back();
     indexTrie.pop_back();
-    weight = G.Vertices[index].weight;
     vu_total[index] = 1;
 
     cout << "Début de la recherche des composantes" << endl;
-    while (weight >= threshold) //On cherche des composantes tant qu'il existe encore un sommet vérifiant
+    while (!indexTrie.empty()) //On cherche des composantes tant qu'il existe encore un sommet vérifiant
         //le critère et dans la limite des 100 composantes.
         //Condition m < 100 enlevée
     {
@@ -176,13 +175,14 @@ int main(int argc, char** argv) {
 
         //Finalement, on recommence la boucle while
         m++;
-        while (vu_total[indexTrie.back()]){
+        while (!indexTrie.empty() and vu_total[indexTrie.back()]){
             indexTrie.pop_back();
         }
-        index = indexTrie.back();
-        indexTrie.pop_back();
-        weight = G.Vertices[index].weight;
-        vu_total[index] = 1;
+        if (!indexTrie.empty()){
+            index = indexTrie.back();
+            indexTrie.pop_back();
+            vu_total[index] = 1;
+        }
 
     }
 
