@@ -71,6 +71,13 @@ int subset(vector<int> &setA, vector<int> &setB){
     return posi == setA.size();
 }
 
+struct indexDic {
+    int key;
+    int weight;
+    friend bool operator< (indexDic& lhs, indexDic& rhs) {
+        return (lhs.weight < rhs.weight);
+    }
+};
 
 int main(int argc, char** argv) {
     if (argc != 8 and argc != 6) {
@@ -118,13 +125,7 @@ int main(int argc, char** argv) {
     int compt;
     vector<int> vu(G.N, 0);
     queue < Neighbor * > aVoir;
-    struct indexDic {
-        int key;
-        int weight;
-        friend bool operator< (indexDic& lhs, indexDic& rhs) {
-            return (lhs.weight < rhs.weight);
-        }
-    };
+
     cout << "Début du tas min" << endl;
     priority_queue<indexDic> indexTrie;
     for (int sommet = 0; sommet < G.N ; sommet++){
