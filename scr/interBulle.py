@@ -119,6 +119,8 @@ if len(Arg) in [5,6,7,8]:
                                 for el in A:
                                     t+= " " + str(el)
                                 text+= "in both path :" + t + "\t"
+                                if len(B) != 0 or len(C) != 0:
+                                    printing = False
                             if False :#len(B) != 0:
                                 t = ""
                                 printing = True
