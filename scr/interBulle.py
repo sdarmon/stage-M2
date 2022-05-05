@@ -47,7 +47,6 @@ if len(Arg) in [5,6,7,8]:
     else:
         k = 41
     threshold = int(Arg[4])
-    strat = [i*(threshold+1)//6 for i in range(1,6)]
     kmerFrom = [dict() for i in range(1,6)] #Dictionnaire associant à un kmer donné la composante et strat dont il est issu
     #Récupération des séquences des composantes
     for i in range(int(Arg[3])):
@@ -60,7 +59,7 @@ if len(Arg) in [5,6,7,8]:
                 compl= reverseC(L[1])
                 for pos in range(len(L[1])-k+1):
                     st = 0
-                    while st < 4 and ((st+1)*(threshold+1))//6 >= int(L[2][:-1]):
+                    while st < 4 and ((st+1)*(threshold+1))//5 >= int(L[2][:-1]):
                         st+=1
                     assert st >= 0
                     kmerFrom[st][L[1][pos:k+pos]] = i
@@ -110,9 +109,9 @@ if len(Arg) in [5,6,7,8]:
                         print(seqUnder)
                     text = ""
                     printing = False
-                    for st in range(3,5):
+                    for st in range(5):
                         if len(upperComp[st]) != 0 or len(underComp[st]) != 0:
-                            text += "In strat ["+str(((st+1)*(threshold+1))//6) +"," + str(-1+((st+2)*(threshold+1))//6) + "] :\t"
+                            text += "In strat ["+str(((st+1)*(threshold+1))//5) +"," + str(-1+((st+2)*(threshold+1))//5) + "] :\t"
                             A = upperComp[st] & underComp[st]
                             B = upperComp[st] - underComp[st]
                             C = underComp[st] - upperComp[st]
