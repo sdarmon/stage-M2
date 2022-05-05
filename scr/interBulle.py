@@ -36,15 +36,19 @@ def maj(sequ):
     return s
 
 
-if len(Arg) not in [4,5]:
-    print("Use : " + Arg[0] + " dirComp bulle.fa nbComp -rapport")
+if len(Arg) not in [5,6,7,8]:
+    print("Use : " + Arg[0] + " dirComp bulle.fa nbComp threshold -k kmer -rapport\n\t k = 41 by default.")
     exit()
-if len(Arg) in [4,5]:
+if len(Arg) in [5,6,7,8]:
     titre = "" #Variable contenant le titre de la séquence dans le fichier .fa
     seq = "" #Sequence de nucléotides
-    kmerFrom = dict() #Dictionnaire associant à un kmer donné la composante dont il est issu
-    k = 41 #k du kmer, il serait judicieux de le mettre en argument de la fonction
-
+    if (len(Arg)>= 7 and Arg[5][1] == 'k') :
+        k = int(Arg[6])
+    else:
+        k = 41
+    threshold = int(Arg[4])
+    strat = [i*(threshold+1)//6 for i in range(1,6)]
+    kmerFrom = [dict() for i in range(1,6)] #Dictionnaire associant à un kmer donné la composante et strat dont il est issu
     #Récupération des séquences des composantes
     for i in range(int(Arg[3])):
         with open(Arg[1] + "comp" + str(i) + ".txt", 'r') as f:
@@ -55,8 +59,9 @@ if len(Arg) in [4,5]:
                 #On l'ajoute au dictionnaire ainsi que son complémentaire
                 compl= reverseC(L[1])
                 for pos in range(len(L[1])-k+1):
-                    kmerFrom[L[1][pos:k+pos]] = i
-                    kmerFrom[compl[pos:k+pos]] = i
+                    st = int(L[2][:-1]) // ((threshold+1)//6)
+                    kmerFrom[st][L[1][pos:k+pos]] = i
+                    kmerFrom[st][compl[pos:k+pos]] = i
 
     #On parcourt maintenant les bulles
     with open(Arg[2], 'r') as f:
@@ -76,25 +81,50 @@ if len(Arg) in [4,5]:
             seq = maj(seq) #Les séquences ayant des nucléotides écrits en miniscule, on les passe en majuscule
 
             #On récupère les numéros des composantes contenant des kmers de la séquence
-            comp_possible = set()
+            comp_possible = [set() for i in range(1,6)]
+            trouve = 0
             for pos in range(len(seq) - k + 1):
                 mer = seq[pos: pos + k]
-                ind = kmerFrom.get(mer, -1)
-                if ind != -1:
-                    comp_possible.add(ind)
+                for st in range(5):
+                    ind = kmerFrom[st].get(mer, -1)
+                    if ind != -1:
+                        comp_possible[st].add(ind)
+                        trouve = 1
             if upper: #Cas chemin du haut
                 seqUpper = line[:-1]
-                upperComp = comp_possible
+                upperComp = [el for el in comp_possible]
+                trouveUpper = trouve
             else: #Cas chemin du bas
                 seqUnder = line[:-1]
-                underComp = comp_possible
+                underComp = [el for el in comp_possible]
+                trouveUnder = trouve
                 #On peut écrit la bulle et son rapport si c'est intéressant
-                if len(underComp) != 0 or len(upperComp) != 0:
-                    if len(Arg)==4:
+                if trouveUnder or trouveUpper:
+                    if Arg[-1] == "-rapport":
                         print(titreUpper)
                         print(seqUpper)
                         print(titreUnder)
                         print(seqUnder)
-                    print("Both found in components:", upperComp & underComp, "\t Only in upper:",
-                          upperComp - underComp, "\t Only in under:", underComp - upperComp)
+                    text = ""
+                    for st in range(5):
+                        if len(upperComp[st]) != 0 or len(underComp[st]) != 0:
+                            text += "In strat ["+str(st*(threshold+1)//6) +"," + str((st+1)*(threshold+1)//6) + "] :\t"
+                            A = upperComp[st] & underComp[st]
+                            B = upperComp[st] - underComp[st]
+                            C = underComp[st] - upperComp[st]
+                            if len(A) != 0:
+                                t = ""
+                                for el in A:
+                                    t+= " " + str(el)
+                                text+= "in both path :" + t + "\t"
+                            if len(B) != 0:
+                                t = ""
+                                for el in B:
+                                    t+= " " + str(el)
+                                text+= "only in upper :" + t + "\t"
+                            if len(C) != 0:
+                                t = ""
+                                for el in C:
+                                    t+= " " + str(el)
+                                text+= "only in under :" + t + "\t"
             titre = ""#On part pour la ligne suivante qui sera un titre
