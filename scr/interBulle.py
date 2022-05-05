@@ -59,7 +59,9 @@ if len(Arg) in [5,6,7,8]:
                 #On l'ajoute au dictionnaire ainsi que son complémentaire
                 compl= reverseC(L[1])
                 for pos in range(len(L[1])-k+1):
-                    st = min((int(L[2][:-1]) // ((threshold+1)//6)) -2,4)
+                    st = 0
+                    while st < 4 and ((st+1)*(threshold+1))//6 >= int(L[2][:-1]):
+                        st+=1
                     assert st >= 0
                     kmerFrom[st][L[1][pos:k+pos]] = i
                     kmerFrom[st][compl[pos:k+pos]] = i
@@ -110,7 +112,7 @@ if len(Arg) in [5,6,7,8]:
                     printing = False
                     for st in range(3,5):
                         if len(upperComp[st]) != 0 or len(underComp[st]) != 0:
-                            text += "In strat ["+str((st+1)*(threshold+1)//6) +"," + str(-1+(st+2)*(threshold+1)//6) + "] :\t"
+                            text += "In strat ["+str(((st+1)*(threshold+1))//6) +"," + str(-1+((st+2)*(threshold+1))//6) + "] :\t"
                             A = upperComp[st] & underComp[st]
                             B = upperComp[st] - underComp[st]
                             C = underComp[st] - upperComp[st]
