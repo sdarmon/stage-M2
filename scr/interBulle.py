@@ -106,6 +106,7 @@ if len(Arg) in [5,6,7,8]:
                         print(titreUnder)
                         print(seqUnder)
                     text = ""
+                    printing = False
                     for st in range(5):
                         if len(upperComp[st]) != 0 or len(underComp[st]) != 0:
                             text += "In strat ["+str((st+1)*(threshold+1)//6) +"," + str(-1+(st+2)*(threshold+1)//6) + "] :\t"
@@ -114,19 +115,22 @@ if len(Arg) in [5,6,7,8]:
                             C = underComp[st] - upperComp[st]
                             if len(A) != 0:
                                 t = ""
+                                printing = True
                                 for el in A:
                                     t+= " " + str(el)
                                 text+= "in both path :" + t + "\t"
                             if False :#len(B) != 0:
                                 t = ""
+                                printing = True
                                 for el in B:
                                     t+= " " + str(el)
                                 text+= "only in upper :" + t + "\t"
                             if False : #len(C) != 0:
                                 t = ""
+                                printing = True
                                 for el in C:
                                     t+= " " + str(el)
                                 text+= "only in under :" + t + "\t"
-                            if text != "":
+                            if printing:
                                 print(text)
             titre = ""#On part pour la ligne suivante qui sera un titre
