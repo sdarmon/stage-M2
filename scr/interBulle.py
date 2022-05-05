@@ -127,5 +127,6 @@ if len(Arg) in [5,6,7,8]:
                                 for el in C:
                                     t+= " " + str(el)
                                 text+= "only in under :" + t + "\t"
-                            print(text)
+                            if text != "":
+                                print(text)
             titre = ""#On part pour la ligne suivante qui sera un titre
