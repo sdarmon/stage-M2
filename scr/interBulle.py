@@ -59,7 +59,7 @@ if len(Arg) in [5,6,7,8]:
                 #On l'ajoute au dictionnaire ainsi que son complémentaire
                 compl= reverseC(L[1])
                 for pos in range(len(L[1])-k+1):
-                    st = int(L[2][:-1]) // ((threshold+1)//6)
+                    st = int(L[2][:-1]) // ((threshold+1)//6) -1
                     kmerFrom[st][L[1][pos:k+pos]] = i
                     kmerFrom[st][compl[pos:k+pos]] = i
 
