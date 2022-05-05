@@ -106,7 +106,7 @@ if len(Arg) in [5,6,7,8]:
                         print(titreUnder)
                         print(seqUnder)
                     text = ""
-                    for st in range(2,5):
+                    for st in range(3,5):
                         if len(upperComp[st]) != 0 or len(underComp[st]) != 0:
                             text += "In strat ["+str((st+1)*(threshold+1)//6) +"," + str((st+2)*(threshold+1)//6) + "] :\t"
                             A = upperComp[st] & underComp[st]
