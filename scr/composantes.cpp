@@ -130,7 +130,7 @@ int main(int argc, char** argv) {
     cout << "Début du tas min" << endl;
     priority_queue<indexDic> indexTrie;
     for (int sommet = 0; sommet < G.N ; sommet++){
-        if (G.Vertices[sommet].weight >= threshold){
+        if (G.Vertices[sommet].weight >= max(threshold,10)){
             indexTrie.push(indexDic{sommet,G.Vertices[sommet].weight});
         }
     } //Attention ici il y a une opti possible : on est en N log N mais c'est clairement possible de faire en N
@@ -175,13 +175,13 @@ int main(int argc, char** argv) {
         }
         if (compt > 1){
             save_comp(G, compo, outputPrefix, m); //On enregistre la composante sur l'ordinateur
+            m++;
             components.push_back(compo); //Et on ajoute la composante au vecteur de composantes
             cout << "Composante trouvée de départ " << index << " et de poids " << G.Vertices[index].weight
                  << " et de taille " << compo.size() << endl;
         }
 
         //Finalement, on recommence la boucle while
-        m++;
         while (!indexTrie.empty() and vu_total[indexTrie.top().key]){
             indexTrie.pop();
         }
