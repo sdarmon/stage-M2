@@ -108,7 +108,7 @@ if len(Arg) in [5,6,7,8]:
                     text = ""
                     for st in range(5):
                         if len(upperComp[st]) != 0 or len(underComp[st]) != 0:
-                            text += "In strat ["+str((st+1)*(threshold+1)//6) +"," + str((st+2)*(threshold+1)//6) + "] :\t"
+                            text += "In strat ["+str((st+1)*(threshold+1)//6) +"," + str(-1+(st+2)*(threshold+1)//6) + "] :\t"
                             A = upperComp[st] & underComp[st]
                             B = upperComp[st] - underComp[st]
                             C = underComp[st] - upperComp[st]
@@ -117,12 +117,12 @@ if len(Arg) in [5,6,7,8]:
                                 for el in A:
                                     t+= " " + str(el)
                                 text+= "in both path :" + t + "\t"
-                            if len(B) != 0:
+                            if False :#len(B) != 0:
                                 t = ""
                                 for el in B:
                                     t+= " " + str(el)
                                 text+= "only in upper :" + t + "\t"
-                            if len(C) != 0:
+                            if False : #len(C) != 0:
                                 t = ""
                                 for el in C:
                                     t+= " " + str(el)
