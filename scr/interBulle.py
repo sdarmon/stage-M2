@@ -121,6 +121,7 @@ if len(Arg) in [5,6,7,8]:
                                 text+= "in both path :" + t + "\t"
                                 if len(B) != 0 or len(C) != 0:
                                     printing = False
+                                    break
                             if False :#len(B) != 0:
                                 t = ""
                                 printing = True
