@@ -19,18 +19,19 @@ def reverseC(seq):
             s = 'C' + s
     return s
 
-#Renvoie une séquence de nucléotides en masjucule
+#Renvoie une séquence de nucléotides en masjucule / En fait on s'en fiche, les miniscules correspondent au bout de
+#l'unitig.
 def maj(sequ):
     s = ""
     for el in sequ:
         if el == 'a':
-            s = s + 'A'
+            continue # s = s + 'A'
         elif el == 'c':
-            s = s + 'C'
+            continue # s = s + 'C'
         elif el == 'g':
-            s = s + 'G'
+            continue # s = s + 'G'
         elif el == 't':
-            s = s + 'T'
+            continue # s = s + 'T'
         else:
             s = s + el
     return s
@@ -47,7 +48,7 @@ if len(Arg) in [5,6,7,8]:
     else:
         k = 41
     threshold = int(Arg[4])
-    kmerFrom = [dict() for i in range(1,6)] #Dictionnaire associant à un kmer donné la composante et strat dont il est issu
+    kmerFrom = dict() #Dictionnaire associant à un kmer donné la composante dont il est issu
     #Récupération des séquences des composantes
     for i in range(int(Arg[3])):
         with open(Arg[1] + "comp" + str(i) + ".txt", 'r') as f:
@@ -58,12 +59,8 @@ if len(Arg) in [5,6,7,8]:
                 #On l'ajoute au dictionnaire ainsi que son complémentaire
                 compl= reverseC(L[1])
                 for pos in range(len(L[1])-k+1):
-                    st = 0
-                    while st < 4 and ((st+1)*(threshold+1))//5 >= int(L[2][:-1]):
-                        st+=1
-                    assert st >= 0
-                    kmerFrom[st][L[1][pos:k+pos]] = i
-                    kmerFrom[st][compl[pos:k+pos]] = i
+                    kmerFrom[L[1][pos:k+pos]] = i
+                    kmerFrom[compl[pos:k+pos]] = i
 
     #On parcourt maintenant les bulles
     with open(Arg[2], 'r') as f:
@@ -83,22 +80,23 @@ if len(Arg) in [5,6,7,8]:
             seq = maj(seq) #Les séquences ayant des nucléotides écrits en miniscule, on les passe en majuscule
 
             #On récupère les numéros des composantes contenant des kmers de la séquence
-            comp_possible = [set() for i in range(1,6)]
+            comp_possible = set()
             trouve = 0
             for pos in range(len(seq) - k + 1):
                 mer = seq[pos: pos + k]
-                for st in range(5):
-                    ind = kmerFrom[st].get(mer, -1)
-                    if ind != -1:
-                        comp_possible[st].add(ind)
-                        trouve = 1
+                ind = kmerFrom.get(mer, -1)
+                if ind != -1:
+                    comp_possible.add(ind)
+                    trouve = 1
             if upper: #Cas chemin du haut
                 seqUpper = line[:-1]
-                upperComp = [el for el in comp_possible]
+                upperComp = comp_possible
+                debut = kmerFrom.get(seq[0:k], -1)
+                end = kmerFrom.get(seq[-k:], -1)
                 trouveUpper = trouve
             else: #Cas chemin du bas
                 seqUnder = line[:-1]
-                underComp = [el for el in comp_possible]
+                underComp = comp_possible
                 trouveUnder = trouve
                 #On peut écrit la bulle et son rapport si c'est intéressant
                 if trouveUnder or trouveUpper:
@@ -109,30 +107,32 @@ if len(Arg) in [5,6,7,8]:
                         print(seqUnder)
                     text = ""
                     printing = False
-                    for st in range(5):
-                        if len(upperComp[st]) != 0 or len(underComp[st]) != 0:
-                            text += "In strat ["+str(((st+1)*(threshold+1))//5) +"," + str(-1+((st+2)*(threshold+1))//5) + "] :\t"
-                            A = upperComp[st] & underComp[st]
-                            B = upperComp[st] - underComp[st]
-                            C = underComp[st] - upperComp[st]
-                            if len(A) != 0:
-                                t = ""
-                                printing = True
-                                for el in A:
-                                    t+= " " + str(el)
-                                text+= "in both path :" + t + "\t"
-                            if False :#len(B) != 0:
-                                t = ""
-                                printing = True
-                                for el in B:
-                                    t+= " " + str(el)
-                                text+= "only in upper :" + t + "\t"
-                            if False : #len(C) != 0:
-                                t = ""
-                                printing = True
-                                for el in C:
-                                    t+= " " + str(el)
-                                text+= "only in under :" + t + "\t"
-                            if printing:
-                                print(text)
+                    if len(upperComp) != 0 or len(underComp) != 0:
+                        A = upperComp & underComp
+                        B = upperComp - underComp
+                        C = underComp - upperComp
+                        if debut != -1:
+                            text+= "Start in " + str(debut) + "\t"
+                        if end != -1:
+                            text+= "End in " + str(end) + "\t"
+                        if len(A) != 0:
+                            t = ""
+                            printing = True
+                            for el in A:
+                                t+= " " + str(el)
+                            text+= "in both path :" + t + "\t"
+                        if len(B) != 0:
+                            t = ""
+                            printing = True
+                            for el in B:
+                                t+= " " + str(el)
+                            text+= "only in upper :" + t + "\t"
+                        if len(C) != 0:
+                            t = ""
+                            printing = True
+                            for el in C:
+                                t+= " " + str(el)
+                            text+= "only in under :" + t + "\t"
+                        if printing:
+                            print(text)
             titre = ""#On part pour la ligne suivante qui sera un titre
