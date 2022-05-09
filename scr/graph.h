@@ -107,7 +107,7 @@ class Graph
     void BFS(int r, vector<Edge>& e ,vector<Neighbor*> &aVoir,vector<int> &vu);
     int BFSCount(vector<int> &rayons, int acc,vector<Neighbor*> &aVoir,vector<int> &vu);
     void BFS_func(int threshold, queue<Neighbor*> &aVoir,vector<int> &vu, set<int> & setVu);
-    void BFS_comp(vector<int> &seen,set<int> &vu, vector<Neighbor*> &aVoir,vector<int> &sons,vector<Neighbor*> &aretes);
+    void BFS_comp(vector<int> &seen,set<int> &vu, set<Neighbor*> &aVoir,vector<int> &sons,vector<Neighbor*> &aretes);
     void weighingANode(int source, int rayon);
     void weighingAllNodes(int rayon);
 };
