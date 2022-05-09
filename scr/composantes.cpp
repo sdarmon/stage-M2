@@ -261,7 +261,9 @@ int main(int argc, char** argv) {
                 vector<Neighbor*> nodeInR;
                 nodeInF.clear();
                 nodeInR.clear();
-                aVoir.clear();
+                while (!aVoir.empty()){
+                    aVoir.pop();
+                }
                 vu2.clear();
                 vu2.insert((*it)); //On voit bien le sommet duquel on part
 
@@ -271,7 +273,7 @@ int main(int argc, char** argv) {
                 for (vector<Neighbor>::iterator voisin = G.Neighbors((*it))->begin();
                      voisin != G.Neighbors((*it))->end(); ++voisin) {
                     if (voisin->label[0] == 'F') {
-                        aVoir.push_back(&(*voisin));
+                        aVoir.push(&(*voisin));
                     } else {
                         pos= distance(inF.begin(), upper_bound(inF.begin(),inF.end(),voisin->val));
                         inF.insert(inF.begin()+pos,voisin->val);
@@ -287,7 +289,7 @@ int main(int argc, char** argv) {
                 for (vector<Neighbor>::iterator voisin = G.Neighbors((*it))->begin();
                      voisin != G.Neighbors((*it))->end(); ++voisin) {
                     if (voisin->label[0] == 'R') {
-                        aVoir.push_back(&(*voisin));
+                        aVoir.push(&(*voisin));
                     } else {
                         pos= distance(inR.begin(), upper_bound(inR.begin(),inR.end(),voisin->val));
                         inR.insert(inR.begin()+pos,voisin->val);
