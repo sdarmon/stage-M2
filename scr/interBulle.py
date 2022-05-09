@@ -124,6 +124,7 @@ if len(Arg) in [5,6,7,8]:
                         if len(B) != 0:
                             t = ""
                             printing = False
+                            titre = ""
                             continue
                             for el in B:
                                 t+= " " + str(el)
@@ -131,6 +132,7 @@ if len(Arg) in [5,6,7,8]:
                         if len(C) != 0:
                             t = ""
                             printing = False
+                            titre = ""
                             continue
                             for el in C:
                                 t+= " " + str(el)
