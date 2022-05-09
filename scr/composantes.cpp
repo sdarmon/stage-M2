@@ -217,8 +217,7 @@ int main(int argc, char** argv) {
     }
 
     //Après, on fait un BFS à partir de chaque sommet dans la composante afin d'obtenir les voisins du périmètre.
-    delete &vu;
-    set<int> vu;
+    set<int> vu2;
     vector<vector<int>> neighborsPeri;
     vector<vector<Neighbor*>> neighborsInF;
     vector<vector<Neighbor*>> neighborsInR;
@@ -263,8 +262,8 @@ int main(int argc, char** argv) {
                 nodeInF.clear();
                 nodeInR.clear();
                 aVoir.clear();
-                vu.clear();
-                vu.insert((*it)); //On voit bien le sommet duquel on part
+                vu2.clear();
+                vu2.insert((*it)); //On voit bien le sommet duquel on part
 
                 //On fait un BFS à partir de chaque sommet afin de savoir quels sommets du périmètre sont
                 //atteignables à partir de chaque sommet du périmètre
@@ -279,7 +278,7 @@ int main(int argc, char** argv) {
                         nodeInF.insert(nodeInF.begin()+ pos,&(*voisin));
                     }
                 }
-                G.BFS_comp(seen, vu, aVoir, sons, aretes);
+                G.BFS_comp(seen, vu2, aVoir, sons, aretes);
 
                 limiteAretes.push_back(aretes.size()); //On fait ça pour garder en mémoire le fait que ce ne sont
                 //pas les mêmes arêtes
@@ -295,7 +294,7 @@ int main(int argc, char** argv) {
                         nodeInR.insert(nodeInR.begin()+ pos,&(*voisin));
                     }
                 }
-                G.BFS_comp(seen, vu, aVoir, sons, aretes);
+                G.BFS_comp(seen, vu2, aVoir, sons, aretes);
 
                 neighborsPeri.push_back(sons);
                 neighborsAretes.push_back(aretes);
