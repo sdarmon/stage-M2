@@ -205,7 +205,7 @@ int main(int argc, char** argv) {
     V3.clear();
     vector<int> seen(G.N, 0);
     vector<int> correspondingVertex(G.N, 0);
-    int compt = 0;
+    compt = 0;
     //seen est le tableau de correspondance entre les anciens sommets et les nouveaux.
     //Pour les sommets des composantes on les flag avec des indices positifs
     for (vector < vector < int >> ::iterator comp = components.begin(); comp != components.end();
@@ -217,6 +217,7 @@ int main(int argc, char** argv) {
     }
 
     //Après, on fait un BFS à partir de chaque sommet dans la composante afin d'obtenir les voisins du périmètre.
+    free(vu);
     set<int> vu;
     vector<vector<int>> neighborsPeri;
     vector<vector<Neighbor*>> neighborsInF;
