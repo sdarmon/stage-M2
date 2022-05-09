@@ -115,7 +115,7 @@ if len(Arg) in [5,6,7,8]:
                             text+= "Start in " + str(debut) + "\t"
                         if end != -1:
                             text+= "End in " + str(end) + "\t"
-                        if debut != end :
+                        if debut>= 0 and fin >= 0 and debut != end :
                             printing = False
                             titre = ""
                             continue
