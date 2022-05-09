@@ -123,13 +123,15 @@ if len(Arg) in [5,6,7,8]:
                             text+= "in both path :" + t + "\t"
                         if len(B) != 0:
                             t = ""
-                            printing = True
+                            printing = False
+                            continue
                             for el in B:
                                 t+= " " + str(el)
                             text+= "only in upper :" + t + "\t"
                         if len(C) != 0:
                             t = ""
-                            printing = True
+                            printing = False
+                            continue
                             for el in C:
                                 t+= " " + str(el)
                             text+= "only in under :" + t + "\t"
