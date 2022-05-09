@@ -90,8 +90,8 @@ int main(int argc, char** argv) {
     vector <Edge> E;
     vector <Node> V;
 
-    char *nodesPath = argv[1];
-    char *edgesPath = argv[2];
+    string nodesPath = argv[1];
+    string edgesPath = argv[2];
     string outputPrefix;
 
     ifstream edges(edgesPath, std::ios::binary);
@@ -382,7 +382,7 @@ int main(int argc, char** argv) {
     outputEdges2.close();
 
     //On récupère aussi l'abondance qui est nécessaire pour kissplice
-    ifstream ab((string)edgesPath.substr(0,edgesPath.size()-12)+".abundance", std::ios::binary);
+    ifstream ab(edgesPath.substr(0,edgesPath.size()-12)+".abundance", std::ios::binary);
 
     vector <double> A;
     read_abundance_file(ab,A);
