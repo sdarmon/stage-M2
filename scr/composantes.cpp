@@ -196,4 +196,206 @@ int main(int argc, char** argv) {
     }
 
     cout << "Fin de la recherche de composantes." << endl;
+
+
+    cout << "Début construction graphe aggloméré" << endl;
+    vector <Edge> E3;
+    vector <Node> V3;
+    E3.clear();
+    V3.clear();
+    vector<int> seen(G.N, 0);
+    vector<int> correspondingVertex(G.N, 0);
+    int compt = 0;
+    //seen est le tableau de correspondance entre les anciens sommets et les nouveaux.
+    //Pour les sommets des composantes on les flag avec des indices positifs
+    for (vector < vector < int >> ::iterator comp = components.begin(); comp != components.end();
+    ++comp){
+        compt++;
+        for (vector<int>::iterator it = comp->begin(); it != comp->end(); ++it) {
+            seen[(*it)] = compt;
+        }
+    }
+
+    //Après, on fait un BFS à partir de chaque sommet dans la composante afin d'obtenir les voisins du périmètre.
+    set<int> vu;
+    vector<vector<int>> neighborsPeri;
+    vector<vector<Neighbor*>> neighborsInF;
+    vector<vector<Neighbor*>> neighborsInR;
+    vector<vector<Neighbor*>> neighborsAretes;
+    vector<int> limiteAretes;
+    vector<int> indexation;
+    vector<int> fusion;
+    vector<vector<int>> setVoisinInF;
+    vector<vector<int>> setVoisinInR;
+    vector<vector<int>> setVoisinOutF;
+    vector<vector<int>> setVoisinOutR;
+    index = 0;
+    int pos;
+    int modif;
+    int compteurDeBoucle = 0;
+    //On boucle sur les composantes
+    for (vector < vector < int >> ::iterator comp = components.begin(); comp != components.end();
+    ++comp){
+        setVoisinInF.clear();
+        setVoisinInR.clear();
+        neighborsPeri.clear(); //Vecteur qui contiendra l'ensemble des voisins de chaque sommet en périmètre.
+        neighborsAretes.clear();
+        neighborsInF.clear();
+        neighborsInR.clear();
+        indexation.clear();
+        limiteAretes.clear();
+        //On boucle sur les sommets de la composante
+        cout << "Pré-calcul pour la composante "<<compteurDeBoucle << endl;
+        compteurDeBoucle++;
+        for (vector<int>::iterator it = comp->begin(); it != comp->end(); ++it) {
+            if (seen[(*it)] == 0) { //Cas sommet en périphérie
+                vector<int> sons;
+                sons.clear();
+                vector<Neighbor*> aretes;
+                aretes.clear();
+                vector<int> inF;
+                vector<int> inR;
+                inF.clear();
+                inR.clear();
+                vector<Neighbor*> nodeInF;
+                vector<Neighbor*> nodeInR;
+                nodeInF.clear();
+                nodeInR.clear();
+                aVoir.clear();
+                vu.clear();
+                vu.insert((*it)); //On voit bien le sommet duquel on part
+
+                //On fait un BFS à partir de chaque sommet afin de savoir quels sommets du périmètre sont
+                //atteignables à partir de chaque sommet du périmètre
+                //Cas en partant du foward
+                for (vector<Neighbor>::iterator voisin = G.Neighbors((*it))->begin();
+                     voisin != G.Neighbors((*it))->end(); ++voisin) {
+                    if (voisin->label[0] == 'F') {
+                        aVoir.push_back(&(*voisin));
+                    } else {
+                        pos= distance(inF.begin(), upper_bound(inF.begin(),inF.end(),voisin->val));
+                        inF.insert(inF.begin()+pos,voisin->val);
+                        nodeInF.insert(nodeInF.begin()+ pos,&(*voisin));
+                    }
+                }
+                G.BFS_comp(seen, vu, aVoir, sons, aretes);
+
+                limiteAretes.push_back(aretes.size()); //On fait ça pour garder en mémoire le fait que ce ne sont
+                //pas les mêmes arêtes
+
+                //Cas en partant du reverse
+                for (vector<Neighbor>::iterator voisin = G.Neighbors((*it))->begin();
+                     voisin != G.Neighbors((*it))->end(); ++voisin) {
+                    if (voisin->label[0] == 'R') {
+                        aVoir.push_back(&(*voisin));
+                    } else {
+                        pos= distance(inR.begin(), upper_bound(inR.begin(),inR.end(),voisin->val));
+                        inR.insert(inR.begin()+pos,voisin->val);
+                        nodeInR.insert(nodeInR.begin()+ pos,&(*voisin));
+                    }
+                }
+                G.BFS_comp(seen, vu, aVoir, sons, aretes);
+
+                neighborsPeri.push_back(sons);
+                neighborsAretes.push_back(aretes);
+                neighborsInF.push_back(nodeInF);
+                neighborsInR.push_back(nodeInR);
+                setVoisinInF.push_back(inF);
+                setVoisinInR.push_back(inR);
+                indexation.push_back((*it)); //On garde en mémoire la correspondance entre l'index et la position
+                //du sommet
+            }
+        } //On termine de traiter tous les sommets de la composante
+        cout << "BFS sur tous les sommets terminés" << endl;
+
+
+        //On peut donc passer la construction du graphe. Commençons par les sommets.
+        for (int i = 0; i < indexation.size(); i++) {
+                V3.push_back(Node(index,G.Vertices[indexation[i]].weight,G.Vertices[indexation[i]].label));
+                correspondingVertex[indexation[i]] = index;
+                index++;
+        }
+
+        //Puis les arêtes au sein de la composante :
+        for (int i = 0; i < indexation.size(); i++) {
+            for (int j = 0; j < neighborsPeri[i].size(); j++) {
+                if (seen[neighborsPeri[i][j]] == 0) {
+                    if (j<limiteAretes[i]){
+                        char aret[3] = {'F', neighborsAretes[i][j]->label[1]};
+                        E3.push_back(Edge(correspondingVertex[indexation[i]],
+                                          correspondingVertex[neighborsPeri[i][j]], 0, aret
+                        ));
+                    } else {
+                        char aret[3] = {'R', neighborsAretes[i][j]->label[1]};
+                        E3.push_back(Edge(correspondingVertex[indexation[i]],
+                                          correspondingVertex[neighborsPeri[i][j]], 0, aret
+                        ));
+                    }
+                }
+            }
+            seen[indexation[i]] = -1;
+        }
+
+    } //On vient de terminer cette composante !
+
+    //Maintenant que les composantes ont bien été ajouté, on s'occupe des sommets restants
+    for (int i = 0; i < G.N; i++) {
+        if (seen[i] == 0 and G.Vertices[i].label.size()>G.kmer-1) {
+            V3.push_back(Node(index, G.Vertices[i].weight, G.Vertices[i].label));
+            correspondingVertex[i] = index;
+            index++;
+        } else if (seen[i] < 0) {
+            continue; //Cas déjà traité précédemment
+        } else {
+            correspondingVertex[i] = -1; //Cas sommet fusionné ou de label trop court
+        }
+    }
+    cout << "Sommets restants ajoutés" << endl;
+
+    //Maintenant on s'occupe des arêtes
+    for (int i = 0; i<G.N ; i++) {
+        if (seen[i] == 0 and correspondingVertex[i]>=0){//Cas sommet hors comp et valide
+            for(vector<Neighbor>::iterator node = G.Neighbors(i)->begin(); node != G.Neighbors(i)->end(); ++node){
+                if (correspondingVertex[node->val]>=0){ //Cas voisin valide
+                    E3.push_back(Edge(correspondingVertex[i],correspondingVertex[node->val],0,node->label));
+                }
+            }
+        } else if (seen[i] < 0 ){
+            for (vector<Neighbor>::iterator node = G.Neighbors(i)->begin(); node != G.Neighbors(i)->end(); ++node) {
+                if (seen[node->val] == 0 and correspondingVertex[node->val]>=0) { //Voisin hors comp et valide
+                    E3.push_back(Edge(correspondingVertex[i], correspondingVertex[node->val], 0, node->label));
+                }
+            }
+        }
+    }
+    cout << "Arêtes restantes ajoutées" << endl;
+
+    //Enfin, on enregistre le graphe créé.
+    ofstream outputNodes2;
+    outputNodes2.open(outputPrefix + "/clean.nodes");
+    printVerticesBcalm(V3, outputNodes2);
+    outputNodes2.close();
+
+    ofstream outputEdges2;
+    outputEdges2.open(outputPrefix + "/clean.edges");
+    printEdgesBcalm(E3, outputEdges2);
+    outputEdges2.close();
+
+    //On récupère aussi l'abondance qui est nécessaire pour kissplice
+    ifstream ab((string)edgesPath.substr(0,edgesPath.size()-12)+".abundance", std::ios::binary);
+
+    vector <double> A;
+    read_abundance_file(ab,A);
+    vector<double> A3(V3.size(),0.0);
+    for (int i = 0; i<A.size();i++){
+        if(correspondingVertex[i] >= 0){
+            A3[correspondingVertex[i]]+= A[i];
+        }
+    }
+
+    ofstream outputAb;
+    outputAb.open(outputPrefix + "/clean.abundance");
+    printAbundance(A3,outputAb);
+    cout << "Graphe enregistré" << endl;
+
 }
