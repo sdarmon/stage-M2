@@ -250,10 +250,10 @@ void Graph::BFS_func(int threshold ,queue<Neighbor*> &aVoir,vector<int> &vu, set
     }
     return;
 }
-void Graph::BFS_comp(vector<int> &seen,set<int> &vu, vector<Neighbor*> &aVoir,vector<int> &sons,vector<Neighbor*> &aretes){
+void Graph::BFS_comp(vector<int> &seen,set<int> &vu, queue<Neighbor*> &aVoir,vector<int> &sons,vector<Neighbor*> &aretes){
     while (aVoir.size() != 0) { //Cas de terminaison, on a terminé le BFS
         Neighbor *node = aVoir.front();
-        aVoir.erase(aVoir.begin());
+        aVoir.pop();
         if (vu.find(node->val) != vu.end()) { //Cas où le sommet a été vu par le BFS
             continue;
         }
@@ -271,7 +271,7 @@ void Graph::BFS_comp(vector<int> &seen,set<int> &vu, vector<Neighbor*> &aVoir,ve
             //On boucle sur ses voisins
             if (it->label[0] == node->label[1]) {
                 //Cas où l'arrêt est bien valide et sommet non vu avant, ce voisin est rajouté dans la file des visites
-                aVoir.push_back(&(*it));
+                aVoir.push(&(*it));
             }
         }
     }
