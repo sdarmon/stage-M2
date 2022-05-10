@@ -82,7 +82,7 @@ elif Arg[2] == "his":
     for i in range(len(y)):
         Y[(10 * y[i]) // (m+1)] +=1
     for i in range(10):
-        Y[i] = Y[i] / len(y)
+        Y[i] = 100 * Y[i] / len(y)
     plt.bar(X,Y, color='green')
     plt.ylabel("Frequencies (in %)")
     plt.xlabel("Sizes of weight")
