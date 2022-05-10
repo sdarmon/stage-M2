@@ -82,7 +82,7 @@ elif Arg[2] == "his":
         Y[(10 * y[i]) // (m+1)] +=1
     for i in range(10):
         Y[i] = Y[i] / len(y)
-    plt.bar(X, Y, color='green')
+    plt.bar(Y, color='green')
     plt.ylabel("Frequencies (in %)")
     plt.xlabel("Sizes of weight")
     plt.title("Histogram of the frequencies of the different sizes of weight (Case radius = 200)")
