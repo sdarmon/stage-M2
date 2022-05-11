@@ -83,7 +83,7 @@ if len(Arg) in [5,6,7,8,9]:
                 if upper:
                     L = line.split("|")
                     bubble=L[0][1:]+"|"+L[1]
-                    type = event[bubble]
+                    type = event.get(bubble,"NA")
                     titreUpper = titre[:-1] #On stocke la titre
                 else:
                     titreUnder = titre[:-1]
