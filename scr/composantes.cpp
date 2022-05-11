@@ -224,11 +224,8 @@ int main(int argc, char** argv) {
     vector<vector<Neighbor*>> neighborsAretes;
     vector<int> limiteAretes;
     vector<int> indexation;
-    vector<int> fusion;
     vector<vector<int>> setVoisinInF;
     vector<vector<int>> setVoisinInR;
-    vector<vector<int>> setVoisinOutF;
-    vector<vector<int>> setVoisinOutR;
     index = 0;
     int pos;
     int modif;
@@ -313,15 +310,16 @@ int main(int argc, char** argv) {
 
         //On peut donc passer la construction du graphe. Commençons par les sommets.
         for (int i = 0; i < indexation.size(); i++) {
-                V3.push_back(Node(index,G.Vertices[indexation[i]].weight,G.Vertices[indexation[i]].label));
-                correspondingVertex[indexation[i]] = index;
-                index++;
+            V3.push_back(Node(index,G.Vertices[indexation[i]].weight,G.Vertices[indexation[i]].label));
+            correspondingVertex[indexation[i]] = index;
+            index++;
+            seen[indexation[i]] = -1;
         }
 
         //Puis les arêtes au sein de la composante :
         for (int i = 0; i < indexation.size(); i++) {
             for (int j = 0; j < neighborsPeri[i].size(); j++) {
-                if (seen[neighborsPeri[i][j]] == 0) {
+                if (seen[neighborsPeri[i][j]] < 0) {
                     if (j<limiteAretes[i]){
                         char aret[3] = {'F', neighborsAretes[i][j]->label[1]};
                         E3.push_back(Edge(correspondingVertex[indexation[i]],
@@ -335,7 +333,6 @@ int main(int argc, char** argv) {
                     }
                 }
             }
-            seen[indexation[i]] = -1;
         }
 
     } //On vient de terminer cette composante !
