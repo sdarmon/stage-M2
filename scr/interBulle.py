@@ -102,8 +102,8 @@ if len(Arg) in [5,6,7,8,9]:
                 upperComp = comp_possible
                 debut = kmerFrom.get(seq[0:k], -1)
                 end = kmerFrom.get(seq[-k:], -1)
-                t1,t2 = line.split("|")[:2]
-                bubble=t1[1:]+"|"+t2
+                L = seqUpper.split("|")
+                bubble=L[0][1:]+"|"+L[1]
                 type = event[bubble]
                 trouveUpper = trouve
             else: #Cas chemin du bas
