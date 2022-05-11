@@ -81,6 +81,9 @@ if len(Arg) in [5,6,7,8,9]:
                 titre = line[:-1]
                 upper = not upper #On change la valeur de upper
                 if upper:
+                    L = line.split("|")
+                    bubble=L[0][1:]+"|"+L[1]
+                    type = event[bubble]
                     titreUpper = titre[:-1] #On stocke la titre
                 else:
                     titreUnder = titre[:-1]
@@ -102,9 +105,6 @@ if len(Arg) in [5,6,7,8,9]:
                 upperComp = comp_possible
                 debut = kmerFrom.get(seq[0:k], -1)
                 end = kmerFrom.get(seq[-k:], -1)
-                L = seqUpper.split("|")
-                bubble=L[0][1:]+"|"+L[1]
-                type = event[bubble]
                 trouveUpper = trouve
             else: #Cas chemin du bas
                 seqUnder = line[:-1]
