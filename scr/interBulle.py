@@ -37,12 +37,21 @@ def maj(sequ):
     return s
 
 
-if len(Arg) not in [5,6,7,8]:
-    print("Use : " + Arg[0] + " dirComp bulle.fa nbComp threshold -k kmer -rapport\n\t k = 41 by default.")
+if len(Arg) not in [5,6,7,8,9]:
+    print("Use : " + Arg[0] + " dirComp bulle.fa nbComp threshold -k kmer [-rapport/-label event.tsv]\n\t k = 41 by default.")
     exit()
-if len(Arg) in [5,6,7,8]:
+if len(Arg) in [5,6,7,8,9]:
     titre = "" #Variable contenant le titre de la séquence dans le fichier .fa
     seq = "" #Sequence de nucléotides
+    event = dict()
+    if Arg[-2] == "-label":
+        with open(Arg[-1],'r') as f:
+            for line in f:
+                L = line.split("\t")
+                type = L[4]
+                bubble = L[15]
+                event[bubble] = type
+
     if (len(Arg)>= 7 and Arg[5][1] == 'k') :
         k = int(Arg[6])
     else:
@@ -93,6 +102,9 @@ if len(Arg) in [5,6,7,8]:
                 upperComp = comp_possible
                 debut = kmerFrom.get(seq[0:k], -1)
                 end = kmerFrom.get(seq[-k:], -1)
+                t1,t2 = line.split("|")[:2]
+                bubble=t1[1:]+"|"+t2
+                type = event[bubble]
                 trouveUpper = trouve
             else: #Cas chemin du bas
                 seqUnder = line[:-1]
@@ -137,5 +149,6 @@ if len(Arg) in [5,6,7,8]:
                                 t+= " " + str(el)
                             text+= "only in under :" + t + "\t"
                         if printing:
+                            text += bubble + "\t" + type
                             print(text)
             titre = ""#On part pour la ligne suivante qui sera un titre
