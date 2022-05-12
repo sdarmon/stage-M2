@@ -10,6 +10,7 @@
 #include <string>
 #include <algorithm>
 #include <set>
+#include <map>
 #include <queue>
 #include "graph.h"
 #pragma clang diagnostic push
@@ -218,121 +219,265 @@ int main(int argc, char** argv) {
 
     //Après, on fait un BFS à partir de chaque sommet dans la composante afin d'obtenir les voisins du périmètre.
     set<int> vu2;
-    vector<vector<int>> neighborsPeri;
-    vector<vector<Neighbor*>> neighborsInF;
-    vector<vector<Neighbor*>> neighborsInR;
-    vector<vector<Neighbor*>> neighborsAretes;
+    set<int> sonSet;
+    typedef map<pair<int,int>,pair<int,int>> dic;
+    typedef map<pair<int,int>,int> dicChem;
+    dic BulF_FF; //la clé est le couple (i,j) trouvé et la valeur associé est le couple (s,taille)
+    dic BulF_FR;
+    dic BulF_RF;
+    dic BulF_RR;
+    dic BulR_FF; //la clé est le couple (i,j) trouvé et la valeur associé est le couple (s,taille)
+    dic BulR_FR;
+    dic BulR_RF;
+    dic BulR_RR;
+    dicChem areteFF;
+    dicChem areteFR;
+    dicChem areteRF;
+    dicChem areteRR;
     vector<int> limiteAretes;
-    vector<int> indexation;
-    vector<vector<int>> setVoisinInF;
-    vector<vector<int>> setVoisinInR;
+    queue<int> depth;
+    vector<int> depthSons;
     index = 0;
     int pos;
     int modif;
+    int I;
+    int J;
     int compteurDeBoucle = 0;
     //On boucle sur les composantes
     for (vector < vector < int >> ::iterator comp = components.begin(); comp != components.end();
     ++comp){
-        setVoisinInF.clear();
-        setVoisinInR.clear();
-        neighborsPeri.clear(); //Vecteur qui contiendra l'ensemble des voisins de chaque sommet en périmètre.
-        neighborsAretes.clear();
-        neighborsInF.clear();
-        neighborsInR.clear();
-        indexation.clear();
+        BulF_FF.clear();
+        BulF_RF.clear();
+        BulF_FR.clear();
+        BulF_RR.clear();
+        BulR_FF.clear();
+        BulR_RF.clear();
+        BulR_FR.clear();
+        BulR_RR.clear();
+        areteFF.clear();
+        areteFR.clear();
+        areteRR.clear();
+        areteRF.clear();
+        depthSons.clear();
         limiteAretes.clear();
+        sonSet.clear();
         //On boucle sur les sommets de la composante
         cout << "Pré-calcul pour la composante "<<compteurDeBoucle << endl;
         compteurDeBoucle++;
         for (vector<int>::iterator it = comp->begin(); it != comp->end(); ++it) {
-            if (seen[(*it)] == 0) { //Cas sommet en périphérie
-                vector<int> sons;
-                sons.clear();
-                vector<Neighbor*> aretes;
-                aretes.clear();
-                vector<int> inF;
-                vector<int> inR;
-                inF.clear();
-                inR.clear();
-                vector<Neighbor*> nodeInF;
-                vector<Neighbor*> nodeInR;
-                nodeInF.clear();
-                nodeInR.clear();
-                while (!aVoir.empty()){
-                    aVoir.pop();
-                }
-                vu2.clear();
-                vu2.insert((*it)); //On voit bien le sommet duquel on part
-
-                //On fait un BFS à partir de chaque sommet afin de savoir quels sommets du périmètre sont
-                //atteignables à partir de chaque sommet du périmètre
-                //Cas en partant du foward
-                for (vector<Neighbor>::iterator voisin = G.Neighbors((*it))->begin();
-                     voisin != G.Neighbors((*it))->end(); ++voisin) {
-                    if (voisin->label[0] == 'F') {
-                        aVoir.push(&(*voisin));
-                    } else {
-                        pos= distance(inF.begin(), upper_bound(inF.begin(),inF.end(),voisin->val));
-                        inF.insert(inF.begin()+pos,voisin->val);
-                        nodeInF.insert(nodeInF.begin()+ pos,&(*voisin));
-                    }
-                }
-                G.BFS_comp(seen, vu2, aVoir, sons, aretes);
-
-                limiteAretes.push_back(aretes.size()); //On fait ça pour garder en mémoire le fait que ce ne sont
-                //pas les mêmes arêtes
-
-                //Cas en partant du reverse
-                for (vector<Neighbor>::iterator voisin = G.Neighbors((*it))->begin();
-                     voisin != G.Neighbors((*it))->end(); ++voisin) {
-                    if (voisin->label[0] == 'R') {
-                        aVoir.push(&(*voisin));
-                    } else {
-                        pos= distance(inR.begin(), upper_bound(inR.begin(),inR.end(),voisin->val));
-                        inR.insert(inR.begin()+pos,voisin->val);
-                        nodeInR.insert(nodeInR.begin()+ pos,&(*voisin));
-                    }
-                }
-                G.BFS_comp(seen, vu2, aVoir, sons, aretes);
-
-                neighborsPeri.push_back(sons);
-                neighborsAretes.push_back(aretes);
-                neighborsInF.push_back(nodeInF);
-                neighborsInR.push_back(nodeInR);
-                setVoisinInF.push_back(inF);
-                setVoisinInR.push_back(inR);
-                indexation.push_back((*it)); //On garde en mémoire la correspondance entre l'index et la position
-                //du sommet
+            //Cas sommet en périphérie
+            vector<int> sons;
+            sons.clear();
+            vector<Neighbor*> aretes;
+            aretes.clear();
+            vector<int> inF;
+            vector<int> inR;
+            inF.clear();
+            inR.clear();
+            vector<Neighbor*> nodeInF;
+            vector<Neighbor*> nodeInR;
+            nodeInF.clear();
+            nodeInR.clear();
+            while (!aVoir.empty()){
+                aVoir.pop();
             }
+            while (!depth.empty()){
+                depth.pop();
+            }
+            vu2.clear();
+            vu2.insert((*it)); //On voit bien le sommet duquel on part
+
+            //On fait un BFS à partir de chaque sommet afin de savoir quels sommets du périmètre sont
+            //atteignables à partir de chaque sommet du périmètre
+            //Cas en partant du forward
+            for (vector<Neighbor>::iterator voisin = G.Neighbors((*it))->begin();
+                 voisin != G.Neighbors((*it))->end(); ++voisin) {
+                if (voisin->label[0] == 'F') {
+                    aVoir.push(&(*voisin));
+                    depth.push(1);
+                }
+            }
+            G.BFS_comp(seen, vu2, aVoir, depth, sons,depthSons, aretes);
+            for (int i = 0; i<sons.size(); i++){
+                sonSet.insert(sons[i]);
+                for (int j = i+1; j<sons.size(); j++){
+                    if (sons[i] < sons[j]) {
+                        I = i;
+                        J= j;
+                    } else {
+                        I = j;
+                        J = i;
+                    }
+                    if (aretes[I][1] == 'F' and aretes[J][1] == 'F') {
+                        if (BulF_FF.find(make_pair(sons[I],sons[J])) == BulF_FF.end() or
+                        BulF_FF[make_pair(sons[I],sons[J])].second > depth[I] + depth[J]){
+                            BulF_FF[make_pair(sons[I],sons[J])] = make_pair((*it),depth[I] + depth[J]);
+                        }
+                    } else if (aretes[I][1] == 'F' and aretes[J][1] == 'R') {
+                        if (BulF_FR.find(make_pair(sons[I],sons[J])) == BulF_FR.end() or
+                                BulF_FR[make_pair(sons[I],sons[J])].second > depth[I] + depth[J]){
+                            BulF_FR[make_pair(sons[I],sons[J])] = make_pair((*it),depth[I] + depth[J]);
+                        }
+
+                    } else if (aretes[I][1] == 'R' and aretes[J][1] == 'F') {
+                        if (BulF_RF.find(make_pair(sons[I],sons[J])) == BulF_RF.end() or
+                                BulF_RF[make_pair(sons[I],sons[J])].second > depth[I] + depth[J]){
+                            BulF_RF[make_pair(sons[I],sons[J])] = make_pair((*it),depth[I] + depth[J]);
+                        }
+
+                    } else {
+                        if (BulF_RR.find(make_pair(sons[I],sons[J])) == BulF_RR.end() or
+                                BulF_RR[make_pair(sons[I],sons[J])].second > depth[I] + depth[J]){
+                            BulF_RR[make_pair(sons[I],sons[J])] = make_pair((*it),depth[I] + depth[J]);
+                        }
+                    }
+                }
+            }
+            limiteAretes.push_back(aretes.size()); //On fait ça pour garder en mémoire le fait que ce ne sont
+            //pas les mêmes arêtes
+
+            //Cas en partant du reverse
+            for (vector<Neighbor>::iterator voisin = G.Neighbors((*it))->begin();
+                 voisin != G.Neighbors((*it))->end(); ++voisin) {
+                if (voisin->label[0] == 'R') {
+                    aVoir.push(&(*voisin));
+                    depth.push(1);
+                }
+            }
+            G.BFS_comp(seen, vu2, aVoir, depth, sons, depthSons, aretes);
+
+            for (int i = limiteAretes.back(); i<sons.size(); i++){
+                for (int j = i+1; j<sons.size(); j++){
+                    if (sons[i] < sons[j]) {
+                        I = i;
+                        J= j;
+                    } else {
+                        I = j;
+                        J = i;
+                    }
+                    if (aretes[I][1] == 'F' and aretes[J][1] == 'F') {
+                        if (BulR_FF.find(make_pair(sons[I],sons[J])) == BulR_FF.end() or
+                            BulR_FF[make_pair(sons[I],sons[J])].second > depth[I] + depth[J]){
+                            BulR_FF[make_pair(sons[I],sons[J])] = make_pair((*it),depth[I] + depth[J]);
+                        }
+                    } else if (aretes[I][1] == 'F' and aretes[J][1] == 'R') {
+                        if (BulR_FR.find(make_pair(sons[I],sons[J])) == BulR_FR.end() or
+                            BulR_FR[make_pair(sons[I],sons[J])].second > depth[I] + depth[J]){
+                            BulR_FR[make_pair(sons[I],sons[J])] = make_pair((*it),depth[I] + depth[J]);
+                        }
+
+                    } else if (aretes[I][1] == 'R' and aretes[J][1] == 'F') {
+                        if (BulR_RF.find(make_pair(sons[I],sons[J])) == BulR_RF.end() or
+                            BulR_RF[make_pair(sons[I],sons[J])].second > depth[I] + depth[J]){
+                            BulR_RF[make_pair(sons[I],sons[J])] = make_pair((*it),depth[I] + depth[J]);
+                        }
+
+                    } else {
+                        if (BulR_RR.find(make_pair(sons[I],sons[J])) == BulR_RR.end() or
+                            BulR_RR[make_pair(sons[I],sons[J])].second > depth[I] + depth[J]){
+                            BulR_RR[make_pair(sons[I],sons[J])] = make_pair((*it),depth[I] + depth[J]);
+                        }
+                    }
+                }
+            }
+            for (int i = 0; i<sons.size(); i++) {
+                for (int j = limiteAretes.back(); j < sons.size(); j++) {
+                    if (aretes[i][1] == 'F' and aretes[j][1] == 'F'){ //attention, ici la seconde lettre doit être comprise
+                        //comme le complément ! (Voir cahier)
+                        areteFR[make_pair(sons[i],sons[j])] = 1;
+                    } else if (aretes[i][1] == 'F' and aretes[j][1] == 'R'){
+                        areteFF[make_pair(sons[i],sons[j])] = 1;
+                    } else if (aretes[i][1] == 'R' and aretes[j][1] == 'R'){
+                        areteRF[make_pair(sons[i],sons[j])] = 1;
+                    } else {
+                        areteRR[make_pair(sons[i],sons[j])] = 1;
+                    }
+                }
+            }
+
         } //On termine de traiter tous les sommets de la composante
         cout << "BFS sur tous les sommets terminés" << endl;
 
 
-        //On peut donc passer la construction du graphe. Commençons par les sommets.
-        for (int i = 0; i < indexation.size(); i++) {
-            V3.push_back(Node(index,G.Vertices[indexation[i]].weight,G.Vertices[indexation[i]].label));
-            correspondingVertex[indexation[i]] = index;
+        //On peut donc passer la construction du graphe. Commençons par les sommets en péri.
+        for (set<int>::iterator setIt = sonSet.begin(); setIt != sonSet.end(); ++setIt) {
+            V3.push_back(Node(index,G.Vertices[(*setIt)].weight,G.Vertices[(*setIt)].label));
+            correspondingVertex[(*setIt)] = index;
             index++;
-            seen[indexation[i]] = -1;
+            seen[(*setIt)] = -1;
+        }
+
+        //On continue par les sommets à dédoubler et les arêtes associées :
+
+        char aretFF[3] = {'F', 'F'};
+        char aretFR[3] = {'F', 'R'};
+        char aretRF[3] = {'R', 'F'};
+        char aretRR[3] = {'R', 'R'};
+        for (dic::iterator itDic=BulF_FF.begin(); itDic!=BulF_FF.end(); ++itDic){
+            V3.push_back(Node(itDic->second.first,0,G.Vertices[itDic->second.first].label));
+            index++;
+            E3.push_back(Edge(index, correspondingVertex[itDic->first.first], 0, aretFF));
+            E3.push_back(Edge(index, correspondingVertex[itDic->first.second], 0, aretFF));
+        }
+        for (dic::iterator itDic=BulF_FR.begin(); itDic!=BulF_FR.end(); ++itDic){
+            V3.push_back(Node(itDic->second.first,0,G.Vertices[itDic->second.first].label));
+            index++;
+            E3.push_back(Edge(index, correspondingVertex[itDic->first.first], 0, aretFF));
+            E3.push_back(Edge(index, correspondingVertex[itDic->first.second], 0, aretFR));
+        }
+        for (dic::iterator itDic=BulF_RF.begin(); itDic!=BulF_RF.end(); ++itDic){
+            V3.push_back(Node(itDic->second.first,0,G.Vertices[itDic->second.first].label));
+            index++;
+            E3.push_back(Edge(index, correspondingVertex[itDic->first.first], 0, aretFR));
+            E3.push_back(Edge(index, correspondingVertex[itDic->first.second], 0, aretFF));
+        }
+        for (dic::iterator itDic=BulF_RR.begin(); itDic!=BulF_RR.end(); ++itDic){
+            V3.push_back(Node(itDic->second.first,0,G.Vertices[itDic->second.first].label));
+            index++;
+            E3.push_back(Edge(index, correspondingVertex[itDic->first.first], 0, aretFR));
+            E3.push_back(Edge(index, correspondingVertex[itDic->first.second], 0, aretFR));
+        }
+        for (dic::iterator itDic=BulR_FF.begin(); itDic!=BulR_FF.end(); ++itDic){
+            V3.push_back(Node(itDic->second.first,0,G.Vertices[itDic->second.first].label));
+            index++;
+            E3.push_back(Edge(index, correspondingVertex[itDic->first.first], 0, aretRF));
+            E3.push_back(Edge(index, correspondingVertex[itDic->first.second], 0, aretRF));
+        }
+        for (dic::iterator itDic=BulR_FR.begin(); itDic!=BulR_FR.end(); ++itDic){
+            V3.push_back(Node(itDic->second.first,0,G.Vertices[itDic->second.first].label));
+            index++;
+            E3.push_back(Edge(index, correspondingVertex[itDic->first.first], 0, aretRF));
+            E3.push_back(Edge(index, correspondingVertex[itDic->first.second], 0, aretRR));
+        }
+        for (dic::iterator itDic=BulR_RF.begin(); itDic!=BulR_RF.end(); ++itDic){
+            V3.push_back(Node(itDic->second.first,0,G.Vertices[itDic->second.first].label));
+            index++;
+            E3.push_back(Edge(index, correspondingVertex[itDic->first.first], 0, aretRR));
+            E3.push_back(Edge(index, correspondingVertex[itDic->first.second], 0, aretRF));
+        }
+        for (dic::iterator itDic=BulR_RR.begin(); itDic!=BulR_RR.end(); ++itDic){
+            V3.push_back(Node(itDic->second.first,0,G.Vertices[itDic->second.first].label));
+            index++;
+            E3.push_back(Edge(index, correspondingVertex[itDic->first.first], 0, aretRR));
+            E3.push_back(Edge(index, correspondingVertex[itDic->first.second], 0, aretRR));
         }
 
         //Puis les arêtes au sein de la composante :
-        for (int i = 0; i < indexation.size(); i++) {
-            for (int j = 0; j < neighborsPeri[i].size(); j++) {
-                if (seen[neighborsPeri[i][j]] < 0) {
-                    if (j<limiteAretes[i]){
-                        char aret[3] = {'F', neighborsAretes[i][j]->label[1]};
-                        E3.push_back(Edge(correspondingVertex[indexation[i]],
-                                          correspondingVertex[neighborsPeri[i][j]], 0, aret
-                        ));
-                    } else {
-                        char aret[3] = {'R', neighborsAretes[i][j]->label[1]};
-                        E3.push_back(Edge(correspondingVertex[indexation[i]],
-                                          correspondingVertex[neighborsPeri[i][j]], 0, aret
-                        ));
-                    }
-                }
-            }
+        for (dicChem::iterator itDic = areteFF.begin(); itDic!=areteFF.end(); ++itDic) {
+            E3.push_back(Edge(correspondingVertex[itDic->first.first],
+                              correspondingVertex[itDic->first.second], 0, aretFF));
+        }
+        for (dicChem::iterator itDic = areteFR.begin(); itDic!=areteFR.end(); ++itDic) {
+            E3.push_back(Edge(correspondingVertex[itDic->first.first],
+                              correspondingVertex[itDic->first.second], 0, aretFR));
+        }
+        for (dicChem::iterator itDic = areteRF.begin(); itDic!=areteRF.end(); ++itDic) {
+            E3.push_back(Edge(correspondingVertex[itDic->first.first],
+                              correspondingVertex[itDic->first.second], 0, aretRF));
+        }
+        for (dicChem::iterator itDic = areteRR.begin(); itDic!=areteRR.end(); ++itDic) {
+            E3.push_back(Edge(correspondingVertex[itDic->first.first],
+                              correspondingVertex[itDic->first.second], 0, aretRR));
         }
 
     } //On vient de terminer cette composante !
@@ -346,20 +491,20 @@ int main(int argc, char** argv) {
         } else if (seen[i] < 0) {
             continue; //Cas déjà traité précédemment
         } else {
-            correspondingVertex[i] = -1; //Cas sommet fusionné ou de label trop court
+            correspondingVertex[i] = -1; //Cas sommet de comp ou de label trop court
         }
     }
     cout << "Sommets restants ajoutés" << endl;
 
     //Maintenant on s'occupe des arêtes
     for (int i = 0; i<G.N ; i++) {
-        if (seen[i] == 0 and correspondingVertex[i]>=0){//Cas sommet hors comp et valide
+        if (seen[i] == 0 and correspondingVertex[i]>=0){//Cas sommet non vu et valide
             for(vector<Neighbor>::iterator node = G.Neighbors(i)->begin(); node != G.Neighbors(i)->end(); ++node){
                 if (correspondingVertex[node->val]>=0){ //Cas voisin valide
                     E3.push_back(Edge(correspondingVertex[i],correspondingVertex[node->val],0,node->label));
                 }
             }
-        } else if (seen[i] < 0 ){
+        } else if (seen[i] < 0 ){ //Cas sommet de comp en péri
             for (vector<Neighbor>::iterator node = G.Neighbors(i)->begin(); node != G.Neighbors(i)->end(); ++node) {
                 if (seen[node->val] == 0 and correspondingVertex[node->val]>=0) { //Voisin hors comp et valide
                     E3.push_back(Edge(correspondingVertex[i], correspondingVertex[node->val], 0, node->label));

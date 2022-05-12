@@ -250,28 +250,33 @@ void Graph::BFS_func(int threshold ,queue<Neighbor*> &aVoir,vector<int> &vu, set
     }
     return;
 }
-void Graph::BFS_comp(vector<int> &seen,set<int> &vu, queue<Neighbor*> &aVoir,vector<int> &sons,vector<Neighbor*> &aretes){
+typedef map<pair<int,int>,pair<int,int>> dic;
+
+void Graph::BFS_comp(vector<int> &seen,set<int> &vu, queue<Neighbor*> &aVoir, queue<int> &depth,
+                     vector<int> &sons, vector<int> &depthSons, vector<Neighbor*> &aretes){
+    int pronf;
     while (aVoir.size() != 0) { //Cas de terminaison, on a terminé le BFS
         Neighbor *node = aVoir.front();
         aVoir.pop();
+        pronf = depth.front();
+        depth.pop();
         if (vu.find(node->val) != vu.end()) { //Cas où le sommet a été vu par le BFS
+            //Cela veut dire qu'on l'a vu par un autre chemin, et il y a nécessairement une bulle par ici
             continue;
         }
         vu.insert(node->val);
         if (seen[node->val] == 0) { //Cas où le sommet est en dehors du périmètre, on sort
             sons.push_back(node->val);
             aretes.push_back(node);
+            depthSons.push_back(pronf);
             continue;
-        }
-        if (seen[node->val] < 0) { //Cas où le sommet est en périphérie, on lui regarde quand-même ses voisins
-            sons.push_back(node->val);
-            aretes.push_back(node);
         }
         for (vector<Neighbor>::iterator it = Neighbors(node->val)->begin(); it != Neighbors(node->val)->end(); ++it) {
             //On boucle sur ses voisins
             if (it->label[0] == node->label[1]) {
                 //Cas où l'arrêt est bien valide et sommet non vu avant, ce voisin est rajouté dans la file des visites
                 aVoir.push(&(*it));
+                depth.push(pronf+1);
             }
         }
     }
