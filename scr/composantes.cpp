@@ -357,25 +357,25 @@ int main(int argc, char** argv) {
                     }
                     if (aretes[I]->label[1] == 'F' and aretes[J]->label[1] == 'F') {
                         if (BulR_FF.find(make_pair(sons[I],sons[J])) == BulR_FF.end() or
-                            BulR_FF[make_pair(sons[I],sons[J])].second > depth[I] + depth[J]){
-                            BulR_FF[make_pair(sons[I],sons[J])] = make_pair((*it),depth[I] + depth[J]);
+                            BulR_FF[make_pair(sons[I],sons[J])].second > depthSons[I] + depthSons[J]){
+                            BulR_FF[make_pair(sons[I],sons[J])] = make_pair((*it),depthSons[I] + depthSons[J]);
                         }
                     } else if (aretes[I]->label[1] == 'F' and aretes[J]->label[1] == 'R') {
                         if (BulR_FR.find(make_pair(sons[I],sons[J])) == BulR_FR.end() or
-                            BulR_FR[make_pair(sons[I],sons[J])].second > depth[I] + depth[J]){
-                            BulR_FR[make_pair(sons[I],sons[J])] = make_pair((*it),depth[I] + depth[J]);
+                            BulR_FR[make_pair(sons[I],sons[J])].second > depthSons[I] + depthSons[J]){
+                            BulR_FR[make_pair(sons[I],sons[J])] = make_pair((*it),depthSons[I] + depthSons[J]);
                         }
 
                     } else if (aretes[I]->label[1] == 'R' and aretes[J]->label[1] == 'F') {
                         if (BulR_RF.find(make_pair(sons[I],sons[J])) == BulR_RF.end() or
-                            BulR_RF[make_pair(sons[I],sons[J])].second > depth[I] + depth[J]){
-                            BulR_RF[make_pair(sons[I],sons[J])] = make_pair((*it),depth[I] + depth[J]);
+                            BulR_RF[make_pair(sons[I],sons[J])].second > depthSons[I] + depthSons[J]){
+                            BulR_RF[make_pair(sons[I],sons[J])] = make_pair((*it),depthSons[I] + depthSons[J]);
                         }
 
                     } else {
                         if (BulR_RR.find(make_pair(sons[I],sons[J])) == BulR_RR.end() or
-                            BulR_RR[make_pair(sons[I],sons[J])].second > depth[I] + depth[J]){
-                            BulR_RR[make_pair(sons[I],sons[J])] = make_pair((*it),depth[I] + depth[J]);
+                            BulR_RR[make_pair(sons[I],sons[J])].second > depthSons[I] + depthSons[J]){
+                            BulR_RR[make_pair(sons[I],sons[J])] = make_pair((*it),depthSons[I] + depthSons[J]);
                         }
                     }
                 }
