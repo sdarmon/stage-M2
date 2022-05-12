@@ -339,6 +339,7 @@ int main(int argc, char** argv) {
             G.BFS_comp(seen, vu2, aVoir, depth, sons, depthSons, aretes);
 
             for (int i = limiteAretes.back(); i<sons.size(); i++){
+                sonSet.insert(sons[i]);
                 for (int j = i+1; j<sons.size(); j++){
                     if (sons[i] < sons[j]) {
                         I = i;
