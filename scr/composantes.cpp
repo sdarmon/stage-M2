@@ -406,52 +406,52 @@ int main(int argc, char** argv) {
         char aretRF[3] = {'R', 'F'};
         char aretRR[3] = {'R', 'R'};
         for (dic::iterator itDic=BulF_FF.begin(); itDic!=BulF_FF.end(); ++itDic){
-            V3.push_back(Node(itDic->second.first,0,G.Vertices[itDic->second.first].label));
-            index++;
+            V3.push_back(Node(index,0,G.Vertices[itDic->second.first].label));
             E3.push_back(Edge(index, correspondingVertex[itDic->first.first], 0, aretFF));
             E3.push_back(Edge(index, correspondingVertex[itDic->first.second], 0, aretFF));
+            index++;
         }
         for (dic::iterator itDic=BulF_FR.begin(); itDic!=BulF_FR.end(); ++itDic){
-            V3.push_back(Node(itDic->second.first,0,G.Vertices[itDic->second.first].label));
-            index++;
+            V3.push_back(Node(index,0,G.Vertices[itDic->second.first].label));
             E3.push_back(Edge(index, correspondingVertex[itDic->first.first], 0, aretFF));
             E3.push_back(Edge(index, correspondingVertex[itDic->first.second], 0, aretFR));
+            index++;
         }
         for (dic::iterator itDic=BulF_RF.begin(); itDic!=BulF_RF.end(); ++itDic){
-            V3.push_back(Node(itDic->second.first,0,G.Vertices[itDic->second.first].label));
-            index++;
+            V3.push_back(Node(index,0,G.Vertices[itDic->second.first].label));
             E3.push_back(Edge(index, correspondingVertex[itDic->first.first], 0, aretFR));
             E3.push_back(Edge(index, correspondingVertex[itDic->first.second], 0, aretFF));
+            index++;
         }
         for (dic::iterator itDic=BulF_RR.begin(); itDic!=BulF_RR.end(); ++itDic){
-            V3.push_back(Node(itDic->second.first,0,G.Vertices[itDic->second.first].label));
-            index++;
+            V3.push_back(Node(index,0,G.Vertices[itDic->second.first].label));
             E3.push_back(Edge(index, correspondingVertex[itDic->first.first], 0, aretFR));
             E3.push_back(Edge(index, correspondingVertex[itDic->first.second], 0, aretFR));
+            index++;
         }
         for (dic::iterator itDic=BulR_FF.begin(); itDic!=BulR_FF.end(); ++itDic){
-            V3.push_back(Node(itDic->second.first,0,G.Vertices[itDic->second.first].label));
-            index++;
+            V3.push_back(Node(index,0,G.Vertices[itDic->second.first].label));
             E3.push_back(Edge(index, correspondingVertex[itDic->first.first], 0, aretRF));
             E3.push_back(Edge(index, correspondingVertex[itDic->first.second], 0, aretRF));
+            index++;
         }
         for (dic::iterator itDic=BulR_FR.begin(); itDic!=BulR_FR.end(); ++itDic){
-            V3.push_back(Node(itDic->second.first,0,G.Vertices[itDic->second.first].label));
-            index++;
+            V3.push_back(Node(index,0,G.Vertices[itDic->second.first].label));
             E3.push_back(Edge(index, correspondingVertex[itDic->first.first], 0, aretRF));
             E3.push_back(Edge(index, correspondingVertex[itDic->first.second], 0, aretRR));
+            index++;
         }
         for (dic::iterator itDic=BulR_RF.begin(); itDic!=BulR_RF.end(); ++itDic){
-            V3.push_back(Node(itDic->second.first,0,G.Vertices[itDic->second.first].label));
-            index++;
+            V3.push_back(Node(index,0,G.Vertices[itDic->second.first].label));
             E3.push_back(Edge(index, correspondingVertex[itDic->first.first], 0, aretRR));
             E3.push_back(Edge(index, correspondingVertex[itDic->first.second], 0, aretRF));
+            index++;
         }
         for (dic::iterator itDic=BulR_RR.begin(); itDic!=BulR_RR.end(); ++itDic){
-            V3.push_back(Node(itDic->second.first,0,G.Vertices[itDic->second.first].label));
-            index++;
+            V3.push_back(Node(index,0,G.Vertices[itDic->second.first].label));
             E3.push_back(Edge(index, correspondingVertex[itDic->first.first], 0, aretRR));
             E3.push_back(Edge(index, correspondingVertex[itDic->first.second], 0, aretRR));
+            index++;
         }
 
         //Puis les arêtes au sein de la composante :
@@ -476,7 +476,7 @@ int main(int argc, char** argv) {
 
     //Maintenant que les composantes ont bien été ajouté, on s'occupe des sommets restants
     for (int i = 0; i < G.N; i++) {
-        if (seen[i] == 0 and G.Vertices[i].label.size()>G.kmer-1) {
+        if (seen[i] == 0 and G.Vertices[i].label.size()>=G.kmer) {
             V3.push_back(Node(index, G.Vertices[i].weight, G.Vertices[i].label));
             correspondingVertex[i] = index;
             index++;
