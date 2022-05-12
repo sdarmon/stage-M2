@@ -355,18 +355,18 @@ int main(int argc, char** argv) {
                         I = j;
                         J = i;
                     }
-                    if (aretes[I][1] == 'F' and aretes[J][1] == 'F') {
+                    if (aretes[I]->label[1] == 'F' and aretes[J]->label[1] == 'F') {
                         if (BulR_FF.find(make_pair(sons[I],sons[J])) == BulR_FF.end() or
                             BulR_FF[make_pair(sons[I],sons[J])].second > depth[I] + depth[J]){
                             BulR_FF[make_pair(sons[I],sons[J])] = make_pair((*it),depth[I] + depth[J]);
                         }
-                    } else if (aretes[I][1] == 'F' and aretes[J][1] == 'R') {
+                    } else if (aretes[I]->label[1] == 'F' and aretes[J]->label[1] == 'R') {
                         if (BulR_FR.find(make_pair(sons[I],sons[J])) == BulR_FR.end() or
                             BulR_FR[make_pair(sons[I],sons[J])].second > depth[I] + depth[J]){
                             BulR_FR[make_pair(sons[I],sons[J])] = make_pair((*it),depth[I] + depth[J]);
                         }
 
-                    } else if (aretes[I][1] == 'R' and aretes[J][1] == 'F') {
+                    } else if (aretes[I]->label[1] == 'R' and aretes[J]->label[1] == 'F') {
                         if (BulR_RF.find(make_pair(sons[I],sons[J])) == BulR_RF.end() or
                             BulR_RF[make_pair(sons[I],sons[J])].second > depth[I] + depth[J]){
                             BulR_RF[make_pair(sons[I],sons[J])] = make_pair((*it),depth[I] + depth[J]);
@@ -382,12 +382,12 @@ int main(int argc, char** argv) {
             }
             for (int i = 0; i<sons.size(); i++) {
                 for (int j = limiteAretes.back(); j < sons.size(); j++) {
-                    if (aretes[i][1] == 'F' and aretes[j][1] == 'F'){ //attention, ici la seconde lettre doit être comprise
+                    if (aretes[i]->label[1] == 'F' and aretes[j]->label[1] == 'F'){ //attention, ici la seconde lettre doit être comprise
                         //comme le complément ! (Voir cahier)
                         areteFR[make_pair(sons[i],sons[j])] = 1;
-                    } else if (aretes[i][1] == 'F' and aretes[j][1] == 'R'){
+                    } else if (aretes[i]->label[1] == 'F' and aretes[j]->label[1] == 'R'){
                         areteFF[make_pair(sons[i],sons[j])] = 1;
-                    } else if (aretes[i][1] == 'R' and aretes[j][1] == 'R'){
+                    } else if (aretes[i]->label[1] == 'R' and aretes[j]->label[1] == 'R'){
                         areteRF[make_pair(sons[i],sons[j])] = 1;
                     } else {
                         areteRR[make_pair(sons[i],sons[j])] = 1;
