@@ -131,7 +131,7 @@ int main(int argc, char** argv) {
     cout << "Début du tas min" << endl;
     priority_queue<indexDic> indexTrie;
     for (int sommet = 0; sommet < G.N ; sommet++){
-        if (G.Vertices[sommet].weight >= max(threshold,10)){
+        if (G.Vertices[sommet].weight >= threshold){
             indexTrie.push(indexDic{sommet,G.Vertices[sommet].weight});
         }
     } //Attention ici il y a une opti possible : on est en N log N mais c'est clairement possible de faire en N
@@ -235,8 +235,10 @@ int main(int argc, char** argv) {
     dicChem areteRF;
     dicChem areteRR;
     vector<int> limiteAretes;
+    vector<int> sons;
     queue<int> depth;
     vector<int> depthSons;
+    vector<Neighbor*> aretes;
     index = 0;
     int pos;
     int modif;
@@ -266,18 +268,8 @@ int main(int argc, char** argv) {
         compteurDeBoucle++;
         for (vector<int>::iterator it = comp->begin(); it != comp->end(); ++it) {
             //Cas sommet en périphérie
-            vector<int> sons;
             sons.clear();
-            vector<Neighbor*> aretes;
             aretes.clear();
-            vector<int> inF;
-            vector<int> inR;
-            inF.clear();
-            inR.clear();
-            vector<Neighbor*> nodeInF;
-            vector<Neighbor*> nodeInR;
-            nodeInF.clear();
-            nodeInR.clear();
             while (!aVoir.empty()){
                 aVoir.pop();
             }
@@ -404,7 +396,7 @@ int main(int argc, char** argv) {
             V3.push_back(Node(index,G.Vertices[(*setIt)].weight,G.Vertices[(*setIt)].label));
             correspondingVertex[(*setIt)] = index;
             index++;
-            seen[(*setIt)] = -1;
+            seen[(*setIt)] = -compteurDeBoucle;
         }
 
         //On continue par les sommets à dédoubler et les arêtes associées :
