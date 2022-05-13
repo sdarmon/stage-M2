@@ -373,24 +373,24 @@ int main(int argc, char** argv) {
                     }
                 }
             }
-            for (int i = 0; i<limiteAretes.back(); i++) {
-                for (int j = limiteAretes.back(); j < sons.size(); j++) {
-                    if (aretes[i]->label[1] == 'F' and aretes[j]->label[1] == 'F'){ //attention, ici la seconde lettre doit être comprise
-                        //comme le complément ! (Voir cahier, ce n'est pas forcément évident)
-                        areteFF[make_pair(sons[i],sons[j])] = 1;
-                        areteRF[make_pair(sons[j],sons[i])] = 1;
-                    } else if (aretes[i]->label[1] == 'F' and aretes[j]->label[1] == 'R'){
-                        areteRR[make_pair(sons[i],sons[j])] = 1;
-                        areteFF[make_pair(sons[j],sons[i])] = 1;
-                    } else if (aretes[i]->label[1] == 'R' and aretes[j]->label[1] == 'R'){
-                        areteFR[make_pair(sons[i],sons[j])] = 1;
-                        areteFR[make_pair(sons[j],sons[i])] = 1;
-                    } else {
-                        areteFR[make_pair(sons[i],sons[j])] = 1;
-                        areteFR[make_pair(sons[j],sons[i])] = 1;
-                    }
-                }
-            }
+//            for (int i = 0; i<limiteAretes.back(); i++) {
+//                for (int j = limiteAretes.back(); j < sons.size(); j++) {
+//                    if (aretes[i]->label[1] == 'F' and aretes[j]->label[1] == 'F'){ //attention, ici la seconde lettre doit être comprise
+//                        //comme le complément ! (Voir cahier, ce n'est pas forcément évident)
+//                        areteFF[make_pair(sons[i],sons[j])] = 1;
+//                        areteRF[make_pair(sons[j],sons[i])] = 1;
+//                    } else if (aretes[i]->label[1] == 'F' and aretes[j]->label[1] == 'R'){
+//                        areteRR[make_pair(sons[i],sons[j])] = 1;
+//                        areteFF[make_pair(sons[j],sons[i])] = 1;
+//                    } else if (aretes[i]->label[1] == 'R' and aretes[j]->label[1] == 'R'){
+//                        areteFR[make_pair(sons[i],sons[j])] = 1;
+//                        areteFR[make_pair(sons[j],sons[i])] = 1;
+//                    } else {
+//                        areteFR[make_pair(sons[i],sons[j])] = 1;
+//                        areteFR[make_pair(sons[j],sons[i])] = 1;
+//                    }
+//                }
+//            }
 
         } //On termine de traiter tous les sommets de la composante
         cout << "BFS sur tous les sommets terminés" << endl;
