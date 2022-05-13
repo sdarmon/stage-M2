@@ -270,6 +270,7 @@ int main(int argc, char** argv) {
             //Cas sommet en périphérie
             sons.clear();
             aretes.clear();
+            depthSons.clear();
             while (!aVoir.empty()){
                 aVoir.pop();
             }
