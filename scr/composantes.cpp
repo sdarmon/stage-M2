@@ -270,7 +270,7 @@ int main(int argc, char** argv) {
         cout << "Pré-calcul pour la composante "<<compteurDeBoucle << endl;
         compteurDeBoucle++;
         for (vector<int>::iterator it = comp->begin(); it != comp->end(); ++it) {
-            cout<< "traitement du sommet " << (*it) << end;
+            cout<< "traitement du sommet " << (*it) << endl;
             //Cas sommet en périphérie
             sons.clear();
             aretes.clear();
