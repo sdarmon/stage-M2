@@ -267,7 +267,7 @@ int main(int argc, char** argv) {
         depthSons.clear();
         sonSet.clear();
         //On boucle sur les sommets de la composante
-        cout << "Pré-calcul pour la composante "<<compteurDeBoucle << endl;
+        cout << "Pré-calcul pour la composante "<<compteurDeBoucle << " de taille " << comp->size() << endl;
         compteurDeBoucle++;
         for (vector<int>::iterator it = comp->begin(); it != comp->end(); ++it) {
             cout<< "traitement du sommet " << (*it) << endl;
@@ -295,7 +295,6 @@ int main(int argc, char** argv) {
                 }
             }
             G.BFS_comp(seen, vu2, aVoir, depth, sons,depthSons, aretes);
-            cout << "\tBFS forward ok" << endl;
             for (int i = 0; i<sons.size(); i++){
                 sonSet.insert(sons[i]);
                 for (int j = i+1; j<sons.size(); j++){
@@ -332,7 +331,6 @@ int main(int argc, char** argv) {
                 }
             }
 
-            cout << "\tBFS pairs forward ok" << endl;
             limiteAretes=aretes.size(); //On fait ça pour garder en mémoire le fait que ce ne sont
             //pas les mêmes arêtes
 
@@ -345,7 +343,6 @@ int main(int argc, char** argv) {
                 }
             }
             G.BFS_comp(seen, vu2, aVoir, depth, sons, depthSons, aretes);
-            cout << "\tBFS reverse ok" << endl;
 
             for (int i = limiteAretes; i<sons.size(); i++){
                 sonSet.insert(sons[i]);
@@ -382,7 +379,6 @@ int main(int argc, char** argv) {
                     }
                 }
             }
-            cout << "\tBFS pairs reverse ok" << endl;
             for (int i = 0; i<limiteAretes; i++) {
                 for (int j = limiteAretes; j < sons.size(); j++) {
                     if (aretes[i]->label[1] == 'F' and aretes[j]->label[1] == 'F'){ //attention, ici la seconde lettre doit être comprise
