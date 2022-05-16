@@ -266,9 +266,11 @@ void Graph::BFS_comp(vector<int> &seen,set<int> &vu, queue<Neighbor*> &aVoir, qu
         }
         vu.insert(node->val);
         if (seen[node->val] <= 0) { //Cas où le sommet est en dehors du périmètre, on sort
-            sons.push_back(node->val);
-            aretes.push_back(node);
-            depthSons.push_back(pronf);
+            if(Vertices[node->val].label.size()>=kmer){
+                sons.push_back(node->val);
+                aretes.push_back(node);
+                depthSons.push_back(pronf);
+            }
             continue;
         }
         for (vector<Neighbor>::iterator it = Neighbors(node->val)->begin(); it != Neighbors(node->val)->end(); ++it) {

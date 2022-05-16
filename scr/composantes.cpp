@@ -270,6 +270,9 @@ int main(int argc, char** argv) {
         cout << "Pré-calcul pour la composante "<<compteurDeBoucle << " de taille " << comp->size() << endl;
         compteurDeBoucle++;
         for (vector<int>::iterator it = comp->begin(); it != comp->end(); ++it) {
+            if (G.Vertices[(*it)].label.size() < G.kmer){
+                continue;
+            }
             //Cas sommet en périphérie
             sons.clear();
             aretes.clear();
@@ -403,10 +406,10 @@ int main(int argc, char** argv) {
 
         //On peut donc passer la construction du graphe. Commençons par les sommets en péri.
         for (set<int>::iterator setIt = sonSet.begin(); setIt != sonSet.end(); ++setIt) {
-            V3.push_back(Node(index,G.Vertices[(*setIt)].weight,G.Vertices[(*setIt)].label));
-            correspondingVertex[(*setIt)] = index;
-            index++;
-            seen[(*setIt)] = -compteurDeBoucle;
+                V3.push_back(Node(index,G.Vertices[(*setIt)].weight,G.Vertices[(*setIt)].label));
+                correspondingVertex[(*setIt)] = index;
+                index++;
+                seen[(*setIt)] = -compteurDeBoucle;
         }
 
         //On continue par les sommets à dédoubler et les arêtes associées :
