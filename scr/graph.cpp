@@ -265,7 +265,7 @@ void Graph::BFS_comp(vector<int> &seen,set<int> &vu, queue<Neighbor*> &aVoir, qu
             continue;
         }
         vu.insert(node->val);
-        if (seen[node->val] == 0) { //Cas où le sommet est en dehors du périmètre, on sort
+        if (seen[node->val] <= 0) { //Cas où le sommet est en dehors du périmètre, on sort
             sons.push_back(node->val);
             aretes.push_back(node);
             depthSons.push_back(pronf);
