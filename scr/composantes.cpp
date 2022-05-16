@@ -234,7 +234,7 @@ int main(int argc, char** argv) {
     dicChem areteFR;
     dicChem areteRF;
     dicChem areteRR;
-    vector<int> limiteAretes;
+    int limiteAretes;
     vector<int> sons;
     queue<int> depth;
     vector<int> depthSons;
@@ -245,6 +245,10 @@ int main(int argc, char** argv) {
     int I;
     int J;
     int compteurDeBoucle = 0;
+    char aretFF[3] = {'F', 'F'};
+    char aretFR[3] = {'F', 'R'};
+    char aretRF[3] = {'R', 'F'};
+    char aretRR[3] = {'R', 'R'};
     //On boucle sur les composantes
     for (vector < vector < int >> ::iterator comp = components.begin(); comp != components.end();
     ++comp){
@@ -261,12 +265,12 @@ int main(int argc, char** argv) {
         areteRR.clear();
         areteRF.clear();
         depthSons.clear();
-        limiteAretes.clear();
         sonSet.clear();
         //On boucle sur les sommets de la composante
         cout << "Pré-calcul pour la composante "<<compteurDeBoucle << endl;
         compteurDeBoucle++;
         for (vector<int>::iterator it = comp->begin(); it != comp->end(); ++it) {
+            cout<< "traitement du sommet " << (*it) << end;
             //Cas sommet en périphérie
             sons.clear();
             aretes.clear();
@@ -281,7 +285,7 @@ int main(int argc, char** argv) {
             vu2.insert((*it)); //On voit bien le sommet duquel on part
 
             //On fait un BFS à partir de chaque sommet afin de savoir quels sommets du périmètre sont
-            //atteignables à partir de chaque sommet du périmètre
+            //atteignables à partir de chaque sommet de la composante
             //Cas en partant du forward
             for (vector<Neighbor>::iterator voisin = G.Neighbors((*it))->begin();
                  voisin != G.Neighbors((*it))->end(); ++voisin) {
@@ -291,6 +295,7 @@ int main(int argc, char** argv) {
                 }
             }
             G.BFS_comp(seen, vu2, aVoir, depth, sons,depthSons, aretes);
+            cout << "\tBFS forward ok" << endl;
             for (int i = 0; i<sons.size(); i++){
                 sonSet.insert(sons[i]);
                 for (int j = i+1; j<sons.size(); j++){
@@ -326,7 +331,9 @@ int main(int argc, char** argv) {
                     }
                 }
             }
-            limiteAretes.push_back(aretes.size()); //On fait ça pour garder en mémoire le fait que ce ne sont
+
+            cout << "\tBFS pairs forward ok" << endl;
+            limiteAretes=aretes.size(); //On fait ça pour garder en mémoire le fait que ce ne sont
             //pas les mêmes arêtes
 
             //Cas en partant du reverse
@@ -338,8 +345,9 @@ int main(int argc, char** argv) {
                 }
             }
             G.BFS_comp(seen, vu2, aVoir, depth, sons, depthSons, aretes);
+            cout << "\tBFS reverse ok" << endl;
 
-            for (int i = limiteAretes.back(); i<sons.size(); i++){
+            for (int i = limiteAretes; i<sons.size(); i++){
                 sonSet.insert(sons[i]);
                 for (int j = i+1; j<sons.size(); j++){
                     if (sons[i] < sons[j]) {
@@ -374,8 +382,9 @@ int main(int argc, char** argv) {
                     }
                 }
             }
-            for (int i = 0; i<limiteAretes.back(); i++) {
-                for (int j = limiteAretes.back(); j < sons.size(); j++) {
+            cout << "\tBFS pairs reverse ok" << endl;
+            for (int i = 0; i<limiteAretes; i++) {
+                for (int j = limiteAretes; j < sons.size(); j++) {
                     if (aretes[i]->label[1] == 'F' and aretes[j]->label[1] == 'F'){ //attention, ici la seconde lettre doit être comprise
                         //comme le complément ! (Voir cahier, ce n'est pas forcément évident)
                         areteFF[make_pair(sons[i],sons[j])] = 1;
@@ -407,10 +416,7 @@ int main(int argc, char** argv) {
 
         //On continue par les sommets à dédoubler et les arêtes associées :
 
-        char aretFF[3] = {'F', 'F'};
-        char aretFR[3] = {'F', 'R'};
-        char aretRF[3] = {'R', 'F'};
-        char aretRR[3] = {'R', 'R'};
+
         for (dic::iterator itDic=BulF_FF.begin(); itDic!=BulF_FF.end(); ++itDic){
             V3.push_back(Node(index,0,G.Vertices[itDic->second.first].label));
             E3.push_back(Edge(index, correspondingVertex[itDic->first.first], 0, aretFF));
