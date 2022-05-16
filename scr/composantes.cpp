@@ -81,9 +81,9 @@ struct indexDic {
 };
 
 int main(int argc, char** argv) {
-    if (argc != 8 and argc != 6) {
+    if (argc != 9 and argc != 7) {
         cout << "Expected use of this program: \n\n\t" << argv[0]
-             << " file.nodes file.edges -c value [-k kmer] outputPrefix \n" << endl;
+             << " file.nodes file.edges -c value [-k kmer] outputPrefix [-with/without]\n" << endl;
         return 0;
     }
 
@@ -94,7 +94,7 @@ int main(int argc, char** argv) {
     string nodesPath = argv[1];
     string edgesPath = argv[2];
     string outputPrefix;
-
+    int with;
     ifstream edges(edgesPath, std::ios::binary);
     ifstream nodes(nodesPath, std::ios::binary);
 
@@ -102,11 +102,21 @@ int main(int argc, char** argv) {
     read_node_file_weighted(nodes, V);
 
     Graph G(V, E);
-    if(argc >= 7 and argv[5][1]=='k' ){
+    if(argc >= 8 and argv[5][1]=='k' ){
         G.kmer = stoi(argv[6]);
         outputPrefix = argv[7];
+        if (((string)argv[8]).size() == 5){
+            with = 1;
+        } else {
+            with = 0;
+        }
     } else {
         outputPrefix = argv[5];
+        if (((string)argv[6]).size() == 5){
+            with = 1;
+        } else {
+            with = 0;
+        }
     }
 
     cout << "Graphe chargé et construit" << endl;
@@ -465,22 +475,24 @@ int main(int argc, char** argv) {
         }
 
         //Puis les arêtes au sein de la composante :
-//        for (dicChem::iterator itDic = areteFF.begin(); itDic!=areteFF.end(); ++itDic) {
-//            E3.push_back(Edge(correspondingVertex[itDic->first.first],
-//                              correspondingVertex[itDic->first.second], 0, aretFF));
-//        }
-//        for (dicChem::iterator itDic = areteFR.begin(); itDic!=areteFR.end(); ++itDic) {
-//            E3.push_back(Edge(correspondingVertex[itDic->first.first],
-//                              correspondingVertex[itDic->first.second], 0, aretFR));
-//        }
-//        for (dicChem::iterator itDic = areteRF.begin(); itDic!=areteRF.end(); ++itDic) {
-//            E3.push_back(Edge(correspondingVertex[itDic->first.first],
-//                              correspondingVertex[itDic->first.second], 0, aretRF));
-//        }
-//        for (dicChem::iterator itDic = areteRR.begin(); itDic!=areteRR.end(); ++itDic) {
-//            E3.push_back(Edge(correspondingVertex[itDic->first.first],
-//                              correspondingVertex[itDic->first.second], 0, aretRR));
-//        }
+        if (with) {
+            for (dicChem::iterator itDic = areteFF.begin(); itDic!=areteFF.end(); ++itDic) {
+                E3.push_back(Edge(correspondingVertex[itDic->first.first],
+                                  correspondingVertex[itDic->first.second], 0, aretFF));
+            }
+            for (dicChem::iterator itDic = areteFR.begin(); itDic!=areteFR.end(); ++itDic) {
+                E3.push_back(Edge(correspondingVertex[itDic->first.first],
+                                  correspondingVertex[itDic->first.second], 0, aretFR));
+            }
+            for (dicChem::iterator itDic = areteRF.begin(); itDic!=areteRF.end(); ++itDic) {
+                E3.push_back(Edge(correspondingVertex[itDic->first.first],
+                                  correspondingVertex[itDic->first.second], 0, aretRF));
+            }
+            for (dicChem::iterator itDic = areteRR.begin(); itDic!=areteRR.end(); ++itDic) {
+                E3.push_back(Edge(correspondingVertex[itDic->first.first],
+                                  correspondingVertex[itDic->first.second], 0, aretRR));
+            }
+        }
 
     } //On vient de terminer cette composante !
 
