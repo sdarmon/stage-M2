@@ -462,22 +462,22 @@ int main(int argc, char** argv) {
         }
 
         //Puis les arêtes au sein de la composante :
-        for (dicChem::iterator itDic = areteFF.begin(); itDic!=areteFF.end(); ++itDic) {
-            E3.push_back(Edge(correspondingVertex[itDic->first.first],
-                              correspondingVertex[itDic->first.second], 0, aretFF));
-        }
-        for (dicChem::iterator itDic = areteFR.begin(); itDic!=areteFR.end(); ++itDic) {
-            E3.push_back(Edge(correspondingVertex[itDic->first.first],
-                              correspondingVertex[itDic->first.second], 0, aretFR));
-        }
-        for (dicChem::iterator itDic = areteRF.begin(); itDic!=areteRF.end(); ++itDic) {
-            E3.push_back(Edge(correspondingVertex[itDic->first.first],
-                              correspondingVertex[itDic->first.second], 0, aretRF));
-        }
-        for (dicChem::iterator itDic = areteRR.begin(); itDic!=areteRR.end(); ++itDic) {
-            E3.push_back(Edge(correspondingVertex[itDic->first.first],
-                              correspondingVertex[itDic->first.second], 0, aretRR));
-        }
+//        for (dicChem::iterator itDic = areteFF.begin(); itDic!=areteFF.end(); ++itDic) {
+//            E3.push_back(Edge(correspondingVertex[itDic->first.first],
+//                              correspondingVertex[itDic->first.second], 0, aretFF));
+//        }
+//        for (dicChem::iterator itDic = areteFR.begin(); itDic!=areteFR.end(); ++itDic) {
+//            E3.push_back(Edge(correspondingVertex[itDic->first.first],
+//                              correspondingVertex[itDic->first.second], 0, aretFR));
+//        }
+//        for (dicChem::iterator itDic = areteRF.begin(); itDic!=areteRF.end(); ++itDic) {
+//            E3.push_back(Edge(correspondingVertex[itDic->first.first],
+//                              correspondingVertex[itDic->first.second], 0, aretRF));
+//        }
+//        for (dicChem::iterator itDic = areteRR.begin(); itDic!=areteRR.end(); ++itDic) {
+//            E3.push_back(Edge(correspondingVertex[itDic->first.first],
+//                              correspondingVertex[itDic->first.second], 0, aretRR));
+//        }
 
     } //On vient de terminer cette composante !
 
