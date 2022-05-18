@@ -311,7 +311,7 @@ int main(int argc, char** argv) {
                     aVoir.push(&(*voisin));
                     depth.push(1);
                     sizeLabel = G.Vertices[(*it)].label.size();
-                    string aux = G.Vertices[(*it)].label.substr(0,sizeLabel-G.kmer);
+                    string aux = G.Vertices[(*it)].label.substr(0,1+sizeLabel-G.kmer);
                     labels.push(aux);
                 }
             }
