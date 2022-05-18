@@ -405,24 +405,20 @@ int main(int argc, char** argv) {
                     string aux = labelSons[j]+G.Vertices[(*it)].label+labelSons[i].substr(G.kmer);
                     if (aretes[i]->label[1] == 'F' and aretes[j]->label[1] == 'F'){ //attention, ici la seconde lettre doit être comprise
                         //comme le complément ! (Voir cahier, ce n'est pas forcément évident)
-                        if (areteRF.find(make_pair(sons[i],sons[j])) == areteRF.end() or areteRF[make_pair(sons[i],sons[j])].size() > aux.size()){
-                            areteRF[make_pair(sons[i],sons[j])] = aux;
-                            //areteRF[make_pair(sons[j],sons[i])] = aux;
+                        if (areteRF.find(make_pair(sons[j],sons[i])) == areteRF.end() or areteRF[make_pair(sons[j],sons[i])].size() > aux.size()){
+                            areteRF[make_pair(sons[j],sons[i])] = aux;
                         }
                     } else if (aretes[i]->label[1] == 'F' and aretes[j]->label[1] == 'R'){
-                        if (areteRR.find(make_pair(sons[i],sons[j])) == areteRR.end() or areteRR[make_pair(sons[i],sons[j])].size() > aux.size()){
-                            areteRR[make_pair(sons[i],sons[j])] = aux;
-                            //areteFF[make_pair(sons[j],sons[i])] = aux;
+                        if (areteFF.find(make_pair(sons[j],sons[i])) == areteFF.end() or areteFF[make_pair(sons[j],sons[i])].size() > aux.size()){
+                            areteFF[make_pair(sons[j],sons[i])] = aux;
                         }
                     } else if (aretes[i]->label[1] == 'R' and aretes[j]->label[1] == 'R'){
-                        if (areteFR.find(make_pair(sons[i],sons[j])) == areteFR.end() or areteFR[make_pair(sons[i],sons[j])].size() > aux.size()){
-                            areteFR[make_pair(sons[i],sons[j])] = aux;
-                            //areteFR[make_pair(sons[j],sons[i])] = aux;
+                        if (areteFR.find(make_pair(sons[j],sons[i])) == areteFR.end() or areteFR[make_pair(sons[j],sons[i])].size() > aux.size()){
+                            areteFR[make_pair(sons[j],sons[i])] = aux;
                         }
                     } else {
-                        if (areteFF.find(make_pair(sons[i],sons[j])) == areteFF.end() or areteFF[make_pair(sons[i],sons[j])].size() > aux.size()){
-                            areteFF[make_pair(sons[i],sons[j])] = aux;
-                            //areteRR[make_pair(sons[j],sons[i])] = aux;
+                        if (areteRR.find(make_pair(sons[j],sons[i])) == areteRR.end() or areteRR[make_pair(sons[j],sons[i])].size() > aux.size()){
+                            areteRR[make_pair(sons[j],sons[i])] = aux;
                         }
                     }
                 }
