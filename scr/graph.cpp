@@ -252,7 +252,7 @@ void Graph::BFS_func(int threshold ,queue<Neighbor*> &aVoir,vector<int> &vu, set
 }
 typedef map<pair<int,int>,pair<int,int>> dic;
 
-string reverse_complement(string &a){
+string reverse_complement(string a){
     string aux = "";
     for (int i = a.size()-1; i>=0; i--){
         if (a[i] == 'A'){
