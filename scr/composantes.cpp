@@ -310,8 +310,7 @@ int main(int argc, char** argv) {
                 if (voisin->label[0] == 'F') {
                     aVoir.push(&(*voisin));
                     depth.push(1);
-                    sizeLabel = G.Vertices[(*it)].label.size();
-                    string aux = G.Vertices[(*it)].label.substr(0,1+sizeLabel-G.kmer);
+                    string aux = G.Vertices[(*it)].label;
                     labels.push(aux);
                 }
             }
@@ -404,7 +403,7 @@ int main(int argc, char** argv) {
             }
             for (int i = 0; i<limiteAretes; i++) {
                 for (int j = limiteAretes; j < sons.size(); j++) {
-                    string aux = labelSons[j]+G.Vertices[(*it)].label+labelSons[i].substr(G.kmer);
+                    string aux = labelSons[j]+labelSons[i];
                     if (aretes[i]->label[1] == 'F' and aretes[j]->label[1] == 'F'){ //attention, ici la seconde lettre doit être comprise
                         //comme le complément ! (Voir cahier, ce n'est pas forcément évident)
                         if (areteRF.find(make_pair(sons[j],sons[i])) == areteRF.end() or areteRF[make_pair(sons[j],sons[i])].size() > aux.size()){
