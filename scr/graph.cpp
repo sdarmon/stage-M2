@@ -313,7 +313,7 @@ void Graph::BFS_comp(vector<int> &seen,set<int> &vu, queue<Neighbor*> &aVoir, qu
                 //Cas où l'arrêt est bien valide et sommet non vu avant, ce voisin est rajouté dans la file des visites
                 aVoir.push(&(*it));
                 depth.push(pronf+1);
-                labels.push(make_label(label,Vertices[node->val].label,node->label[0],node->label[1]));
+                labels.push(make_label(label,Vertices[node->val].label,node->label[0],node->label[1],kmer));
             }
         }
     }
