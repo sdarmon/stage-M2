@@ -231,7 +231,7 @@ int main(int argc, char** argv) {
     set<int> vu2;
     set<int> sonSet;
     typedef map<pair<int,int>,pair<int,int>> dic;
-    typedef map<pair<int,int>,int> dicChem;
+    typedef map<pair<int,int>,string> dicChem;
     dic BulF_FF; //la clé est le couple (i,j) trouvé et la valeur associé est le couple (s,taille)
     dic BulF_FR;
     dic BulF_RF;
@@ -246,8 +246,10 @@ int main(int argc, char** argv) {
     dicChem areteRR;
     int limiteAretes;
     vector<int> sons;
-    queue<int> depth;
     vector<int> depthSons;
+    queue<int> depth;
+    vector<string> labelSons;
+    queue<string> labels;
     vector<Neighbor*> aretes;
     index = 0;
     int pos;
@@ -274,7 +276,6 @@ int main(int argc, char** argv) {
         areteFR.clear();
         areteRR.clear();
         areteRF.clear();
-        depthSons.clear();
         sonSet.clear();
         //On boucle sur les sommets de la composante
         cout << "Pré-calcul pour la composante "<<compteurDeBoucle << " de taille " << comp->size() << endl;
@@ -287,11 +288,15 @@ int main(int argc, char** argv) {
             sons.clear();
             aretes.clear();
             depthSons.clear();
-            while (!aVoir.empty()){
+            labelSons.clear();
+            while (!aVoir.empty()){ // N'est jamais censé arriver !
                 aVoir.pop();
             }
-            while (!depth.empty()){
+            while (!depth.empty()){ // N'est jamais censé arriver !
                 depth.pop();
+            }
+            while (!labels.empty()){ // N'est jamais censé arriver !
+                labels.pop();
             }
             vu2.clear();
             vu2.insert((*it)); //On voit bien le sommet duquel on part
@@ -304,9 +309,12 @@ int main(int argc, char** argv) {
                 if (voisin->label[0] == 'F') {
                     aVoir.push(&(*voisin));
                     depth.push(1);
+                    string aux = G.Vertices[(*it)].label;
+                    labels.push(aux);
                 }
             }
-            G.BFS_comp(seen, vu2, aVoir, depth, sons,depthSons, aretes);
+            G.BFS_comp(seen, vu2, aVoir, depth, labels,sons,depthSons, aretes, labelSons);
+
             for (int i = 0; i<sons.size(); i++){
                 sonSet.insert(sons[i]);
                 for (int j = i+1; j<sons.size(); j++){
@@ -352,9 +360,10 @@ int main(int argc, char** argv) {
                 if (voisin->label[0] == 'R') {
                     aVoir.push(&(*voisin));
                     depth.push(1);
+                    labels.push("");
                 }
             }
-            G.BFS_comp(seen, vu2, aVoir, depth, sons, depthSons, aretes);
+            G.BFS_comp(seen, vu2, aVoir, depth, labels, sons, depthSons, aretes, labelSons);
 
             for (int i = limiteAretes; i<sons.size(); i++){
                 sonSet.insert(sons[i]);
@@ -393,19 +402,28 @@ int main(int argc, char** argv) {
             }
             for (int i = 0; i<limiteAretes; i++) {
                 for (int j = limiteAretes; j < sons.size(); j++) {
+                    string aux = labelSons[j]+G.Vertices[(*it)].label+labelSons[i].substr(G.kmer);
                     if (aretes[i]->label[1] == 'F' and aretes[j]->label[1] == 'F'){ //attention, ici la seconde lettre doit être comprise
                         //comme le complément ! (Voir cahier, ce n'est pas forcément évident)
-                        areteRF[make_pair(sons[i],sons[j])] = 1;
-                        areteRF[make_pair(sons[j],sons[i])] = 1;
+                        if (areteRF.find(make_pair(sons[i],sons[j])) == areteRF.end() or areteRF[make_pair(sons[i],sons[j])].size() > aux.size()){
+                            areteRF[make_pair(sons[i],sons[j])] = aux;
+                            //areteRF[make_pair(sons[j],sons[i])] = aux;
+                        }
                     } else if (aretes[i]->label[1] == 'F' and aretes[j]->label[1] == 'R'){
-                        areteRR[make_pair(sons[i],sons[j])] = 1;
-                        areteFF[make_pair(sons[j],sons[i])] = 1;
+                        if (areteRR.find(make_pair(sons[i],sons[j])) == areteRR.end() or areteRR[make_pair(sons[i],sons[j])].size() > aux.size()){
+                            areteRR[make_pair(sons[i],sons[j])] = aux;
+                            //areteFF[make_pair(sons[j],sons[i])] = aux;
+                        }
                     } else if (aretes[i]->label[1] == 'R' and aretes[j]->label[1] == 'R'){
-                        areteFR[make_pair(sons[i],sons[j])] = 1;
-                        areteFR[make_pair(sons[j],sons[i])] = 1;
+                        if (areteFR.find(make_pair(sons[i],sons[j])) == areteFR.end() or areteFR[make_pair(sons[i],sons[j])].size() > aux.size()){
+                            areteFR[make_pair(sons[i],sons[j])] = aux;
+                            //areteFR[make_pair(sons[j],sons[i])] = aux;
+                        }
                     } else {
-                        areteFF[make_pair(sons[i],sons[j])] = 1;
-                        areteRR[make_pair(sons[j],sons[i])] = 1;
+                        if (areteFF.find(make_pair(sons[i],sons[j])) == areteFF.end() or areteFF[make_pair(sons[i],sons[j])].size() > aux.size()){
+                            areteFF[make_pair(sons[i],sons[j])] = aux;
+                            //areteRR[make_pair(sons[j],sons[i])] = aux;
+                        }
                     }
                 }
             }
@@ -495,20 +513,36 @@ int main(int argc, char** argv) {
         //Puis les arêtes au sein de la composante :
         if (with) {
             for (dicChem::iterator itDic = areteFF.begin(); itDic!=areteFF.end(); ++itDic) {
-                E3.push_back(Edge(correspondingVertex[itDic->first.first],
-                                  correspondingVertex[itDic->first.second], 0, aretFF));
+                V3.push_back(Node(index, 0, itDic->second));
+                E3.push_back(Edge(correspondingVertex[itDic->first.first], index, 0, aretFF));
+                E3.push_back(Edge(index, correspondingVertex[itDic->first.second], 0, aretFF));
+                E3.push_back(Edge(correspondingVertex[itDic->first.second], index, 0, aretRF));
+                E3.push_back(Edge(index, correspondingVertex[itDic->first.first], 0, aretFR));
+                index++;
             }
             for (dicChem::iterator itDic = areteFR.begin(); itDic!=areteFR.end(); ++itDic) {
-                E3.push_back(Edge(correspondingVertex[itDic->first.first],
-                                  correspondingVertex[itDic->first.second], 0, aretFR));
+                V3.push_back(Node(index, 0, itDic->second));
+                E3.push_back(Edge(correspondingVertex[itDic->first.first], index, 0, aretFF));
+                E3.push_back(Edge(index, correspondingVertex[itDic->first.second], 0, aretFR));
+                E3.push_back(Edge(correspondingVertex[itDic->first.second], index, 0, aretRF));
+                E3.push_back(Edge(index, correspondingVertex[itDic->first.first], 0, aretFF));
+                index++;
             }
             for (dicChem::iterator itDic = areteRF.begin(); itDic!=areteRF.end(); ++itDic) {
-                E3.push_back(Edge(correspondingVertex[itDic->first.first],
-                                  correspondingVertex[itDic->first.second], 0, aretRF));
+                V3.push_back(Node(index, 0, itDic->second));
+                E3.push_back(Edge(correspondingVertex[itDic->first.first], index, 0, aretRF));
+                E3.push_back(Edge(index, correspondingVertex[itDic->first.second], 0, aretFF));
+                E3.push_back(Edge(correspondingVertex[itDic->first.second], index, 0, aretFF));
+                E3.push_back(Edge(index, correspondingVertex[itDic->first.first], 0, aretFR));
+                index++;
             }
             for (dicChem::iterator itDic = areteRR.begin(); itDic!=areteRR.end(); ++itDic) {
-                E3.push_back(Edge(correspondingVertex[itDic->first.first],
-                                  correspondingVertex[itDic->first.second], 0, aretRR));
+                V3.push_back(Node(index, 0, itDic->second));
+                E3.push_back(Edge(correspondingVertex[itDic->first.first], index, 0, aretRF));
+                E3.push_back(Edge(index, correspondingVertex[itDic->first.second], 0, aretFR));
+                E3.push_back(Edge(correspondingVertex[itDic->first.second], index, 0, aretRF));
+                E3.push_back(Edge(index, correspondingVertex[itDic->first.first], 0, aretFR));
+                index++;
             }
         }
 

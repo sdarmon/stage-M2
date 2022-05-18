@@ -109,8 +109,8 @@ class Graph
     void BFS(int r, vector<Edge>& e ,vector<Neighbor*> &aVoir,vector<int> &vu);
     int BFSCount(vector<int> &rayons, int acc,vector<Neighbor*> &aVoir,vector<int> &vu);
     void BFS_func(int threshold, queue<Neighbor*> &aVoir,vector<int> &vu, set<int> & setVu);
-    void BFS_comp(vector<int> &seen,set<int> &vu, queue<Neighbor*> &aVoir, queue<int> &depth,
-                  vector<int> &sons, vector<int> &depthSons, vector<Neighbor*> &aretes);
+    void BFS_comp(vector<int> &seen,set<int> &vu, queue<Neighbor*> &aVoir, queue<int> &depth,queue<string> &labels,
+                  vector<int> &sons, vector<int> &depthSons, vector<Neighbor*> &aretes, vector<string> & labelSons);
     void weighingANode(int source, int rayon);
     void weighingAllNodes(int rayon);
 };
@@ -118,6 +118,11 @@ class Graph
 
 //Other functions
 void comp(char* s, char* r);
+
+string reverse_complement(string &a);
+string make_label(string &a, string &b, char sensA, char sensB, int kmer);
+
+
 void read_node_file( ifstream &node_file, vector<Node>& seqs);
 void read_node_file_weighted( ifstream &node_file, vector<Node>& seqs);
 void read_edge_file( ifstream &edge_file, vector<Edge>& edges );

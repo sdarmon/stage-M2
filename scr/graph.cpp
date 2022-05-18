@@ -252,14 +252,47 @@ void Graph::BFS_func(int threshold ,queue<Neighbor*> &aVoir,vector<int> &vu, set
 }
 typedef map<pair<int,int>,pair<int,int>> dic;
 
-void Graph::BFS_comp(vector<int> &seen,set<int> &vu, queue<Neighbor*> &aVoir, queue<int> &depth,
-                     vector<int> &sons, vector<int> &depthSons, vector<Neighbor*> &aretes){
+string reverse_complement(string &a){
+    string aux = "";
+    for (int i = a.size()-1; i>=0; i--){
+        if (a[i] == 'A'){
+            aux = aux + 'T';
+        } else if (a[i] == 'T'){
+            aux = aux + 'A';
+        } else if (a[i] == 'G'){
+            aux = aux + 'C';
+        } else {
+            aux = aux + 'G';
+        }
+    }
+    return aux;
+}
+
+string make_label(string &a, string &b, char sensA, char sensB, int kmer){ //Voir explication dans le cahier
+    string aux;
+    if( sensA == 'F' and sensB == 'F'){
+        aux = a + b.substr(kmer-1);
+    } else if (sensA == 'R' and sensB == 'R'){
+        aux = reverse_complement(reverse_complement(a) + reverse_complement(b).substr(kmer-1));
+    } else if (sensA == 'F' and sensB == 'R'){
+        aux = reverse_complement(a + reverse_complement(b).substr(kmer-1));
+    } else {
+        aux = reverse_complement(a) + b.substr(kmer-1);
+    }
+    return aux;
+}
+
+void Graph::BFS_comp(vector<int> &seen,set<int> &vu, queue<Neighbor*> &aVoir, queue<int> &depth, queue<string> &labels,
+                     vector<int> &sons, vector<int> &depthSons, vector<Neighbor*> &aretes, vector<string> & labelSons){
     int pronf;
+    string label;
     while (aVoir.size() != 0) { //Cas de terminaison, on a terminé le BFS
         Neighbor *node = aVoir.front();
         aVoir.pop();
         pronf = depth.front();
         depth.pop();
+        label = labels.front();
+        labels.pop();
         if (vu.find(node->val) != vu.end()) { //Cas où le sommet a été vu par le BFS
             //Cela veut dire qu'on l'a vu par un autre chemin, et il y a nécessairement une bulle par ici
             continue;
@@ -270,6 +303,7 @@ void Graph::BFS_comp(vector<int> &seen,set<int> &vu, queue<Neighbor*> &aVoir, qu
                 sons.push_back(node->val);
                 aretes.push_back(node);
                 depthSons.push_back(pronf);
+                labelSons.push_back(label);
             }
             continue;
         }
@@ -279,6 +313,7 @@ void Graph::BFS_comp(vector<int> &seen,set<int> &vu, queue<Neighbor*> &aVoir, qu
                 //Cas où l'arrêt est bien valide et sommet non vu avant, ce voisin est rajouté dans la file des visites
                 aVoir.push(&(*it));
                 depth.push(pronf+1);
+                labels.push(make_label(label,Vertices[node->val].label,node->label[0],node->label[1]));
             }
         }
     }
