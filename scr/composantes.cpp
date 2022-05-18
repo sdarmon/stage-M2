@@ -512,32 +512,32 @@ int main(int argc, char** argv) {
                 V3.push_back(Node(index, 0, itDic->second));
                 E3.push_back(Edge(correspondingVertex[itDic->first.first], index, 0, aretFF));
                 E3.push_back(Edge(index, correspondingVertex[itDic->first.second], 0, aretFF));
-                E3.push_back(Edge(correspondingVertex[itDic->first.second], index, 0, aretRF));
-                E3.push_back(Edge(index, correspondingVertex[itDic->first.first], 0, aretFR));
+                E3.push_back(Edge(correspondingVertex[itDic->first.second], index, 0, aretRR));
+                E3.push_back(Edge(index, correspondingVertex[itDic->first.first], 0, aretRR));
                 index++;
             }
             for (dicChem::iterator itDic = areteFR.begin(); itDic!=areteFR.end(); ++itDic) {
                 V3.push_back(Node(index, 0, itDic->second));
                 E3.push_back(Edge(correspondingVertex[itDic->first.first], index, 0, aretFF));
                 E3.push_back(Edge(index, correspondingVertex[itDic->first.second], 0, aretFR));
-                E3.push_back(Edge(correspondingVertex[itDic->first.second], index, 0, aretRF));
-                E3.push_back(Edge(index, correspondingVertex[itDic->first.first], 0, aretFF));
+                E3.push_back(Edge(correspondingVertex[itDic->first.second], index, 0, aretFR));
+                E3.push_back(Edge(index, correspondingVertex[itDic->first.first], 0, aretRR));
                 index++;
             }
             for (dicChem::iterator itDic = areteRF.begin(); itDic!=areteRF.end(); ++itDic) {
                 V3.push_back(Node(index, 0, itDic->second));
                 E3.push_back(Edge(correspondingVertex[itDic->first.first], index, 0, aretRF));
                 E3.push_back(Edge(index, correspondingVertex[itDic->first.second], 0, aretFF));
-                E3.push_back(Edge(correspondingVertex[itDic->first.second], index, 0, aretFF));
-                E3.push_back(Edge(index, correspondingVertex[itDic->first.first], 0, aretFR));
+                E3.push_back(Edge(correspondingVertex[itDic->first.second], index, 0, aretRR));
+                E3.push_back(Edge(index, correspondingVertex[itDic->first.first], 0, aretRF));
                 index++;
             }
             for (dicChem::iterator itDic = areteRR.begin(); itDic!=areteRR.end(); ++itDic) {
                 V3.push_back(Node(index, 0, itDic->second));
                 E3.push_back(Edge(correspondingVertex[itDic->first.first], index, 0, aretRF));
                 E3.push_back(Edge(index, correspondingVertex[itDic->first.second], 0, aretFR));
-                E3.push_back(Edge(correspondingVertex[itDic->first.second], index, 0, aretRF));
-                E3.push_back(Edge(index, correspondingVertex[itDic->first.first], 0, aretFR));
+                E3.push_back(Edge(correspondingVertex[itDic->first.second], index, 0, aretFR));
+                E3.push_back(Edge(index, correspondingVertex[itDic->first.first], 0, aretRF));
                 index++;
             }
         }
