@@ -307,7 +307,7 @@ void Graph::BFS_comp(vector<int> &seen,set<int> &vu, queue<Neighbor*> &aVoir, qu
             }
             continue;
         }
-        if (and G.Vertices[node->val].label.size() < kmer) {
+        if (Vertices[node->val].label.size() < kmer) {
             continue;
         }
         for (vector<Neighbor>::iterator it = Neighbors(node->val)->begin(); it != Neighbors(node->val)->end(); ++it) {
