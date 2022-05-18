@@ -119,7 +119,7 @@ class Graph
 //Other functions
 void comp(char* s, char* r);
 
-string reverse_complement(string &a);
+string reverse_complement(string a);
 string make_label(string &a, string &b, char sensA, char sensB, int kmer);
 
 
