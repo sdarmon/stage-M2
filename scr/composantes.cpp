@@ -254,6 +254,7 @@ int main(int argc, char** argv) {
     index = 0;
     int pos;
     int modif;
+    int sizeLabel;
     int I;
     int J;
     int compteurDeBoucle = 0;
@@ -309,7 +310,8 @@ int main(int argc, char** argv) {
                 if (voisin->label[0] == 'F') {
                     aVoir.push(&(*voisin));
                     depth.push(1);
-                    string aux = G.Vertices[(*it)].label;
+                    sizeLabel = G.Vertices[(*it)].label.size();
+                    string aux = G.Vertices[(*it)].label.substr(0,sizeLabel-G.kmer+1);
                     labels.push(aux);
                 }
             }
