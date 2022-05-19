@@ -112,11 +112,6 @@ if len(Arg) in [5,6,7,8,9]:
                 trouveUnder = trouve
                 #On peut écrit la bulle et son rapport si c'est intéressant
                 if trouveUnder or trouveUpper:
-                    if Arg[-1] == "-rapport":
-                        print(titreUpper)
-                        print(seqUpper)
-                        print(titreUnder)
-                        print(seqUnder)
                     text = ""
                     printing = False
                     if len(upperComp) != 0 or len(underComp) != 0:
@@ -155,6 +150,11 @@ if len(Arg) in [5,6,7,8,9]:
                                 t+= " " + str(el)
                             text+= "only in under :" + t + "\t"
                         if printing:
+                            if Arg[-1] == "-rapport":
+                                print(titreUpper)
+                                print(seqUpper)
+                                print(titreUnder)
+                                print(seqUnder)
                             text += bubble + "\t" + type
                             print(text)
             titre = ""#On part pour la ligne suivante qui sera un titre
