@@ -124,8 +124,10 @@ if len(Arg) in [5,6,7,8,9]:
                         B = upperComp - underComp
                         C = underComp - upperComp
                         if debut != -1:
+                            printing = True
                             text+= "Start in " + str(debut) + "\t"
                         if end != -1:
+                            printing = True
                             text+= "End in " + str(end) + "\t"
                         # if debut != end : #debut>= 0 and fin >= 0 and
                         #     printing = False
@@ -140,11 +142,13 @@ if len(Arg) in [5,6,7,8,9]:
                             text+= "in both path :" + t + "\t"
                         if len(B) != 0:
                             t = ""
+                            printing = True
                             for el in B:
                                 t+= " " + str(el)
                             text+= "only in upper :" + t + "\t"
                         if len(C) != 0:
                             t = ""
+                            printing = True
                             for el in C:
                                 t+= " " + str(el)
                             text+= "only in under :" + t + "\t"
