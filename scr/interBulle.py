@@ -136,7 +136,9 @@ if len(Arg) in [5,6,7,8,9]:
 
                         if len(A) != 0:
                             t = ""
-                            printing = True
+                            printing = False
+                            titre = ""
+                            continue
                             for el in A:
                                 t+= " " + str(el)
                             text+= "in both path :" + t + "\t"
