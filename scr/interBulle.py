@@ -25,13 +25,13 @@ def maj(sequ):
     s = ""
     for el in sequ:
         if el == 'a':
-            continue # s = s + 'A'
+            s = s + 'A'
         elif el == 'c':
-            continue # s = s + 'C'
+            s = s + 'C'
         elif el == 'g':
-            continue # s = s + 'G'
+            s = s + 'G'
         elif el == 't':
-            continue # s = s + 'T'
+            s = s + 'T'
         else:
             s = s + el
     return s
