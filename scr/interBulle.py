@@ -70,7 +70,7 @@ if len(Arg) in [5,6,7,8,9]:
                 for pos in range(len(L[1])-k+1):
                     kmerFrom[L[1][pos:k+pos]] = i
                     kmerFrom[compl[pos:k+pos]] = i
-
+    compVu = [0 for i in range(int(Arg[3]))]
     #On parcourt maintenant les bulles
     with open(Arg[2], 'r') as f:
         upper = False #Variable booléenne indiquant si on est un upper path ou un under path
@@ -139,6 +139,16 @@ if len(Arg) in [5,6,7,8,9]:
                             text+= "in both path :" + t + "\t"
                         if len(B) != 0:
                             t = ""
+                            vu = False
+                            for el in B:
+                                if compVu[el] == 0:
+                                    compVu[el] = 1
+                                    vu = True
+                                    break
+                            if vu == False:
+                                printing = False
+                                titre = ""
+                                continue
                             printing = True
                             for el in B:
                                 t+= " " + str(el)
