@@ -273,9 +273,9 @@ string make_label(string &a, string &b, char sensA, char sensB, int kmer){ //Voi
     if( sensA == 'F' and sensB == 'F'){
         aux = a + b.substr(kmer-1);
     } else if (sensA == 'R' and sensB == 'R'){
-        aux = reverse_complement(reverse_complement(a) + reverse_complement(b).substr(kmer-1));
+        aux = a + b.substr(kmer-1);
     } else if (sensA == 'F' and sensB == 'R'){
-        aux = reverse_complement(a + reverse_complement(b).substr(kmer-1));
+        aux = a + reverse_complement(b).substr(kmer-1);
     } else {
         aux = reverse_complement(a) + b.substr(kmer-1);
     }
