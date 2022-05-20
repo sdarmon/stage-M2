@@ -71,10 +71,11 @@ if len(Arg) == 5:
     #On plt.plot les histogrammes des fréquences ainsi trouvée (avec des jolies couleurs et les bars se superposant
     YY = np.array(Y[0])
     for i in range(1, len(Y)):
-        YY=YY+np.array(Y[i]))
+        YY=YY+np.array(Y[i])
         plt.bar(X, Y[i], label=str(i), color=cm.hsv(i / len(Y)), bottom=YY)
     plt.title("Nombre de TE dans chaque composante")
     plt.ylabel("Nombre de TE distincts")
     plt.xlabel("Numéro de composante")
     plt.legend(title="TE contenus dans X composante(s)")
     plt.show()
+
