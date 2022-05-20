@@ -403,7 +403,7 @@ int main(int argc, char** argv) {
             }
             for (int i = 0; i<limiteAretes; i++) {
                 for (int j = limiteAretes; j < sons.size(); j++) {
-                    string aux = labelSons[j]+labelSons[i];
+                    string aux = reverse_complement(labelSons[j]) +labelSons[i];
                     if (aretes[i]->label[1] == 'F' and aretes[j]->label[1] == 'F'){ //attention, ici la seconde lettre doit être comprise
                         //comme le complément ! (Voir cahier, ce n'est pas forcément évident)
                         if (areteRF.find(make_pair(sons[j],sons[i])) == areteRF.end() or areteRF[make_pair(sons[j],sons[i])].size() > aux.size()){
