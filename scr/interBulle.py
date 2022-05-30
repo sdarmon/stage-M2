@@ -147,9 +147,9 @@ if len(Arg) in [5, 6, 7, 8, 9]:
                         #     continue
                         if len(A) != 0:
                             t = ""
-                            printing = False
-                            titre = ""
-                            continue
+                            # printing = False
+                            # titre = ""
+                            # continue
                             for el in A:
                                 t += " " + str(el)
                             text += "in both path :" + t + "\t"
