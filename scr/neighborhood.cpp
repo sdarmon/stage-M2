@@ -18,7 +18,7 @@
 //Fonction permettant d'enregistrer une composante du graphe `G` dans un fichier
 void save_comp(Graph &G, vector<int> &vu, string outputPrefix, int rang){
     ofstream output;
-    output.open(outputPrefix+"/processing/neighbors"+to_string(rang)+".txt");
+    output.open(outputPrefix+"nodes.txt");
     for (int i = 0; i < G.N ; i++){
         if (vu[i]){
             output << i << "\t" << G.Vertices[i].label << "\t" << ((vu[i] < 0) ? 0 : vu[i]) << "\t" << G.Vertices[i].weight << endl;
