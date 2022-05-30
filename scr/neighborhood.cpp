@@ -99,6 +99,7 @@ int main(int argc, char** argv) {
 
     Graph G(V, E);
     vector<Neighbor*> aVoir;
+    vector<Edge> E2;
     vector<int> pronf;
     Neighbor* node ;
     int node_id;
@@ -107,6 +108,7 @@ int main(int argc, char** argv) {
     for(int rang = 0; rang <nodes_id.size(); rang++) {
 
         aVoir.clear();
+        E2.clear();
         pronf.clear();
         vu.clear();
         for (int i = 0; i<G.N; i++){
@@ -121,6 +123,7 @@ int main(int argc, char** argv) {
             if (G.Vertices[it->val].weight >= threshold) {
                 aVoir.push_back(&(*it));
                 pronf.push_back(1);
+                E2.push_back(Edge(node_id,it->val,0,it->label));
             }
         }
 
@@ -142,9 +145,13 @@ int main(int argc, char** argv) {
                     //Cas où l'arrêt est bien valide et sommet non vu avant, ce voisin est rajouté dans la file des visites
                     aVoir.push_back(&(*it));
                     pronf.push_back(p + 1);
+                    E2.push_back(Edge(node->val,it->val,0,it->label));
                 }
             }
         }
         save_comp(G, vu, prefixOutput, rang);
+        ofstream edges;
+        edges.open(prefixOutput+".edges");
+        printEdges(E2,edges);
     }
 }
