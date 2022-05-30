@@ -156,32 +156,32 @@ if len(Arg) in [5, 6, 7, 8, 9]:
                             text += "in both path :" + t + "\t"
                         if len(B) != 0:
                             t = ""
-                            vu = False
-                            for el in B:
-                                if compVu[el] == 0:
-                                    compVu[el] = 1
-                                    vu = True
-                                    break
-                            if vu == False:
-                                printing = False
-                                titre = ""
-                                continue
+                            # vu = False
+                            # for el in B:
+                            #     if compVu[el] == 0:
+                            #         compVu[el] = 1
+                            #         vu = True
+                            #         break
+                            # if vu == False:
+                            #     printing = False
+                            #     titre = ""
+                            #     continue
                             printing = True
                             for el in B:
                                 t += " " + str(el)
                             text += "only in upper :" + t + "\t"
                         if len(C) != 0:
                             t = ""
-                            vu = False
-                            for el in B:
-                                if compVu[el] == 0:
-                                    compVu[el] = 1
-                                    vu = True
-                                    break
-                            if vu == False:
-                                printing = False
-                                titre = ""
-                                continue
+                            # vu = False
+                            # for el in B:
+                            #     if compVu[el] == 0:
+                            #         compVu[el] = 1
+                            #         vu = True
+                            #         break
+                            # if vu == False:
+                            #     printing = False
+                            #     titre = ""
+                            #     continue
                             printing = True
                             for el in C:
                                 t += " " + str(el)
