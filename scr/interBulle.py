@@ -185,12 +185,13 @@ if len(Arg) in [5, 6, 7, 8, 9]:
                             for el in C:
                                 t += " " + str(el)
                             text += "only in under :" + t + "\t"
-                    if printing:
+                    if printing and (intersect_connu_upper != "UpperNotFound" or intersect_connu_under != "UnderNotFound"):
                         if Arg[-1] == "-rapport":
                             print(titreUpper)
                             print(seqUpper)
                             print(titreUnder)
                             print(seqUnder)
+
                         text += bubble + "\t" + type + "\t" + intersect_connu_upper + "\t" + intersect_connu_under
                         print(text)
             titre = ""  # On part pour la ligne suivante qui sera un titre
