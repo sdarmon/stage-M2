@@ -21,7 +21,7 @@ def reverseC(seq):
     return s
 
 
-# Renvoie une séquence de nucléotides en majuscule / En fait on s'en fiche, les minuscules correspondent au bout de
+# Renvoie une séquence de nucléotides en masjucule / En fait on s'en fiche, les miniscules correspondent au bout de
 # l'unitig.
 def maj(sequ):
     s = ""
@@ -41,13 +41,12 @@ def maj(sequ):
 
 if len(Arg) not in [5, 6, 7, 8, 9]:
     print("Use : " + Arg[
-        0] + " dirComp bulle.fa nbComp threshold -k kmer [-rapport/-label event.tsv/-compare type.fa]\n\t k = 41 by default.")
+        0] + " dirComp bulle.fa nbComp threshold -k kmer [-rapport/-label event.tsv]\n\t k = 41 by default.")
     exit()
 if len(Arg) in [5, 6, 7, 8, 9]:
     titre = ""  # Variable contenant le titre de la séquence dans le fichier .fa
     seq = ""  # Sequence de nucléotides
     event = dict()
-    sequences = dict()
     if Arg[-2] == "-label":
         with open(Arg[-1], 'r') as f:
             for line in f:
@@ -55,18 +54,6 @@ if len(Arg) in [5, 6, 7, 8, 9]:
                 type = L[4]
                 bubble = L[15]
                 event[bubble] = type
-
-    if Arg[-2] == "-compare":
-        with open(Arg[-1], 'r') as f:
-            odd = 1
-            for line in f:
-                if odd:
-                    L = line.split("|")
-                    bubble = L[0][1:] + "|" + L[1]
-                    odd = 0
-                else:
-                    sequences[maj(line[:-1])] = bubble
-                    odd = 1
 
     if (len(Arg) >= 7 and Arg[5][1] == 'k'):
         k = int(Arg[6])
@@ -100,12 +87,13 @@ if len(Arg) in [5, 6, 7, 8, 9]:
                     L = line.split("|")
                     bubble = L[0][1:] + "|" + L[1]
                     type = event.get(bubble, "NA")
-                    titreUpper = titre[:-1]  # On stocke le titre
+                    titreUpper = titre[:-1]  # On stocke la titre
                 else:
                     titreUnder = titre[:-1]
                 continue
             seq = line[:-1]
             seq = maj(seq)  # Les séquences ayant des nucléotides écrits en miniscule, on les passe en majuscule
+
             # On récupère les numéros des composantes contenant des kmers de la séquence
             comp_possible = set()
             trouve = 0
@@ -121,20 +109,14 @@ if len(Arg) in [5, 6, 7, 8, 9]:
                 debut = kmerFrom.get(seq[0:k], -1)
                 end = kmerFrom.get(seq[-k:], -1)
                 trouveUpper = trouve
-                intersect_connu_upper = sequences.get(seq,"UpperNotFound")
-                if intersect_connu_upper != "UpperNotFound":
-                    del sequences[seq]
             else:  # Cas chemin du bas
                 seqUnder = line[:-1]
                 underComp = comp_possible
                 trouveUnder = trouve
-                intersect_connu_under = sequences.get(seq,"UnderNotFound")
-                if intersect_connu_under != "UnderNotFound":
-                    del sequences[seq]
                 # On peut écrit la bulle et son rapport si c'est intéressant
-                if True: #if trouveUnder or trouveUpper:
+                if trouveUnder or trouveUpper:
                     text = ""
-                    printing = True #False initialement
+                    printing = False
                     if len(upperComp) != 0 or len(underComp) != 0:
                         A = upperComp & underComp
                         B = upperComp - underComp
@@ -149,56 +131,53 @@ if len(Arg) in [5, 6, 7, 8, 9]:
                         #     printing = False
                         #     titre = ""
                         #     continue
+
                         if len(A) != 0:
                             t = ""
-                            # printing = False
-                            # titre = ""
-                            # continue
+                            printing = False
+                            titre = ""
+                            continue
                             for el in A:
                                 t += " " + str(el)
                             text += "in both path :" + t + "\t"
                         if len(B) != 0:
                             t = ""
-                            # vu = False
-                            # for el in B:
-                            #     if compVu[el] == 0:
-                            #         compVu[el] = 1
-                            #         vu = True
-                            #         break
-                            # if vu == False:
-                            #     printing = False
-                            #     titre = ""
-                            #     continue
+                            vu = False
+                            for el in B:
+                                if compVu[el] == 0:
+                                    compVu[el] = 1
+                                    vu = True
+                                    break
+                            if vu == False:
+                                printing = False
+                                titre = ""
+                                continue
                             printing = True
                             for el in B:
                                 t += " " + str(el)
                             text += "only in upper :" + t + "\t"
                         if len(C) != 0:
                             t = ""
-                            # vu = False
-                            # for el in B:
-                            #     if compVu[el] == 0:
-                            #         compVu[el] = 1
-                            #         vu = True
-                            #         break
-                            # if vu == False:
-                            #     printing = False
-                            #     titre = ""
-                            #     continue
+                            vu = False
+                            for el in B:
+                                if compVu[el] == 0:
+                                    compVu[el] = 1
+                                    vu = True
+                                    break
+                            if vu == False:
+                                printing = False
+                                titre = ""
+                                continue
                             printing = True
                             for el in C:
                                 t += " " + str(el)
                             text += "only in under :" + t + "\t"
-                    if printing :
-                        if Arg[-1] == "-rapport":
-                            print(titreUpper)
-                            print(seqUpper)
-                            print(titreUnder)
-                            print(seqUnder)
-
-                        text += bubble + "\t" + type + "\t" + intersect_connu_upper + "\t" + intersect_connu_under
-                        print(text)
+                        if printing:
+                            if Arg[-1] == "-rapport":
+                                print(titreUpper)
+                                print(seqUpper)
+                                print(titreUnder)
+                                print(seqUnder)
+                            text += bubble + "\t" + type
+                            print(text)
             titre = ""  # On part pour la ligne suivante qui sera un titre
-    for key,value in sequences.items():
-        print("missing",value)
-        #print("missing", key)
