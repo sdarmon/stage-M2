@@ -130,7 +130,7 @@ if len(Arg) in [5, 6, 7, 8, 9]:
                 # On peut écrit la bulle et son rapport si c'est intéressant
                 if True: #if trouveUnder or trouveUpper:
                     text = ""
-                    printing = True
+                    printing = True #False initialement
                     if len(upperComp) != 0 or len(underComp) != 0:
                         A = upperComp & underComp
                         B = upperComp - underComp
@@ -185,12 +185,12 @@ if len(Arg) in [5, 6, 7, 8, 9]:
                             for el in C:
                                 t += " " + str(el)
                             text += "only in under :" + t + "\t"
-                        if printing:
-                            if Arg[-1] == "-rapport":
-                                print(titreUpper)
-                                print(seqUpper)
-                                print(titreUnder)
-                                print(seqUnder)
-                            text += bubble + "\t" + type + "\t" + intersect_connu_upper + "\t" + intersect_connu_under
-                            print(text)
+                    if printing:
+                        if Arg[-1] == "-rapport":
+                            print(titreUpper)
+                            print(seqUpper)
+                            print(titreUnder)
+                            print(seqUnder)
+                        text += bubble + "\t" + type + "\t" + intersect_connu_upper + "\t" + intersect_connu_under
+                        print(text)
             titre = ""  # On part pour la ligne suivante qui sera un titre
