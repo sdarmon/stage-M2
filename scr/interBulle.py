@@ -128,7 +128,7 @@ if len(Arg) in [5, 6, 7, 8, 9]:
                 trouveUnder = trouve
                 intersect_connu_under = sequences.get(seq,"UnderNotFound")
                 # On peut écrit la bulle et son rapport si c'est intéressant
-                if trouveUnder or trouveUpper:
+                if True: #if trouveUnder or trouveUpper:
                     text = ""
                     printing = False
                     if len(upperComp) != 0 or len(underComp) != 0:
@@ -145,7 +145,6 @@ if len(Arg) in [5, 6, 7, 8, 9]:
                         #     printing = False
                         #     titre = ""
                         #     continue
-
                         if len(A) != 0:
                             t = ""
                             printing = False
