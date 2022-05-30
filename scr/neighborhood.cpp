@@ -1,6 +1,5 @@
 /*
- * Ce programme permet de faire une agglomeration des composantes
- * des graphes.
+ *
  */
 
 #include <list>
@@ -55,7 +54,7 @@ int main(int argc, char** argv) {
         threshold = atoi(argv[5]);
         dis = atoi(argv[7]);
         prefixOutput = "./";
-    }else if (argc == 10 and (string)argv[4] == "-o" and (string)argv[6] == "-c" and (string)argv[8] == "-c"){
+    }else if (argc == 10 and (string)argv[4] == "-o" and (string)argv[6] == "-c" and (string)argv[8] == "-d"){
         prefixOutput = argv[5];
         threshold = atoi(argv[7]);
         dis = atoi(argv[9]);
