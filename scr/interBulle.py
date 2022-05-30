@@ -65,7 +65,7 @@ if len(Arg) in [5, 6, 7, 8, 9]:
                     bubble = L[0][1:] + "|" + L[1]
                     odd = 0
                 else:
-                    sequences[maj(line)] = bubble
+                    sequences[maj(line[:-1])] = bubble
                     odd = 1
 
     if (len(Arg) >= 7 and Arg[5][1] == 'k'):
@@ -117,8 +117,6 @@ if len(Arg) in [5, 6, 7, 8, 9]:
                     trouve = 1
             if upper:  # Cas chemin du haut
                 seqUpper = line[:-1]
-                print(line)
-                print(seqUpper)
                 upperComp = comp_possible
                 debut = kmerFrom.get(seq[0:k], -1)
                 end = kmerFrom.get(seq[-k:], -1)
