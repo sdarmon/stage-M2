@@ -200,5 +200,5 @@ if len(Arg) in [5, 6, 7, 8, 9]:
                         print(text)
             titre = ""  # On part pour la ligne suivante qui sera un titre
     for key,value in sequences.items():
-        print("missing",value)
+        print("missing",">"+value)
         print("missing", key)
