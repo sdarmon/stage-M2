@@ -122,11 +122,15 @@ if len(Arg) in [5, 6, 7, 8, 9]:
                 end = kmerFrom.get(seq[-k:], -1)
                 trouveUpper = trouve
                 intersect_connu_upper = sequences.get(seq,"UpperNotFound")
+                if intersect_connu_upper != "UpperNotFound":
+                    del sequences[intersect_connu_upper]
             else:  # Cas chemin du bas
                 seqUnder = line[:-1]
                 underComp = comp_possible
                 trouveUnder = trouve
                 intersect_connu_under = sequences.get(seq,"UnderNotFound")
+                if intersect_connu_under != "UnderNotFound":
+                    del sequences[intersect_connu_under]
                 # On peut écrit la bulle et son rapport si c'est intéressant
                 if True: #if trouveUnder or trouveUpper:
                     text = ""
@@ -195,3 +199,6 @@ if len(Arg) in [5, 6, 7, 8, 9]:
                         text += bubble + "\t" + type + "\t" + intersect_connu_upper + "\t" + intersect_connu_under
                         print(text)
             titre = ""  # On part pour la ligne suivante qui sera un titre
+    for key,value in sequences.items():
+        print("missing",value)
+        print("missing", key)
