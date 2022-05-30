@@ -185,7 +185,7 @@ if len(Arg) in [5, 6, 7, 8, 9]:
                             for el in C:
                                 t += " " + str(el)
                             text += "only in under :" + t + "\t"
-                    if printing and (intersect_connu_upper != "UpperNotFound" or intersect_connu_under != "UnderNotFound"):
+                    if printing :
                         if Arg[-1] == "-rapport":
                             print(titreUpper)
                             print(seqUpper)
