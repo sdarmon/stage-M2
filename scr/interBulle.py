@@ -130,7 +130,7 @@ if len(Arg) in [5, 6, 7, 8, 9]:
                 # On peut écrit la bulle et son rapport si c'est intéressant
                 if True: #if trouveUnder or trouveUpper:
                     text = ""
-                    printing = False
+                    printing = True
                     if len(upperComp) != 0 or len(underComp) != 0:
                         A = upperComp & underComp
                         B = upperComp - underComp
