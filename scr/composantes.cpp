@@ -279,164 +279,180 @@ int main(int argc, char** argv) {
         areteRF.clear();
         sonSet.clear();
         //On boucle sur les sommets de la composante
-        cout << "Pré-calcul pour la composante "<<compteurDeBoucle << " de taille " << comp->size() << endl;
-        compteurDeBoucle++;
-        for (vector<int>::iterator it = comp->begin(); it != comp->end(); ++it) {
-            if (G.Vertices[(*it)].label.size() < G.kmer){
-                continue;
-            }
-            //Cas sommet en périphérie
-            sons.clear();
-            aretes.clear();
-            depthSons.clear();
-            labelSons.clear();
-            while (!aVoir.empty()){ // N'est jamais censé arriver !
-                aVoir.pop();
-            }
-            while (!depth.empty()){ // N'est jamais censé arriver !
-                depth.pop();
-            }
-            while (!labels.empty()){ // N'est jamais censé arriver !
-                labels.pop();
-            }
-            vu2.clear();
-            vu2.insert((*it)); //On voit bien le sommet duquel on part
-
-            //On fait un BFS à partir de chaque sommet afin de savoir quels sommets du périmètre sont
-            //atteignables à partir de chaque sommet de la composante
-            //Cas en partant du forward
-            for (vector<Neighbor>::iterator voisin = G.Neighbors((*it))->begin();
-                 voisin != G.Neighbors((*it))->end(); ++voisin) {
-                if (voisin->label[0] == 'F') {
-                    aVoir.push(&(*voisin));
-                    depth.push(1);
-                    string aux = G.Vertices[(*it)].label;
-                    labels.push(aux);
+        if (comp->size() > 5000) {
+        cout << "Composante " << compteurDeBoucle << " passée car trop grosses (de taille " << comp->size() << ")" << endl; }
+        else {
+            cout << "Pré-calcul pour la composante " << compteurDeBoucle << " de taille " << comp->size() << endl;
+            compteurDeBoucle++;
+            for (vector<int>::iterator it = comp->begin(); it != comp->end(); ++it) {
+                if (G.Vertices[(*it)].label.size() < G.kmer) {
+                    continue;
                 }
-            }
-            G.BFS_comp(seen, vu2, aVoir, depth, labels,sons,depthSons, aretes, labelSons);
-            for (int i = 0; i<sons.size(); i++) {
-                sonSet.insert(sons[i]);
-            }
-            if (!with) {
-                for (int i = 0; i<sons.size(); i++){
-                    for (int j = i+1; j<sons.size(); j++){
-                        if (sons[i] < sons[j]) {
-                            I = i;
-                            J= j;
-                        } else {
-                            I = j;
-                            J = i;
-                        }
-                        if (aretes[I]->label[1] == 'F' and aretes[J]->label[1] == 'F') {
-                            if (BulF_FF.find(make_pair(sons[I],sons[J])) == BulF_FF.end() or
-                                BulF_FF[make_pair(sons[I],sons[J])].second > depthSons[I] + depthSons[J]){
-                                BulF_FF[make_pair(sons[I],sons[J])] = make_pair((*it),depthSons[I] + depthSons[J]);
-                            }
-                        } else if (aretes[I]->label[1] == 'F' and aretes[J]->label[1] == 'R') {
-                            if (BulF_FR.find(make_pair(sons[I],sons[J])) == BulF_FR.end() or
-                                BulF_FR[make_pair(sons[I],sons[J])].second > depthSons[I] + depthSons[J]){
-                                BulF_FR[make_pair(sons[I],sons[J])] = make_pair((*it),depthSons[I] + depthSons[J]);
-                            }
+                //Cas sommet en périphérie
+                sons.clear();
+                aretes.clear();
+                depthSons.clear();
+                labelSons.clear();
+                while (!aVoir.empty()) { // N'est jamais censé arriver !
+                    aVoir.pop();
+                }
+                while (!depth.empty()) { // N'est jamais censé arriver !
+                    depth.pop();
+                }
+                while (!labels.empty()) { // N'est jamais censé arriver !
+                    labels.pop();
+                }
+                vu2.clear();
+                vu2.insert((*it)); //On voit bien le sommet duquel on part
 
-                        } else if (aretes[I]->label[1] == 'R' and aretes[J]->label[1] == 'F') {
-                            if (BulF_RF.find(make_pair(sons[I],sons[J])) == BulF_RF.end() or
-                                BulF_RF[make_pair(sons[I],sons[J])].second > depthSons[I] + depthSons[J]){
-                                BulF_RF[make_pair(sons[I],sons[J])] = make_pair((*it),depthSons[I] + depthSons[J]);
+                //On fait un BFS à partir de chaque sommet afin de savoir quels sommets du périmètre sont
+                //atteignables à partir de chaque sommet de la composante
+                //Cas en partant du forward
+                for (vector<Neighbor>::iterator voisin = G.Neighbors((*it))->begin();
+                     voisin != G.Neighbors((*it))->end(); ++voisin) {
+                    if (voisin->label[0] == 'F') {
+                        aVoir.push(&(*voisin));
+                        depth.push(1);
+                        string aux = G.Vertices[(*it)].label;
+                        labels.push(aux);
+                    }
+                }
+                G.BFS_comp(seen, vu2, aVoir, depth, labels, sons, depthSons, aretes, labelSons);
+                for (int i = 0; i < sons.size(); i++) {
+                    sonSet.insert(sons[i]);
+                }
+                if (!with) {
+                    for (int i = 0; i < sons.size(); i++) {
+                        for (int j = i + 1; j < sons.size(); j++) {
+                            if (sons[i] < sons[j]) {
+                                I = i;
+                                J = j;
+                            } else {
+                                I = j;
+                                J = i;
                             }
+                            if (aretes[I]->label[1] == 'F' and aretes[J]->label[1] == 'F') {
+                                if (BulF_FF.find(make_pair(sons[I], sons[J])) == BulF_FF.end() or
+                                    BulF_FF[make_pair(sons[I], sons[J])].second > depthSons[I] + depthSons[J]) {
+                                    BulF_FF[make_pair(sons[I], sons[J])] = make_pair((*it),
+                                                                                     depthSons[I] + depthSons[J]);
+                                }
+                            } else if (aretes[I]->label[1] == 'F' and aretes[J]->label[1] == 'R') {
+                                if (BulF_FR.find(make_pair(sons[I], sons[J])) == BulF_FR.end() or
+                                    BulF_FR[make_pair(sons[I], sons[J])].second > depthSons[I] + depthSons[J]) {
+                                    BulF_FR[make_pair(sons[I], sons[J])] = make_pair((*it),
+                                                                                     depthSons[I] + depthSons[J]);
+                                }
 
-                        } else {
-                            if (BulF_RR.find(make_pair(sons[I],sons[J])) == BulF_RR.end() or
-                                BulF_RR[make_pair(sons[I],sons[J])].second > depthSons[I] + depthSons[J]){
-                                BulF_RR[make_pair(sons[I],sons[J])] = make_pair((*it),depthSons[I] + depthSons[J]);
+                            } else if (aretes[I]->label[1] == 'R' and aretes[J]->label[1] == 'F') {
+                                if (BulF_RF.find(make_pair(sons[I], sons[J])) == BulF_RF.end() or
+                                    BulF_RF[make_pair(sons[I], sons[J])].second > depthSons[I] + depthSons[J]) {
+                                    BulF_RF[make_pair(sons[I], sons[J])] = make_pair((*it),
+                                                                                     depthSons[I] + depthSons[J]);
+                                }
+
+                            } else {
+                                if (BulF_RR.find(make_pair(sons[I], sons[J])) == BulF_RR.end() or
+                                    BulF_RR[make_pair(sons[I], sons[J])].second > depthSons[I] + depthSons[J]) {
+                                    BulF_RR[make_pair(sons[I], sons[J])] = make_pair((*it),
+                                                                                     depthSons[I] + depthSons[J]);
+                                }
                             }
                         }
                     }
                 }
-            }
 
-            limiteAretes=aretes.size(); //On fait ça pour garder en mémoire le fait que ce ne sont
-            //pas les mêmes arêtes
+                limiteAretes = aretes.size(); //On fait ça pour garder en mémoire le fait que ce ne sont
+                //pas les mêmes arêtes
 
-            //Cas en partant du reverse
-            for (vector<Neighbor>::iterator voisin = G.Neighbors((*it))->begin();
-                 voisin != G.Neighbors((*it))->end(); ++voisin) {
-                if (voisin->label[0] == 'R') {
-                    aVoir.push(&(*voisin));
-                    depth.push(1);
-                    labels.push("");
+                //Cas en partant du reverse
+                for (vector<Neighbor>::iterator voisin = G.Neighbors((*it))->begin();
+                     voisin != G.Neighbors((*it))->end(); ++voisin) {
+                    if (voisin->label[0] == 'R') {
+                        aVoir.push(&(*voisin));
+                        depth.push(1);
+                        labels.push("");
+                    }
                 }
-            }
-            G.BFS_comp(seen, vu2, aVoir, depth, labels, sons, depthSons, aretes, labelSons);
+                G.BFS_comp(seen, vu2, aVoir, depth, labels, sons, depthSons, aretes, labelSons);
 
-            for (int i = limiteAretes; i<sons.size(); i++) {
-                sonSet.insert(sons[i]);
-            }
-            if (!with) {
-                for (int i = limiteAretes; i<sons.size(); i++){
-                    for (int j = i+1; j<sons.size(); j++){
-                        if (sons[i] < sons[j]) {
-                            I = i;
-                            J= j;
-                        } else {
-                            I = j;
-                            J = i;
-                        }
-                        if (aretes[I]->label[1] == 'F' and aretes[J]->label[1] == 'F') {
-                            if (BulR_FF.find(make_pair(sons[I],sons[J])) == BulR_FF.end() or
-                                BulR_FF[make_pair(sons[I],sons[J])].second > depthSons[I] + depthSons[J]){
-                                BulR_FF[make_pair(sons[I],sons[J])] = make_pair((*it),depthSons[I] + depthSons[J]);
+                for (int i = limiteAretes; i < sons.size(); i++) {
+                    sonSet.insert(sons[i]);
+                }
+                if (!with) {
+                    for (int i = limiteAretes; i < sons.size(); i++) {
+                        for (int j = i + 1; j < sons.size(); j++) {
+                            if (sons[i] < sons[j]) {
+                                I = i;
+                                J = j;
+                            } else {
+                                I = j;
+                                J = i;
                             }
-                        } else if (aretes[I]->label[1] == 'F' and aretes[J]->label[1] == 'R') {
-                            if (BulR_FR.find(make_pair(sons[I],sons[J])) == BulR_FR.end() or
-                                BulR_FR[make_pair(sons[I],sons[J])].second > depthSons[I] + depthSons[J]){
-                                BulR_FR[make_pair(sons[I],sons[J])] = make_pair((*it),depthSons[I] + depthSons[J]);
-                            }
+                            if (aretes[I]->label[1] == 'F' and aretes[J]->label[1] == 'F') {
+                                if (BulR_FF.find(make_pair(sons[I], sons[J])) == BulR_FF.end() or
+                                    BulR_FF[make_pair(sons[I], sons[J])].second > depthSons[I] + depthSons[J]) {
+                                    BulR_FF[make_pair(sons[I], sons[J])] = make_pair((*it),
+                                                                                     depthSons[I] + depthSons[J]);
+                                }
+                            } else if (aretes[I]->label[1] == 'F' and aretes[J]->label[1] == 'R') {
+                                if (BulR_FR.find(make_pair(sons[I], sons[J])) == BulR_FR.end() or
+                                    BulR_FR[make_pair(sons[I], sons[J])].second > depthSons[I] + depthSons[J]) {
+                                    BulR_FR[make_pair(sons[I], sons[J])] = make_pair((*it),
+                                                                                     depthSons[I] + depthSons[J]);
+                                }
 
-                        } else if (aretes[I]->label[1] == 'R' and aretes[J]->label[1] == 'F') {
-                            if (BulR_RF.find(make_pair(sons[I],sons[J])) == BulR_RF.end() or
-                                BulR_RF[make_pair(sons[I],sons[J])].second > depthSons[I] + depthSons[J]){
-                                BulR_RF[make_pair(sons[I],sons[J])] = make_pair((*it),depthSons[I] + depthSons[J]);
-                            }
+                            } else if (aretes[I]->label[1] == 'R' and aretes[J]->label[1] == 'F') {
+                                if (BulR_RF.find(make_pair(sons[I], sons[J])) == BulR_RF.end() or
+                                    BulR_RF[make_pair(sons[I], sons[J])].second > depthSons[I] + depthSons[J]) {
+                                    BulR_RF[make_pair(sons[I], sons[J])] = make_pair((*it),
+                                                                                     depthSons[I] + depthSons[J]);
+                                }
 
-                        } else {
-                            if (BulR_RR.find(make_pair(sons[I],sons[J])) == BulR_RR.end() or
-                                BulR_RR[make_pair(sons[I],sons[J])].second > depthSons[I] + depthSons[J]){
-                                BulR_RR[make_pair(sons[I],sons[J])] = make_pair((*it),depthSons[I] + depthSons[J]);
+                            } else {
+                                if (BulR_RR.find(make_pair(sons[I], sons[J])) == BulR_RR.end() or
+                                    BulR_RR[make_pair(sons[I], sons[J])].second > depthSons[I] + depthSons[J]) {
+                                    BulR_RR[make_pair(sons[I], sons[J])] = make_pair((*it),
+                                                                                     depthSons[I] + depthSons[J]);
+                                }
                             }
                         }
                     }
                 }
-            }
-            if (with) {
-                for (int i = 0; i<limiteAretes; i++) {
-                    for (int j = limiteAretes; j < sons.size(); j++) {
-                        string aux = reverse_complement(labelSons[j]) +labelSons[i];
-                        if (aretes[i]->label[1] == 'F' and aretes[j]->label[1] == 'F'){ //attention, ici la seconde lettre doit être comprise
-                            //comme le complément ! (Voir cahier, ce n'est pas forcément évident)
-                            if (areteRF.find(make_pair(sons[j],sons[i])) == areteRF.end() or areteRF[make_pair(sons[j],sons[i])].size() > aux.size()){
-                                areteRF[make_pair(sons[j],sons[i])] = aux;
-                            }
-                        } else if (aretes[i]->label[1] == 'F' and aretes[j]->label[1] == 'R'){
-                            if (areteFF.find(make_pair(sons[j],sons[i])) == areteFF.end() or areteFF[make_pair(sons[j],sons[i])].size() > aux.size()){
-                                areteFF[make_pair(sons[j],sons[i])] = aux;
-                            }
-                        } else if (aretes[i]->label[1] == 'R' and aretes[j]->label[1] == 'R'){
-                            if (areteFR.find(make_pair(sons[j],sons[i])) == areteFR.end() or areteFR[make_pair(sons[j],sons[i])].size() > aux.size()){
-                                areteFR[make_pair(sons[j],sons[i])] = aux;
-                            }
-                        } else {
-                            if (areteRR.find(make_pair(sons[j],sons[i])) == areteRR.end() or areteRR[make_pair(sons[j],sons[i])].size() > aux.size()){
-                                areteRR[make_pair(sons[j],sons[i])] = aux;
+                if (with) {
+                    for (int i = 0; i < limiteAretes; i++) {
+                        for (int j = limiteAretes; j < sons.size(); j++) {
+                            string aux = reverse_complement(labelSons[j]) + labelSons[i];
+                            if (aretes[i]->label[1] == 'F' and
+                                aretes[j]->label[1] == 'F') { //attention, ici la seconde lettre doit être comprise
+                                //comme le complément ! (Voir cahier, ce n'est pas forcément évident)
+                                if (areteRF.find(make_pair(sons[j], sons[i])) == areteRF.end() or
+                                    areteRF[make_pair(sons[j], sons[i])].size() > aux.size()) {
+                                    areteRF[make_pair(sons[j], sons[i])] = aux;
+                                }
+                            } else if (aretes[i]->label[1] == 'F' and aretes[j]->label[1] == 'R') {
+                                if (areteFF.find(make_pair(sons[j], sons[i])) == areteFF.end() or
+                                    areteFF[make_pair(sons[j], sons[i])].size() > aux.size()) {
+                                    areteFF[make_pair(sons[j], sons[i])] = aux;
+                                }
+                            } else if (aretes[i]->label[1] == 'R' and aretes[j]->label[1] == 'R') {
+                                if (areteFR.find(make_pair(sons[j], sons[i])) == areteFR.end() or
+                                    areteFR[make_pair(sons[j], sons[i])].size() > aux.size()) {
+                                    areteFR[make_pair(sons[j], sons[i])] = aux;
+                                }
+                            } else {
+                                if (areteRR.find(make_pair(sons[j], sons[i])) == areteRR.end() or
+                                    areteRR[make_pair(sons[j], sons[i])].size() > aux.size()) {
+                                    areteRR[make_pair(sons[j], sons[i])] = aux;
+                                }
                             }
                         }
                     }
                 }
-            }
 
-        } //On termine de traiter tous les sommets de la composante
-        cout << "BFS sur tous les sommets terminés" << endl;
-
+            } //On termine de traiter tous les sommets de la composante
+            cout << "BFS sur tous les sommets terminés" << endl;
+        }
 
         //On peut donc passer la construction du graphe. Commençons par les sommets en péri.
         for (set<int>::iterator setIt = sonSet.begin(); setIt != sonSet.end(); ++setIt) {
