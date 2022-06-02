@@ -280,10 +280,11 @@ int main(int argc, char** argv) {
         sonSet.clear();
         //On boucle sur les sommets de la composante
         if (comp->size() > 5000) {
-        cout << "Composante " << compteurDeBoucle << " passée car trop grosses (de taille " << comp->size() << ")" << endl; }
-        compteurDeBoucle++;
-        for (vector<int>::iterator it = comp->begin(); it != comp->end(); ++it){
-            seen[(*it)] = 0;
+            cout << "Composante " << compteurDeBoucle << " passée car trop grosses (de taille " << comp->size() << ")" << endl;
+            compteurDeBoucle++;
+            for (vector<int>::iterator it = comp->begin(); it != comp->end(); ++it) {
+                seen[(*it)] = 0;
+            }
         }
         else {
             cout << "Pré-calcul pour la composante " << compteurDeBoucle << " de taille " << comp->size() << endl;
