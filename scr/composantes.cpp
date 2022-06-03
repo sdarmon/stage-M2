@@ -599,7 +599,7 @@ int main(int argc, char** argv) {
             }
         } else if (seen[i] < 0 ){ //Cas sommet de comp en péri
             for (vector<Neighbor>::iterator node = G.Neighbors(i)->begin(); node != G.Neighbors(i)->end(); ++node) {
-                if (seen[node->val] == 0 and correspondingVertex[node->val]>=0) { //Voisin hors comp et valide
+                if (seen[node->val] <= 0 and correspondingVertex[node->val]>=0) { //Voisin hors comp et valide
                     E3.push_back(Edge(correspondingVertex[i], correspondingVertex[node->val], 0, node->label));
                 }
             }
