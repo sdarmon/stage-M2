@@ -48,6 +48,7 @@ if len(Arg) in [5, 6, 7, 8, 9]:
     seq = ""  # Sequence de nucléotides
     event = dict()
     sequences = dict()
+    seq_vu=set()
     if Arg[-2] == "-label":
         with open(Arg[-1], 'r') as f:
             for line in f:
@@ -65,7 +66,11 @@ if len(Arg) in [5, 6, 7, 8, 9]:
                     bubble = L[0][1:] + "|" + L[1]
                     odd = 0
                 else:
-                    sequences[maj(line[:-1])] = bubble
+                    key = maj(line[:-1])
+                    if sequences.get(key,-1) != -1:
+                        sequences[key].append(bubble)
+                    else:
+                        sequences[key]= [bubble]
                     odd = 1
 
     if (len(Arg) >= 7 and Arg[5][1] == 'k'):
@@ -98,8 +103,8 @@ if len(Arg) in [5, 6, 7, 8, 9]:
                 upper = not upper  # On change la valeur de upper
                 if upper:
                     L = line.split("|")
-                    bubble = L[0][1:] + "|" + L[1]
-                    type = event.get(bubble, "NA")
+                    bubbles = L[0][1:] + "|" + L[1]
+                    type = event.get(bubbles, "NA")
                     titreUpper = titre[:-1]  # On stocke le titre
                 else:
                     titreUnder = titre[:-1]
@@ -123,14 +128,14 @@ if len(Arg) in [5, 6, 7, 8, 9]:
                 trouveUpper = trouve
                 intersect_connu_upper = sequences.get(seq,"UpperNotFound")
                 if intersect_connu_upper != "UpperNotFound":
-                    del sequences[seq]
+                    seq_vu.add(seq)
             else:  # Cas chemin du bas
                 seqUnder = line[:-1]
                 underComp = comp_possible
                 trouveUnder = trouve
                 intersect_connu_under = sequences.get(seq,"UnderNotFound")
                 if intersect_connu_under != "UnderNotFound":
-                    del sequences[seq]
+                    seq_vu.add(seq)
                 # On peut écrit la bulle et son rapport si c'est intéressant
                 if True: #if trouveUnder or trouveUpper:
                     text = ""
@@ -196,9 +201,10 @@ if len(Arg) in [5, 6, 7, 8, 9]:
                             print(titreUnder)
                             print(seqUnder)
 
-                        text += bubble + "\t" + type + "\t" + intersect_connu_upper + "\t" + intersect_connu_under
+                        text += bubbles + "\t" + type + "\t" + intersect_connu_upper.join(" ") + "\t" + intersect_connu_under.join(" ")
                         print(text)
             titre = ""  # On part pour la ligne suivante qui sera un titre
     for key,value in sequences.items():
-        print("missing",value)
+        if key not in seq_vu:
+            print("missing",value)
         #print("missing", key)
