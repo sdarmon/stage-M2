@@ -81,9 +81,9 @@ struct indexDic {
 };
 
 int main(int argc, char** argv) {
-    if (argc != 9 and argc != 7) {
+    if (argc != 9 and argc != 7 and argc != 8 and argc != 6) {
         cout << "Expected use of this program: \n\n\t" << argv[0]
-             << " file.nodes file.edges -c value [-k kmer] outputPrefix [-with/without]\n" << endl;
+             << " file.nodes file.edges -c value [-k kmer] outputPrefix [-with/without/compo]\n" << endl;
         return 0;
     }
 
@@ -94,7 +94,7 @@ int main(int argc, char** argv) {
     string nodesPath = argv[1];
     string edgesPath = argv[2];
     string outputPrefix;
-    int with;
+    int start_compo= 0;
     ifstream edges(edgesPath, std::ios::binary);
     ifstream nodes(nodesPath, std::ios::binary);
 
@@ -107,6 +107,9 @@ int main(int argc, char** argv) {
         outputPrefix = argv[7];
         if (((string)argv[8]).size() == 5){
             with = 1;
+        } else if (((string)argv[6]).size() == 6){
+            start_compo = 1;
+
         } else {
             with = 0;
         }
@@ -114,10 +117,13 @@ int main(int argc, char** argv) {
         outputPrefix = argv[5];
         if (((string)argv[6]).size() == 5){
             with = 1;
+        } else if (((string)argv[6]).size() == 6){
+            start_compo = 1;
+
         } else {
-            with = 0;
+                with = 0;
+            }
         }
-    }
 
     cout << "Graphe chargé et construit" << endl;
 
@@ -210,6 +216,10 @@ int main(int argc, char** argv) {
 
     cout << "Fin de la recherche de composantes." << endl;
 
+
+    else{
+
+    }
 
     cout << "Début construction graphe aggloméré" << endl;
     vector <Edge> E3;

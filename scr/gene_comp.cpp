@@ -51,7 +51,6 @@ int main(int argc, char** argv) {
     string nodesPath = argv[1];
     string edgesPath = argv[2];
     string outputPrefix;
-    int start_compo = 0;
     ifstream edges(edgesPath, std::ios::binary);
     ifstream nodes(nodesPath, std::ios::binary);
 
@@ -59,28 +58,9 @@ int main(int argc, char** argv) {
     read_node_file_weighted(nodes, V);
 
     Graph G(V, E);
-    if (argc >= 8 and argv[5][1] == 'k') {
-        G.kmer = stoi(argv[6]);
-        outputPrefix = argv[7];
-        if (((string) argv[8]).size() == 5) {
-            with = 1;
-        } else if (((string) argv[6]).size() == 6) {
-            start_compo = 1;
 
-        } else {
-            with = 0;
-        }
-    } else {
-        outputPrefix = argv[5];
-        if (((string) argv[6]).size() == 5) {
-            with = 1;
-        } else if (((string) argv[6]).size() == 6) {
-            start_compo = 1;
-
-        } else {
-            with = 0;
-        }
-    }
+    G.kmer = stoi(argv[6]);
+    outputPrefix = argv[7];
 
     cout << "Graphe chargé et construit" << endl;
 
