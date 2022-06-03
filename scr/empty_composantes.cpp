@@ -49,11 +49,11 @@ int main(int argc, char** argv) {
     read_edge_file(edges, E);
     read_node_file_weighted(nodes, V);
 
+    Graph G(V, E);
     G.kmer = stoi(argv[4]);
     compoPrefix = argv[5];
     nbComp = stoi(argv[6]);
     outputPrefix = argv[7];
-    Graph G(V, E);
 
 
     cout << "Graphe chargé et construit" << endl;
@@ -110,7 +110,7 @@ int main(int argc, char** argv) {
     int compt;
     //On boucle sur les composantes
     for (int component = 0; component<nbComp; component++){
-        it->clear();
+        comp->clear();
         ifstream file(compoPrefix+to_string(component)+".txt", std::ios::binary);
         while (getline(file, line)){
             compt=stoi(line.substr(0,line.find("\t")));
