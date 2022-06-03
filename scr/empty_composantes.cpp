@@ -18,20 +18,6 @@
 #define MAX 1024
 
 
-//Fonction permettant de récupérer l'index du sommet de `G` ayant le poids le plus élevé et qui n'a pas été déjà vu dans
-//`vu_total` (i.e. `vu_total[index] == 0`)
-int indexMax(Graph &G, vector<int> &vu_total){
-    int index;
-    int val = -1;
-    for (int i = 0; i<G.N; i++){
-        if (vu_total[i] == 0 && G.Vertices[i].weight > val){
-            index = i;
-            val = G.Vertices[i].weight;
-        }
-    }
-    return index;
-}
-
 //Initialisation d'un vecteur avec la valeur -1. Il me semble que vector<int> vec(-1,n) doit fonctionner, à corriger!!
 void initVec(vector<int> &vec, int n){
     vec.clear();
@@ -41,49 +27,10 @@ void initVec(vector<int> &vec, int n){
     return;
 }
 
-//Fonction permettant d'enregistrer une composante du graphe `G` dans un fichier
-void save_comp(Graph &G, vector<int> &compo, string outputPrefix, int rang){
-    ofstream output;
-    output.open(outputPrefix+"/processing/comp"+to_string(rang)+".txt");
-    for (vector<int>::iterator it = compo.begin(); it != compo.end(); it++){
-        output << *it << "\t" << G.Vertices[*it].label << "\t" << G.Vertices[*it].weight  << "\n";
-    }
-    return;
-}
-
-//Fonction indiquant si le setA est un sous-ensemble du setB. Le setA et le setB doivent être triés.
-int subset(vector<int> &setA, vector<int> &setB){
-    if (setA.size() > setB.size()){
-        return 0;
-    }
-    int posi = 0;
-    int posj = 0;
-    while(posi< setA.size() and posj < setB.size()) {
-        if (setA[posi] == setB[posj]){
-            posi++;
-            posj++;
-        } else if (setA[posi] < setB[posj]){ //Cas où le i-ème élément n'a pas été trouvé dans le setB
-            return 0;
-        }
-        else {
-            posj++;
-        }
-    }
-    return posi == setA.size();
-}
-
-struct indexDic {
-    int key;
-    int weight;
-    friend bool operator< (indexDic const& lhs, indexDic const& rhs) {
-        return (lhs.weight < rhs.weight);
-    }
-};
-
 int main(int argc, char** argv) {
-    if (argc != 9 and argc != 7 and argc != 8 and argc != 6) {
+    if (argc != 8) {
         cout << "Expected use of this program: \n\n\t" << argv[0]
-             << " file.nodes file.edges -c value [-k kmer] outputPrefix [-with/without/compo]\n" << endl;
+             << " file.nodes file.edges -k kmer compoPrefix nbComp outputPrefix \n" << endl;
         return 0;
     }
 
@@ -94,132 +41,22 @@ int main(int argc, char** argv) {
     string nodesPath = argv[1];
     string edgesPath = argv[2];
     string outputPrefix;
-    int start_compo= 0;
+    string compoPrefix;
+    int nbComp;
     ifstream edges(edgesPath, std::ios::binary);
     ifstream nodes(nodesPath, std::ios::binary);
 
     read_edge_file(edges, E);
     read_node_file_weighted(nodes, V);
 
+    G.kmer = stoi(argv[4]);
+    compoPrefix = argv[5];
+    nbComp = stoi(argv[6]);
+    outputPrefix = argv[7];
     Graph G(V, E);
-    if(argc >= 8 and argv[5][1]=='k' ){
-        G.kmer = stoi(argv[6]);
-        outputPrefix = argv[7];
-        if (((string)argv[8]).size() == 5){
-            with = 1;
-        } else if (((string)argv[6]).size() == 6){
-            start_compo = 1;
 
-        } else {
-            with = 0;
-        }
-    } else {
-        outputPrefix = argv[5];
-        if (((string)argv[6]).size() == 5){
-            with = 1;
-        } else if (((string)argv[6]).size() == 6){
-            start_compo = 1;
-
-        } else {
-                with = 0;
-            }
-        }
 
     cout << "Graphe chargé et construit" << endl;
-
-    int index;
-    //Construction du vector `vu_total`
-    vector<int> vu_total(G.N, 0);
-
-    vector <vector<int>> components;
-    components.clear();
-
-    //Ici le critère choisi pour définir une composante est juste d'être le sous-graphe connexe maximum du graphe G
-    //auquel on a enlevé tous les sommets de poids inférieur au threshold `threshold`.
-    int threshold;
-    threshold = atoi(argv[4]);
-    int m = 0;
-    int compt;
-    vector<int> vu(G.N, 0);
-    set<int> setVu;
-    queue < Neighbor * > aVoir;
-
-    cout << "Début du tas min" << endl;
-    priority_queue<indexDic> indexTrie;
-    for (int sommet = 0; sommet < G.N ; sommet++){
-        if (G.Vertices[sommet].weight >= threshold){
-            indexTrie.push(indexDic{sommet,G.Vertices[sommet].weight});
-        }
-    } //Attention ici il y a une opti possible : on est en N log N mais c'est clairement possible de faire en N
-    index = indexTrie.top().key;
-    indexTrie.pop();
-    vu_total[index] = 1;
-
-    cout << "Début de la recherche des composantes" << endl;
-    while (!indexTrie.empty()) //On cherche des composantes tant qu'il existe encore un sommet vérifiant
-        //le critère et dans la limite des 100 composantes.
-        //Condition m < 100 enlevée
-    {
-        //On réalise alors un BFS depuis le sommet `index`
-        for (set<int>::iterator it = setVu.begin(); it != setVu.end() ; it++) {
-            vu[(*it)] = 0;
-        }
-        setVu.clear();
-        vector<int> compo;
-        compo.clear();
-        //aVoir étant une queue de BFS; est toujours censé être vide ici. Pour la sanité des algos qui suivent on la
-        //vide au cas où...
-        while (!aVoir.empty()){
-            aVoir.pop();
-        }
-        vu[index] = 1;
-        setVu.insert(index);
-        for (vector<Neighbor>::iterator it = G.Neighbors(index)->begin(); it != G.Neighbors(index)->end(); ++it) {
-            if (G.Vertices[it->val].weight >= threshold) {
-                aVoir.push(&(*it));
-            }
-        }
-        G.BFS_func(threshold, aVoir, vu, setVu);
-
-        //Puis on ajoute les sommets trouvés à la composante
-        compt=1;
-        compo.push_back(index);
-        vu_total[index] = 1;
-        for (int i = 0; i < G.N; i++) {
-            if (vu[i] and i != index) {
-                compt++;
-                compo.push_back(i);
-                vu_total[i] = 1;
-            }
-        }
-        if (compt > 1){
-            save_comp(G, compo, outputPrefix, m); //On enregistre la composante sur l'ordinateur
-            m++;
-            components.push_back(compo); //Et on ajoute la composante au vecteur de composantes
-            cout << "Composante trouvée de départ " << index << " et de poids " << G.Vertices[index].weight
-                 << " et de taille " << compo.size() << endl;
-        }
-
-        //Finalement, on recommence la boucle while
-        while (!indexTrie.empty() and vu_total[indexTrie.top().key]){
-            indexTrie.pop();
-        }
-        if (!indexTrie.empty()){
-            index = indexTrie.top().key;
-            indexTrie.pop();
-            vu_total[index] = 1;
-        } else {
-            break;
-        }
-
-    }
-
-    cout << "Fin de la recherche de composantes." << endl;
-
-
-    else{
-
-    }
 
     cout << "Début construction graphe aggloméré" << endl;
     vector <Edge> E3;
@@ -230,14 +67,7 @@ int main(int argc, char** argv) {
     vector<int> correspondingVertex(G.N, 0);
     compt = 0;
     //seen est le tableau de correspondance entre les anciens sommets et les nouveaux.
-    //Pour les sommets des composantes on les flag avec des indices positifs
-    for (vector < vector < int >> ::iterator comp = components.begin(); comp != components.end();
-    ++comp){
-        compt++;
-        for (vector<int>::iterator it = comp->begin(); it != comp->end(); ++it) {
-            seen[(*it)] = compt;
-        }
-    }
+
 
     //Après, on fait un BFS à partir de chaque sommet dans la composante afin d'obtenir les voisins du périmètre.
     set<int> vu2;
@@ -274,10 +104,18 @@ int main(int argc, char** argv) {
     char aretFR[3] = {'F', 'R'};
     char aretRF[3] = {'R', 'F'};
     char aretRR[3] = {'R', 'R'};
+    vector <int> *comp;
+    string line;
+    int compt;
     //On boucle sur les composantes
-    for (vector < vector < int >> ::iterator comp = components.begin(); comp != components.end();
-    ++comp){
-        BulF_FF.clear();
+    for (int component = 0; component<nbComp; component++){
+        it->clear();
+        ifstream file(compoPrefix+to_string(comp)+".txt", std::ios::binary);
+        while (getline(file, line)){
+            compt=stoi(line.substr(0,line.find("\t")));
+            comp->push_back(compt);
+            seen[compt] = component + 1;
+        }
         BulF_RF.clear();
         BulF_FR.clear();
         BulF_RR.clear();
