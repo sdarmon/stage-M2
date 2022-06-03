@@ -65,7 +65,6 @@ int main(int argc, char** argv) {
     V3.clear();
     vector<int> seen(G.N, 0);
     vector<int> correspondingVertex(G.N, 0);
-    compt = 0;
     //seen est le tableau de correspondance entre les anciens sommets et les nouveaux.
 
 
@@ -94,6 +93,7 @@ int main(int argc, char** argv) {
     queue<string> labels;
     vector<Neighbor*> aretes;
     queue < Neighbor * > aVoir;
+    int index;
     index = 0;
     int pos;
     int modif;
