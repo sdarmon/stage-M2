@@ -93,6 +93,7 @@ int main(int argc, char** argv) {
     vector<string> labelSons;
     queue<string> labels;
     vector<Neighbor*> aretes;
+    queue < Neighbor * > aVoir;
     index = 0;
     int pos;
     int modif;
@@ -110,7 +111,7 @@ int main(int argc, char** argv) {
     //On boucle sur les composantes
     for (int component = 0; component<nbComp; component++){
         it->clear();
-        ifstream file(compoPrefix+to_string(comp)+".txt", std::ios::binary);
+        ifstream file(compoPrefix+to_string(component)+".txt", std::ios::binary);
         while (getline(file, line)){
             compt=stoi(line.substr(0,line.find("\t")));
             comp->push_back(compt);
