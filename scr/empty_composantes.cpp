@@ -2,7 +2,7 @@
  * Ce programme permet de faire une agglomeration des composantes
  * des graphes.
  */
-
+#include <unistd.h>
 #include <list>
 #include <vector>
 #include <iostream>
@@ -83,7 +83,9 @@ int main(int argc, char** argv) {
     cout << "Début des calculs des arêtes des comp " << nbComp<<endl;
     for (int component = 0; component<nbComp; component++){
         cout << "Pré-calcul pour la composante " << compteurDeBoucle << " de taille " << comp->size() << endl;
+        sleep(1);
         comp->clear();
+        sleep(1);
         file_name = compoPrefix+to_string(component)+".txt";
         cout << "Ouverture du fichier " << file_name << endl;
         ifstream file(file_name, std::ios::binary);
