@@ -83,9 +83,7 @@ int main(int argc, char** argv) {
     cout << "Début des calculs des arêtes des comp " << nbComp<<endl;
     for (int component = 0; component<nbComp; component++){
         cout << "Pré-calcul pour la composante " << compteurDeBoucle << endl;
-        sleep(1);
         comp.clear();
-        sleep(1);
         file_name = compoPrefix+to_string(component)+".txt";
         cout << "Ouverture du fichier " << file_name << endl;
         ifstream file(file_name, std::ios::binary);
