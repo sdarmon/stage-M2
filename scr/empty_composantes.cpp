@@ -77,12 +77,15 @@ int main(int argc, char** argv) {
     int compteurDeBoucle = 0;
     vector <int> *comp;
     string line;
+    string file_name;
     int compt;
     //On boucle sur les composantes
     cout << "Début des calculs des arêtes des comp " << nbComp<<endl;
     for (int component = 0; component<nbComp; component++){
         comp->clear();
-        ifstream file(compoPrefix+to_string(component)+".txt", std::ios::binary);
+        file_name = compoPrefix+to_string(component)+".txt";
+        cout << "Ouverture du fichier " << file_name << endl;
+        ifstream file(file_name, std::ios::binary);
         cout << "Pré-calcul pour la composante " << compteurDeBoucle << " de taille " << comp->size() << endl;
         while (getline(file, line)){
             compt=stoi(line.substr(0,line.find('\t')));
