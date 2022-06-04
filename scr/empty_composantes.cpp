@@ -57,8 +57,6 @@ int main(int argc, char** argv) {
 
 
     cout << "Graphe chargé et construit" << endl;
-
-    cout << "Début construction graphe aggloméré" << endl;
     vector <Edge> E3;
     vector <Node> V3;
     E3.clear();
@@ -75,13 +73,13 @@ int main(int argc, char** argv) {
     queue<string> labels;
     vector<Neighbor*> aretes;
     queue < Neighbor * > aVoir;
-    int index;
-    index = 0;
+    int index = 0;
     int compteurDeBoucle = 0;
     vector <int> *comp;
     string line;
     int compt;
     //On boucle sur les composantes
+    cout << "Début des calculs des arêtes des comp " << endl;
     for (int component = 0; component<nbComp; component++){
         comp->clear();
         ifstream file(compoPrefix+to_string(component)+".txt", std::ios::binary);
