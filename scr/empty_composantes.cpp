@@ -90,7 +90,7 @@ int main(int argc, char** argv) {
         cout << "Ouverture du fichier " << file_name << endl;
         ifstream file(file_name, std::ios::binary);
         while (getline(file, line)){
-            compt=stoi(line.substr(line.find('\t')));
+            compt=0; //stoi(line.substr(line.find('\t')))
             comp->push_back(compt);
             seen[compt] = component + 1;
         }
