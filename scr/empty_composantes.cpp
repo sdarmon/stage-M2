@@ -71,20 +71,6 @@ int main(int argc, char** argv) {
     //Après, on fait un BFS à partir de chaque sommet dans la composante afin d'obtenir les voisins du périmètre.
     set<int> vu2;
     set<int> sonSet;
-    typedef map<pair<int,int>,pair<int,int>> dic;
-    typedef map<pair<int,int>,string> dicChem;
-    dic BulF_FF; //la clé est le couple (i,j) trouvé et la valeur associé est le couple (s,taille)
-    dic BulF_FR;
-    dic BulF_RF;
-    dic BulF_RR;
-    dic BulR_FF; //la clé est le couple (i,j) trouvé et la valeur associé est le couple (s,taille)
-    dic BulR_FR;
-    dic BulR_RF;
-    dic BulR_RR;
-    dicChem areteFF;
-    dicChem areteFR;
-    dicChem areteRF;
-    dicChem areteRR;
     int limiteAretes;
     vector<int> sons;
     vector<int> depthSons;
@@ -95,16 +81,7 @@ int main(int argc, char** argv) {
     queue < Neighbor * > aVoir;
     int index;
     index = 0;
-    int pos;
-    int modif;
-    int sizeLabel;
-    int I;
-    int J;
     int compteurDeBoucle = 0;
-    char aretFF[3] = {'F', 'F'};
-    char aretFR[3] = {'F', 'R'};
-    char aretRF[3] = {'R', 'F'};
-    char aretRR[3] = {'R', 'R'};
     vector <int> *comp;
     string line;
     int compt;
@@ -113,21 +90,10 @@ int main(int argc, char** argv) {
         comp->clear();
         ifstream file(compoPrefix+to_string(component)+".txt", std::ios::binary);
         while (getline(file, line)){
-            compt=stoi(line.substr(0,line.find("\t")));
+            compt=stoi(line.substr(0,line.find('\t')));
             comp->push_back(compt);
             seen[compt] = component + 1;
         }
-        BulF_RF.clear();
-        BulF_FR.clear();
-        BulF_RR.clear();
-        BulR_FF.clear();
-        BulR_RF.clear();
-        BulR_FR.clear();
-        BulR_RR.clear();
-        areteFF.clear();
-        areteFR.clear();
-        areteRR.clear();
-        areteRF.clear();
         sonSet.clear();
         //On boucle sur les sommets de la composante
         cout << "Pré-calcul pour la composante " << compteurDeBoucle << " de taille " << comp->size() << endl;
