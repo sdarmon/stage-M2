@@ -7,8 +7,8 @@
 #include <vector>
 #include <iostream>
 #include <fstream>
-#include <string>
-#include <algorithm>
+//#include <string>
+//#include <algorithm>
 #include <set>
 #include <map>
 #include <queue>
@@ -79,11 +79,11 @@ int main(int argc, char** argv) {
     string line;
     int compt;
     //On boucle sur les composantes
-    cout << "Début des calculs des arêtes des comp " << endl;
     for (int component = 0; component<nbComp; component++){
-        comp->clear();
-        ifstream file(compoPrefix+to_string(component)+".txt", std::ios::binary);
         cout << "Pré-calcul pour la composante " << compteurDeBoucle << " de taille " << comp->size() << endl;
+        comp->clear();
+        cout << "Pré-calcul pour la composante " << compteurDeBoucle << " de taille " << comp->size() << endl;
+        ifstream file(compoPrefix+to_string(component)+".txt", std::ios::binary);
         while (getline(file, line)){
             compt=stoi(line.substr(0,line.find('\t')));
             comp->push_back(compt);
