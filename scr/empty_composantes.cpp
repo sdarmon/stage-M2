@@ -75,7 +75,7 @@ int main(int argc, char** argv) {
     queue < Neighbor * > aVoir;
     int index = 0;
     int compteurDeBoucle = 0;
-    vector <int> *comp;
+    vector <int> comp;
     string line;
     string file_name;
     int compt;
@@ -84,14 +84,14 @@ int main(int argc, char** argv) {
     for (int component = 0; component<nbComp; component++){
         cout << "Pré-calcul pour la composante " << compteurDeBoucle << endl;
         sleep(1);
-        comp->clear();
+        comp.clear();
         sleep(1);
         file_name = compoPrefix+to_string(component)+".txt";
         cout << "Ouverture du fichier " << file_name << endl;
         ifstream file(file_name, std::ios::binary);
         while (getline(file, line)){
             compt=stoi(line.substr(line.find('\t')));
-            comp->push_back(compt);
+            comp.push_back(compt);
             seen[compt] = component + 1;
         }
         sonSet.clear();
@@ -112,17 +112,17 @@ int main(int argc, char** argv) {
             labels.pop();
         }
         vu2.clear();
-        vu2.insert((*comp)[0]); //On voit bien le sommet duquel on part
+        vu2.insert(comp[0]); //On voit bien le sommet duquel on part
 
         //On fait un BFS à partir de chaque sommet afin de savoir quels sommets du périmètre sont
         //atteignables à partir de chaque sommet de la composante
         //Cas en partant du forward
-        for (vector<Neighbor>::iterator voisin = G.Neighbors((*comp)[0])->begin();
-             voisin != G.Neighbors((*comp)[0])->end(); ++voisin) {
+        for (vector<Neighbor>::iterator voisin = G.Neighbors(comp[0])->begin();
+             voisin != G.Neighbors(comp[0])->end(); ++voisin) {
             if (voisin->label[0] == 'F') {
                 aVoir.push(&(*voisin));
                 depth.push(1);
-                string aux = G.Vertices[(*comp)[0]].label;
+                string aux = G.Vertices[comp[0]].label;
                 labels.push(aux);
             }
         }
@@ -135,8 +135,8 @@ int main(int argc, char** argv) {
         //pas les mêmes arêtes
 
         //Cas en partant du reverse
-        for (vector<Neighbor>::iterator voisin = G.Neighbors((*comp)[0])->begin();
-             voisin != G.Neighbors((*comp)[0])->end(); ++voisin) {
+        for (vector<Neighbor>::iterator voisin = G.Neighbors(comp[0])->begin();
+             voisin != G.Neighbors(comp[0])->end(); ++voisin) {
             if (voisin->label[0] == 'R') {
                 aVoir.push(&(*voisin));
                 depth.push(1);
