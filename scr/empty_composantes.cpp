@@ -79,11 +79,11 @@ int main(int argc, char** argv) {
     string line;
     int compt;
     //On boucle sur les composantes
+    cout << "Début des calculs des arêtes des comp " << nbComp<<endl;
     for (int component = 0; component<nbComp; component++){
-        cout << "Pré-calcul pour la composante " << compteurDeBoucle << " de taille " << comp->size() << endl;
         comp->clear();
-        cout << "Pré-calcul pour la composante " << compteurDeBoucle << " de taille " << comp->size() << endl;
         ifstream file(compoPrefix+to_string(component)+".txt", std::ios::binary);
+        cout << "Pré-calcul pour la composante " << compteurDeBoucle << " de taille " << comp->size() << endl;
         while (getline(file, line)){
             compt=stoi(line.substr(0,line.find('\t')));
             comp->push_back(compt);
