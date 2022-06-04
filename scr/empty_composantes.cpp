@@ -65,10 +65,6 @@ int main(int argc, char** argv) {
     V3.clear();
     vector<int> seen(G.N, 0);
     vector<int> correspondingVertex(G.N, 0);
-    //seen est le tableau de correspondance entre les anciens sommets et les nouveaux.
-
-
-    //Après, on fait un BFS à partir de chaque sommet dans la composante afin d'obtenir les voisins du périmètre.
     set<int> vu2;
     set<int> sonSet;
     int limiteAretes;
@@ -89,6 +85,7 @@ int main(int argc, char** argv) {
     for (int component = 0; component<nbComp; component++){
         comp->clear();
         ifstream file(compoPrefix+to_string(component)+".txt", std::ios::binary);
+        cout << "Pré-calcul pour la composante " << compteurDeBoucle << " de taille " << comp->size() << endl;
         while (getline(file, line)){
             compt=stoi(line.substr(0,line.find('\t')));
             comp->push_back(compt);
@@ -96,7 +93,6 @@ int main(int argc, char** argv) {
         }
         sonSet.clear();
         //On boucle sur les sommets de la composante
-        cout << "Pré-calcul pour la composante " << compteurDeBoucle << " de taille " << comp->size() << endl;
         compteurDeBoucle++;
         //Cas sommet au centre
         sons.clear();
