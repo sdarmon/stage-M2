@@ -160,12 +160,10 @@ int main(int argc, char** argv) {
 
     //Maintenant que les composantes ont bien été ajouté, on s'occupe des sommets restants
     for (int i = 0; i < G.N; i++) {
-        if (seen[i] == 0 and G.Vertices[i].label.size()>=G.kmer) {
+        if (seen[i] <= 0 and G.Vertices[i].label.size()>=G.kmer) {
             V3.push_back(Node(index, G.Vertices[i].weight, G.Vertices[i].label));
             correspondingVertex[i] = index;
             index++;
-        } else if (seen[i] < 0) {
-            continue; //Cas déjà traité précédemment
         } else {
             correspondingVertex[i] = -1; //Cas sommet de comp ou de label trop court
         }
@@ -174,16 +172,10 @@ int main(int argc, char** argv) {
 
     //Maintenant on s'occupe des arêtes
     for (int i = 0; i<G.N ; i++) {
-        if (seen[i] == 0 and correspondingVertex[i]>=0){//Cas sommet non vu et valide
+        if (correspondingVertex[i]>=0){//Cas sommet non vu et valide
             for(vector<Neighbor>::iterator node = G.Neighbors(i)->begin(); node != G.Neighbors(i)->end(); ++node){
                 if (correspondingVertex[node->val]>=0){ //Cas voisin valide
                     E3.push_back(Edge(correspondingVertex[i],correspondingVertex[node->val],0,node->label));
-                }
-            }
-        } else if (seen[i] < 0 ){ //Cas sommet de comp en péri
-            for (vector<Neighbor>::iterator node = G.Neighbors(i)->begin(); node != G.Neighbors(i)->end(); ++node) {
-                if (seen[node->val] <= 0 and correspondingVertex[node->val]>=0) { //Voisin hors comp et valide
-                    E3.push_back(Edge(correspondingVertex[i], correspondingVertex[node->val], 0, node->label));
                 }
             }
         }

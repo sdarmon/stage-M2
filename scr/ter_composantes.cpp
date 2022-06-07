@@ -336,8 +336,7 @@ int main(int argc, char** argv) {
         }
         for (int i = 0; i < limiteAretes; i++) {
             for (int j = limiteAretes; j < sons.size(); j++) {
-                if (aretes[i]->label[1] == 'F' and
-                    aretes[j]->label[1] == 'F') {
+                if (aretes[i]->label[1] == 'F' and aretes[j]->label[1] == 'F') {
                     areteRF[make_pair(sons[j], sons[i])] = reverse_complement(labelSons[j]) + labelSons[i];
                 } else if (aretes[i]->label[1] == 'F' and aretes[j]->label[1] == 'R') {
                     areteFF[make_pair(sons[j], sons[i])] = reverse_complement(labelSons[j]) + labelSons[i];
