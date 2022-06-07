@@ -129,6 +129,7 @@ if len(Arg) in [5, 6, 7, 8, 9]:
                 intersect_connu_upper = sequences.get(seq,"UpperNotFound")
                 if intersect_connu_upper != "UpperNotFound":
                     seq_vu.add(seq)
+                    intersect_connu_upper = " ".join(intersect_connu_upper)
             else:  # Cas chemin du bas
                 seqUnder = line[:-1]
                 underComp = comp_possible
@@ -136,6 +137,7 @@ if len(Arg) in [5, 6, 7, 8, 9]:
                 intersect_connu_under = sequences.get(seq,"UnderNotFound")
                 if intersect_connu_under != "UnderNotFound":
                     seq_vu.add(seq)
+                    intersect_connu_under = " ".join(intersect_connu_under)
                 # On peut écrit la bulle et son rapport si c'est intéressant
                 if True: #if trouveUnder or trouveUpper:
                     text = ""
@@ -201,7 +203,7 @@ if len(Arg) in [5, 6, 7, 8, 9]:
                             print(titreUnder)
                             print(seqUnder)
 
-                        text += bubbles + "\t" + type + "\t" + " ".join(intersect_connu_upper) + "\t" + " ".join(intersect_connu_under)
+                        text += bubbles + "\t" + type + "\t" + intersect_connu_upper + "\t" + intersect_connu_under
                         print(text)
             titre = ""  # On part pour la ligne suivante qui sera un titre
     for key,value in sequences.items():
