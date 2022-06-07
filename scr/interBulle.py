@@ -208,5 +208,5 @@ if len(Arg) in [5, 6, 7, 8, 9]:
             titre = ""  # On part pour la ligne suivante qui sera un titre
     for key,value in sequences.items():
         if key not in seq_vu:
-            print("missing"," ".join(value))
+            print("missing","||".join(value))
         #print("missing", key)
