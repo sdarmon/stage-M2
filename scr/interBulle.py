@@ -201,7 +201,7 @@ if len(Arg) in [5, 6, 7, 8, 9]:
                             print(titreUnder)
                             print(seqUnder)
 
-                        text += bubbles + "\t" + type + "\t" + intersect_connu_upper.join(" ") + "\t" + intersect_connu_under.join(" ")
+                        text += bubbles + "\t" + type + "\t" + " ".join(intersect_connu_upper) + "\t" + " ".join(intersect_connu_under)
                         print(text)
             titre = ""  # On part pour la ligne suivante qui sera un titre
     for key,value in sequences.items():
