@@ -215,5 +215,5 @@ if len(Arg) in [5, 6, 7, 8, 9]:
         if key not in seq_vu:
             for bubble in value:
                 if bubble not in bubble_vu:
-                    print("missing",el)
+                    print("missing",bubble)
         #print("missing", key)
