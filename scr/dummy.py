@@ -4,6 +4,7 @@ Arg = sys.argv[:]
 seq = []
 vu = set()
 compt = 0
+step = 0
 with open(Arg[1], 'r') as f:
     for line in f:
         step = (step+1)%4
