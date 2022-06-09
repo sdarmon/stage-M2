@@ -113,16 +113,20 @@ int main(int argc, char** argv) {
     char aretFR[3] = {'F', 'R'};
     char aretRF[3] = {'R', 'F'};
     char aretRR[3] = {'R', 'R'};
-    vector <int> *comp;
+    vector <int> comp;
     string line;
+    string file_name;
     int compt;
     //On boucle sur les composantes
+    cout << "Début des calculs des arêtes des comp " << nbComp<<endl;
     for (int component = 0; component<nbComp; component++){
-        it->clear();
-        ifstream file(compoPrefix+to_string(comp)+".txt", std::ios::binary);
+        comp.clear();
+        file_name = compoPrefix+to_string(component)+".txt";
+        cout << "Ouverture du fichier " << file_name << endl;
+        ifstream file(file_name, std::ios::binary);
         while (getline(file, line)){
-            compt=stoi(line.substr(0,line.find("\t")));
-            comp->push_back(compt);
+            compt=stoi(line.substr(0,line.find('\t')));
+            comp.push_back(compt);
             seen[compt] = component + 1;
         }
         BulF_RF.clear();
@@ -138,9 +142,9 @@ int main(int argc, char** argv) {
         areteRF.clear();
         sonSet.clear();
         //On boucle sur les sommets de la composante
-        cout << "Pré-calcul pour la composante " << compteurDeBoucle << " de taille " << comp->size() << endl;
+        cout << "Pré-calcul pour la composante " << compteurDeBoucle << " de taille " << comp.size() << endl;
         compteurDeBoucle++;
-        for (vector<int>::iterator it = comp->begin(); it != comp->end(); ++it) {
+        for (vector<int>::iterator it = comp.begin(); it != comp.end(); ++it) {
             if (G.Vertices[(*it)].label.size() < G.kmer) {
                 continue;
             }
