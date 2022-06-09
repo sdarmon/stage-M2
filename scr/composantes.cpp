@@ -102,7 +102,7 @@ int main(int argc, char** argv) {
     vector<string> labelSons;
     queue<string> labels;
     vector<Neighbor*> aretes;
-    index = 0;
+    int index = 0;
     int pos;
     int modif;
     int sizeLabel;
@@ -181,46 +181,6 @@ int main(int argc, char** argv) {
             for (int i = 0; i < sons.size(); i++) {
                 sonSet.insert(sons[i]);
             }
-            if (!with) {
-                for (int i = 0; i < sons.size(); i++) {
-                    for (int j = i + 1; j < sons.size(); j++) {
-                        if (sons[i] < sons[j]) {
-                            I = i;
-                            J = j;
-                        } else {
-                            I = j;
-                            J = i;
-                        }
-                        if (aretes[I]->label[1] == 'F' and aretes[J]->label[1] == 'F') {
-                            if (BulF_FF.find(make_pair(sons[I], sons[J])) == BulF_FF.end() or
-                                BulF_FF[make_pair(sons[I], sons[J])].second > depthSons[I] + depthSons[J]) {
-                                BulF_FF[make_pair(sons[I], sons[J])] = make_pair((*it),
-                                                                                 depthSons[I] + depthSons[J]);
-                            }
-                        } else if (aretes[I]->label[1] == 'F' and aretes[J]->label[1] == 'R') {
-                            if (BulF_FR.find(make_pair(sons[I], sons[J])) == BulF_FR.end() or
-                                BulF_FR[make_pair(sons[I], sons[J])].second > depthSons[I] + depthSons[J]) {
-                                BulF_FR[make_pair(sons[I], sons[J])] = make_pair((*it),
-                                                                                 depthSons[I] + depthSons[J]);
-                            }
-
-                        } else if (aretes[I]->label[1] == 'R' and aretes[J]->label[1] == 'F') {
-                            if (BulF_RF.find(make_pair(sons[I], sons[J])) == BulF_RF.end() or
-                                BulF_RF[make_pair(sons[I], sons[J])].second > depthSons[I] + depthSons[J]) {
-                                BulF_RF[make_pair(sons[I], sons[J])] = make_pair((*it),
-                                                                                 depthSons[I] + depthSons[J]);
-                            }
-
-                        } else {
-                            if (BulF_RR.find(make_pair(sons[I], sons[J])) == BulF_RR.end() or
-                                BulF_RR[make_pair(sons[I], sons[J])].second > depthSons[I] + depthSons[J]) {
-                                BulF_RR[make_pair(sons[I], sons[J])] = make_pair((*it),
-                                                                                 depthSons[I] + depthSons[J]);
-                            }
-                        }
-                    }
-                }
-            }
 
             limiteAretes = aretes.size(); //On fait ça pour garder en mémoire le fait que ce ne sont
             //pas les mêmes arêtes
@@ -239,72 +199,30 @@ int main(int argc, char** argv) {
             for (int i = limiteAretes; i < sons.size(); i++) {
                 sonSet.insert(sons[i]);
             }
-            if (!with) {
-                for (int i = limiteAretes; i < sons.size(); i++) {
-                    for (int j = i + 1; j < sons.size(); j++) {
-                        if (sons[i] < sons[j]) {
-                            I = i;
-                            J = j;
-                        } else {
-                            I = j;
-                            J = i;
+            for (int i = 0; i < limiteAretes; i++) {
+                for (int j = limiteAretes; j < sons.size(); j++) {
+                    string aux = reverse_complement(labelSons[j]) + labelSons[i];
+                    if (aretes[i]->label[1] == 'F' and
+                        aretes[j]->label[1] == 'F') { //attention, ici la seconde lettre doit être comprise
+                        //comme le complément ! (Voir cahier, ce n'est pas forcément évident)
+                        if (areteRF.find(make_pair(sons[j], sons[i])) == areteRF.end() or
+                            areteRF[make_pair(sons[j], sons[i])].size() > aux.size()) {
+                            areteRF[make_pair(sons[j], sons[i])] = aux;
                         }
-                        if (aretes[I]->label[1] == 'F' and aretes[J]->label[1] == 'F') {
-                            if (BulR_FF.find(make_pair(sons[I], sons[J])) == BulR_FF.end() or
-                                BulR_FF[make_pair(sons[I], sons[J])].second > depthSons[I] + depthSons[J]) {
-                                BulR_FF[make_pair(sons[I], sons[J])] = make_pair((*it),
-                                                                                 depthSons[I] + depthSons[J]);
-                            }
-                        } else if (aretes[I]->label[1] == 'F' and aretes[J]->label[1] == 'R') {
-                            if (BulR_FR.find(make_pair(sons[I], sons[J])) == BulR_FR.end() or
-                                BulR_FR[make_pair(sons[I], sons[J])].second > depthSons[I] + depthSons[J]) {
-                                BulR_FR[make_pair(sons[I], sons[J])] = make_pair((*it),
-                                                                                 depthSons[I] + depthSons[J]);
-                            }
-
-                        } else if (aretes[I]->label[1] == 'R' and aretes[J]->label[1] == 'F') {
-                            if (BulR_RF.find(make_pair(sons[I], sons[J])) == BulR_RF.end() or
-                                BulR_RF[make_pair(sons[I], sons[J])].second > depthSons[I] + depthSons[J]) {
-                                BulR_RF[make_pair(sons[I], sons[J])] = make_pair((*it),
-                                                                                 depthSons[I] + depthSons[J]);
-                            }
-
-                        } else {
-                            if (BulR_RR.find(make_pair(sons[I], sons[J])) == BulR_RR.end() or
-                                BulR_RR[make_pair(sons[I], sons[J])].second > depthSons[I] + depthSons[J]) {
-                                BulR_RR[make_pair(sons[I], sons[J])] = make_pair((*it),
-                                                                                 depthSons[I] + depthSons[J]);
-                            }
+                    } else if (aretes[i]->label[1] == 'F' and aretes[j]->label[1] == 'R') {
+                        if (areteFF.find(make_pair(sons[j], sons[i])) == areteFF.end() or
+                            areteFF[make_pair(sons[j], sons[i])].size() > aux.size()) {
+                            areteFF[make_pair(sons[j], sons[i])] = aux;
                         }
-                    }
-                }
-            }
-            if (with) {
-                for (int i = 0; i < limiteAretes; i++) {
-                    for (int j = limiteAretes; j < sons.size(); j++) {
-                        string aux = reverse_complement(labelSons[j]) + labelSons[i];
-                        if (aretes[i]->label[1] == 'F' and
-                            aretes[j]->label[1] == 'F') { //attention, ici la seconde lettre doit être comprise
-                            //comme le complément ! (Voir cahier, ce n'est pas forcément évident)
-                            if (areteRF.find(make_pair(sons[j], sons[i])) == areteRF.end() or
-                                areteRF[make_pair(sons[j], sons[i])].size() > aux.size()) {
-                                areteRF[make_pair(sons[j], sons[i])] = aux;
-                            }
-                        } else if (aretes[i]->label[1] == 'F' and aretes[j]->label[1] == 'R') {
-                            if (areteFF.find(make_pair(sons[j], sons[i])) == areteFF.end() or
-                                areteFF[make_pair(sons[j], sons[i])].size() > aux.size()) {
-                                areteFF[make_pair(sons[j], sons[i])] = aux;
-                            }
-                        } else if (aretes[i]->label[1] == 'R' and aretes[j]->label[1] == 'R') {
-                            if (areteFR.find(make_pair(sons[j], sons[i])) == areteFR.end() or
-                                areteFR[make_pair(sons[j], sons[i])].size() > aux.size()) {
-                                areteFR[make_pair(sons[j], sons[i])] = aux;
-                            }
-                        } else {
-                            if (areteRR.find(make_pair(sons[j], sons[i])) == areteRR.end() or
-                                areteRR[make_pair(sons[j], sons[i])].size() > aux.size()) {
-                                areteRR[make_pair(sons[j], sons[i])] = aux;
-                            }
+                    } else if (aretes[i]->label[1] == 'R' and aretes[j]->label[1] == 'R') {
+                        if (areteFR.find(make_pair(sons[j], sons[i])) == areteFR.end() or
+                            areteFR[make_pair(sons[j], sons[i])].size() > aux.size()) {
+                            areteFR[make_pair(sons[j], sons[i])] = aux;
+                        }
+                    } else {
+                        if (areteRR.find(make_pair(sons[j], sons[i])) == areteRR.end() or
+                            areteRR[make_pair(sons[j], sons[i])].size() > aux.size()) {
+                            areteRR[make_pair(sons[j], sons[i])] = aux;
                         }
                     }
                 }
@@ -322,110 +240,38 @@ int main(int argc, char** argv) {
             seen[(*setIt)] = -compteurDeBoucle;
         }
 
-        //On continue par les sommets à dédoubler et les arêtes associées :
-
-
-        if (!with) {
-            for (dic::iterator itDic = BulF_FF.begin(); itDic != BulF_FF.end(); ++itDic) {
-                V3.push_back(Node(index, 0, G.Vertices[itDic->second.first].label));
-                E3.push_back(Edge(index, correspondingVertex[itDic->first.first], 0, aretFF));
-                E3.push_back(Edge(index, correspondingVertex[itDic->first.second], 0, aretFF));
-                E3.push_back(Edge(correspondingVertex[itDic->first.first], index, 0, aretRR));
-                E3.push_back(Edge(correspondingVertex[itDic->first.second], index, 0, aretRR));
-                index++;
-            }
-            for (dic::iterator itDic = BulF_FR.begin(); itDic != BulF_FR.end(); ++itDic) {
-                V3.push_back(Node(index, 0, G.Vertices[itDic->second.first].label));
-                E3.push_back(Edge(index, correspondingVertex[itDic->first.first], 0, aretFF));
-                E3.push_back(Edge(index, correspondingVertex[itDic->first.second], 0, aretFR));
-                E3.push_back(Edge(correspondingVertex[itDic->first.first], index, 0, aretRR));
-                E3.push_back(Edge(correspondingVertex[itDic->first.second], index, 0, aretFR));
-                index++;
-            }
-            for (dic::iterator itDic = BulF_RF.begin(); itDic != BulF_RF.end(); ++itDic) {
-                V3.push_back(Node(index, 0, G.Vertices[itDic->second.first].label));
-                E3.push_back(Edge(index, correspondingVertex[itDic->first.first], 0, aretFR));
-                E3.push_back(Edge(index, correspondingVertex[itDic->first.second], 0, aretFF));
-                E3.push_back(Edge(correspondingVertex[itDic->first.first], index, 0, aretFR));
-                E3.push_back(Edge(correspondingVertex[itDic->first.second], index, 0, aretRR));
-                index++;
-            }
-            for (dic::iterator itDic = BulF_RR.begin(); itDic != BulF_RR.end(); ++itDic) {
-                V3.push_back(Node(index, 0, G.Vertices[itDic->second.first].label));
-                E3.push_back(Edge(index, correspondingVertex[itDic->first.first], 0, aretFR));
-                E3.push_back(Edge(index, correspondingVertex[itDic->first.second], 0, aretFR));
-                E3.push_back(Edge(correspondingVertex[itDic->first.first], index, 0, aretFR));
-                E3.push_back(Edge(correspondingVertex[itDic->first.second], index, 0, aretFR));
-                index++;
-            }
-            for (dic::iterator itDic = BulR_FF.begin(); itDic != BulR_FF.end(); ++itDic) {
-                V3.push_back(Node(index, 0, G.Vertices[itDic->second.first].label));
-                E3.push_back(Edge(index, correspondingVertex[itDic->first.first], 0, aretRF));
-                E3.push_back(Edge(index, correspondingVertex[itDic->first.second], 0, aretRF));
-                E3.push_back(Edge(correspondingVertex[itDic->first.first], index, 0, aretRF));
-                E3.push_back(Edge(correspondingVertex[itDic->first.second], index, 0, aretRF));
-                index++;
-            }
-            for (dic::iterator itDic = BulR_FR.begin(); itDic != BulR_FR.end(); ++itDic) {
-                V3.push_back(Node(index, 0, G.Vertices[itDic->second.first].label));
-                E3.push_back(Edge(index, correspondingVertex[itDic->first.first], 0, aretRF));
-                E3.push_back(Edge(index, correspondingVertex[itDic->first.second], 0, aretRR));
-                E3.push_back(Edge(correspondingVertex[itDic->first.first], index, 0, aretRF));
-                E3.push_back(Edge(correspondingVertex[itDic->first.second], index, 0, aretFF));
-                index++;
-            }
-            for (dic::iterator itDic = BulR_RF.begin(); itDic != BulR_RF.end(); ++itDic) {
-                V3.push_back(Node(index, 0, G.Vertices[itDic->second.first].label));
-                E3.push_back(Edge(index, correspondingVertex[itDic->first.first], 0, aretRR));
-                E3.push_back(Edge(index, correspondingVertex[itDic->first.second], 0, aretRF));
-                E3.push_back(Edge(correspondingVertex[itDic->first.first], index, 0, aretFF));
-                E3.push_back(Edge(correspondingVertex[itDic->first.second], index, 0, aretRF));
-                index++;
-            }
-            for (dic::iterator itDic = BulR_RR.begin(); itDic != BulR_RR.end(); ++itDic) {
-                V3.push_back(Node(index, 0, G.Vertices[itDic->second.first].label));
-                E3.push_back(Edge(index, correspondingVertex[itDic->first.first], 0, aretRR));
-                E3.push_back(Edge(index, correspondingVertex[itDic->first.second], 0, aretRR));
-                E3.push_back(Edge(correspondingVertex[itDic->first.first], index, 0, aretFF));
-                E3.push_back(Edge(correspondingVertex[itDic->first.second], index, 0, aretFF));
-                index++;
-            }
-        }
-
         //Puis les arêtes au sein de la composante :
-        if (with) {
-            for (dicChem::iterator itDic = areteFF.begin(); itDic != areteFF.end(); ++itDic) {
-                V3.push_back(Node(index, 0, itDic->second));
-                E3.push_back(Edge(correspondingVertex[itDic->first.first], index, 0, aretFF));
-                E3.push_back(Edge(index, correspondingVertex[itDic->first.second], 0, aretFF));
-                E3.push_back(Edge(correspondingVertex[itDic->first.second], index, 0, aretRR));
-                E3.push_back(Edge(index, correspondingVertex[itDic->first.first], 0, aretRR));
-                index++;
-            }
-            for (dicChem::iterator itDic = areteFR.begin(); itDic != areteFR.end(); ++itDic) {
-                V3.push_back(Node(index, 0, itDic->second));
-                E3.push_back(Edge(correspondingVertex[itDic->first.first], index, 0, aretFF));
-                E3.push_back(Edge(index, correspondingVertex[itDic->first.second], 0, aretFR));
-                E3.push_back(Edge(correspondingVertex[itDic->first.second], index, 0, aretFR));
-                E3.push_back(Edge(index, correspondingVertex[itDic->first.first], 0, aretRR));
-                index++;
-            }
-            for (dicChem::iterator itDic = areteRF.begin(); itDic != areteRF.end(); ++itDic) {
-                V3.push_back(Node(index, 0, itDic->second));
-                E3.push_back(Edge(correspondingVertex[itDic->first.first], index, 0, aretRF));
-                E3.push_back(Edge(index, correspondingVertex[itDic->first.second], 0, aretFF));
-                E3.push_back(Edge(correspondingVertex[itDic->first.second], index, 0, aretRR));
-                E3.push_back(Edge(index, correspondingVertex[itDic->first.first], 0, aretRF));
-                index++;
-            }
-            for (dicChem::iterator itDic = areteRR.begin(); itDic != areteRR.end(); ++itDic) {
-                V3.push_back(Node(index, 0, itDic->second));
-                E3.push_back(Edge(correspondingVertex[itDic->first.first], index, 0, aretRF));
-                E3.push_back(Edge(index, correspondingVertex[itDic->first.second], 0, aretFR));
-                E3.push_back(Edge(correspondingVertex[itDic->first.second], index, 0, aretFR));
-                E3.push_back(Edge(index, correspondingVertex[itDic->first.first], 0, aretRF));
-                index++;
-            }
+        for (dicChem::iterator itDic = areteFF.begin(); itDic != areteFF.end(); ++itDic) {
+            V3.push_back(Node(index, 0, itDic->second));
+            E3.push_back(Edge(correspondingVertex[itDic->first.first], index, 0, aretFF));
+            E3.push_back(Edge(index, correspondingVertex[itDic->first.second], 0, aretFF));
+            E3.push_back(Edge(correspondingVertex[itDic->first.second], index, 0, aretRR));
+            E3.push_back(Edge(index, correspondingVertex[itDic->first.first], 0, aretRR));
+            index++;
+        }
+        for (dicChem::iterator itDic = areteFR.begin(); itDic != areteFR.end(); ++itDic) {
+            V3.push_back(Node(index, 0, itDic->second));
+            E3.push_back(Edge(correspondingVertex[itDic->first.first], index, 0, aretFF));
+            E3.push_back(Edge(index, correspondingVertex[itDic->first.second], 0, aretFR));
+            E3.push_back(Edge(correspondingVertex[itDic->first.second], index, 0, aretFR));
+            E3.push_back(Edge(index, correspondingVertex[itDic->first.first], 0, aretRR));
+            index++;
+        }
+        for (dicChem::iterator itDic = areteRF.begin(); itDic != areteRF.end(); ++itDic) {
+            V3.push_back(Node(index, 0, itDic->second));
+            E3.push_back(Edge(correspondingVertex[itDic->first.first], index, 0, aretRF));
+            E3.push_back(Edge(index, correspondingVertex[itDic->first.second], 0, aretFF));
+            E3.push_back(Edge(correspondingVertex[itDic->first.second], index, 0, aretRR));
+            E3.push_back(Edge(index, correspondingVertex[itDic->first.first], 0, aretRF));
+            index++;
+        }
+        for (dicChem::iterator itDic = areteRR.begin(); itDic != areteRR.end(); ++itDic) {
+            V3.push_back(Node(index, 0, itDic->second));
+            E3.push_back(Edge(correspondingVertex[itDic->first.first], index, 0, aretRF));
+            E3.push_back(Edge(index, correspondingVertex[itDic->first.second], 0, aretFR));
+            E3.push_back(Edge(correspondingVertex[itDic->first.second], index, 0, aretFR));
+            E3.push_back(Edge(index, correspondingVertex[itDic->first.first], 0, aretRF));
+            index++;
         }
     } //On vient de terminer cette composante !
 
