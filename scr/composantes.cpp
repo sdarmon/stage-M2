@@ -43,7 +43,7 @@ bool foundedEdge(int i ,int j,vector <Edge> &E2,int limite){
             return true;
         }
     }
-    retrun false;
+    return false;
 }
 
 int main(int argc, char** argv) {

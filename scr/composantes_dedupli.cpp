@@ -7,7 +7,7 @@
 #include <vector>
 #include <iostream>
 #include <fstream>
-#include <string>
+//#include <string>
 #include <set>
 #include <map>
 #include <queue>
@@ -32,7 +32,7 @@ bool foundedEdge(int i ,int j,vector <Edge> &E2,int limite){
             return true;
         }
     }
-    retrun false;
+    return false;
 }
 
 struct indexDic {
@@ -105,7 +105,7 @@ int main(int argc, char** argv) {
     char aretFF[3] = {'F', 'F'};
     char aretFR[3] = {'F', 'R'};
     char aretRF[3] = {'R', 'F'};
-    char aretRR[3] = {'R', 'R'};
+    // char aretRR[3] = {'R', 'R'};
     vector <int> comp;
     string line;
     string file_name;
@@ -167,7 +167,7 @@ int main(int argc, char** argv) {
                         (sons[i] + G.N / 2) % G.N); //Cette opération permet de récupérer les sommets complémentaires
             }
         }
-        for (set<int>::iterator it = sonSet.begin(); it != sonSet.end(); ++it){
+        for (set<int>::iterator it=sonSet.begin(); it != sonSet.end(); ++it){
             sons.clear();
             aretes.clear();
             depthSons.clear();
