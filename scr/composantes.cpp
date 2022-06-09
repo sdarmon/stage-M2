@@ -122,7 +122,6 @@ int main(int argc, char** argv) {
     for (int component = 0; component<nbComp; component++){
         comp.clear();
         file_name = compoPrefix+to_string(component)+".txt";
-        cout << "Ouverture du fichier " << file_name << endl;
         ifstream file(file_name, std::ios::binary);
         while (getline(file, line)){
             compt=stoi(line.substr(0,line.find('\t')));
