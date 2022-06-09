@@ -112,7 +112,9 @@ class Graph
     void BFS_comp(vector<int> &seen,set<int> &vu, queue<Neighbor*> &aVoir, queue<int> &depth,queue<string> &labels,
                   vector<int> &sons, vector<int> &depthSons, vector<Neighbor*> &aretes, vector<string> & labelSons);
     void weighingANode(int source, int rayon);
+    void weighingANodeGraphDuppli(int source, int rayon);
     void weighingAllNodes(int rayon);
+    void weighingAllNodesGraphDuppli(int rayon);
 };
 
 

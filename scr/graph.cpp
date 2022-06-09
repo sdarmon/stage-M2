@@ -402,11 +402,35 @@ void Graph::weighingANode(int source, int rayon) {
     Vertices[source].weight = mini;
 }
 
+//Permet de donner un poids à un sommet, correspondant aux nombres de sommets présents dans un rayon donné.
+void Graph::weighingANodeGraphDuppli(int source, int rayon) {
+    //Initialisation des files pour le bfs. Il serait plus judicieux ici d'utiliser un set<int> pour vu!!!!
+    vector<Neighbor*> aVoir;
+    vector<int> vu;
+    vector<int> rayons; //Ici on a une file de rayons car comme on calcule la distance en termes de nucléotides, cette
+    // métrique est différente de la distance entre sommets dans le graphe compacté
+    rayons.clear();
+    aVoir.clear();
+    vu.clear();
+    vu.push_back(source);
+    for (vector<Neighbor>::iterator it = Neighbors(source)->begin(); it != Neighbors(source)->end(); ++it){
+        aVoir.push_back(&(*it));
+        rayons.push_back(rayon-(Vertices[source].label.size() - kmer));
+    }
+    Vertices[source].weight = BFSCount(rayons,1,aVoir,vu);
+}
 
 //Permet de donner un poids à tous les sommets du graphe.
 void Graph::weighingAllNodes(int rayon) {
     for (vector<Node>::iterator it = Vertices.begin(); it != Vertices.end(); ++it){
         weighingANode(it->val, rayon);
+    }
+}
+
+//Permet de donner un poids à tous les sommets du graphe.
+void Graph::weighingAllNodesGraphDuppli(int rayon) {
+    for (vector<Node>::iterator it = Vertices.begin(); it != Vertices.end(); ++it){
+        weighingANodeGraphDuppli(it->val, rayon);
     }
 }
 

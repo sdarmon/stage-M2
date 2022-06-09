@@ -94,8 +94,7 @@ int main(int argc, char** argv) {
 
     cout << "Début de la recherche des composantes" << endl;
     while (!indexTrie.empty()) //On cherche des composantes tant qu'il existe encore un sommet vérifiant
-        //le critère et dans la limite des 100 composantes.
-        //Condition m < 100 enlevée
+        //le critère
     {
         //On réalise alors un BFS depuis le sommet `index`
         for (set<int>::iterator it = setVu.begin(); it != setVu.end(); it++) {
