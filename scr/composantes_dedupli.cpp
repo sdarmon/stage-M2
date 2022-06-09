@@ -25,7 +25,15 @@ void initVec(vector<int> &vec, int n){
     return;
 }
 
-
+bool foundedEdge(int i ,int j,vector <Edge> &E2,int limite){
+    //Ici il me semble que l'on peut faire une recherche dichotomique mais je n'en suis pas sûr à 100%
+    for (int k = 0; k< limite; k++){
+        if (E2[k].start == i and E2[k].end == j) {
+            return true;
+        }
+    }
+    retrun false;
+}
 
 struct indexDic {
     int key;
@@ -34,17 +42,6 @@ struct indexDic {
         return (lhs.weight < rhs.weight);
     }
 };
-
-bool foundedEdge(int i ,int j,vector <Edge> &E2,int limite){
-    //Ici il me semble que l'on peut faire une recherche dichotomique mais je n'en suis pas sûr à 100%
-    //On peut surtout précalculer un tableau founded[i][j] pour un coût constant
-    for (int k = 0; k< limite; k++){
-        if (E2[k].start == i and E2[k].end == j) {
-            return true;
-        }
-    }
-    retrun false;
-}
 
 int main(int argc, char** argv) {
     if (argc != 8) {
@@ -112,6 +109,7 @@ int main(int argc, char** argv) {
     vector <int> comp;
     string line;
     string file_name;
+    char charact;
     int compt;
     //On boucle sur les composantes
     cout << "Début des calculs des arêtes des comp " << nbComp<<endl;
@@ -158,64 +156,56 @@ int main(int argc, char** argv) {
             //Cas en partant du forward
             for (vector<Neighbor>::iterator voisin = G.Neighbors((*it))->begin();
                  voisin != G.Neighbors((*it))->end(); ++voisin) {
-                if (voisin->label[0] == 'F') {
-                    aVoir.push(&(*voisin));
-                    depth.push(1);
-                    string aux = G.Vertices[(*it)].label;
-                    labels.push(aux);
-                }
+                aVoir.push(&(*voisin));
+                depth.push(1);
+                string aux = G.Vertices[(*it)].label;
+                labels.push(aux);
             }
             G.BFS_comp(seen, vu2, aVoir, depth, labels, sons, depthSons, aretes, labelSons);
             for (int i = 0; i < sons.size(); i++) {
-                sonSet.insert(sons[i]);
+                sonSet.insert(
+                        (sons[i] + G.N / 2) % G.N); //Cette opération permet de récupérer les sommets complémentaires
             }
-
-            limiteAretes = aretes.size(); //On fait ça pour garder en mémoire le fait que ce ne sont
-            //pas les mêmes arêtes
-
-            //Cas en partant du reverse
+        }
+        for (set<int>::iterator it = sonSet.begin(); it != sonSet.end(); ++it){
+            sons.clear();
+            aretes.clear();
+            depthSons.clear();
+            labelSons.clear();
+            while (!aVoir.empty()) { // N'est jamais censé arriver !
+                aVoir.pop();
+            }
+            while (!depth.empty()) { // N'est jamais censé arriver !
+                depth.pop();
+            }
+            while (!labels.empty()) { // N'est jamais censé arriver !
+                labels.pop();
+            }
+            vu2.clear();
+            vu2.insert((*it)); //On voit bien le sommet duquel on part
             for (vector<Neighbor>::iterator voisin = G.Neighbors((*it))->begin();
                  voisin != G.Neighbors((*it))->end(); ++voisin) {
-                if (voisin->label[0] == 'R') {
-                    aVoir.push(&(*voisin));
-                    depth.push(1);
-                    labels.push("");
-                }
+                charact = voisin->label[0];
+                aVoir.push(&(*voisin));
+                depth.push(1);
+                labels.push("");
             }
-            G.BFS_comp(seen, vu2, aVoir, depth, labels, sons, depthSons, aretes, labelSons);
-
-            for (int i = limiteAretes; i < sons.size(); i++) {
-                sonSet.insert(sons[i]);
-            }
-            for (int i = 0; i < limiteAretes; i++) {
-                for (int j = limiteAretes; j < sons.size(); j++) {
-                    string aux = reverse_complement(labelSons[j]) + labelSons[i];
-                    if (aretes[i]->label[1] == 'F' and
-                        aretes[j]->label[1] == 'F') { //attention, ici la seconde lettre doit être comprise
-                        //comme le complément ! (Voir cahier, ce n'est pas forcément évident)
-                        if (areteRF.find(make_pair(sons[j], sons[i])) == areteRF.end() or
-                            areteRF[make_pair(sons[j], sons[i])].size() > aux.size()) {
-                            areteRF[make_pair(sons[j], sons[i])] = aux;
-                        }
-                    } else if (aretes[i]->label[1] == 'F' and aretes[j]->label[1] == 'R') {
-                        if (areteFF.find(make_pair(sons[j], sons[i])) == areteFF.end() or
-                            areteFF[make_pair(sons[j], sons[i])].size() > aux.size()) {
-                            areteFF[make_pair(sons[j], sons[i])] = aux;
-                        }
-                    } else if (aretes[i]->label[1] == 'R' and aretes[j]->label[1] == 'R') {
-                        if (areteFR.find(make_pair(sons[j], sons[i])) == areteFR.end() or
-                            areteFR[make_pair(sons[j], sons[i])].size() > aux.size()) {
-                            areteFR[make_pair(sons[j], sons[i])] = aux;
-                        }
+            G.BFS_comp_GraphDedupli(seen, vu2, aVoir, depth, labels, sons, depthSons, aretes, labelSons);
+            for (int i = 0; i < sons.size(); i++){
+                if (charact == 'F'){
+                    if (aretes[i]->label[1] == 'F'){
+                        areteFF[make_pair((*it), sons[i])] = labelSons[i];
                     } else {
-                        if (areteRR.find(make_pair(sons[j], sons[i])) == areteRR.end() or
-                            areteRR[make_pair(sons[j], sons[i])].size() > aux.size()) {
-                            areteRR[make_pair(sons[j], sons[i])] = aux;
-                        }
+                        areteFR[make_pair((*it), sons[i])] = labelSons[i];
+                    }
+                } else {
+                    if (aretes[i]->label[1] == 'F'){
+                        areteRF[make_pair((*it), sons[i])] = labelSons[i];
+                    } else {
+                        areteRR[make_pair((*it), sons[i])] = labelSons[i];
                     }
                 }
             }
-
         } //On termine de traiter tous les sommets de la composante
         cout << "BFS sur tous les sommets terminés" << endl;
 
@@ -233,32 +223,24 @@ int main(int argc, char** argv) {
             V3.push_back(Node(index, 0, itDic->second));
             E3.push_back(Edge(correspondingVertex[itDic->first.first], index, 0, aretFF));
             E3.push_back(Edge(index, correspondingVertex[itDic->first.second], 0, aretFF));
-            E3.push_back(Edge(correspondingVertex[itDic->first.second], index, 0, aretRR));
-            E3.push_back(Edge(index, correspondingVertex[itDic->first.first], 0, aretRR));
             index++;
         }
         for (dicChem::iterator itDic = areteFR.begin(); itDic != areteFR.end(); ++itDic) {
             V3.push_back(Node(index, 0, itDic->second));
             E3.push_back(Edge(correspondingVertex[itDic->first.first], index, 0, aretFF));
             E3.push_back(Edge(index, correspondingVertex[itDic->first.second], 0, aretFR));
-            E3.push_back(Edge(correspondingVertex[itDic->first.second], index, 0, aretFR));
-            E3.push_back(Edge(index, correspondingVertex[itDic->first.first], 0, aretRR));
             index++;
         }
         for (dicChem::iterator itDic = areteRF.begin(); itDic != areteRF.end(); ++itDic) {
             V3.push_back(Node(index, 0, itDic->second));
             E3.push_back(Edge(correspondingVertex[itDic->first.first], index, 0, aretRF));
             E3.push_back(Edge(index, correspondingVertex[itDic->first.second], 0, aretFF));
-            E3.push_back(Edge(correspondingVertex[itDic->first.second], index, 0, aretRR));
-            E3.push_back(Edge(index, correspondingVertex[itDic->first.first], 0, aretRF));
             index++;
         }
         for (dicChem::iterator itDic = areteRR.begin(); itDic != areteRR.end(); ++itDic) {
             V3.push_back(Node(index, 0, itDic->second));
             E3.push_back(Edge(correspondingVertex[itDic->first.first], index, 0, aretRF));
             E3.push_back(Edge(index, correspondingVertex[itDic->first.second], 0, aretFR));
-            E3.push_back(Edge(correspondingVertex[itDic->first.second], index, 0, aretFR));
-            E3.push_back(Edge(index, correspondingVertex[itDic->first.first], 0, aretRF));
             index++;
         }
     } //On vient de terminer cette composante !
@@ -289,8 +271,8 @@ int main(int argc, char** argv) {
             for (vector<Neighbor>::iterator node = G.Neighbors(i)->begin(); node != G.Neighbors(i)->end(); ++node) {
                 if (seen[node->val] == 0 and correspondingVertex[node->val]>=0) { //Voisin hors comp et valide
                     E3.push_back(Edge(correspondingVertex[i], correspondingVertex[node->val], 0, node->label));
-                } else if (seen[node->val] < 0 and correspondingVertex[node->val]>=0 and
-                not foundedEdge(seen[i],seen[node->val],E3,limiteAretes)) { //Voisin hors comp et valide
+                } else if (seen[node->val] < 0 and correspondingVertex[node->val]>=0 and seen[i] != seen[node->val] and
+                    not foundedEdge(seen[i],seen[node->val],E3,limiteAretes)) { //Voisin hors comp et valide
                     E3.push_back(Edge(correspondingVertex[i], correspondingVertex[node->val], 0, node->label));
                 }
             }
