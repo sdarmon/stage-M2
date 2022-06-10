@@ -17,4 +17,4 @@ with open(Arg[1], 'r') as f:
 print("Il y a "+str(len(vu))+" under paths uniques sur les "+str(compt)+" bulles.")
 with open(Arg[2], 'w') as o:
     for key,value in vu.items():
-        o.write(key, value)
+        o.write(key+"\t"}str(value))
