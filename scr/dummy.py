@@ -2,16 +2,19 @@ import sys
 
 Arg = sys.argv[:]
 seq = []
-vu = set()
+vu = dict()
 compt = 0
 step = 0
 with open(Arg[1], 'r') as f:
     for line in f:
         step = (step+1)%4
         if step == 0:
-            vu.add(line)
+            if vu.get(line,-1) != -1:
+                vu[line]+=1
+            else:
+                vu[line] = 1
             compt+=1
 print("Il y a "+str(len(vu))+" under paths uniques sur les "+str(compt)+" bulles.")
 with open(Arg[2], 'w') as o:
-    for el in vu:
-        o.write(el)
+    for key,value in vu.items():
+        o.write(key, value)
