@@ -35,6 +35,14 @@ bool foundedEdge(int i ,int j,vector <Edge> &E2,int limite){
     return false;
 }
 
+int reverse(int n, int N){
+    if (n>= N/2){
+        return n-N/2;
+    } else {
+        return n+N/2;
+    }
+}
+
 struct indexDic {
     int key;
     int weight;
@@ -149,22 +157,21 @@ int main(int argc, char** argv) {
                 labels.pop();
             }
             vu2.clear();
-            vu2.insert((*it)); //On voit bien le sommet duquel on part
+            vu2.insert(reverse(*it, G.N)); //On voit bien le sommet duquel on part
 
             //On fait un BFS à partir de chaque sommet afin de savoir quels sommets du périmètre sont
             //atteignables à partir de chaque sommet de la composante
             //Cas en partant du forward
-            for (vector<Neighbor>::iterator voisin = G.Neighbors((*it))->begin();
-                 voisin != G.Neighbors((*it))->end(); ++voisin) {
+            for (vector<Neighbor>::iterator voisin = G.Neighbors(reverse(*it, G.N))->begin();
+                 voisin != G.Neighbors(reverse(*it, G.N))->end(); ++voisin) {
                 aVoir.push(&(*voisin));
                 depth.push(1);
-                string aux = G.Vertices[(*it)].label;
+                string aux = G.Vertices[reverse(*it, G.N)].label;
                 labels.push(aux);
             }
             G.BFS_comp(seen, vu2, aVoir, depth, labels, sons, depthSons, aretes, labelSons);
             for (int i = 0; i < sons.size(); i++) {
-                sonSet.insert(
-                        (sons[i] + G.N / 2) % G.N); //Cette opération permet de récupérer les sommets complémentaires
+                sonSet.insert(reverse(sons[i], G.N)); //Cette opération permet de récupérer les sommets complémentaires
             }
         }
         for (set<int>::iterator it=sonSet.begin(); it != sonSet.end(); ++it){
@@ -263,9 +270,12 @@ int main(int argc, char** argv) {
     for (int i = 0; i<G.N ; i++) {
         if (seen[i] == 0 and correspondingVertex[i]>=0){//Cas sommet non vu et valide
             for(vector<Neighbor>::iterator node = G.Neighbors(i)->begin(); node != G.Neighbors(i)->end(); ++node){
-                if (correspondingVertex[node->val]>=0){ //Cas voisin valide
+                if (seen[node->val] == 0 and correspondingVertex[node->val]>=0){ //Cas voisin valide
                     E3.push_back(Edge(correspondingVertex[i],correspondingVertex[node->val],0,node->label));
-                }
+                } else if (seen[node->val] < 0 and correspondingVertex[node->val]>=0
+                and not foundedEdge(seen[i],seen[node->val],E3,limiteAretes)){ //Cas voisin valide
+                        E3.push_back(Edge(correspondingVertex[i],correspondingVertex[node->val],0,node->label));
+                    }
             }
         } else if (seen[i] < 0 ){ //Cas sommet de comp en péri
             for (vector<Neighbor>::iterator node = G.Neighbors(i)->begin(); node != G.Neighbors(i)->end(); ++node) {

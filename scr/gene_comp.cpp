@@ -7,14 +7,11 @@
 #include <vector>
 #include <iostream>
 #include <fstream>
-#include <string>
 #include <algorithm>
 #include <set>
 #include <map>
 #include <queue>
 #include "graph.h"
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wstring-compare"
 #define MAX 1024
 
 
