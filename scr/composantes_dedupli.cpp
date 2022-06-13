@@ -189,7 +189,6 @@ int main(int argc, char** argv) {
             vu2.insert((*it)); //On voit bien le sommet duquel on part
             for (vector<Neighbor>::iterator voisin = G.Neighbors((*it))->begin();
                  voisin != G.Neighbors((*it))->end(); ++voisin) {
-                charact = voisin->label[0];
                 aVoir.push(&(*voisin));
                 depth.push(1);
                 labels.push("");
