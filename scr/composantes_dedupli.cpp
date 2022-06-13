@@ -115,7 +115,6 @@ int main(int argc, char** argv) {
     vector <int> comp;
     string line;
     string file_name;
-    char charact;
     int compt;
     //On boucle sur les composantes
     cout << "Début des calculs des arêtes des comp " << nbComp<<endl;
