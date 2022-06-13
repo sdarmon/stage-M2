@@ -111,8 +111,6 @@ int main(int argc, char** argv) {
     int index = 0;
     int compteurDeBoucle = 0;
     char aretFF[3] = {'F', 'F'};
-    char aretFR[3] = {'F', 'R'};
-    char aretRF[3] = {'R', 'F'};
     // char aretRR[3] = {'R', 'R'};
     vector <int> comp;
     string line;
@@ -199,18 +197,7 @@ int main(int argc, char** argv) {
             }
             G.BFS_comp_GraphDedupli(seen, vu2, aVoir, depth, labels, sons, depthSons, aretes, labelSons);
             for (int i = 0; i < sons.size(); i++){
-                if (charact == 'F'){
-                    if (aretes[i]->label[1] == 'F'){
-                        areteFF[make_pair((*it), sons[i])] = labelSons[i];
-                    } else {
-                        areteFR[make_pair((*it), sons[i])] = labelSons[i];
-                    }
-                } else {
-                    if (aretes[i]->label[1] == 'F'){
-                        areteRF[make_pair((*it), sons[i])] = labelSons[i];
-                    } else {
-                        areteRR[make_pair((*it), sons[i])] = labelSons[i];
-                    }
+                areteFF[make_pair((*it), sons[i])] = labelSons[i];
                 }
             }
         } //On termine de traiter tous les sommets de la composante
@@ -230,24 +217,6 @@ int main(int argc, char** argv) {
             V3.push_back(Node(index, 0, itDic->second));
             E3.push_back(Edge(correspondingVertex[itDic->first.first], index, 0, aretFF));
             E3.push_back(Edge(index, correspondingVertex[itDic->first.second], 0, aretFF));
-            index++;
-        }
-        for (dicChem::iterator itDic = areteFR.begin(); itDic != areteFR.end(); ++itDic) {
-            V3.push_back(Node(index, 0, itDic->second));
-            E3.push_back(Edge(correspondingVertex[itDic->first.first], index, 0, aretFF));
-            E3.push_back(Edge(index, correspondingVertex[itDic->first.second], 0, aretFR));
-            index++;
-        }
-        for (dicChem::iterator itDic = areteRF.begin(); itDic != areteRF.end(); ++itDic) {
-            V3.push_back(Node(index, 0, itDic->second));
-            E3.push_back(Edge(correspondingVertex[itDic->first.first], index, 0, aretRF));
-            E3.push_back(Edge(index, correspondingVertex[itDic->first.second], 0, aretFF));
-            index++;
-        }
-        for (dicChem::iterator itDic = areteRR.begin(); itDic != areteRR.end(); ++itDic) {
-            V3.push_back(Node(index, 0, itDic->second));
-            E3.push_back(Edge(correspondingVertex[itDic->first.first], index, 0, aretRF));
-            E3.push_back(Edge(index, correspondingVertex[itDic->first.second], 0, aretFR));
             index++;
         }
     } //On vient de terminer cette composante !
