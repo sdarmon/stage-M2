@@ -39,18 +39,15 @@ int main(int argc, char** argv)
         V.push_back(Node(n+i,V[i].weight, reverse_complement(V[i].label)));
     }
     char aretFF[3] = {'F', 'F'};
-    char aretFR[3] = {'F', 'R'};
-    char aretRF[3] = {'R', 'F'};
-    char aretRR[3] = {'R', 'R'};
     for (int i = 0; i<n ; i++){
         if (E[i].label[0] == 'F' and E[i].label[1] == 'F'){
             E_duppli.push_back(Edge(E[i].start,E[i].end,E[i].weight,aretFF));
         } else if (E[i].label[0] == 'R' and E[i].label[1] == 'R'){
-            E_duppli.push_back(Edge(n+E[i].start,n+E[i].end,E[i].weight,aretRR));
+            E_duppli.push_back(Edge(n+E[i].start,n+E[i].end,E[i].weight,aretFF));
         } else if (E[i].label[0] == 'F' and E[i].label[1] == 'R'){
-            E_duppli.push_back(Edge(E[i].start,n+E[i].end,E[i].weight,aretFR));
+            E_duppli.push_back(Edge(E[i].start,n+E[i].end,E[i].weight,aretFF));
         } else if (E[i].label[0] == 'R' and E[i].label[1] == 'F'){
-            E_duppli.push_back(Edge(n+E[i].start,E[i].end,E[i].weight,aretRF));
+            E_duppli.push_back(Edge(n+E[i].start,E[i].end,E[i].weight,aretFF));
         }
     }
 
