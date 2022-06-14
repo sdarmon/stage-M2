@@ -39,7 +39,7 @@ int main(int argc, char** argv)
         V.push_back(Node(n+i,V[i].weight, reverse_complement(V[i].label)));
     }
     char aretFF[3] = {'F', 'F'};
-    for (int i = 0; i<n ; i++){
+    for (int i = 0; i<V.size() ; i++){
         if (E[i].label[0] == 'F' and E[i].label[1] == 'F'){
             E_duppli.push_back(Edge(E[i].start,E[i].end,E[i].weight,aretFF));
         } else if (E[i].label[0] == 'R' and E[i].label[1] == 'R'){
@@ -61,14 +61,24 @@ int main(int argc, char** argv)
     G.weighingAllNodesGraphDuppli(atoi(argv[3]));
 
     if(argc == 6 and argv[4][1]=='o'){
+        string prefix = argv[5];
         ofstream output;
-        output.open(argv[5]);
+        output.open(prefix);
+        ofstream outputE;
+        outputE.open(prefix.substr(0,prefix.size()-5)+"edges");
         printGraphVertices(G,output);
+        printEdgesBcalm(G,outputE);
+        outputE.close();
         output.close();
     } else if(argc == 8 and argv[6][1]=='o'){
+        string prefix = argv[7];
         ofstream output;
-        output.open(argv[7]);
+        output.open(prefix);
+        ofstream outputE;
+        outputE.open(prefix.substr(0,prefix.size()-5)+"edges");
         printGraphVertices(G,output);
+        printEdgesBcalm(G,outputE);
+        outputE.close();
         output.close();
     } else {
         printGraphVertices(G);

@@ -97,9 +97,6 @@ int main(int argc, char** argv) {
     set<int> sonSet;
     typedef map<pair<int,int>,string> dicChem;
     dicChem areteFF;
-    dicChem areteFR;
-    dicChem areteRF;
-    dicChem areteRR;
     int limiteAretes;
     vector<int> sons;
     vector<int> depthSons;
@@ -128,9 +125,6 @@ int main(int argc, char** argv) {
             seen[compt] = component + 1;
         }
         areteFF.clear();
-        areteFR.clear();
-        areteRR.clear();
-        areteRF.clear();
         sonSet.clear();
         //On boucle sur les sommets de la composante
         cout << "Pré-calcul pour la composante " << compteurDeBoucle << " de taille " << comp.size() << endl;
