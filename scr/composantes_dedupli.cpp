@@ -185,7 +185,8 @@ int main(int argc, char** argv) {
             }
             G.BFS_comp_GraphDedupli(seen, vu2, aVoir, depth, labels, sons, depthSons, aretes, labelSons);
             for (int i = 0; i < sons.size(); i++){
-                areteFF[make_pair((*it), sons[i])] = labelSons[i];
+                int taille = G.Vertices[sons[i]].label.size()-G.kmer+1;
+                areteFF[make_pair((*it), sons[i])] = labelSons[i].substr(0,labelSons[i].size()-taille);
             }
         } //On termine de traiter tous les sommets de la composante
         cout << "BFS sur tous les sommets terminés" << endl;
