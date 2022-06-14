@@ -158,6 +158,9 @@ int main(int argc, char** argv) {
             }
         }
         for (set<int>::iterator it=sonSet.begin(); it != sonSet.end(); ++it){
+            if (G.Vertices[(*it)].label.size()<G.kmer){
+                continue;
+            }
             sons.clear();
             aretes.clear();
             depthSons.clear();
@@ -194,6 +197,9 @@ int main(int argc, char** argv) {
 
         //On peut donc passer la construction du graphe. Commençons par les sommets en péri.
         for (set<int>::iterator setIt = sonSet.begin(); setIt != sonSet.end(); ++setIt) {
+            if (G.Vertices[(*setIt)].label.size()<G.kmer){
+                continue;
+            }
             V3.push_back(Node(index, G.Vertices[(*setIt)].weight, G.Vertices[(*setIt)].label));
             correspondingVertex[(*setIt)] = index;
             index++;
