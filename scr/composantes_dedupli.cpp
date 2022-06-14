@@ -35,14 +35,6 @@ bool foundedEdge(int i ,int j,vector <Edge> &E2,int limite){
     return false;
 }
 
-int reverse(int n, int N){
-    if (n>= N/2){
-        return n-N/2;
-    } else {
-        return n+N/2;
-    }
-}
-
 struct indexDic {
     int key;
     int weight;
