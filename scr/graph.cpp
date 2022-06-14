@@ -250,6 +250,46 @@ void Graph::BFS_func(int threshold ,queue<Neighbor*> &aVoir,vector<int> &vu, set
     }
     return;
 }
+int reverse(int n, int N){
+    if (n>= N/2){
+        return n-N/2;
+    } else {
+        return n+N/2;
+    }
+}
+
+
+// BFS qui teste si les sommets vérifient bien une condition (par une fonction)
+void Graph::BFS_func_dedupli(int threshold ,queue<int> &aVoir,vector<int> &vu, set<int> & setVu){
+    int vertex;
+    while (aVoir.size() != 0){ //Cas de terminaison, on a terminé le BFS
+        vertex = aVoir.front();
+        aVoir.pop();
+        if (vu[vertex]){ //Cas où le sommet a été vu par le BFS
+            continue;
+        }
+        vu[vertex]=1;
+        setVu.insert(vertex);
+
+        for (vector<Neighbor>::iterator it = Neighbors(vertex)->begin(); it != Neighbors(vertex)->end(); ++it){
+            //On boucle sur ses voisins
+            if (Vertices[it->val].weight >= threshold and vu[it->val]==0){
+                //Cas où l'arrêt est bien valide et sommet non vu avant, ce voisin est rajouté dans la file des visites
+                aVoir.push(it->val);
+            }
+        }
+        for (vector<Neighbor>::iterator it = Neighbors(reverse(vertex,N))->begin(); it != Neighbors(reverse(vertex,N))->end(); ++it){
+            //On boucle sur ses voisins
+            if (Vertices[reverse(it->val,N)].weight >= threshold and vu[reverse(it->val,N)]==0){
+                //Cas où l'arrêt est bien valide et sommet non vu avant, ce voisin est rajouté dans la file des visites
+                aVoir.push(reverse(it->val,N));
+            }
+        }
+    }
+    return;
+}
+
+
 typedef map<pair<int,int>,pair<int,int>> dic;
 
 string reverse_complement(string a){
