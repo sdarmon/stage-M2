@@ -67,7 +67,7 @@ int main(int argc, char** argv)
         ofstream outputE;
         outputE.open(prefix.substr(0,prefix.size()-5)+"edges");
         printGraphVertices(G,output);
-        printEdgesBcalm(G,outputE);
+        printEdgesBcalm(E_duppli,outputE);
         outputE.close();
         output.close();
     } else if(argc == 8 and argv[6][1]=='o'){
@@ -77,7 +77,7 @@ int main(int argc, char** argv)
         ofstream outputE;
         outputE.open(prefix.substr(0,prefix.size()-5)+"edges");
         printGraphVertices(G,output);
-        printEdgesBcalm(G,outputE);
+        printEdgesBcalm(E_duppli,outputE);
         outputE.close();
         output.close();
     } else {
