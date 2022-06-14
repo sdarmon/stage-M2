@@ -177,7 +177,7 @@ int main(int argc, char** argv) {
                  voisin != G.Neighbors((*it))->end(); ++voisin) {
                 aVoir.push(&(*voisin));
                 depth.push(1);
-                labels.push("");
+                labels.push(voisin->label);
             }
             G.BFS_comp_GraphDedupli(seen, vu2, aVoir, depth, labels, sons, depthSons, aretes, labelSons);
             for (int i = 0; i < sons.size(); i++){
