@@ -244,7 +244,7 @@ int main(int argc, char** argv) {
             for (vector<Neighbor>::iterator node = G.Neighbors(i)->begin(); node != G.Neighbors(i)->end(); ++node) {
                 if (seen[node->val] == 0 and correspondingVertex[node->val]>=0) { //Voisin hors comp et valide
                     E3.push_back(Edge(correspondingVertex[i], correspondingVertex[node->val], 0, node->label));
-                } else if (seen[node->val] < 0 and correspondingVertex[node->val]>=0 and seen[i] != seen[node->val] and
+                } else if (seen[node->val] < 0 and correspondingVertex[node->val]>=0  and
                     not foundedEdge(seen[i],seen[node->val],E3,limiteAretes)) { //Voisin hors comp et valide
                     E3.push_back(Edge(correspondingVertex[i], correspondingVertex[node->val], 0, node->label));
                 }
