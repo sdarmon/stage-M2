@@ -205,6 +205,9 @@ int main(int argc, char** argv) {
 
         //Puis les arêtes au sein de la composante :
         for (dicChem::iterator itDic = areteFF.begin(); itDic != areteFF.end(); ++itDic) {
+            if (itDic->second.size()==0){ //Ce cas là arrive lorsque les sommets i et j sont adjacents
+                continue;
+            }
             V3.push_back(Node(index, 0, itDic->second));
             E3.push_back(Edge(correspondingVertex[itDic->first.first], index, 0, aretFF));
             E3.push_back(Edge(index, correspondingVertex[itDic->first.second], 0, aretFF));
