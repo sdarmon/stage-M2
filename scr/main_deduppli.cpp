@@ -39,7 +39,7 @@ int main(int argc, char** argv)
         V.push_back(Node(n+i,V[i].weight, reverse_complement(V[i].label)));
     }
     char aretFF[3] = {'F', 'F'};
-    for (int i = 0; i<V.size() ; i++){
+    for (int i = 0; i<E.size() ; i++){
         if (E[i].label[0] == 'F' and E[i].label[1] == 'F'){
             E_duppli.push_back(Edge(E[i].start,E[i].end,E[i].weight,aretFF));
         } else if (E[i].label[0] == 'R' and E[i].label[1] == 'R'){
