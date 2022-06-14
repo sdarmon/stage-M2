@@ -175,9 +175,13 @@ int main(int argc, char** argv) {
             vu2.insert((*it)); //On voit bien le sommet duquel on part
             for (vector<Neighbor>::iterator voisin = G.Neighbors((*it))->begin();
                  voisin != G.Neighbors((*it))->end(); ++voisin) {
+                if (G.Vertices[voisin->val].label.size()<G.kmer){
+                    continue;
+                }
                 aVoir.push(&(*voisin));
                 depth.push(1);
-                labels.push(voisin->label);
+                string aux = G.Vertices[voisin->val].label;
+                labels.push(aux);
             }
             G.BFS_comp_GraphDedupli(seen, vu2, aVoir, depth, labels, sons, depthSons, aretes, labelSons);
             for (int i = 0; i < sons.size(); i++){

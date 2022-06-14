@@ -398,7 +398,7 @@ void Graph::BFS_comp_GraphDedupli(vector<int> &seen,set<int> &vu, queue<Neighbor
                 //Cas où l'arrêt est bien valide et sommet non vu avant, ce voisin est rajouté dans la file des visites
                 aVoir.push(&(*it));
                 depth.push(pronf+1);
-                labels.push(label+Vertices[node->val].label);
+                labels.push(label+Vertices[node->val].label.substr(kmer-1,Vertices[node->val].label.size()));
             }
         }
     }
