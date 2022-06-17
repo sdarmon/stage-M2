@@ -190,7 +190,7 @@ int main(int argc, char** argv) {
             for (int i = 0; i < sons.size(); i++){
                 int taille = labelSons[i].size()-G.Vertices[sons[i]].label.size()+G.kmer-1;
                 if (taille >= 41){
-                    areteFF[make_pair((*it), sons[i])] = labelSons[i];.substr(0,taille);
+                    areteFF[make_pair((*it), sons[i])] = labelSons[i].substr(0,taille);
                 }
 
             }
