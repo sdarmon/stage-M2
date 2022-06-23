@@ -4,7 +4,8 @@ Arg = sys.argv[:]
 bubble = set()
 with open(Arg[1], 'r') as f:
     for line in f:
-        bubble.add(line[:-1])
+        L=line.split('\t')
+        bubble.add(L[:-4])
 with open(Arg[2], 'r') as f:
     for line in f:
         if line[:-1] in bubble:
