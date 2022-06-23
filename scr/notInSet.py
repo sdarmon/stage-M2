@@ -5,7 +5,7 @@ bubble = set()
 with open(Arg[1], 'r') as f:
     for line in f:
         L=line.split('\t')
-        bubble.add(L[:-4])
+        bubble.add(L[-4])
 with open(Arg[2], 'r') as f:
     for line in f:
         if line[:-1] in bubble:
