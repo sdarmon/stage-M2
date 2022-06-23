@@ -9,14 +9,14 @@ with open(Arg[1], 'r') as f:
 with open(Arg[2], 'r') as f:
     for line in f:
         if line[:-1] in bubble:
-            bubble.remove(line[:-1])
+            bubble.remove(line.split('\t')[-1][:-1])
 with open(Arg[3], 'r') as f:
     for line in f:
         if line[:-1] in bubble:
-            bubble.remove(line[:-1])
+            bubble.remove(line.split('\t')[-1][:-1])
 with open(Arg[4], 'r') as f:
     for line in f:
         if line[:-1] in bubble:
-            bubble.remove(line[:-1])
+            bubble.remove(line.split('\t')[-1][:-1])
 for el in bubble:
     print(el)
