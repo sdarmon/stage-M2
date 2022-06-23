@@ -7,7 +7,7 @@ with open(Arg[1], 'r') as f:
     for line in f:
         L=line.split('\t')
         bubble.add(L[-4])
-        correspondance[bubble]=line[:-1]
+        correspondance[L[-4]]=line[:-1]
 with open(Arg[2], 'r') as f:
     for line in f:
         b=line.split('\t')[-1][:-1]
