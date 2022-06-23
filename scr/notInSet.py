@@ -8,15 +8,18 @@ with open(Arg[1], 'r') as f:
         bubble.add(L[-4])
 with open(Arg[2], 'r') as f:
     for line in f:
-        if line[:-1] in bubble:
-            bubble.remove(line.split('\t')[-1][:-1])
+        b=line.split('\t')[-1][:-1]
+        if b in bubble:
+            bubble.remove(b)
 with open(Arg[3], 'r') as f:
     for line in f:
-        if line[:-1] in bubble:
-            bubble.remove(line.split('\t')[-1][:-1])
+        b=line.split('\t')[-1][:-1]
+        if b in bubble:
+            bubble.remove(b)
 with open(Arg[4], 'r') as f:
     for line in f:
-        if line[:-1] in bubble:
-            bubble.remove(line.split('\t')[-1][:-1])
+        b=line.split('\t')[-1][:-1]
+        if b in bubble:
+            bubble.remove(b)
 for el in bubble:
     print(el)
