@@ -1,13 +1,9 @@
 import sys
 
 Arg = sys.argv[:]
-step = -1
+step = 0
 with open(Arg[1], 'r') as f:
     for line in f:
-        if line[0] in ['-','_','#']:
-            continue
-        step = (step+1)%4
-        if step == 0:
-            L = line.split("|")
-            id = L[0][1:]+"|"+L[1]
-            print(id)
+        step = (step+1)%5
+        if step != 0:
+            print(line[:-1])
