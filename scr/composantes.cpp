@@ -188,13 +188,13 @@ int main(int argc, char** argv) {
                             areteRF[make_pair(sons[j], sons[i])] = aux;
                         }
                     } else if (aretes[i]->label[1] == 'F' and aretes[j]->label[1] == 'R' and
-                        not G.neigh(sons[j],sons[i],'F','F')) ) {
+                        not G.neigh(sons[j],sons[i],'F','F')) {
                         if (areteFF.find(make_pair(sons[j], sons[i])) == areteFF.end() or
                             areteFF[make_pair(sons[j], sons[i])].size() > aux.size()) {
                             areteFF[make_pair(sons[j], sons[i])] = aux;
                         }
                     } else if (aretes[i]->label[1] == 'R' and aretes[j]->label[1] == 'R' and
-                        not G.neigh(sons[j],sons[i],'F','R')) ) {
+                        not G.neigh(sons[j],sons[i],'F','R')) {
                         if (areteFR.find(make_pair(sons[j], sons[i])) == areteFR.end() or
                             areteFR[make_pair(sons[j], sons[i])].size() > aux.size()) {
                             areteFR[make_pair(sons[j], sons[i])] = aux;
