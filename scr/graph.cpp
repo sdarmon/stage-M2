@@ -516,6 +516,15 @@ void Graph::weighingAllNodesGraphDuppli(int rayon) {
     }
 }
 
+bool Graph::neigh(int u,int v,char s1,char s2){
+    for (vector<Neighbor>::iterator it = Neighbors(u)->begin(); it != Neighbors(u)->end(); ++it) {
+        if (it->val == v and it->label[0] == s1 and it->label[1] == s2) {
+            return true;
+        }
+    }
+    return false;
+}
+
 //================================================================
 //                  Reading functions
 //================================================================

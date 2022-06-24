@@ -35,16 +35,6 @@ struct indexDic {
     }
 };
 
-bool foundedEdge(int i ,int j,vector <Edge> &E2,int limite){
-    //Ici il me semble que l'on peut faire une recherche dichotomique mais je n'en suis pas sûr à 100%
-    //On peut surtout précalculer un tableau founded[i][j] pour un coût constant
-    for (int k = 0; k< limite; k++){
-        if (E2[k].start == i and E2[k].end == j) {
-            return true;
-        }
-    }
-    return false;
-}
 
 int main(int argc, char** argv) {
     if (argc != 8) {
@@ -191,23 +181,26 @@ int main(int argc, char** argv) {
                 for (int j = limiteAretes; j < sons.size(); j++) {
                     string aux = reverse_complement(labelSons[j]) + labelSons[i];
                     if (aretes[i]->label[1] == 'F' and
-                        aretes[j]->label[1] == 'F') { //attention, ici la seconde lettre doit être comprise
+                        aretes[j]->label[1] == 'F' and
+                        not G.neigh(sons[j],sons[i],'R','F')) { //attention, ici la seconde lettre doit être comprise
                         //comme le complément ! (Voir cahier, ce n'est pas forcément évident)
                         if (areteRF.find(make_pair(sons[j], sons[i])) == areteRF.end() or
                             areteRF[make_pair(sons[j], sons[i])].size() > aux.size()) {
                             areteRF[make_pair(sons[j], sons[i])] = aux;
                         }
-                    } else if (aretes[i]->label[1] == 'F' and aretes[j]->label[1] == 'R') {
+                    } else if (aretes[i]->label[1] == 'F' and aretes[j]->label[1] == 'R'and
+                        not G.neigh(sons[j],sons[i],'F','F')) ) {
                         if (areteFF.find(make_pair(sons[j], sons[i])) == areteFF.end() or
                             areteFF[make_pair(sons[j], sons[i])].size() > aux.size()) {
                             areteFF[make_pair(sons[j], sons[i])] = aux;
                         }
-                    } else if (aretes[i]->label[1] == 'R' and aretes[j]->label[1] == 'R') {
+                    } else if (aretes[i]->label[1] == 'R' and aretes[j]->label[1] == 'R'and
+                        not G.neigh(sons[j],sons[i],'F','R')) ) {
                         if (areteFR.find(make_pair(sons[j], sons[i])) == areteFR.end() or
                             areteFR[make_pair(sons[j], sons[i])].size() > aux.size()) {
                             areteFR[make_pair(sons[j], sons[i])] = aux;
                         }
-                    } else {
+                    } else if (not G.neigh(sons[j],sons[i],'R','R')){
                         if (areteRR.find(make_pair(sons[j], sons[i])) == areteRR.end() or
                             areteRR[make_pair(sons[j], sons[i])].size() > aux.size()) {
                             areteRR[make_pair(sons[j], sons[i])] = aux;
@@ -287,10 +280,7 @@ int main(int argc, char** argv) {
             }
         } else if (seen[i] < 0 ){ //Cas sommet de comp en péri
             for (vector<Neighbor>::iterator node = G.Neighbors(i)->begin(); node != G.Neighbors(i)->end(); ++node) {
-                if (seen[node->val] == 0 and correspondingVertex[node->val]>=0) { //Voisin hors comp et valide
-                    E3.push_back(Edge(correspondingVertex[i], correspondingVertex[node->val], 0, node->label));
-                } else if (seen[node->val] < 0 and correspondingVertex[node->val]>=0 and
-                not foundedEdge(seen[i],seen[node->val],E3,limiteAretes)) { //Voisin hors comp et valide
+                if (seen[node->val] <= 0 and correspondingVertex[node->val]>=0) { //Voisin hors comp et valide
                     E3.push_back(Edge(correspondingVertex[i], correspondingVertex[node->val], 0, node->label));
                 }
             }

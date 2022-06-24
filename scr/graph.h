@@ -118,6 +118,7 @@ class Graph
     void weighingANodeGraphDuppli(int source, int rayon);
     void weighingAllNodes(int rayon);
     void weighingAllNodesGraphDuppli(int rayon);
+    bool neigh(int u,int v,char s1,char s2);
 };
 
 
