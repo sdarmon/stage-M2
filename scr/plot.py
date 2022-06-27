@@ -74,28 +74,25 @@ elif Arg[2] == "his":
     m = 0
     with open(Arg[1]) as f:
         for line in f:
-            if (len(line)<2):
+            if len(line) < 2:
                 break
-            y.append(float(line.split('\t')[2][:-1]))
-        x = np.arange(1,len(y)+1,1)
+            poids = int(line.split("\t")[-1][:-1])
+            m = max(poids,m)
+            y.append(poids)
+        x = np.arange(1, len(y) + 1, 1)
 
-    Y=[0 for i in range(10)]
-    X=[""for i in range(10)]
+    Y = [0 for i in range(10)]
+    X = [str(i) for i in range(10)]
     for i in range(len(y)):
-        Y[(10*i)//len(y)]+=y[i]
-        X[(10*i)//len(y)] = i
-
-    for i in range(9, 0,-1):
-        X[i]=str(X[i-1]+1)+"->"+str(X[i])
-    X[0] = "1->"+str(X[0])
+        Y[(10 * y[i]) // (m+1)] +=1
+    for i in range(10):
+        Y[i] = 100 * Y[i] / len(y)
     plt.bar(X[1:],Y[1:], color='green')
     plt.ylabel("Frequences (en %)")
     plt.xlabel("Taille des poids")
-    plt.title("Histogramme des fréquences des différents poids (Pour un rayon de 10 nucléotides)")
-    for i, v in enumerate(Y):
-        plt.text(i-1.25, v + .01, int(v*100*len(y)), color='b', fontweight='bold')
+    plt.title("Histogramme des fréquences des différents poids (Pour un rayon de 10 nucléotides)")#fig.suptitle("Frequencies of the different sizes of weight (Case of " + Arg[0][:-4] + ")")
+    #plt.title("Histogram of the frequencies of the different sizes of weight (Case radius = 200)")
     plt.show()
-
 
 elif Arg[2] == "top1":
     y = []
