@@ -76,7 +76,7 @@ elif Arg[2] == "his":
         for line in f:
             if (len(line)<2):
                 break
-            y.append(float(line.split('\t')[1][:-1]))
+            y.append(float(line.split('\t')[2][:-1]))
         x = np.arange(1,len(y)+1,1)
 
     Y=[0 for i in range(10)]
