@@ -61,5 +61,5 @@ if len(Arg) == 5:
     plt.title("Nombre de TE dans chaque composante")
     plt.ylabel("Nombre de TE distincts")
     plt.xlabel("Numéro de composante")
-    plt.legend(title="TE contenus dans X composante(s)")
+    #plt.legend(title="TE contenus dans X composante(s)")
     plt.show()
