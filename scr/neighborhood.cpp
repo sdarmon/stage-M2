@@ -100,11 +100,10 @@ int main(int argc, char** argv) {
     Graph G(V, E);
     vector<Neighbor*> aVoir;
     vector<Edge> E2;
-    vector<int> pronf(1,nodes_id.size());
+    vector<int> pronf(nodes_id.size(),1);
     int node ;
-    int node_id;
     int p ;
-vector<int> vu;
+    vector<int> vu(G.N,0);
     //On fait un BFS
     while (nodes_id.size() != 0) { //Cas de terminaison, on a terminé le BFS
         node = nodes_id.front();
