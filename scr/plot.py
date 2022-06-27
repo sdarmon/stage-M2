@@ -48,17 +48,20 @@ elif Arg[2] == "dot":
             yg.append(Y[i])
             xg.append(x[i])
 
-    #fig, axs = plt.subplots(1)
+    fig, axs = plt.subplots(2)
 
-    plt.plot(xg, yg, 'bo', label='Fréquence non nulle')
-    plt.plot(x, Y, 'green')
+    axs[0].plot(xg, yg, 'bo', label='Fréquence non nulle')
+    axs[0].plot(x, Y, 'green')
+    axs[0].ylabel("Frequences (en %)")
+    axs[0].xlabel("Taille des poids")
+    axs[0].suptitle("Fréquence des différents poids (Pour un rayon de 10 nucléotides)")#fig.suptitle("Frequencies of the different sizes of weight (Case of " + Arg[0][:-4] + ")")
+
+
     #axs[1].plot(xb, yb, 'ro', label='Null Frequency')
     #axs[1].legend()
     #axs[1].plot(x, Y, 'green')
-    plt.ylabel("Frequences (en %)")
     #axs[1].set(ylabel="Frequences (en %)")
-    plt.xlabel("Taille des poids")
-    plt.title("Fréquence des différentes valeurs de poids (Pour un rayon de 10 nucléotides)")#fig.suptitle("Frequencies of the different sizes of weight (Case of " + Arg[0][:-4] + ")")
+
 
     plt.legend()
     plt.show()
@@ -87,7 +90,7 @@ elif Arg[2] == "his":
     plt.bar(X[1:],Y[1:], color='green')
     plt.ylabel("Frequences (en %)")
     plt.xlabel("Taille des poids")
-    plt.title("Histogramme des fréquences des différentes valeurs de poids (Pour un rayon de 10 nucléotides)")#fig.suptitle("Frequencies of the different sizes of weight (Case of " + Arg[0][:-4] + ")")
+    plt.title("Histogramme des fréquences des différents poids (Pour un rayon de 10 nucléotides)")#fig.suptitle("Frequencies of the different sizes of weight (Case of " + Arg[0][:-4] + ")")
     #plt.title("Histogram of the frequencies of the different sizes of weight (Case radius = 200)")
     plt.show()
 
