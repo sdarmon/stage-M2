@@ -97,6 +97,10 @@ int main(int argc, char** argv) {
     read_edge_file(edges, E);
     read_node_file_weighted(nodes, V);
 
+    char aretFF[3] = {'F', 'F'};
+    char aretFR[3] = {'F', 'R'};
+    char aretRF[3] = {'R', 'F'};
+    char aretRR[3] = {'R', 'R'};
     Graph G(V, E);
     vector<Edge> E2;
     vector<int> pronf(nodes_id.size(),1);
@@ -122,6 +126,15 @@ int main(int argc, char** argv) {
                 nodes_id.push_back(it->val);
                 pronf.push_back(p + 1);
                 E2.push_back(Edge(node,it->val,0,it->label));
+                if (it->label[0] == 'F' and it->label[0] == 'F' ){
+                    E2.push_back(Edge(it->val,node,0,aretRR));
+                } else if (it->label[0] == 'F' and it->label[0] == 'R' ){
+                    E2.push_back(Edge(it->val,node,0,aretFR));
+                } else if (it->label[0] == 'R' and it->label[0] == 'R' ){
+                    E2.push_back(Edge(it->val,node,0,aretFF));
+                } else if (it->label[0] == 'R' and it->label[0] == 'F' ){
+                    E2.push_back(Edge(it->val,node,0,aretRF));
+                }
             }
         }
     }
