@@ -98,7 +98,6 @@ int main(int argc, char** argv) {
     read_node_file_weighted(nodes, V);
 
     Graph G(V, E);
-    vector<Neighbor*> aVoir;
     vector<Edge> E2;
     vector<int> pronf(nodes_id.size(),1);
     int node ;
@@ -107,7 +106,7 @@ int main(int argc, char** argv) {
     //On fait un BFS
     while (nodes_id.size() != 0) { //Cas de terminaison, on a terminé le BFS
         node = nodes_id.front();
-        aVoir.erase(aVoir.begin());
+        nodes_id.erase(nodes_id.begin());
         p = pronf.front();
         pronf.erase(pronf.begin());
         if (vu[node] != 0) { //Cas où le sommet a été vu par le BFS
