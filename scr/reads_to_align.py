@@ -51,6 +51,8 @@ def isPoly(sequence):
     Entrée : une séquence de nucléotides
     Sortie : s'il existe une queue poly
     """
+    if len(sequence) == 0:
+        return True
     n = len(sequence)
     m = 0
     compteur = 1
