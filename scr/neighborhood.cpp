@@ -16,7 +16,7 @@
 
 
 //Fonction permettant d'enregistrer une composante du graphe `G` dans un fichier
-void save_comp(Graph &G, vector<int> &vu, string outputPrefix, int rang){
+void save_comp(Graph &G, vector<int> &vu, string outputPrefix){
     ofstream output;
     output.open(outputPrefix+".nodes");
     for (int i = 0; i < G.N ; i++){
@@ -127,7 +127,7 @@ int main(int argc, char** argv) {
                 }
             }
         }
-        save_comp(G, vu, prefixOutput, rang);
+        save_comp(G, vu, prefixOutput);
         ofstream edges;
         edges.open(prefixOutput+".edges");
         printEdges(E2,edges);
