@@ -14,7 +14,7 @@ Arg = sys.argv[:]
 
 if len(Arg) not in [3, 4]:
     print("Wrong input used.\n Use : " + Arg[
-        0] + "output.txt format optional_input.txt\n Where format is 'dot', 'his', 'top1', 'top10', 'top20' or "
+        0] + " output.txt format optional_input.txt\n Where format is 'dot', 'his', 'top1', 'top10', 'top20' or "
              "'reverse', the format of the plot.")
 
 elif Arg[2] == "dot":
@@ -48,18 +48,18 @@ elif Arg[2] == "dot":
             yg.append(Y[i])
             xg.append(x[i])
 
-    fig, axs = plt.subplots(2)
+    fig, axs = plt.subplots(1)
 
     axs[0].plot(xg, yg, 'bo', label='Positive Frequency')
     axs[0].legend()
-    axs[1].plot(xb, yb, 'ro', label='Null Frequency')
-    axs[1].legend()
+    #axs[1].plot(xb, yb, 'ro', label='Null Frequency')
+    #axs[1].legend()
     axs[0].plot(x, Y, 'green')
-    axs[1].plot(x, Y, 'green')
-    axs[0].set(ylabel="Frequencies (in %)")
-    axs[1].set(ylabel="Frequencies (in %)")
-    plt.xlabel("Sizes of weight")
-    fig.suptitle("Frequencies of the different sizes of weight (Case of " + Arg[0][:-4] + ")")
+    #axs[1].plot(x, Y, 'green')
+    axs[0].set(ylabel="Frequences (en %)")
+    #axs[1].set(ylabel="Frequences (en %)")
+    plt.xlabel("Taille des poids")
+    fig.suptitle("Fréquence des différentes valeurs de poids (Pour un rayon de 10 nucléotides)")#fig.suptitle("Frequencies of the different sizes of weight (Case of " + Arg[0][:-4] + ")")
     plt.show()
 
 
@@ -84,9 +84,10 @@ elif Arg[2] == "his":
     for i in range(10):
         Y[i] = 100 * Y[i] / len(y)
     plt.bar(X[1:],Y[1:], color='green')
-    plt.ylabel("Frequencies (in %)")
-    plt.xlabel("Sizes of weight")
-    plt.title("Histogram of the frequencies of the different sizes of weight (Case radius = 200)")
+    plt.ylabel("Frequences (en %)")
+    plt.xlabel("Taille des poids")
+    fig.suptitle("Histogramme des fréquences des différentes valeurs de poids (Pour un rayon de 10 nucléotides)")#fig.suptitle("Frequencies of the different sizes of weight (Case of " + Arg[0][:-4] + ")")
+    #plt.title("Histogram of the frequencies of the different sizes of weight (Case radius = 200)")
     plt.show()
 
 elif Arg[2] == "top1":
