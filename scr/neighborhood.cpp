@@ -138,6 +138,7 @@ int main(int argc, char** argv) {
             }
         }
     }
+
     save_comp(G, vu, prefixOutput);
     ofstream edges2;
     edges2.open(prefixOutput+".edges");
