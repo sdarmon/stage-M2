@@ -105,12 +105,12 @@ int main(int argc, char** argv) {
     int node_id;
     int p ;
     vector<int> vu;
-    for(int rang = 0; rang <nodes_id.size(); rang++) {
+    int taille = nodes_id.size();
+    for(int rang = 0; rang <taille; rang++) {
 
         aVoir.clear();
         E2.clear();
         pronf.clear();
-        vu.clear();
         for (int i = 0; i<G.N; i++){
             vu.push_back(0);
         }
@@ -133,7 +133,7 @@ int main(int argc, char** argv) {
             aVoir.erase(aVoir.begin());
             p = pronf.front();
             pronf.erase(pronf.begin());
-            if (vu[node->val]) { //Cas où le sommet a été vu par le BFS
+            if (vu[node->val] != 0) { //Cas où le sommet a été vu par le BFS
                 continue;
             }
             vu[node->val] = p;
