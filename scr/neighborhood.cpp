@@ -121,7 +121,7 @@ int main(int argc, char** argv) {
                 //On boucle sur ses voisins
                 if (G.Vertices[it->val].weight >= threshold and vu[it->val] == 0 and p <= dis) {
                     //Cas où l'arrêt est bien valide et sommet non vu avant, ce voisin est rajouté dans la file des visites
-                    aVoir.push_back(it->val);
+                    nodes_id.push_back(it->val);
                     pronf.push_back(p + 1);
                     E2.push_back(Edge(node,it->val,0,it->label));
                 }
