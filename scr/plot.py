@@ -87,7 +87,7 @@ elif Arg[2] == "his":
     plt.bar(X[1:],Y[1:], color='green')
     plt.ylabel("Frequences (en %)")
     plt.xlabel("Taille des poids")
-    fig.suptitle("Histogramme des fréquences des différentes valeurs de poids (Pour un rayon de 10 nucléotides)")#fig.suptitle("Frequencies of the different sizes of weight (Case of " + Arg[0][:-4] + ")")
+    plt.title("Histogramme des fréquences des différentes valeurs de poids (Pour un rayon de 10 nucléotides)")#fig.suptitle("Frequencies of the different sizes of weight (Case of " + Arg[0][:-4] + ")")
     #plt.title("Histogram of the frequencies of the different sizes of weight (Case radius = 200)")
     plt.show()
 
