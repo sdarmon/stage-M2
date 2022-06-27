@@ -58,8 +58,8 @@ if len(Arg) == 5:
         print("Found in "+str(i)+" componants :",Z[i])
     for i in range(1, len(Y)):
         plt.bar(X, Y[i], label=str(i), color=cm.hsv(i / len(Y)), bottom=np.sum(Y[0:i],axis=0))
-    plt.title("Nombre de TE dans chaque composante (cas du moustique)")
+    plt.title("Nombre de TE dans chaque composante (cas du chien)")
     plt.ylabel("Nombre de TE distincts")
     plt.xlabel("Numéro de composante")
-    #plt.legend(title="TE contenus dans X composante(s)")
+    plt.legend(title="TE contenus dans X composante(s)")
     plt.show()
