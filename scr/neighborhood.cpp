@@ -100,52 +100,30 @@ int main(int argc, char** argv) {
     Graph G(V, E);
     vector<Neighbor*> aVoir;
     vector<Edge> E2;
-    vector<int> pronf;
-    Neighbor* node ;
+    vector<int> pronf(nodes_id.size(),1);
+    int node ;
     int node_id;
     int p ;
     vector<int> vu;
-    int taille = nodes_id.size();
-    for(int rang = 0; rang <taille; rang++) {
-
-        aVoir.clear();
-        E2.clear();
-        pronf.clear();
-        for (int i = 0; i<G.N; i++){
-            vu.push_back(0);
-        }
-        node_id = nodes_id.front();
-        nodes_id.erase(nodes_id.begin());
-        vu[node_id] = -1; //On le marque comme sommet d'entrée
-
-        //On ajoute les voisins à visiter
-        for (vector<Neighbor>::iterator it = G.Neighbors(node_id)->begin(); it != G.Neighbors(node_id)->end(); ++it) {
-            if (G.Vertices[it->val].weight >= threshold) {
-                aVoir.push_back(&(*it));
-                pronf.push_back(1);
-                E2.push_back(Edge(node_id,it->val,0,it->label));
-            }
-        }
-
         //On fait un BFS
-        while (aVoir.size() != 0) { //Cas de terminaison, on a terminé le BFS
-            node = aVoir.front();
+        while (nodes_id.size() != 0) { //Cas de terminaison, on a terminé le BFS
+            node = nodes_id.front();
             aVoir.erase(aVoir.begin());
             p = pronf.front();
             pronf.erase(pronf.begin());
-            if (vu[node->val] != 0) { //Cas où le sommet a été vu par le BFS
+            if (vu[node] != 0) { //Cas où le sommet a été vu par le BFS
                 continue;
             }
-            vu[node->val] = p;
+            vu[node] = p;
 
-            for (vector<Neighbor>::iterator it = G.Neighbors(node->val)->begin();
-                 it != G.Neighbors(node->val)->end(); ++it) {
+            for (vector<Neighbor>::iterator it = G.Neighbors(node)->begin();
+                 it != G.Neighbors(node)->end(); ++it) {
                 //On boucle sur ses voisins
                 if (G.Vertices[it->val].weight >= threshold and vu[it->val] == 0 and p <= dis) {
                     //Cas où l'arrêt est bien valide et sommet non vu avant, ce voisin est rajouté dans la file des visites
-                    aVoir.push_back(&(*it));
+                    aVoir.push_back(it->val);
                     pronf.push_back(p + 1);
-                    E2.push_back(Edge(node->val,it->val,0,it->label));
+                    E2.push_back(Edge(node,it->val,0,it->label));
                 }
             }
         }
