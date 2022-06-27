@@ -100,7 +100,7 @@ int main(int argc, char** argv) {
     Graph G(V, E);
     vector<Neighbor*> aVoir;
     vector<Edge> E2;
-    vector<int> pronf(nodes_id.size(),1);
+    vector<int> pronf(1,nodes_id.size());
     int node ;
     int node_id;
     int p ;
