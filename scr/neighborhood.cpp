@@ -78,7 +78,7 @@ int main(int argc, char** argv) {
     char *nodesPath = argv[1];
     char *edgesPath = argv[2];
     vector<int> nodes_id;
-    nodes_id.clear();
+    vector<int> pronf;
     string arg = argv[3];
     if (arg.find('.') != string::npos){
         char *idPath =argv[3];
@@ -86,6 +86,7 @@ int main(int argc, char** argv) {
         string line;
         while (getline(ids, line)){
             nodes_id.push_back(stoi(line));
+            pronf.push_back(1);
         }
         ids.close();
     } else {
@@ -103,12 +104,11 @@ int main(int argc, char** argv) {
     char aretRR[3] = {'R', 'R'};
     Graph G(V, E);
     vector<Edge> E2;
-    vector<int> pronf(nodes_id.size(),1);
     int node ;
     int p ;
     vector<int> vu(G.N,0);
     //On fait un BFS
-    while (nodes_id.size() != 0) { //Cas de terminaison, on a terminé le BFS
+    while (not nodes_id.empty() ) { //Cas de terminaison, on a terminé le BFS
         node = nodes_id.front();
         nodes_id.erase(nodes_id.begin());
         p = pronf.front();
