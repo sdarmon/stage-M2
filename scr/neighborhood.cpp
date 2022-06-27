@@ -104,32 +104,31 @@ int main(int argc, char** argv) {
     int node ;
     int node_id;
     int p ;
-    vector<int> vu;
-        //On fait un BFS
-        while (nodes_id.size() != 0) { //Cas de terminaison, on a terminé le BFS
-            node = nodes_id.front();
-            aVoir.erase(aVoir.begin());
-            p = pronf.front();
-            pronf.erase(pronf.begin());
-            if (vu[node] != 0) { //Cas où le sommet a été vu par le BFS
-                continue;
-            }
-            vu[node] = p;
+vector<int> vu;
+    //On fait un BFS
+    while (nodes_id.size() != 0) { //Cas de terminaison, on a terminé le BFS
+        node = nodes_id.front();
+        aVoir.erase(aVoir.begin());
+        p = pronf.front();
+        pronf.erase(pronf.begin());
+        if (vu[node] != 0) { //Cas où le sommet a été vu par le BFS
+            continue;
+        }
+        vu[node] = p;
 
-            for (vector<Neighbor>::iterator it = G.Neighbors(node)->begin();
-                 it != G.Neighbors(node)->end(); ++it) {
-                //On boucle sur ses voisins
-                if (G.Vertices[it->val].weight >= threshold and vu[it->val] == 0 and p <= dis) {
-                    //Cas où l'arrêt est bien valide et sommet non vu avant, ce voisin est rajouté dans la file des visites
-                    nodes_id.push_back(it->val);
-                    pronf.push_back(p + 1);
-                    E2.push_back(Edge(node,it->val,0,it->label));
-                }
+        for (vector<Neighbor>::iterator it = G.Neighbors(node)->begin();
+             it != G.Neighbors(node)->end(); ++it) {
+            //On boucle sur ses voisins
+            if (G.Vertices[it->val].weight >= threshold and vu[it->val] == 0 and p <= dis) {
+                //Cas où l'arrêt est bien valide et sommet non vu avant, ce voisin est rajouté dans la file des visites
+                nodes_id.push_back(it->val);
+                pronf.push_back(p + 1);
+                E2.push_back(Edge(node,it->val,0,it->label));
             }
         }
-        save_comp(G, vu, prefixOutput);
-        ofstream edges2;
-        edges2.open(prefixOutput+".edges");
-        printEdges(E2,edges2);
     }
+    save_comp(G, vu, prefixOutput);
+    ofstream edges2;
+    edges2.open(prefixOutput+".edges");
+    printEdges(E2,edges2);
 }
