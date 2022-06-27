@@ -48,18 +48,18 @@ elif Arg[2] == "dot":
             yg.append(Y[i])
             xg.append(x[i])
 
-    fig, axs = plt.subplots(1)
+    #fig, axs = plt.subplots(1)
 
-    axs[0].plot(xg, yg, 'bo', label='Positive Frequency')
-    axs[0].legend()
+    plt.plot(xg, yg, 'bo', label='Positive Frequency')
+    plt.legend()
     #axs[1].plot(xb, yb, 'ro', label='Null Frequency')
     #axs[1].legend()
-    axs[0].plot(x, Y, 'green')
+    plt.plot(x, Y, 'green')
     #axs[1].plot(x, Y, 'green')
-    axs[0].set(ylabel="Frequences (en %)")
+    plt.ylabel("Frequences (en %)")
     #axs[1].set(ylabel="Frequences (en %)")
     plt.xlabel("Taille des poids")
-    fig.suptitle("Fréquence des différentes valeurs de poids (Pour un rayon de 10 nucléotides)")#fig.suptitle("Frequencies of the different sizes of weight (Case of " + Arg[0][:-4] + ")")
+    plt.title("Fréquence des différentes valeurs de poids (Pour un rayon de 10 nucléotides)")#fig.suptitle("Frequencies of the different sizes of weight (Case of " + Arg[0][:-4] + ")")
     plt.show()
 
 
