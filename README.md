@@ -4,6 +4,8 @@
 
 Ce projet contient contient les résultats de mon stage de M2 portant sur le développement de méthodes d’analyse de l’épissage alternatif à partir de données RNA-seq. Un rapport de stage est disponible sur ce git. L'algorithme principal de ce Git permet de simplifier les graphes de De Bruijn afin de trouver de nouveaux évènements d'épissage alternatif.
 
+Voici une présentation du contenu de ce Git :
+
 ### Data :
 
 Ce dossier contient un mini jeu de données pour tester les algorithmes mis en place. Ce jeu de donnée "test" correspond à un graphe de De Bruijn compacté et est décomposé en trois fichiers :
