@@ -110,9 +110,11 @@ J'ai décidé de choisir pour représenter l'arête consensus, de prendre le plu
 Pendant l'énumération des bulles, il peut être intéressant de prendre en compte les composantes. En effet, on ne souhaite pas énumérer les bulles dont les deux chemins passent pas la même composante. Cela permetterait alors d'améliorer l'efficacité de l'énumération.
 
 
+&nbsp; 
 
-------
+&nbsp; 
 
+&nbsp; 
 
 
 
