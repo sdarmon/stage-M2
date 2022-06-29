@@ -46,7 +46,7 @@ Ensuite, il y a les programmes liés à l'analyse de mes données ou de mes mét
 - `reads_to_align.py` : 
 - `suppDoublon.py` : 
 
-Finalement, il y a les programmes de pipeline :
+Finalement, il y a les programmes de pipeline utilisant le logiciel *Nextflow*:
 
 - `start.nf` : Permet d'exécuter l'algorithme sur n'importe quel graphe en un ligne. Par défault, s'exécute uniquement sur le graphe `test`.
 - `analyse_TE` : Permet d'effectuer l'analyse complète des éléments transposables des jeux de données. Nécéssite d'avoir des fichiers d'annotation pour fonctionner.
@@ -54,13 +54,37 @@ Finalement, il y a les programmes de pipeline :
 
 ## Exemple d'utilisation 
 
+A partir du logiciel *Nextflow*, il est possible d'exécuter toutes les étapes de l'algorithme sur n'importe quel graphe. Par défaut, `start.nf` s'exécute sur le graphe `test`, mais il est possible de rajouter n'importe quel graphe à traiter directement dans le fichier `start.nf`.
+
+Pour exécuter le programme, il suffit d'exécuter la commande suivante :
+
+```
+pwd | xargs nextflow run start.nf --path
+``` 
+
+Sinon, il est également possible de refaire chaque étape à la main :
+
 ### Etape 1 : la podération du graphe
+
+```
+g++ graph.cpp ponderation.cpp -o ponderation.exe 
+./ponderation.exe ../data/test.nodes ../data/test.edges 3 -k 5 -o ../processing/test.nodes.pondere
+python3 reads_to_align.py ../processing/test.nodes.pondere ../processing/test_clean.nodes.pondere 0 -clean
+``` 
 
 ### Etape 2 : la génération des composantes
 
+```
+g++ graph.cpp gene_comp.cpp -o gene_comp.exe 
+./gene_comp.exe ../processing/test_clean.nodes.pondere ../data/test.edges -c 4 -k 5 ..
+``` 
+
 ### Etape 3 : la simplification du graphe de De Bruijn
 
-
+```
+g++ graph.cpp composantes.cpp -o composantes.exe 
+./composantes.exe ../processing/test_clean.nodes.pondere ../data/test.edges -k 5 ../processing/comp0.txt 1 ../results/clean
+``` 
 
 
 ## Ancien Protocole utilisé pour la mise en place de la pipeline
