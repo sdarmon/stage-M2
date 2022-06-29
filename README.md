@@ -52,6 +52,8 @@ Finalement, il y a les programmes de pipeline utilisant le logiciel *Nextflow*:
 - `analyse_TE` : Permet d'effectuer l'analyse complète des éléments transposables des jeux de données. Nécéssite d'avoir des fichiers d'annotation pour fonctionner.
 
 
+
+
 ## Exemple d'utilisation 
 
 A partir du logiciel *Nextflow*, il est possible d'exécuter toutes les étapes de l'algorithme sur n'importe quel graphe. Par défaut, `start.nf` s'exécute sur le graphe `test`, mais il est possible de rajouter n'importe quel graphe à traiter directement dans le fichier `start.nf`.
@@ -85,6 +87,36 @@ g++ graph.cpp gene_comp.cpp -o gene_comp.exe
 g++ graph.cpp composantes.cpp -o composantes.exe 
 ./composantes.exe ../processing/test_clean.nodes.pondere ../data/test.edges -k 5 ../processing/comp0.txt 1 ../results/clean
 ``` 
+
+Ainsi, on obtient le graphe simplifié dans le dossier `results` qui peut être ensuite utilisé par le logiciel *KisSplice* pour obtenir une énumération de bulles.
+
+
+
+
+## Améliorations à apporter
+
+### Sur l'étape 2:
+
+J'effectue un tri des sommets car historiquement, je ne conservais que les 100 composantes ayant les poids les plus élevés. Cependant, avoir ce tri sur les composantes n'est pas forcément pertinant, et n'est utile que pour l'analyse des composantes. Il serait donc préférable d'utiliser l'algorithme de Tarjan pour obtenir les composantes linéairement lors d'une implémentation concrète.
+
+
+### Sur l'étape 3:
+
+J'ai décidé de choisir pour représenter l'arête consensus, de prendre le plus court chemin entre les sommets à relier. Ce choix là n'est pas forcément utile et le fait de relacher cette condition permet de concevoir un algorithme linéaire en les tailles des données. Etant actuellement l'étape limitante, il s'agit là de la meilleure optimisation à faire.
+
+
+### Sur *KisSplice*
+
+Pendant l'énumération des bulles, il peut être intéressant de prendre en compte les composantes. En effet, on ne souhaite pas énumérer les bulles dont les deux chemins passent pas la même composante. Cela permetterait alors d'améliorer l'efficacité de l'énumération.
+
+
+
+------
+
+
+
+
+La suite de ce Git contient l'ancien protocole que j'utilisais afin d'obtenir une analyse des éléments transposables dans mes jeux de données.
 
 
 ## Ancien Protocole utilisé pour la mise en place de la pipeline
