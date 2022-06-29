@@ -37,14 +37,14 @@ Tout d'abord, il y a les programmes de l'algorithme de simplification :
 
 Ensuite, il y a les programmes liés à l'analyse de mes données ou de mes méthodes :
 
-- `empty_composantes.cpp` : 
-- `filtrage_bulle.py` : 
-- `interBulle.py` : 
-- `neighborhood.cpp` : 
-- `plot.py` : 
-- `rapportAgglo` : 
-- `reads_to_align.py` : 
-- `suppDoublon.py` : 
+- `empty_composantes.cpp` : Ce programme fonctionne comme `composantes.cpp`, supprime les composantes, mais ne rajoute pas les nouvelles arêtes! Cela m'a permis d'avoir des graphes de contrôle.
+- `filtrage_bulle.py` : Cette fonction permet d'annoter les bulles afin de savoir les quelles sont nouvelles ainsi que de savoir quelles bulles passent par quelles composantes.
+- `interBulle.py` : Cette fonction permet de garder qu'une bulle par composante, et est utilisée afin d'avoir un aperçu des composantes.
+- `neighborhood.cpp` : Ce programme permet d'extraire un sous-graphe à distance donnée, permettant d'étudier des sous-graphes.
+- `plot.py` : Cette fonction me permet de produire divers graphiques (dont notamment ceux de mon rapport) facilitant l'analyse.
+- `rapportAgglo.py` : Cette fonctionne permet d'intersecter les comosantes avec des éléments transposables connues et d'afficher un graphique récapitulatif du contenu des composantes. De plus, elle affiche également comment sont répartis tous les éléments transposables connus (en les classant en fonction de dans combien de composantes ils sont). 
+- `reads_to_align.py` : Cette fonction permet de préparer le fichiers des sommets du graphes de plusieurs manières; soit elle va nettoyer les données (queue poly(A)) ou alors elle peut transformer la liste des sommets en fichier `.fa`, alignable sur des génomes de référence. 
+- `suppDoublon.py` : Cette fonction permet de filtrer des éléments transposables en double ou des bulles en double.
 
 Finalement, il y a les programmes de pipeline utilisant le logiciel *Nextflow*:
 
@@ -108,6 +108,13 @@ J'ai décidé de choisir pour représenter l'arête consensus, de prendre le plu
 ### Sur *KisSplice*
 
 Pendant l'énumération des bulles, il peut être intéressant de prendre en compte les composantes. En effet, on ne souhaite pas énumérer les bulles dont les deux chemins passent pas la même composante. Cela permetterait alors d'améliorer l'efficacité de l'énumération.
+
+
+&nbsp; 
+
+&nbsp; 
+
+&nbsp; 
 
 
 &nbsp; 
