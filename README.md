@@ -1,72 +1,67 @@
-# stage-M2
+# Stage M2 : Développements de méthodes d’analyse de l’épissage alternatif à partir de données RNA-seq
+
+## Présentation
+
+Ce projet contient contient les résultats de mon stage de M2 portant sur le développement de méthodes d’analyse de l’épissage alternatif à partir de données RNA-seq. Un rapport de stage est disponible sur ce git. L'algorithme principal de ce Git permet de simplifier les graphes de De Bruijn afin de trouver de nouveaux évènements d'épissage alternatif.
+
+### Data :
+
+Ce dossier contient un mini jeu de données pour tester les algorithmes mis en place. Ce jeu de donnée "test" correspond à un graphe de De Bruijn compacté et est décomposé en trois fichiers :
+
+- `test.nodes` : Chaque ligne correspond à un unique sommet qui est défini par un numéro et une séquence de nucléotide.
+- `test.edges` : Chaque ligne correspond à une unique arête qui est définie par un sommet de départ, un sommet d'arrivé et un type d'arête (plus d'explications sur les types des arêtes à la structure du graphe sont disponibles dans le rapport).
+- `test.abundance` : Chaque ligne correspond à l'abondance des k-mers de chaque sommet. Je n'utilise pas cette métrique, elle ne sert qu'au bon fonctionnement de *KisSplice*.
+
+### Processing :
+
+- `test.nodes.pondere` : Ce fichier correspond au fichier `test.nodes` mais avec en plus pour chaque sommet son poids. Il a était obtenu à la suite de l'étape 1 de l'algorithme.
+- `comp0.txt` : Ce fichier contient tous les sommets faisant parties de la composante 0. Il a été généré à la suite de l'étape 2.
+
+### Results :
+
+Ce dossier contient les résultats finaux de mon alogithme. Il est composé de fichiers `clean.nodes`, `clean.edges` et `clean.abundance` qui correspondent au nouveau graphe qui sera par la suite utilisé par *KisSplice*.
+
+
+### Scr :
+
+Ce dossier contient tous les algorithmes. On peut les décomposer en trois catégories :
+
+Tout d'abord, il y a les programmes de l'algorithme de simplification : 
+
+- `graph.cpp` et `graph.h` : Contiennent toutes les structures et fonctions liées aux graphes que j'ai utilisés.
+- `ponderation.cpp` : Etape 1 de l'algorithme permettant de faire la pondération du graphe.
+- `gene_comp.cpp` : Etape 2 de l'algorithme permettant de générer toutes les composantes.
+- `composantes.cpp` : Etape 3 de l'algorithme permettant de simplifier effectivement le graphe.
+
+Ensuite, il y a les programmes liés à l'analyse de mes données ou de mes méthodes :
+
+- `empty_composantes.cpp` : 
+- `filtrage_bulle.py` : 
+- `interBulle.py` : 
+- `neighborhood.cpp` : 
+- `plot.py` : 
+- `rapportAgglo` : 
+- `reads_to_align.py` : 
+- `suppDoublon.py` : 
+
+Finalement, il y a les programmes de pipeline :
+
+- `start.nf` : Permet d'exécuter l'algorithme sur n'importe quel graphe en un ligne. Par défault, s'exécute uniquement sur le graphe `test`.
+- `analyse_TE` : Permet d'effectuer l'analyse complète des éléments transposables des jeux de données. Nécéssite d'avoir des fichiers d'annotation pour fonctionner.
+
+
+## Exemple d'utilisation 
+
+### Etape 1 : la podération du graphe
+
+### Etape 2 : la génération des composantes
+
+### Etape 3 : la simplification du graphe de De Bruijn
 
 
 
-## Fonctions d'affichage
 
-### Analyse graphique de la distribution des poids
-
-Fonctionne également en `top20`, `top10`, `top1`.
-```
-python3 plot.py ../../data/moustique/outputGraphmoustique.txt top10
-```
-
-### Plotting des reads concernés
-
-On récupère les séquences de l'intersection dans seq.txt (l'output). Puis on les affiche avec la fonction plot.
-```
-python3 reads_to_align.py ../../data/outputGraphMoustique.txt ../../results/moustique/seq.txt 11 -reverse ../../results/moustique/intersectionKissNoDouble.txt
-python3 plot.py ../../data/outputGraphMoustique.txt reverse ../../results/moustique/seq.txt
-```
-
-### Afficher une séquence sur Cytoscape:
-
-```
-/data/home/vincent/TiffanyDelhomme$ ./nbh -n /localdata/pandata/students/Projet_KS/kissplice_results/kissplice_moustique/graph_IR03_B_R1_IR03_C_R1_IR03_D_R1_IR03_E_R1_IR13_B_R1_IR13_C_R1_IR13_D_R1_IR13_E_R1_k41.nodes -e /localdata/pandata/students/Projet_KS/kissplice_results/kissplice_moustique/graph_IR03_B_R1_IR03_C_R1_IR03_D_R1_IR03_E_R1_IR13_B_R1_IR13_C_R1_IR13_D_R1_IR13_E_R1_k41_C0.05.edges -k 41 -o /localdata/pandata/students/Projet_KS/DmGoth/data/candidat/graph -d 10 -q CTGAATAGCTGCGCGTTTACCGCTACGGCTATCTGGGCCCC
-python3 labellingCytoscape.py ../../data/candidat/graph.edges ../../data/moustique/outputGraphMoustiqueNonOpt.txt 8 ../../data/candidat/graph.label
-
-g++ graph.cpp splitGraph.cpp -o split.exe
-./split.exe ../../../kissplice_results/kissplice_moustique/graph_IR03_B_R1_IR03_C_R1_IR03_D_R1_IR03_E_R1_IR13_B_R1_IR13_C_R1_IR13_D_R1_IR13_E_R1_k41.nodes ../../data/candidat/graph.nodes ../../data/candidat/graph.edges ../../data/candidat/graph
-
-Cytoscape &
-```
-
-Seq à tester : `CTGAATAGCTGCGCGTTTACCGCTACGGCTATCTGGGCCCC`
-Puis File > Import > Import Network from file
-
-
-
-### Histogramme de l'agglomération
-
-```
-python3 ${workDir}/rapportAgglo.py ${workDir}/../../data/moustique/AaegL5_TE_repeats.gff ${workDir}/../../results/moustique/processing/intersectionTE 100
-```
-
-
-# Out of date
-
-## Utiles
-
-### Pour se connecter en sshfs:
-
-```
-sshfs sdarmon@pedago-ngs:/localdata/pandata/students/Projet_KS/DmGoth peda/
-```
-### Pour copier un fichier sur le serveur
-
-```
-scp -p ../../Bureau/genome_assemblies_genome_fasta.tar sdarmon@pedago-ngs:/localdata/pandata/students/Projet_KS/DmGoth/data/chien
-```
-### Pour modifier une colonne d'un fichier avec awk
-```
-awk '{split($6,a,"."); $6=a[1]; print $0}' /localdata/pandata/students/Projet_KS/DmGoth/stage-M2/scr/../../data/chien/Cfam_GSD_TE.gtf.gz
-```
-
-### Pour supp les premiers characteres:
-```
-awk '{print substr($0,4)}' Cfam_GSD_TE.gtf
-```
-## proto
+## Ancien Protocole utilisé pour la mise en place de la pipeline
 
 
 ### Etape 1: Téléchargement
@@ -139,7 +134,7 @@ Version moustique version non optimisée:
 python3 plot.py ../../data/outputGraphMoustiqueNonOpt.txt top10
 python3 plot.py ../../data/outputGraphMoustiqueNonOpt.txt dot
 ```
-Iench version:
+Version Chien:
 
 ```
 python3 plot.py ../../data/chien/outputGraphChien.txt top10
@@ -197,7 +192,7 @@ STAR --genomeDir ../results \
 --outReadsUnmapped Fastx
 ```
 
-iench:
+Chien:
 
 ```
 cd ../../data/chien
@@ -230,8 +225,8 @@ less ../../results/STAR/Log.final.out
 
 Version CLEAN
 ```
-bedtools intersect -wb -b ../results/moustique/STARClean/Aligned.sortedByCoord.out.bam -a AaegL5_TE_repeats.gff  > ../results/moustique/intersectionKissClean.txt
-bedtools intersect -wa -b ../results/moustique/STARClean/Aligned.sortedByCoord.out.bam -a AaegL5_TE_repeats.gff  > ../results/moustique/intersectionTEClean.txt
+bedtools intersect -wb -b ../../results/STAR/Aligned.sortedByCoord.out.bam -a ../../data/moustique/AaegL5_TE_repeats.gff  > ../../results/moustique/intersectionKissClean.txt
+bedtools intersect -wa -b ../../results/STAR/Aligned.sortedByCoord.out.bam -a ../../data/moustique/AaegL5_TE_repeats.gff  > ../../results/moustique/intersectionTEClean.txt
 cd ../stage-M2/scr/
 python3 suppDoublon.py ../../results/moustique/intersectionKissClean.txt ../../results/moustique/intersectionKissCleanNoDouble.txt -s 12
 python3 suppDoublon.py ../../results/moustique/intersectionTEClean.txt ../../results/moustique/intersectionTECleanNoDouble.txt -t 8
@@ -258,8 +253,8 @@ less ../../results/moustique/STAR/Log.final.out
 ### intersection Ref vs nonOpt:
 
 ```
-cd ../../results/moustique
-python3 ../../stage-M2/scr/interseq.py intersectionTEAllSeq.txt  intersectionTENonOptNoDouble.txt nonOpt
+  cd ../../results/moustique
+  python3 ../../stage-M2/scr/interseq.py intersectionTEAllSeq.txt  intersectionTENonOptNoDouble.txt nonOpt
 wc -l nonOptintersection.txt 
 wc -l nonOptseq1Remaning.txt 
 wc -l nonOptseq2Remaning.txt
@@ -317,10 +312,4 @@ python3 reads_to_align.py ../../data/chien/outputGraph.txt ../../data/outputClea
 g++ graph.cpp agglo.cpp -o agglo.exe
 ./agglo.exe ../../data/outputCleanChien.txt ../../../kissplice_results/kissplice_Chiens/graph_SRR15254976_1_SRR15254976_2_SRR15254978_1_SRR15254978_2_SRR15254980_1_SRR15254980_2_SRR15254982_1_SRR15254982_2_SRR15254985_1_SRR15254985_2_SRR15254986_1_SRR15254986_2_SRR15254989_1_SRR15254989_2_SRR1k41_C0.05.edges -c 25 ../../results/moustique/compChien
 
-```
-
-## Valgrind
-
-```
-  valgrind --leak-check=yes myprog arg1 arg2 
 ```
