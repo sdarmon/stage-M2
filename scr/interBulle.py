@@ -211,9 +211,11 @@ if len(Arg) in [5, 6, 7, 8, 9]:
                         text += bubbles + "\t" + type + "\t" + intersect_connu_upper + "\t" + intersect_connu_under
                         print(text)
             titre = ""  # On part pour la ligne suivante qui sera un titre
+    """
     for key,value in sequences.items():
         if key not in seq_vu:
             for bubble in value:
                 if bubble not in bubble_vu:
                     print("missing",bubble)
-        #print("missing", key)
+    
+    """
