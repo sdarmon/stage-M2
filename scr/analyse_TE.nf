@@ -56,10 +56,20 @@ human["abundance"] = "${workDir}/../../../kissplice_results/kissplice_human_fast
 human["edges"] = "${workDir}/../../../kissplice_results/kissplice_human_fastp/graph_fastp_SknshRACellRep1_10M_fastp_SknshRACellRep2_10M_fastp_SknshCellRep3_10M_fastp_SknshCellRep4_10M_k41_C0.05.edges"
 human["TE"] = "${workDir}/../../../fastq/Human/Human_TE.gtf"
 
+droso = ["name":"", "genome":"", "gtf":"", "nodes":"","abundance":"", "edges":"", "TE":""]
+droso["name"] = "droso"
+droso["genome"] = "~/Document/data/droso/genes.fasta"
+droso["gtf"] = "~/Document/data/droso/ref.gff"
+droso["nodes"] = "~/Document/data/droso/graph_ovarie_1_ovarie_2_k41.nodes"
+droso["abundance"] = "~/Document/data/droso/graph_ovarie_1_ovarie_2_k41.abundance"
+droso["edges"] = "~/Document/data/droso/graph_ovarie_1_ovarie_2_k41.edges"
+droso["TE"] = "~/Document/data/droso/TE.gtf"
+
+
 
 topVal = Channel.from("top10","top10")
 topAgglo = Channel.from("top1","top1")
-donnees = Channel.from(chienFastP) //moust,chien
+donnees = Channel.from(droso) //moust,chien,chienFastP
 // = Channel.from() //moust
 //intersecter = Channel.from()  //moust
 //agglo = Channel.from() //moust
