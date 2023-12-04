@@ -115,7 +115,7 @@ process calculpoids {
     nodes = spe.nodes
     edges = spe.edges
     """
-    g++ -g ${workDir}/graph.cpp ${workDir}/main.cpp -o ${workDir}/graph.exe
+    g++ -g ${workDir}/graph.cpp ${workDir}/gene_comp.cpp -o ${workDir}/graph.exe
     ${workDir}/graph.exe  ${nodes} ${edges} 10 -o ${workDir}/../../data/${name}/outputGraph${spe.name}.txt
     python3 ${workDir}/reads_to_align.py ${workDir}/../../data/${name}/outputGraph${spe.name}.txt ${workDir}/../../data/${name}/outputGraph${spe.name}Clean.txt 0 -clean
     """
