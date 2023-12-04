@@ -280,7 +280,7 @@ process intersectComp {
     """
 }
 
-
+/*
     """
         grep "SINEC2A1_CF" ${gtf} > ${workDir}/../../data/${name}/SINEC2A1_CF.gtf
         for i in {0..99..1}
@@ -400,5 +400,5 @@ done
     cat chrMT.fna >> ref_genome_Homo.fa
 
 """
-
+*/
 
