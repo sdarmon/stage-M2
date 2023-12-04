@@ -7,6 +7,7 @@ println "\tDébut de la Pipeline Nextflow\nA executer dans le dossier scr du ser
 if (params.path != null){
 workDir = params.path
 println "Path loaded\n"
+println workDir
 }
 
 
@@ -70,7 +71,6 @@ droso["TE"] = "~/Document/data/droso/TE.gtf"
 topVal = Channel.from("top10","top10")
 topAgglo = Channel.from("top1","top1")
 donnees = Channel.from(droso) //moust,chien,chienFastP
-// = Channel.from() //moust
 //intersecter = Channel.from()  //moust
 //agglo = Channel.from() //moust
 
