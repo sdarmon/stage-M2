@@ -276,7 +276,7 @@ process intersectComp {
                 -b ${workDir}/../../results/${name}/processing/STAR_alignment/Aligned.sortedByCoord.out.bam \
                 > ${workDir}/../../results/${name}/processing/intersectionTE$i.txt
         done
-        python3 ${workDir}rapportAgglo.py ${TE} ${workDir}/../../results/${name}/processing/intersectionTE $MAXI -target > ${workDir}/../../results/${name}/rapportHisto.txt
+        python3 ${workDir}rapportAgglo.py ${TE} ${workDir}/../../results/${name}/processing/intersectionTE \$MAXI -target > ${workDir}/../../results/${name}/rapportHisto.txt
     """
 }
 
