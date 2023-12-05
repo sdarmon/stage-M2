@@ -390,7 +390,7 @@ int main(int argc, char** argv) {
                     for (vector<Neighbor>::iterator voisin = G.Neighbors((*it))->begin();
                          voisin != G.Neighbors((*it))->end(); ++voisin) {
                         if (voisin->label[0] == 'F') {
-                            aVoir.push_back(&(*voisin));
+                            aVoir.push(&(*voisin));
                             depth.push_back(1);
                             labels.push(make_label(Vertices[(*it)].label,Vertices[voisin->val].label,voisin->label[0],voisin->label[1],kmer));
 
@@ -409,7 +409,7 @@ int main(int argc, char** argv) {
                     for (vector<Neighbor>::iterator voisin = G.Neighbors((*it))->begin();
                          voisin != G.Neighbors((*it))->end(); ++voisin) {
                         if (voisin->label[0] == 'R') {
-                            aVoir.push_back(&(*voisin));
+                            aVoir.push(&(*voisin));
                             depth.push_back(1);
                             labels.push(make_label(Vertices[(*it)].label,Vertices[voisin->val].label,voisin->label[0],voisin->label[1],kmer));
                         } else {
