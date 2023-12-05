@@ -365,7 +365,7 @@ void Graph::BFS_comp(vector<int> &seen,set<int> &vu, queue<Neighbor*> &aVoir, qu
 
 
 void Graph::BFS_comp_GraphDedupli(vector<int> &seen,set<int> &vu, queue<Neighbor*> &aVoir, queue<int> &depth, queue<string> &labels,
-                     vector<int> &sons, vector<int> &depthSons, vector<Neighbor*> &aretes, vector<string> & labelSons){
+                                  vector<int> &sons, vector<int> &depthSons, vector<Neighbor*> &aretes, vector<string> & labelSons){
     int pronf;
     string label;
     while (aVoir.size() != 0) { //Cas de terminaison, on a terminé le BFS

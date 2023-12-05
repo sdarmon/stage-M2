@@ -193,6 +193,7 @@ int main(int argc, char** argv) {
     int weight;
     int compt;
     vector<int> vu(G.N, 0);
+    set<int> setVu;
     vector < Neighbor * > aVoir;
 
     index = indexMax(G, vu_total);
@@ -211,13 +212,15 @@ int main(int argc, char** argv) {
         vector<int> compo;
         compo.clear();
         aVoir.clear();
+        setVu.clear();
         vu[index] = 1;
+        setVu.insert(index);
         for (vector<Neighbor>::iterator it = G.Neighbors(index)->begin(); it != G.Neighbors(index)->end(); ++it) {
             if (G.Vertices[it->val].weight >= threshold) {
                 aVoir.push_back(&(*it));
             }
         }
-        G.BFS_func(threshold, aVoir, vu);
+        G.BFS_func(threshold, aVoir, vu,setVu);
 
         //Puis on ajoute les sommets trouvés à la composante
         compt=0;
@@ -355,6 +358,14 @@ int main(int argc, char** argv) {
                 if (seen[(*it)] < 0) { //Cas sommet en périphérie
                     vector<int> sons;
                     sons.clear();
+                    vector<int> depthSons;
+                    depthSons.clear();
+                    vector<string> labelSons;
+                    labelSons.clear();
+                    vector<string> labels;
+                    labels.clear();
+                    vector<int> depth;
+                    depth.clear();
                     vector<Neighbor*> aretes;
                     aretes.clear();
                     vector<int> inF;
@@ -376,13 +387,16 @@ int main(int argc, char** argv) {
                          voisin != G.Neighbors((*it))->end(); ++voisin) {
                         if (voisin->label[0] == 'F') {
                             aVoir.push_back(&(*voisin));
+                            depth.push_back(1);
+                            labels.push(make_label(Vertices[it->val].label,Vertices[voisin->val].label,voisin->label[0],voisin->label[1],kmer));
+
                         } else {
                             pos= distance(inF.begin(), upper_bound(inF.begin(),inF.end(),voisin->val));
                             inF.insert(inF.begin()+pos,voisin->val);
                             nodeInF.insert(nodeInF.begin()+ pos,&(*voisin));
                         }
                     }
-                    G.BFS_comp(seen, vu, aVoir, sons, aretes);
+                    G.BFS_comp(seen, vu, aVoir, depth, labels, sons, depthSons, aretes, labelSons);
 
                     limiteAretes.push_back(aretes.size()); //On fait ça pour garder en mémoire le fait que ce ne sont
                     //pas les mêmes arêtes
@@ -392,13 +406,15 @@ int main(int argc, char** argv) {
                          voisin != G.Neighbors((*it))->end(); ++voisin) {
                         if (voisin->label[0] == 'R') {
                             aVoir.push_back(&(*voisin));
+                            depth.push_back(1);
+                            labels.push(make_label(Vertices[it->val].label,Vertices[voisin->val].label,voisin->label[0],voisin->label[1],kmer));
                         } else {
                             pos= distance(inR.begin(), upper_bound(inR.begin(),inR.end(),voisin->val));
                             inR.insert(inR.begin()+pos,voisin->val);
                             nodeInR.insert(nodeInR.begin()+ pos,&(*voisin));
                         }
                     }
-                    G.BFS_comp(seen, vu, aVoir, sons, aretes);
+                    G.BFS_comp(seen, vu, aVoir, depth, labels, sons, depthSons, aretes, labelSons);
 
                     neighborsPeri.push_back(sons);
                     neighborsAretes.push_back(aretes);
