@@ -378,7 +378,9 @@ int main(int argc, char** argv) {
                     vector<Neighbor*> nodeInR;
                     nodeInF.clear();
                     nodeInR.clear();
-                    aVoir.clear();
+                    while (!aVoir.empty()){
+                        aVoir.pop();
+                    }
                     vu.clear();
                     vu.insert((*it)); //On voit bien le sommet duquel on part
 
