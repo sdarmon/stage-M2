@@ -365,8 +365,7 @@ int main(int argc, char** argv) {
                     vector<string> labelSons;
                     labelSons.clear();
                     queue<string> labels;
-                    vector<int> depth;
-                    depth.clear();
+                    queue<int> depth;
                     vector<Neighbor*> aretes;
                     aretes.clear();
                     vector<int> inF;
@@ -390,7 +389,7 @@ int main(int argc, char** argv) {
                          voisin != G.Neighbors((*it))->end(); ++voisin) {
                         if (voisin->label[0] == 'F') {
                             aVoir.push(&(*voisin));
-                            depth.push_back(1);
+                            depth.push(1);
                             labels.push(make_label(G.Vertices[(*it)].label,G.Vertices[voisin->val].label,voisin->label[0],voisin->label[1],G.kmer));
 
                         } else {
@@ -409,7 +408,7 @@ int main(int argc, char** argv) {
                          voisin != G.Neighbors((*it))->end(); ++voisin) {
                         if (voisin->label[0] == 'R') {
                             aVoir.push(&(*voisin));
-                            depth.push_back(1);
+                            depth.push(1);
                             labels.push(make_label(G.Vertices[(*it)].label,G.Vertices[voisin->val].label,voisin->label[0],voisin->label[1],G.kmer));
                         } else {
                             pos= distance(inR.begin(), upper_bound(inR.begin(),inR.end(),voisin->val));
