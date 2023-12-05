@@ -308,6 +308,13 @@ string reverse_complement(string a){
     return aux;
 }
 
+int min(int a, int b){
+    if (a < b) {
+        return a;
+    }
+    return b;
+}
+
 string make_label(string &a, string &b, char sensA, char sensB, int kmer){ //Voir explication dans le cahier
     string aux;
     if( sensA == 'F' and sensB == 'F'){
