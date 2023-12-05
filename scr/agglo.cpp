@@ -391,7 +391,7 @@ int main(int argc, char** argv) {
                         if (voisin->label[0] == 'F') {
                             aVoir.push(&(*voisin));
                             depth.push_back(1);
-                            labels.push(make_label(G.Vertices[(*it)].label,G.Vertices[voisin->val].label,voisin->label[0],voisin->label[1],kmer));
+                            labels.push(make_label(G.Vertices[(*it)].label,G.Vertices[voisin->val].label,voisin->label[0],voisin->label[1],G.kmer));
 
                         } else {
                             pos= distance(inF.begin(), upper_bound(inF.begin(),inF.end(),voisin->val));
@@ -410,7 +410,7 @@ int main(int argc, char** argv) {
                         if (voisin->label[0] == 'R') {
                             aVoir.push(&(*voisin));
                             depth.push_back(1);
-                            labels.push(make_label(G.Vertices[(*it)].label,G.Vertices[voisin->val].label,voisin->label[0],voisin->label[1],kmer));
+                            labels.push(make_label(G.Vertices[(*it)].label,G.Vertices[voisin->val].label,voisin->label[0],voisin->label[1],G.kmer));
                         } else {
                             pos= distance(inR.begin(), upper_bound(inR.begin(),inR.end(),voisin->val));
                             inR.insert(inR.begin()+pos,voisin->val);
