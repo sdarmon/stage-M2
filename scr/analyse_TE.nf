@@ -254,7 +254,7 @@ process intersectComp {
 
     script:
     """
-        MAXI=\$(ls ${workDir}/../../results/${name}/processing/comp*.txt | wc -l)
+        MAXI=$(ls ${workDir}/../../results/${name}/processing/comp*.txt | wc -l)
         for ((i=0; i<$MAXI; i++))
         do
             python3 \
