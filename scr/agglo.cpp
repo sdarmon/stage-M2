@@ -217,7 +217,7 @@ int main(int argc, char** argv) {
         setVu.insert(index);
         for (vector<Neighbor>::iterator it = G.Neighbors(index)->begin(); it != G.Neighbors(index)->end(); ++it) {
             if (G.Vertices[it->val].weight >= threshold) {
-                aVoir.push_back(&(*it));
+                aVoir.push(&(*it));
             }
         }
         G.BFS_func(threshold, aVoir, vu,setVu);
