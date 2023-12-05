@@ -262,7 +262,7 @@ process intersectComp {
                 ${workDir}/../../results/${name}/processing/comp\$i.fq \
                 0
             mkdir -p ${workDir}/../../results/${name}/processing/STAR_alignment
-            STAR --genomeDir ${workDir}/../../results/moustique/genome \
+            STAR --genomeDir ${workDir}/../../results/${name}/genome \
                 --runMode alignReads \
                 --runThreadN 8 \
                 --readFilesIn ${workDir}/../../results/${name}/processing/comp\$i.fq  \
