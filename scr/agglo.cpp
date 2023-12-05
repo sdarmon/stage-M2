@@ -194,7 +194,7 @@ int main(int argc, char** argv) {
     int compt;
     vector<int> vu(G.N, 0);
     set<int> setVu;
-    vector < Neighbor * > aVoir;
+    queue < Neighbor * > aVoir;
 
     index = indexMax(G, vu_total);
     weight = G.Vertices[index].weight;
