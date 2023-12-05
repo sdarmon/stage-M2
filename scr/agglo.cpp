@@ -364,8 +364,7 @@ int main(int argc, char** argv) {
                     depthSons.clear();
                     vector<string> labelSons;
                     labelSons.clear();
-                    vector<string> labels;
-                    labels.clear();
+                    queue<string> labels;
                     vector<int> depth;
                     depth.clear();
                     vector<Neighbor*> aretes;
