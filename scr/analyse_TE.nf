@@ -70,9 +70,9 @@ droso["TE"] = "~/Document/data/droso/TE.gtf"
 
 topVal = Channel.from("top10","top10")
 topAgglo = Channel.from("top1","top1")
-donnees = Channel.from(droso) //moust,chien,chienFastP
-//intersecter = Channel.from()  //moust
-//agglo = Channel.from() //moust
+//donnees = Channel.from() //moust,chien,chienFastP
+intersecter = Channel.from(droso)  //moust
+//agglo = Channel.from(droso) //moust
 
 
 process creaCarte {
