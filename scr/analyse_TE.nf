@@ -70,14 +70,14 @@ droso["TE"] = "~/Document/data/droso/TE.gtf"
 
 topVal = Channel.from("top10","top10")
 topAgglo = Channel.from("top1","top1")
-donnees = Channel.from() //moust,chien,chienFastP
+//donnees = Channel.from() //moust,chien,chienFastP
 intersecter = Channel.from(droso)  //moust
 //agglo = Channel.from(droso) //moust
 
 
 process creaCarte {
     input:
-    val spe from donnees
+    //val spe from donnees
 
     output:
     val spe into STARDir
