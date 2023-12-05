@@ -211,7 +211,9 @@ int main(int argc, char** argv) {
         }
         vector<int> compo;
         compo.clear();
-        aVoir.clear();
+        while (!aVoir.empty()){
+            aVoir.pop();
+        }
         setVu.clear();
         vu[index] = 1;
         setVu.insert(index);
