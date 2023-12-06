@@ -26,6 +26,7 @@ elif Arg[2] == "dot":
     with open(Arg[1]) as f:
         for line in f:
             L = line.split('\t')
+            print(L[2][:-1], L[2])
             if len(line) < 2 or int(L[2][:-1]) < 0:
                 break
             y.append(int(L[2][:-1]))

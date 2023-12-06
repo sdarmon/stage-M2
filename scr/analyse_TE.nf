@@ -117,7 +117,8 @@ process calculpoids {
     """
     g++ -g ${workDir}/graph.cpp ${workDir}/ponderation.cpp -o ${workDir}/graph.exe
     ${workDir}/graph.exe  ${nodes} ${edges} 10 -k 41 -o ${workDir}/../../data/${name}/outputGraph${spe.name}.txt
-    python3 ${workDir}/reads_to_align.py ${workDir}/../../data/${name}/outputGraph${spe.name}.txt ${workDir}/../../data/${name}/outputGraph${spe.name}Clean.txt 0 -clean
+    python3 ${workDir}/reads_to_align.py ${workDir}/../../data/${name}/outputGraph${spe.name}.txt \
+    ${workDir}/../../data/${name}/outputGraph${spe.name}Clean.txt 0 -clean
     """
 }
 
