@@ -238,10 +238,10 @@ int main(int argc, char** argv) {
             components.push_back(compo); //Et on ajoute la composante au vecteur de composantes
             cout << "Composante trouvée de départ " << index << " et de poids " << G.Vertices[index].weight
                  << " et de taille " << compo.size() << endl;
+            m++;
         }
 
         //Finalement, on recommence la boucle while
-        m++;
         index = indexMax(G, vu_total);
         weight = G.Vertices[index].weight;
         vu_total[index] = 1;

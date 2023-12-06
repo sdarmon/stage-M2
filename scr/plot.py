@@ -75,7 +75,7 @@ elif Arg[2] == "his":
     with open(Arg[1]) as f:
         for line in f:
             if len(line) < 2:
-                break
+                continue
             poids = int(line.split("\t")[-1][:-1])
             m = max(poids,m)
             y.append(poids)
@@ -88,9 +88,9 @@ elif Arg[2] == "his":
     for i in range(10):
         Y[i] = 100 * Y[i] / len(y)
     plt.bar(X[1:],Y[1:], color='green')
-    plt.ylabel("Frequences (en %)")
+    plt.ylabel("Fréquences (en %)")
     plt.xlabel("Taille des poids")
-    plt.title("Histogramme des fréquences des différents poids par intervalle de 10% (premier intervalle non représenté")#fig.suptitle("Frequencies of the different sizes of weight (Case of " + Arg[0][:-4] + ")")
+    plt.title("Histogramme des fréquences des différents poids par intervalle de 10% (premier intervalle non représenté)")#fig.suptitle("Frequencies of the different sizes of weight (Case of " + Arg[0][:-4] + ")")
     #plt.title("Histogram of the frequencies of the different sizes of weight (Case radius = 200)")
     plt.show()
 
@@ -112,7 +112,7 @@ elif Arg[2] == "top1":
     M = 0
     for el in Y:
         M += el
-        if 10 * M >= 999:
+        if M >= 99:
             break
         size += 1
     print(size)
