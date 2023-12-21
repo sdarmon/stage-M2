@@ -275,7 +275,7 @@ process intersectComp {
                 --outReadsUnmapped Fastx
             bedtools intersect -wa -a ${TE} \
                 -b ${workDir}/../../results/${name}/processing/STAR_alignment/Aligned.sortedByCoord.out.bam \
-                > ${workDir}/../../results/${name}/processing/intersectionTE\$i.txt
+                - split > ${workDir}/../../results/${name}/processing/intersectionTE\$i.txt
         done
         python3 ${workDir}rapportAgglo.py ${TE} ${workDir}/../../results/${name}/processing/intersectionTE \$MAXI -target > ${workDir}/../../results/${name}/rapportHisto.txt
     """
@@ -401,5 +401,6 @@ done
     cat chrMT.fna >> ref_genome_Homo.fa
 
 """
+
 */
 

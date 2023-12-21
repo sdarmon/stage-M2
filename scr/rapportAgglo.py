@@ -19,7 +19,7 @@ if len(Arg) == 5:
         for line in f:
             if len(line) > 2 and line[0] != '#':
                 if Arg[4] == "-target":
-                    target = line.split("\t")[8].split(" ")[0]
+                    target = line.split("\t")[9]
                 else:
                     target = line.split("\t")[8].split(";")[0]
 
@@ -32,7 +32,7 @@ if len(Arg) == 5:
             for line in f:
                 if len(line) > 2:
                     if Arg[4] == "-target":
-                        target = line.split("\t")[8].split(" ")[0]
+                        target = line.split("\t")[9]
                     else:
                         target = line.split("\t")[8].split(";")[0]
                     if '(' in target and ')n' in target:

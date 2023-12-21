@@ -96,6 +96,14 @@ cat ../../results/moustique/graphComp14/id_new.txt | while read p; do grep "${p}
 Et on peut ensuite répéter le point précédent sur `new_bulles.fa` pour avoir ces chemins du bas.
 
 
+## Intersection et trie des alignements de TE avec les alignements des unitigs :
+ 
+```
+bedtools intersect -split -a ../../data/droso/TE.gtf -b ../../results/droso/STAR_alignment/Aligned.sortedByCoord.out.bam -wo > ../../results/droso/intersectionBloc.txt
+sort -k19 -n -r ../../results/droso/intersectionBloc.txt > ../../results/droso/intersectionSorted.txt```
+```
+
+
 ## En cas de soucis :
 
 Ne pas hésiter à m'envoyer un mail!
