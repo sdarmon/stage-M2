@@ -17,6 +17,7 @@ if len(Arg) == 5:
     dicTE = {}
     with open(Arg[1], 'r') as f:
         for line in f:
+            print(line, line.split("\t"))
             if len(line) > 2 and line[0] != '#':
                 if Arg[4] == "-target":
                     target = line.split("\t")[9]
