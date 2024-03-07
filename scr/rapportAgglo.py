@@ -50,8 +50,8 @@ if len(Arg) == 5:
             nb_found += 1
 
 
-    X = [i for i in nb_found] #range(int(Arg[3]))]
-    Y = [[0 for i in nb_found]] #range(int(Arg[3]))]]
+    X = [i for i in range(nb_found)] #range(int(Arg[3]))]
+    Y = [[0 for i in range(nb_found)]] #range(int(Arg[3]))]]
     for target,lst in dicTE.items():
         if not lst:
             continue
@@ -60,7 +60,7 @@ if len(Arg) == 5:
             true_comp = offset[comp]
             if len(Y) <= freq:
                 for i in range(freq - len(Y) + 1):
-                    Y.append([0 for j in  nb_found]) #range(int(Arg[3]))])
+                    Y.append([0 for j in range(nb_found)]) #range(int(Arg[3]))])
             Y[freq][true_comp] += 1
     Z = [[] for el in Y]
     for target,lst in dicTE.items():
