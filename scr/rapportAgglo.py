@@ -13,7 +13,7 @@ if len(Arg) not in [5]:
     print("Use : " + Arg[0] + " TE.gff prefixCompTe nbComponent [-chien/-target]")
     exit()
 if len(Arg) == 5:
-
+    set_comp_found = set()
     dicTE = {}
     with open(Arg[1], 'r') as f:
         for line in f:
@@ -39,23 +39,34 @@ if len(Arg) == 5:
                         continue
                     if dicTE[target] == [] or dicTE[target][-1] != i:
                         dicTE[target].append(i)
+                        set_comp_found.add(i)
 
-    X = [i for i in range(int(Arg[3]))]
-    Y = [[0 for i in range(int(Arg[3]))]]
+    #Compute the offset between none empty components
+    offset = [-1 for i in range(int(Arg[3]))]
+    nb_found = 0
+    for i in range(int(Arg[3])):
+        if i in set_comp_found:
+            offset[i] = nb_found
+            nb_found += 1
+
+
+    X = [i for i in nb_found] #range(int(Arg[3]))]
+    Y = [[0 for i in nb_found]] #range(int(Arg[3]))]]
     for target,lst in dicTE.items():
         if not lst:
             continue
         freq = len(lst)
         for comp in lst:
+            true_comp = offset[comp]
             if len(Y) <= freq:
                 for i in range(freq - len(Y) + 1):
-                    Y.append([0 for j in range(int(Arg[3]))])
-            Y[freq][comp] += 1
+                    Y.append([0 for j in  nb_found]) #range(int(Arg[3]))])
+            Y[freq][true_comp] += 1
     Z = [[] for el in Y]
     for target,lst in dicTE.items():
         Z[len(lst)].append(target)
     for i in range(1,len(Z)):
-        print("Found in "+str(i)+" componants :",Z[i])
+        print("Found in "+str(i)+" components :",Z[i])
     for i in range(1, len(Y)):
         plt.bar(X, Y[i], label=str(i), color=cm.hsv(i / len(Y)), bottom=np.sum(Y[0:i],axis=0))
     plt.title("Nombre de TE dans chaque composante (cas du chien)")
