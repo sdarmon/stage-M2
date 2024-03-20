@@ -136,6 +136,19 @@ int main(int argc, char** argv) {
                     E2.push_back(Edge(it->val,node,0,aretRF));
                 }
             }
+            if (vu[it->val] != 0) {
+                //Cas où le voisin a déjà été vu
+                E2.push_back(Edge(node,it->val,0,it->label));
+                if (it->label[0] == 'F' and it->label[1] == 'F' ){
+                    E2.push_back(Edge(it->val,node,0,aretRR));
+                } else if (it->label[0] == 'F' and it->label[1] == 'R' ){
+                    E2.push_back(Edge(it->val,node,0,aretFR));
+                } else if (it->label[0] == 'R' and it->label[1] == 'R' ){
+                    E2.push_back(Edge(it->val,node,0,aretFF));
+                } else if (it->label[0] == 'R' and it->label[1] == 'F' ){
+                    E2.push_back(Edge(it->val,node,0,aretRF));
+                }
+            }
         }
     }
 
