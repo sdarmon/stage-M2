@@ -121,7 +121,7 @@ int main(int argc, char** argv) {
         for (vector<Neighbor>::iterator it = G.Neighbors(node)->begin();
              it != G.Neighbors(node)->end(); ++it) {
             //On boucle sur ses voisins
-            if (vu[it->val] == 0 and p <= dis) {
+            if (vu[it->val] == 0 and p + 1 <= dis) {
                 //Cas où l'arrêt est bien valide et sommet non vu avant, ce voisin est rajouté dans la file des visites
                 nodes_id.push_back(it->val);
                 pronf.push_back(p + 1);
