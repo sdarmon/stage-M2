@@ -19,7 +19,7 @@ if len(Arg) not in [4]:
 
 cycle = 0
 w = int(Arg[3])
-if len(Arg) == 3:
+if len(Arg) == 4:
     with open(Arg[1], 'r') as f:
         with open(Arg[2], 'w') as f_out:
             for line in f:
