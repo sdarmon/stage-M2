@@ -10,6 +10,7 @@ def homomorphic_compression(read,w):
         next_w = read[i:i+w]
         if current_w != next_w:
             S += read[i+w-1]
+            current_w = next_w
     return S
 
 if len(Arg) not in [4]:
