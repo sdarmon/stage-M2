@@ -447,7 +447,7 @@ int Graph::BFSCount(vector<int> &rayons, int acc,vector<Neighbor*> &aVoir,vector
                 rayons.push_back(rayon + kmer - 1 - node->weight);
             }
         }
-        if (nb_neigh <= 2) {
+        if (nb_neigh == 2) {
             return BFSCount(rayons, acc, aVoir, vu); //Cas d'un chemin, on prend en compte le sommet
         } else {
             return BFSCount(rayons, acc + 1, aVoir, vu); //On traite les cas suivants, en prenant en compte le sommet
