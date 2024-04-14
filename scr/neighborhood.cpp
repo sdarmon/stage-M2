@@ -21,7 +21,7 @@ void save_comp(Graph &G, vector<int> &vu, string outputPrefix){
     output.open(outputPrefix+".nodes");
     for (int i = 0; i < G.N ; i++){
         if (vu[i]){
-            output << i << "\t" << G.Vertices[i].label << "\t" << ((vu[i] < 0) ? 0 : vu[i]) << endl;
+            output << i << "\t" << G.Vertices[i].label << "\t" << ((vu[i] < 0) ? 0 : vu[i]) << "\t" << ((vu[i] > 1) ? 0 : G.Vertices[i].weight) << endl;
         }
     }
     return;
