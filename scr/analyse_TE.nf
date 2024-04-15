@@ -404,12 +404,12 @@ done
 
 */
 # Get every name of the TE actual transcribed, to be editted for every name
-grep  "$2" ../../data/droso/actual_TE.fa > ../../data/droso/exp_$1_name.txt
+grep  "$2\\$" ../../data/droso/actual_TE.fa > ../../data/droso/exp_$1_name.txt
 grep "$2\\$"  ../../data/droso/FC30.table.tsv | awk {'print $4 "\t" $5'} | sort -k2 -nr > ../../data/droso/$1/sorted_count.txt
 
 #Making the directories
-mkdir ../../data/droso/$1
-mkdir ../../results/droso/$1
+mkdir -p ../../data/droso/$1
+mkdir -p ../../results/droso/$1
 
 #Extracting the gtf of the associated TEs
 sed 's/\$/\\$/g' ../../data/droso/exp_$1_name.txt > ../../data/droso/exp_$1_name_pattern.txt

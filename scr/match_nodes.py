@@ -4,7 +4,7 @@ import sys
 Arg = sys.argv[:]
 
 if len(Arg) not in [4]:
-    print("Use : " + Arg[0] + " allNodes.txt TeNodes.txt TeNodes_corrected.txt")
+    print("Use : " + Arg[0] + " allNodes.txt Te.fa TeNodes_corrected.txt")
     exit()
 
 
@@ -14,16 +14,23 @@ def rev_comp(seq):
     return ''.join([comp[el] for el in seq[::-1]])
 
 
-#Reading the TEnodes
-TeNodes = set()
+#Reading the TE.fa file and storing the 41-mers of the TEs
+Te = {}
+name = ''
 with open(Arg[2], 'r') as f:
     for line in f:
-        L = line.split('\t')
-        #dividing L[1] into its every 41-mers
-        for i in range(0, len(L[1])-41):
-            TeNodes.add(L[1][i:i+41])
-            TeNodes.add(rev_comp(L[1][i:i+41]))
+        if line[0] == '>':
+            name = line[1:-1]
+            Te[name] = ''
+        else:
+            Te[name] += line.strip()
 
+#Defining TEnodes as the set of 41-mers of the TEs
+TeNodes = set()
+for TE in Te.values():
+    for i in range(len(TE) - 41):
+        TeNodes.add(TE[i:i+41])
+        TeNodes.add(rev_comp(TE[i:i+41]))
 
 #Reading the allNodes.txt file and writing the corrected file
 with open(Arg[1], 'r') as f:
