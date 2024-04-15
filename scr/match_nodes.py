@@ -25,21 +25,22 @@ with open(Arg[2], 'r') as f:
         else:
             Te[name] += line.strip()
 
-#Defining TEnodes as the set of 41-mers of the TEs
-TeNodes = set()
-for TE in Te.values():
-    for i in range(len(TE) - 41):
-        TeNodes.add(TE[i:i+41])
-        TeNodes.add(rev_comp(TE[i:i+41]))
+
+#Define a function that checks if a sequence is a subsequence of a TE
+def is_subseq(seq, TE):
+    for i in range(len(TE) - len(seq) + 1):
+        if TE[i:i+len(seq)] == seq:
+            return True
+    return False
+
 
 #Reading the allNodes.txt file and writing the corrected file
 with open(Arg[1], 'r') as f:
     with open(Arg[3], 'w') as f_out:
         for line in f:
             L = line.split('\t')
-            kmers = [L[1][i:i+41] for i in range(0, len(L[1])-41)]
-            #Checking if the kmer is in the TEnodes
-            for kmer in kmers:
-                if kmer in TeNodes:
+            #Checking if the L[1] is in the TEnodes
+            for TE in Te:
+                if is_subseq(L[1], Te[TE]) or is_subseq(rev_comp(L[1]), Te[TE]):
                     f_out.write(line)
                     break
