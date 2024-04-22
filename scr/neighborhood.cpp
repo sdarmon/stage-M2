@@ -117,7 +117,10 @@ int main(int argc, char** argv) {
             continue;
         }
         vu[node] = p;
-
+        //Case where node is in comp but without any neighbors
+        if (p == 1 && G.Neighbors(node)->empty()){
+            E2.push_back(Edge(node,node,0,G.aretFF));
+        }
         for (vector<Neighbor>::iterator it = G.Neighbors(node)->begin();
              it != G.Neighbors(node)->end(); ++it) {
             //On boucle sur ses voisins
