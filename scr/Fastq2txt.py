@@ -12,7 +12,7 @@ with open(Arg[1], 'r') as f:
     with open(Arg[2], 'w') as f_out:
         for line in f:
             if line[0] == '@':
-                f_out.write(line[1:])
+                f_out.write(">"+line[1:])
                 #now getting the complet sequence before adding it to the output file
                 seq = ''
             elif line[0] == '+':
