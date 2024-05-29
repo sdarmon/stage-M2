@@ -35,7 +35,7 @@ for gene in genes:
 with open(Arg[2], 'w') as f:
     for gene in genes:
         for el in gene:
-            f.write(el)
+            f.write(el[0])
     for intron in introns:
         f.write(intron[0].split('\t')[0] + '\t' + intron[0].split('\t')[1] + '\tintron\t' + str(intron[1]) + '\t' + str(intron[2]) + '\t' + '\t'.join(intron[0].split('\t')[5:]))
 

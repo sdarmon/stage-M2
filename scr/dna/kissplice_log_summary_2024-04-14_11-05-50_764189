@@ -1,0 +1,10 @@
+This is KisSplice, version 2.6.2
+
+The command line was:       /usr/bin/kissplice -r ../../results/droso/pogo/reads.fa -c 0 -C 0 -o dna/
+Using the read files:      ../../results/droso/pogo/reads.fa
+Results will be stored in: /data/home/sdarmon/Document/stage-M2/scr/dna
+Summary log file will be saved in: /data/home/sdarmon/Document/stage-M2/scr/dna/kissplice_log_summary_2024-04-14_11-05-50_764189
+
+
+[11:05:50 14/04/2024] --> Building de Bruijn graph...
+Graph will be written in dna//graph_reads_k41.[edges/nodes]
