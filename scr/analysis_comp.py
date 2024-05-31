@@ -114,8 +114,6 @@ with open(Arg[2], 'r') as f:
             UTR.add(target)
         if "CDS" in line:
             CDS.add(target)
-        if "intron" in line:
-            intron.add(target)
         genes.add(target)
 
 #Reading the transposable elements from the TE.gtf file
@@ -125,12 +123,12 @@ with open(Arg[3], 'r') as f:
         target = line.split("\t")[8].split(" ")[1]
         transpo.add(target)
 
-#Function that computes the entropy of the 10-mers in the sequences
-def entropy(seqs):
-    count = [0 for _ in range(5**10)]
+#Function that computes the entropy of the n-mers in the sequences
+def entropy(seqs,n):
+    count = [0 for _ in range(5**n)]
     for seq in seqs:
-        for i in range(len(seq) - 9):
-            s = encode(seq[i:i+10])
+        for i in range(len(seq) - n + 1):
+            s = encode(seq[i:i+n])
             count[s] += 1
     total = sum(count)
     prob = [el/total for el in count]
@@ -151,17 +149,20 @@ with open(Arg[1], 'r') as f:
         total_length += len(line[:-1])
 m, seq_m, r = count_microsat(' '.join(seqs))
 
+#We define the introns as the sequences that are not in the UTR nor the CDS but still are in a gene
+intron = genes - UTR - CDS
+
 #writing the results in the output file
 with open(Arg[4], 'w') as f:
     f.write("Average number of poly(A) : " + str(total_poly/len(seqs)) + "\n")
-    f.write("Entropy of the 10-mers : " + str(entropy(seqs)) + "\n")
+    f.write("Entropy of the 6-mers : " + str(entropy(seqs,6)) + "\n")
     f.write("Ratio of CG : " + str(count_CG(' '.join(seqs))) + "\n")
     f.write("Ratio of microsatellites : " + str(r) + "\n")
     f.write("Most frequent microsatellite : " + seq_m + " with " + str(m) + " copies, covering " + str(m*len(seq_m)/total_length*100) + "% of the sequences\n")
-    f.write(str(len(genes)) + " Genes intersecting with the sequences : " + str(genes))
-    f.write(str(len(match_prot)) + " Genes intersecting with the sequences that match a protein : " + str(match_prot))
-    f.write(str(len(UTR)) + " Genes intersecting with the sequences that are in UTR : " + str(UTR))
-    f.write(str(len(CDS)) + " Genes intersecting with the sequences that are in CDS : " + str(CDS))
-    f.write(str(len(intron)) + " Genes intersecting with the sequences that are in intron : " + str(intron))
-    f.write(str(len(transpo)) + " Transposable elements intersecting with the sequences : " + str(transpo))
+    f.write(str(len(genes)) + " Genes intersecting with the sequences : " + str(genes) + "\n\n")
+    f.write(str(len(match_prot)) + " Genes intersecting with the sequences that match a protein : " + str(match_prot) + "\n\n")
+    f.write(str(len(UTR)) + " Genes intersecting with the sequences that are in UTR : " + str(UTR) + "\n\n")
+    f.write(str(len(CDS)) + " Genes intersecting with the sequences that are in CDS : " + str(CDS) + "\n\n")
+    f.write(str(len(intron)) + " Genes intersecting with the sequences that are in intron : " + str(intron) + "\n\n")
+    f.write(str(len(transpo)) + " Transposable elements intersecting with the sequences : " + str(transpo) + "\n\n")
 
