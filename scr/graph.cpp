@@ -496,6 +496,101 @@ void Graph::weighingANode(int source, int rayon) {
     Vertices[source].weight = mini;
 }
 
+//Definition de BFScatch permettant de récupérer les strings des sommets à distance le rayon du sommet source
+void Graph::BFScatch(vector<string> &kmers_at_distance_d,vector<Neighbor*> &aVoir,vector<int> &vu,vector<int> &rayons) {
+    if (aVoir.size() == 0) { //Cas de terminaison, on a terminé le BFS
+        return;
+    }
+    int rayonCourant = rayons.front();
+    rayons.erase(rayons.begin());
+    Neighbor* node = aVoir.front();
+    aVoir.erase(aVoir.begin());
+    vu.push_back(node->val);
+
+    if (rayonCourant == 0) {
+        if (find(vu.begin(),vu.end(),node->val) != vu.end()) { //Cas où le sommet a été vu par le BFS
+            if (node->label[1] == 'F') {
+                //On ajoute le 1er k-mer de node
+                kmers_at_distance_d.push_back(Vertices[node->val].label.substr(0,kmer));
+            } else {
+                //On ajoute le 1er k-mer du reverse complement de node
+                kmers_at_distance_d.push_back(reverse_complement(Vertices[node->val].label).substr(0,kmer));
+            }
+            return BFScatch(kmers_at_distance_d,aVoir,vu,rayons);
+        }
+    }
+
+    if (find(vu.begin(),vu.end(),node->val) != vu.end()) { //Cas où le sommet a été vu par le BFS
+        return BFScatch(kmers_at_distance_d,aVoir,vu,rayons);
+    }
+
+
+    for (vector<Neighbor>::iterator it = Neighbors(node->val)->begin(); it != Neighbors(node->val)->end(); ++it){
+        if (it->label[0] == node->label[1]){
+            aVoir.push_back(&(*it));
+            rayons.push_back(rayonCourant-1);
+        }
+    }
+    return BFScatch(kmers_at_distance_d,aVoir,vu,rayons);
+}
+
+//Definition de greedy_Hamming_cluster permettant de trouver le nombre de classes de sequences de kmers_at_distance_d
+//qui sont à distance d'Hamming d'au plus d nucléotides de l'une des autres séquences de la classe.
+int Graph::greedy_Hamming_cluster(vector<string> &kmers_at_distance_d, int d){
+    int taille = kmers_at_distance_d.size();
+    int nb_classes = 0;
+    vector<int> classes(taille,0);
+    for (int i = 0; i < taille; i++){
+        if (classes[i] == 0){
+            nb_classes++;
+            classes[i] = nb_classes;
+        }
+        for (int j = i+1; j < taille; j++){
+            if (classes[j] == 0){
+                int distance = 0;
+                for (int k = 0; k < kmers_at_distance_d[i].size(); k++){
+                    if (kmers_at_distance_d[i][k] != kmers_at_distance_d[j][k]){
+                        distance++;
+                    }
+                }
+                if (distance <= d){
+                    classes[j] = classes[i];
+                }
+            }
+        }
+    }
+    return nb_classes;
+}
+
+//Permet de donner un poids à un sommet, correspondant aux nombres de sommets à distance le rayon qui sont distants (distance de Hamming) de moins de d nucléotides.
+void Graph::weighingANodeHamming(int source, int rayon, int d){
+    vector<string> kmers_at_distance_d;
+    vector<Neighbor*> aVoir;
+    vector<int> vu;
+    vector<int> rayons;
+    int taille_hamming = 0;
+    //On rajoute dans Avoir les voisins du sommet source
+    vu.push_back(source);
+    for (vector<Neighbor>::iterator it = Neighbors(source)->begin(); it != Neighbors(source)->end(); ++it){
+        if (it->label[0] == 'F'){
+            aVoir.push_back(&(*it));
+            rayons.push_back(rayon-1);
+        } else {
+            aVoir.push_back(&(*it));
+            rayons.push_back(rayon-1);
+        }
+    }
+    //On récupère les strings des sommets à distance rayon du sommet source
+    BFScatch(kmers_at_distance_d,aVoir,vu,rayons);
+
+    //On calcule le nombre de classes de séquences de kmers_at_distance_d qui sont à distance d'Hamming d'au plus d nucléotides de l'une des autres séquences de la classe.
+    taille_hamming = greedy_Hamming_cluster(kmers_at_distance_d,d);
+
+    //On donne ce nombre de classes comme poids au sommet source
+    Vertices[source].weight = taille_hamming;
+}
+
+
 //Permet de donner un poids à un sommet, correspondant aux nombres de sommets présents dans un rayon donné.
 void Graph::weighingANodeGraphDuppli(int source, int rayon) {
     //Initialisation des files pour le bfs. Il serait plus judicieux ici d'utiliser un set<int> pour vu!!!!
@@ -517,7 +612,7 @@ void Graph::weighingANodeGraphDuppli(int source, int rayon) {
 //Permet de donner un poids à tous les sommets du graphe.
 void Graph::weighingAllNodes(int rayon) {
     for (vector<Node>::iterator it = Vertices.begin(); it != Vertices.end(); ++it){
-        weighingANode(it->val, rayon);
+        weighingANodeHamming(it->val, rayon);
     }
 }
 
