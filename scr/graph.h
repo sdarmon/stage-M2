@@ -119,9 +119,9 @@ class Graph
     void weighingAllNodes(int rayon);
     void weighingAllNodesGraphDuppli(int rayon);
     bool neigh(int u,int v,char s1,char s2);
-    void Graph::BFScatch(vector<string> &kmers_at_distance_d,vector<Neighbor*> &aVoir,vector<int> &vu,vector<int> &rayons);
-    int Graph::greedy_Hamming_cluster(vector<string> &kmers_at_distance_d, int d);
-    void Graph::weighingANodeHamming(int source, int rayon, int d);
+    void BFScatch(vector<string> &kmers_at_distance_d,vector<Neighbor*> &aVoir,vector<int> &vu,vector<int> &rayons);
+    int greedy_Hamming_cluster(vector<string> &kmers_at_distance_d, int d);
+    void weighingANodeHamming(int source, int rayon, int d);
     };
 
 
