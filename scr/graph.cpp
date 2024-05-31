@@ -505,10 +505,11 @@ void Graph::BFScatch(vector<string> &kmers_at_distance_d,vector<Neighbor*> &aVoi
     rayons.erase(rayons.begin());
     Neighbor* node = aVoir.front();
     aVoir.erase(aVoir.begin());
-    vu.push_back(node->val);
+
 
     if (rayonCourant == 0) {
         if (find(vu.begin(),vu.end(),node->val) != vu.end()) { //Cas où le sommet a été vu par le BFS
+            vu.push_back(node->val);
             if (node->label[1] == 'F') {
                 //On ajoute le 1er k-mer de node
                 kmers_at_distance_d.push_back(Vertices[node->val].label.substr(0,kmer));
@@ -523,7 +524,7 @@ void Graph::BFScatch(vector<string> &kmers_at_distance_d,vector<Neighbor*> &aVoi
     if (find(vu.begin(),vu.end(),node->val) != vu.end()) { //Cas où le sommet a été vu par le BFS
         return BFScatch(kmers_at_distance_d,aVoir,vu,rayons);
     }
-
+    vu.push_back(node->val);
 
     for (vector<Neighbor>::iterator it = Neighbors(node->val)->begin(); it != Neighbors(node->val)->end(); ++it){
         if (it->label[0] == node->label[1]){
