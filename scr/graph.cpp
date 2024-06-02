@@ -574,10 +574,11 @@ int Graph::greedy_Hamming_cluster(vector<string> &kmers_at_distance_d, int d){
 //Permet de donner un poids à un sommet, correspondant aux nombres de sommets à distance le rayon qui sont distants (distance de Hamming) de moins de d nucléotides.
 void Graph::weighingANodeHamming(int source, int rayon, int d){
     vector<string> kmers_at_distance_d;
+    kmers_at_distance_d.clear();
     vector<Neighbor*> aVoir;
     vector<int> vu;
     vector<int> rayons;
-    int taille_hamming = 0;
+    int taille_hamming;
     //On rajoute dans Avoir les voisins du sommet source
     vu.push_back(source);
     for (vector<Neighbor>::iterator it = Neighbors(source)->begin(); it != Neighbors(source)->end(); ++it){
@@ -589,7 +590,6 @@ void Graph::weighingANodeHamming(int source, int rayon, int d){
             rayons.push_back(rayon-1);
         }
     }
-    vu.push_back(source);
     //On récupère les strings des sommets à distance rayon du sommet source
     BFScatch(kmers_at_distance_d,aVoir,vu,rayons);
 
