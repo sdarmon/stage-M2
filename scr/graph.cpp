@@ -589,6 +589,7 @@ void Graph::weighingANodeHamming(int source, int rayon, int d){
             rayons.push_back(rayon-1);
         }
     }
+    vu.push_back(source);
     //On récupère les strings des sommets à distance rayon du sommet source
     BFScatch(kmers_at_distance_d,aVoir,vu,rayons);
 
