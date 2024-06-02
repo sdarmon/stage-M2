@@ -90,7 +90,7 @@ int main(int argc, char** argv) {
         }
         ids.close();
     } else {
-        nodes_id.push_back(atoi(argv[3]));
+        nodes_id.push_back(stoi(argv[3]));
     }
     ifstream edges(edgesPath, std::ios::binary);
     ifstream nodes(nodesPath, std::ios::binary);

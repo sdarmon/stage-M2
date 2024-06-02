@@ -525,11 +525,19 @@ void Graph::BFScatch(vector<string> &kmers_at_distance_d,vector<Neighbor*> &aVoi
         return BFScatch(kmers_at_distance_d,aVoir,vu,rayons);
     }
     vu.push_back(node->val);
-
-    for (vector<Neighbor>::iterator it = Neighbors(node->val)->begin(); it != Neighbors(node->val)->end(); ++it){
-        if (it->label[0] == node->label[1]){
-            aVoir.push_back(&(*it));
-            rayons.push_back(rayonCourant-1);
+    if (rayonCourant + kmer - 1 >= 0){
+        for (vector<Neighbor>::iterator it = Neighbors(node->val)->begin(); it != Neighbors(node->val)->end(); ++it){
+            if (it->label[0] == node->label[1]){
+                aVoir.push_back(&(*it));
+                rayons.push_back(rayonCourant + kmer - 1 - Vertices[node->val].label.size());
+            }
+        }
+    } else {
+        //On ajoute le k-mer de node
+        if (node->label[1] == 'F') {
+            kmers_at_distance_d.push_back(Vertices[node->val].label.substr(rayonCourant,kmer));
+        } else {
+            kmers_at_distance_d.push_back(reverse_complement(Vertices[node->val].label).substr(rayonCourant,kmer));
         }
     }
     return BFScatch(kmers_at_distance_d,aVoir,vu,rayons);
