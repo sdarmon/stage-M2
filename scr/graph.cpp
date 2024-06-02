@@ -525,7 +525,7 @@ void Graph::BFScatch(vector<string> &kmers_at_distance_d,vector<Neighbor*> &aVoi
         return BFScatch(kmers_at_distance_d,aVoir,vu,rayons);
     }
     vu.push_back(node->val);
-    if (rayonCourant + kmer - 1 >= 0){
+    if (rayonCourant + kmer - 1 >= Vertices[node->val].label.size()) {
         for (vector<Neighbor>::iterator it = Neighbors(node->val)->begin(); it != Neighbors(node->val)->end(); ++it){
             if (it->label[0] == node->label[1]){
                 aVoir.push_back(&(*it));
