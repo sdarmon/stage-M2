@@ -7,8 +7,8 @@ import sys
 
 Arg = sys.argv[:]
 
-if len(Arg) not in [3]:
-    print("Use : " + Arg[0] + " comp%i.txt seq_intersectionTE%i.txt")
+if len(Arg) not in [4]:
+    print("Use : " + Arg[0] + " comp%i.txt seq_intersectionTE%i.txt seq_intersectionRef%i.txt")
     exit()
 
 #Reading seq_intersectionTE%i.txt into a list
@@ -24,14 +24,42 @@ with open(Arg[2], 'r') as f:
         else:
             dic_index2TE[index].append(TE)
 
+#Reading intersectionRef%i.txt into a list to get the gene intersection with the comps
+dic_index2gene = {}
+
+with open(Arg[3], 'r') as f:
+    for line in f:
+        L = line.split('\t')
+        gene = L[8].split('"')[1]
+        index = int(L[12].split('_')[1])
+        if index not in dic_index2gene:
+            dic_index2gene[index] = [gene]
+        else:
+            dic_index2gene[index].append(gene)
+
 #Reading every line of comp%i.txt and adding the TE reference if the index of the line is in dic_index2TE
 #Writing the new line in a new file comp%i.txt
 i = 0
+all_representants = []
 with open(Arg[1], 'r') as f:
     with open(Arg[1][:-4] + "_TE.txt", 'w') as f_out:
         for line in f:
-            if i in dic_index2TE:
-                f_out.write(line[:-1] + "\t" + "; ".join(dic_index2TE[i]) + "\n")
+            representant = ";"
+            representant_index = -1
+            if i in dic_index2gene:
+                str_gene = "; ".join(dic_index2gene[i])
+                representant = dic_index2gene[i][0]
             else:
-                f_out.write(line[:-1] + "\t" + ";" + "\n")
+                str_gene = ";"
+            if i in dic_index2TE:
+                str_TE = "; ".join(dic_index2TE[i])
+                representant = dic_index2TE[i][0]
+            else :
+                str_TE = ";"
+            if representant not in all_representants:
+                all_representants.append(representant)
+            representant_index = all_representants.index(representant)
+
+            f_out.write(line[:-1] + "\t" + str_TE + "\t" + str_gene +  "\t" + representant_index + "\n")
+            
             i += 1

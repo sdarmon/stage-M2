@@ -578,7 +578,7 @@ void Graph::weighingANodeHamming(int source, int rayon, int d){
     vector<Neighbor*> aVoir;
     vector<int> vu;
     vector<int> rayons;
-    int taille_hamming;
+    int taille_hamming  ;
     //On rajoute dans Avoir les voisins du sommet source
     vu.push_back(source);
     for (vector<Neighbor>::iterator it = Neighbors(source)->begin(); it != Neighbors(source)->end(); ++it){
