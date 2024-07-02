@@ -7,8 +7,8 @@ from math import log
 
 Arg = sys.argv[:]
 
-if len(Arg) not in [5]:
-    print("Use : " + Arg[0] + " comp.fq intersection_gene.txt intersection_TE.txt output.txt")
+if len(Arg) not in [5,6]:
+    print("Use : " + Arg[0] + " comp.fq intersection_gene.txt intersection_TE.txt output.txt --debug")
     exit()
 
 
@@ -153,16 +153,24 @@ m, seq_m, r = count_microsat(' '.join(seqs))
 intron = genes - UTR - CDS
 
 #writing the results in the output file
-with open(Arg[4], 'w') as f:
-    f.write("Average number of poly(A) : " + str(total_poly/len(seqs)) + "\n")
-    f.write("Entropy of the 6-mers : " + str(entropy(seqs,6)) + "\n")
-    f.write("Ratio of CG : " + str(count_CG(' '.join(seqs))) + "\n")
-    f.write("Ratio of microsatellites : " + str(r) + "\n")
-    f.write("Most frequent microsatellite : " + seq_m + " with " + str(m) + " copies, covering " + str(m*len(seq_m)/total_length*100) + "% of the sequences\n")
-    f.write(str(len(genes)) + " Genes intersecting with the sequences : " + str(genes) + "\n\n")
-    f.write(str(len(match_prot)) + " Genes intersecting with the sequences that match a protein : " + str(match_prot) + "\n\n")
-    f.write(str(len(UTR)) + " Genes intersecting with the sequences that are in UTR : " + str(UTR) + "\n\n")
-    f.write(str(len(CDS)) + " Genes intersecting with the sequences that are in CDS : " + str(CDS) + "\n\n")
-    f.write(str(len(intron)) + " Genes intersecting with the sequences that are in intron : " + str(intron) + "\n\n")
-    f.write(str(len(transpo)) + " Transposable elements intersecting with the sequences : " + str(transpo) + "\n\n")
+if len(Arg) == 5:
+    with open(Arg[4], 'w') as f:
+        f.write("Average number of poly(A) : " + str(total_poly/len(seqs)) + "\n")
+        f.write("Entropy of the 6-mers : " + str(entropy(seqs,6)) + "\n")
+        f.write("Ratio of CG : " + str(count_CG(' '.join(seqs))) + "\n")
+        f.write("Ratio of microsatellites : " + str(r) + "\n")
+        f.write("Most frequent microsatellite : " + seq_m + " with " + str(m) + " copies, covering " + str(m*len(seq_m)/total_length*100) + "% of the sequences\n")
+        f.write(str(len(genes)) + " Genes intersecting with the sequences : " + str(genes) + "\n\n")
+        f.write(str(len(match_prot)) + " Genes intersecting with the sequences that match a protein : " + str(match_prot) + "\n\n")
+        f.write(str(len(UTR)) + " Genes intersecting with the sequences that are in UTR : " + str(UTR) + "\n\n")
+        f.write(str(len(CDS)) + " Genes intersecting with the sequences that are in CDS : " + str(CDS) + "\n\n")
+        f.write(str(len(intron)) + " Genes intersecting with the sequences that are in intron : " + str(intron) + "\n\n")
+        f.write(str(len(transpo)) + " Transposable elements intersecting with the sequences : " + str(transpo) + "\n\n")
+
+else:
+    with open(Arg[4], 'w') as f:
+        f.write(str(total_poly/len(seqs)) + "\t")
+        f.write(str(r) + "\t")
+        f.write(str(len(UTR)+len(CDS)) + "\t")
+        f.write(str(len(transpo)) + "\n")
 
