@@ -42,6 +42,7 @@ echo "\n\n\nComputing the associated subgraph"
 
 echo "\n\n\nCompute the origin of those nodes (TE insersion or reads)"
 grep "$2\\$"  ../../data/droso/FC30.table.tsv | awk  '$5 > 0 {print $4 "\t" $5}' | sort -k2 -nr > ../../data/droso/$1/sorted_count.txt
-python3 parent_TE.py ../../data/droso/$1/aplot.nodes ../../data/droso/exp_$1.fa ../../data/droso/$1/sorted_count.txt ../../data/droso/$1/aplot_enhanced.nodes
+python3 parent_TE.py ../../data/droso/$1/aplot.nodes ../../data/droso/exp_$1.fa ../../data/droso/$1/sorted_count.txt ../../data/droso/$1/aplot_enhanced.nodes ../../data/droso/$1/outputNodes.txt ../../data/droso/$1/graph_reads_k41.abundance  
+
 sort -n ../../data/droso/$1/aplot.edges | uniq > ../../data/droso/$1/aplot_uniq.edges
 

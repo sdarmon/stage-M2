@@ -7,8 +7,8 @@ from math import log
 
 Arg = sys.argv[:]
 
-if len(Arg) not in [5,6]:
-    print("Use : " + Arg[0] + " comp.fq intersection_gene.txt intersection_TE.txt output.txt --debug")
+if len(Arg) not in [5,6,7,8]:
+    print("Use : " + Arg[0] + " comp.fq intersection_gene.txt intersection_TE.txt output.txt [--o.s. sep] [--short]")
     exit()
 
 
@@ -105,9 +105,16 @@ match_prot = set()
 UTR = set()
 CDS = set()
 intron = set()
+
+if len(Arg) >= 7 :
+    sep = Arg[6]
+else:
+    sep = "split('\t')[8].split(' ')[1]"
+func = eval(f"lambda x: x.{sep}")
+
 with open(Arg[2], 'r') as f:
     for line in f:
-        target = line.split("\t")[8].split(" ")[1]
+        target = func(line)
         if "matches_ref_protein \"True\";" in line:
             match_prot.add(target)
         if "UTR" in line :
@@ -120,7 +127,7 @@ with open(Arg[2], 'r') as f:
 transpo = set()
 with open(Arg[3], 'r') as f:
     for line in f:
-        target = line.split("\t")[8].split(" ")[1]
+        target = func(line)
         transpo.add(target)
 
 #Function that computes the entropy of the n-mers in the sequences
@@ -153,7 +160,7 @@ m, seq_m, r = count_microsat(' '.join(seqs))
 intron = genes - UTR - CDS
 
 #writing the results in the output file
-if len(Arg) == 5:
+if len(Arg) == 5 or len(Arg) == 7:
     with open(Arg[4], 'w') as f:
         f.write("Average number of poly(A) : " + str(total_poly/len(seqs)) + "\n")
         f.write("Entropy of the 6-mers : " + str(entropy(seqs,6)) + "\n")

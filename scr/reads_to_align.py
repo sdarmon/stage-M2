@@ -83,7 +83,11 @@ if len(Arg) == 4:
             if len(line) < 2:
                 break
             L = line.split('\t')
-            if int(L[2][:-1]) > t:
+            if '\n' in L[2]:
+                th = L[2][:-1]
+            else:
+                th = L[2]
+            if int(th) > t:
                 seqs.append(L[1])
     with open(Arg[2], 'w') as f:
         compt = 0
