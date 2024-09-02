@@ -1,0 +1,1162 @@
+STAR version=STAR_2.6.1d
+STAR compilation time,server,dir=Fri Nov 16 17:04:12 EST 2018 florence.cshl.edu:/sonas-hs/gingeras/nlsas_norepl/user/dobin/STAR/STAR.master/source
+##### DEFAULT parameters:
+versionSTAR                       20201
+versionGenome                     20101   20200   
+parametersFiles                   -   
+sysShell                          -
+runMode                           alignReads
+runThreadN                        1
+runDirPerm                        User_RWX
+runRNGseed                        777
+genomeDir                         ./GenomeDir/
+genomeLoad                        NoSharedMemory
+genomeFastaFiles                  -   
+genomeChainFiles                  -   
+genomeSAindexNbases               14
+genomeChrBinNbits                 18
+genomeSAsparseD                   1
+genomeSuffixLengthMax             18446744073709551615
+genomeFileSizes                   0   
+genomeConsensusFile               -
+readFilesType                     Fastx   
+readFilesIn                       Read1   Read2   
+readFilesPrefix                   -
+readFilesCommand                  -   
+readMatesLengthsIn                NotEqual
+readMapNumber                     18446744073709551615
+readNameSeparator                 /   
+inputBAMfile                      -
+bamRemoveDuplicatesType           -
+bamRemoveDuplicatesMate2basesN    0
+limitGenomeGenerateRAM            31000000000
+limitIObufferSize                 150000000
+limitOutSAMoneReadBytes           100000
+limitOutSJcollapsed               1000000
+limitOutSJoneRead                 1000
+limitBAMsortRAM                   0
+limitSjdbInsertNsj                1000000
+outTmpDir                         -
+outTmpKeep                        None
+outStd                            Log
+outReadsUnmapped                  None
+outQSconversionAdd                0
+outMultimapperOrder               Old_2.4
+outSAMtype                        SAM   
+outSAMmode                        Full
+outSAMstrandField                 None
+outSAMattributes                  Standard   
+outSAMunmapped                    None   
+outSAMorder                       Paired
+outSAMprimaryFlag                 OneBestScore
+outSAMreadID                      Standard
+outSAMmapqUnique                  255
+outSAMflagOR                      0
+outSAMflagAND                     65535
+outSAMattrRGline                  -   
+outSAMheaderHD                    -   
+outSAMheaderPG                    -   
+outSAMheaderCommentFile           -
+outBAMcompression                 1
+outBAMsortingThreadN              0
+outBAMsortingBinsN                50
+outSAMfilter                      None   
+outSAMmultNmax                    18446744073709551615
+outSAMattrIHstart                 1
+outSAMtlen                        1
+outSJfilterReads                  All
+outSJfilterCountUniqueMin         3   1   1   1   
+outSJfilterCountTotalMin          3   1   1   1   
+outSJfilterOverhangMin            30   12   12   12   
+outSJfilterDistToOtherSJmin       10   0   5   10   
+outSJfilterIntronMaxVsReadN       50000   100000   200000   
+outWigType                        None   
+outWigStrand                      Stranded   
+outWigReferencesPrefix            -
+outWigNorm                        RPM   
+outFilterType                     Normal
+outFilterMultimapNmax             10
+outFilterMultimapScoreRange       1
+outFilterScoreMin                 0
+outFilterScoreMinOverLread        0.66
+outFilterMatchNmin                0
+outFilterMatchNminOverLread       0.66
+outFilterMismatchNmax             10
+outFilterMismatchNoverLmax        0.3
+outFilterMismatchNoverReadLmax    1
+outFilterIntronMotifs             None
+outFilterIntronStrands            RemoveInconsistentStrands
+clip5pNbases                      0   
+clip3pNbases                      0   
+clip3pAfterAdapterNbases          0   
+clip3pAdapterSeq                  -   
+clip3pAdapterMMp                  0.1   
+winBinNbits                       16
+winAnchorDistNbins                9
+winFlankNbins                     4
+winAnchorMultimapNmax             50
+winReadCoverageRelativeMin        0.5
+winReadCoverageBasesMin           0
+scoreGap                          0
+scoreGapNoncan                    -8
+scoreGapGCAG                      -4
+scoreGapATAC                      -8
+scoreStitchSJshift                1
+scoreGenomicLengthLog2scale       -0.25
+scoreDelBase                      -2
+scoreDelOpen                      -2
+scoreInsOpen                      -2
+scoreInsBase                      -2
+seedSearchLmax                    0
+seedSearchStartLmax               50
+seedSearchStartLmaxOverLread      1
+seedPerReadNmax                   1000
+seedPerWindowNmax                 50
+seedNoneLociPerWindow             10
+seedMultimapNmax                  10000
+seedSplitMin                      12
+alignIntronMin                    21
+alignIntronMax                    0
+alignMatesGapMax                  0
+alignTranscriptsPerReadNmax       10000
+alignSJoverhangMin                5
+alignSJDBoverhangMin              3
+alignSJstitchMismatchNmax         0   -1   0   0   
+alignSplicedMateMapLmin           0
+alignSplicedMateMapLminOverLmate    0.66
+alignWindowsPerReadNmax           10000
+alignTranscriptsPerWindowNmax     100
+alignEndsType                     Local
+alignSoftClipAtReferenceEnds      Yes
+alignEndsProtrude                 0   ConcordantPair   
+alignInsertionFlush               None
+peOverlapNbasesMin                0
+peOverlapMMp                      0.01
+chimSegmentMin                    0
+chimScoreMin                      0
+chimScoreDropMax                  20
+chimScoreSeparation               10
+chimScoreJunctionNonGTAG          -1
+chimMainSegmentMultNmax           10
+chimJunctionOverhangMin           20
+chimOutType                       Junctions   
+chimFilter                        banGenomicN   
+chimSegmentReadGapMax             0
+chimMultimapNmax                  0
+chimMultimapScoreRange            1
+chimNonchimScoreDropMin           20
+chimOutJunctionFormat             0   
+sjdbFileChrStartEnd               -   
+sjdbGTFfile                       -
+sjdbGTFchrPrefix                  -
+sjdbGTFfeatureExon                exon
+sjdbGTFtagExonParentTranscript    transcript_id
+sjdbGTFtagExonParentGene          gene_id
+sjdbOverhang                      100
+sjdbScore                         2
+sjdbInsertSave                    Basic
+varVCFfile                        -
+waspOutputMode                    None
+quantMode                         -   
+quantTranscriptomeBAMcompression    1
+quantTranscriptomeBan             IndelSoftclipSingleend
+twopass1readsN                    18446744073709551615
+twopassMode                       None
+##### Command Line:
+STARlong --genomeDir ../../results/dog/te_ref/ --runMode alignReads --runThreadN 8 --readFilesIn dog_sineCA2_n.unitigs --outFileNamePrefix STAR_alignment_cons_dog_sineCA2/ --outSAMtype BAM SortedByCoordinate --outSAMunmapped Within --outSAMattributes Standard --outFilterMultimapNmax 10000 --outReadsUnmapped Fastx
+##### Initial USER parameters from Command Line:
+outFileNamePrefix                 STAR_alignment_cons_dog_sineCA2/
+###### All USER parameters from Command Line:
+genomeDir                     ../../results/dog/te_ref/     ~RE-DEFINED
+runMode                       alignReads     ~RE-DEFINED
+runThreadN                    8     ~RE-DEFINED
+readFilesIn                   dog_sineCA2_n.unitigs        ~RE-DEFINED
+outFileNamePrefix             STAR_alignment_cons_dog_sineCA2/     ~RE-DEFINED
+outSAMtype                    BAM   SortedByCoordinate        ~RE-DEFINED
+outSAMunmapped                Within        ~RE-DEFINED
+outSAMattributes              Standard        ~RE-DEFINED
+outFilterMultimapNmax         10000     ~RE-DEFINED
+outReadsUnmapped              Fastx     ~RE-DEFINED
+##### Finished reading parameters from all sources
+
+##### Final user re-defined parameters-----------------:
+runMode                           alignReads
+runThreadN                        8
+genomeDir                         ../../results/dog/te_ref/
+readFilesIn                       dog_sineCA2_n.unitigs   
+outFileNamePrefix                 STAR_alignment_cons_dog_sineCA2/
+outReadsUnmapped                  Fastx
+outSAMtype                        BAM   SortedByCoordinate   
+outSAMattributes                  Standard   
+outSAMunmapped                    Within   
+outFilterMultimapNmax             10000
+
+-------------------------------
+##### Final effective command line:
+STARlong   --runMode alignReads   --runThreadN 8   --genomeDir ../../results/dog/te_ref/   --readFilesIn dog_sineCA2_n.unitigs      --outFileNamePrefix STAR_alignment_cons_dog_sineCA2/   --outReadsUnmapped Fastx   --outSAMtype BAM   SortedByCoordinate      --outSAMattributes Standard      --outSAMunmapped Within      --outFilterMultimapNmax 10000
+
+##### Final parameters after user input--------------------------------:
+versionSTAR                       20201
+versionGenome                     20101   20200   
+parametersFiles                   -   
+sysShell                          -
+runMode                           alignReads
+runThreadN                        8
+runDirPerm                        User_RWX
+runRNGseed                        777
+genomeDir                         ../../results/dog/te_ref/
+genomeLoad                        NoSharedMemory
+genomeFastaFiles                  -   
+genomeChainFiles                  -   
+genomeSAindexNbases               14
+genomeChrBinNbits                 18
+genomeSAsparseD                   1
+genomeSuffixLengthMax             18446744073709551615
+genomeFileSizes                   0   
+genomeConsensusFile               -
+readFilesType                     Fastx   
+readFilesIn                       dog_sineCA2_n.unitigs   
+readFilesPrefix                   -
+readFilesCommand                  -   
+readMatesLengthsIn                NotEqual
+readMapNumber                     18446744073709551615
+readNameSeparator                 /   
+inputBAMfile                      -
+bamRemoveDuplicatesType           -
+bamRemoveDuplicatesMate2basesN    0
+limitGenomeGenerateRAM            31000000000
+limitIObufferSize                 150000000
+limitOutSAMoneReadBytes           100000
+limitOutSJcollapsed               1000000
+limitOutSJoneRead                 1000
+limitBAMsortRAM                   0
+limitSjdbInsertNsj                1000000
+outFileNamePrefix                 STAR_alignment_cons_dog_sineCA2/
+outTmpDir                         -
+outTmpKeep                        None
+outStd                            Log
+outReadsUnmapped                  Fastx
+outQSconversionAdd                0
+outMultimapperOrder               Old_2.4
+outSAMtype                        BAM   SortedByCoordinate   
+outSAMmode                        Full
+outSAMstrandField                 None
+outSAMattributes                  Standard   
+outSAMunmapped                    Within   
+outSAMorder                       Paired
+outSAMprimaryFlag                 OneBestScore
+outSAMreadID                      Standard
+outSAMmapqUnique                  255
+outSAMflagOR                      0
+outSAMflagAND                     65535
+outSAMattrRGline                  -   
+outSAMheaderHD                    -   
+outSAMheaderPG                    -   
+outSAMheaderCommentFile           -
+outBAMcompression                 1
+outBAMsortingThreadN              0
+outBAMsortingBinsN                50
+outSAMfilter                      None   
+outSAMmultNmax                    18446744073709551615
+outSAMattrIHstart                 1
+outSAMtlen                        1
+outSJfilterReads                  All
+outSJfilterCountUniqueMin         3   1   1   1   
+outSJfilterCountTotalMin          3   1   1   1   
+outSJfilterOverhangMin            30   12   12   12   
+outSJfilterDistToOtherSJmin       10   0   5   10   
+outSJfilterIntronMaxVsReadN       50000   100000   200000   
+outWigType                        None   
+outWigStrand                      Stranded   
+outWigReferencesPrefix            -
+outWigNorm                        RPM   
+outFilterType                     Normal
+outFilterMultimapNmax             10000
+outFilterMultimapScoreRange       1
+outFilterScoreMin                 0
+outFilterScoreMinOverLread        0.66
+outFilterMatchNmin                0
+outFilterMatchNminOverLread       0.66
+outFilterMismatchNmax             10
+outFilterMismatchNoverLmax        0.3
+outFilterMismatchNoverReadLmax    1
+outFilterIntronMotifs             None
+outFilterIntronStrands            RemoveInconsistentStrands
+clip5pNbases                      0   
+clip3pNbases                      0   
+clip3pAfterAdapterNbases          0   
+clip3pAdapterSeq                  -   
+clip3pAdapterMMp                  0.1   
+winBinNbits                       16
+winAnchorDistNbins                9
+winFlankNbins                     4
+winAnchorMultimapNmax             50
+winReadCoverageRelativeMin        0.5
+winReadCoverageBasesMin           0
+scoreGap                          0
+scoreGapNoncan                    -8
+scoreGapGCAG                      -4
+scoreGapATAC                      -8
+scoreStitchSJshift                1
+scoreGenomicLengthLog2scale       -0.25
+scoreDelBase                      -2
+scoreDelOpen                      -2
+scoreInsOpen                      -2
+scoreInsBase                      -2
+seedSearchLmax                    0
+seedSearchStartLmax               50
+seedSearchStartLmaxOverLread      1
+seedPerReadNmax                   1000
+seedPerWindowNmax                 50
+seedNoneLociPerWindow             10
+seedMultimapNmax                  10000
+seedSplitMin                      12
+alignIntronMin                    21
+alignIntronMax                    0
+alignMatesGapMax                  0
+alignTranscriptsPerReadNmax       10000
+alignSJoverhangMin                5
+alignSJDBoverhangMin              3
+alignSJstitchMismatchNmax         0   -1   0   0   
+alignSplicedMateMapLmin           0
+alignSplicedMateMapLminOverLmate    0.66
+alignWindowsPerReadNmax           10000
+alignTranscriptsPerWindowNmax     100
+alignEndsType                     Local
+alignSoftClipAtReferenceEnds      Yes
+alignEndsProtrude                 0   ConcordantPair   
+alignInsertionFlush               None
+peOverlapNbasesMin                0
+peOverlapMMp                      0.01
+chimSegmentMin                    0
+chimScoreMin                      0
+chimScoreDropMax                  20
+chimScoreSeparation               10
+chimScoreJunctionNonGTAG          -1
+chimMainSegmentMultNmax           10
+chimJunctionOverhangMin           20
+chimOutType                       Junctions   
+chimFilter                        banGenomicN   
+chimSegmentReadGapMax             0
+chimMultimapNmax                  0
+chimMultimapScoreRange            1
+chimNonchimScoreDropMin           20
+chimOutJunctionFormat             0   
+sjdbFileChrStartEnd               -   
+sjdbGTFfile                       -
+sjdbGTFchrPrefix                  -
+sjdbGTFfeatureExon                exon
+sjdbGTFtagExonParentTranscript    transcript_id
+sjdbGTFtagExonParentGene          gene_id
+sjdbOverhang                      100
+sjdbScore                         2
+sjdbInsertSave                    Basic
+varVCFfile                        -
+waspOutputMode                    None
+quantMode                         -   
+quantTranscriptomeBAMcompression    1
+quantTranscriptomeBan             IndelSoftclipSingleend
+twopass1readsN                    18446744073709551615
+twopassMode                       None
+----------------------------------------
+
+WARNING: --limitBAMsortRAM=0, will use genome size as RAM limit for BAM sorting
+Finished loading and checking parameters
+Reading genome generation parameters:
+### STAR   --runMode genomeGenerate   --runThreadN 8   --genomeDir ../../results/dog/te_ref   --genomeFastaFiles ../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa      --genomeSAindexNbases 13   --genomeChrBinNbits 16   --genomeSAsparseD 4
+### GstrandBit=32
+versionGenome                 20201        ~RE-DEFINED
+genomeFastaFiles              ../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa        ~RE-DEFINED
+genomeSAindexNbases           13     ~RE-DEFINED
+genomeChrBinNbits             16     ~RE-DEFINED
+genomeSAsparseD               4     ~RE-DEFINED
+sjdbOverhang                  0     ~RE-DEFINED
+sjdbFileChrStartEnd           -        ~RE-DEFINED
+sjdbGTFfile                   -     ~RE-DEFINED
+sjdbGTFchrPrefix              -     ~RE-DEFINED
+sjdbGTFfeatureExon            exon     ~RE-DEFINED
+sjdbGTFtagExonParentTranscripttranscript_id     ~RE-DEFINED
+sjdbGTFtagExonParentGene      gene_id     ~RE-DEFINED
+sjdbInsertSave                Basic     ~RE-DEFINED
+genomeFileSizes               44498944   1084342        ~RE-DEFINED
+Genome version is compatible with current STAR version
+Number of real (reference) chromosomes= 679
+1	>ALINE	617	0
+2	BLACKJACK	2969	65536
+3	Bsp	741	131072
+4	CAN	175	196608
+5	CarERV2	7612	262144
+6	CarERV2a1_LTR	546	327680
+7	CarERV2a_LTR	584	393216
+8	CarERV2b1_LTR	409	458752
+9	CarERV2b2_LTR	434	524288
+10	CarERV2c1_LTR	666	589824
+11	CarERV2c2_LTR	653	655360
+12	CarERV2c3_LTR	618	720896
+13	CarERV2d1_LTR	724	786432
+14	CarERV2d2_LTR	726	851968
+15	CarERV3_LTR	415	917504
+16	CarERV4a1_LTR	457	983040
+17	CarERV4a2_LTR	396	1048576
+18	CarERV4a_LTR	456	1114112
+19	CarERV4b_LTR	462	1179648
+20	CarERV4c_CF	443	1245184
+21	CarERVR1_LTR	434	1310720
+22	CarLTR1-int	6615	1376256
+23	CarLTR10_LTR	461	1441792
+24	CarLTR11a_LTR	662	1507328
+25	CarLTR11b_LTR	552	1572864
+26	CarLTR1A1A_LTR	407	1638400
+27	CarLTR1A1B_LTR	416	1703936
+28	CarLTR1A1C_LTR	414	1769472
+29	CarLTR1A2A_LTR	432	1835008
+30	CarLTR1A2B_LTR	416	1900544
+31	CarLTR1A3_LTR	418	1966080
+32	CarLTR1B1_LTR	579	2031616
+33	CarLTR1B2_LTR	546	2097152
+34	CarLTR2_LTR	578	2162688
+35	CarLTR3	670	2228224
+36	CarLTR4_LTR	439	2293760
+37	CarLTR5_LTR	472	2359296
+38	CarLTR6b	600	2424832
+39	CarLTR6c	544	2490368
+40	CarLTR7	483	2555904
+41	CarLTR8b	397	2621440
+42	CarLTR9_LTR	563	2686976
+43	CarSat1	500	2752512
+44	Carsat2	456	2818048
+45	Carsat3	168	2883584
+46	CfERV1	5919	2949120
+47	CfERV1a_LTR	507	3014656
+48	CfERV1b_LTR	437	3080192
+49	CfERV1c_LTR	376	3145728
+50	CfERV1z_LTR	459	3211264
+51	CfERVF1	5896	3276800
+52	CfERVF1_LTR	457	3342336
+53	CfERVF2	7205	3407872
+54	CfERVF2B_LTR	456	3473408
+55	CfERVF2_LTR	459	3538944
+56	CHARLIE1	2761	3604480
+57	Charlie11	2196	3670016
+58	Charlie13a	1514	3735552
+59	Charlie13b	512	3801088
+60	Charlie15a	224	3866624
+61	Charlie16a	342	3932160
+62	Charlie17a	219	3997696
+63	Charlie18a	342	4063232
+64	Charlie19a	386	4128768
+65	CHARLIE1A	1450	4194304
+66	CHARLIE1B	518	4259840
+67	CHARLIE2	2760	4325376
+68	Charlie21a	1213	4390912
+69	Charlie22a	491	4456448
+70	Charlie24	2450	4521984
+71	Charlie25	2524	4587520
+72	Charlie26a	325	4653056
+73	Charlie27	1237	4718592
+74	Charlie28	948	4784128
+75	CHARLIE4	1961	4849664
+76	CHARLIE8A	341	4915200
+77	CR1L	261	4980736
+78	CR1_Mam	2204	5046272
+79	DeuSINE	347	5111808
+80	DNA1_Mam	407	5177344
+81	ERVL-B4	5714	5242880
+82	ERVL-E	5667	5308416
+83	Eulor1	357	5373952
+84	Eulor10	277	5439488
+85	Eulor11	375	5505024
+86	Eulor12	184	5570560
+87	Eulor12B_CM	128	5636096
+88	Eulor12_CM	168	5701632
+89	Eulor2A	214	5767168
+90	Eulor2B	273	5832704
+91	Eulor2C	169	5898240
+92	Eulor3	306	5963776
+93	Eulor4	424	6029312
+94	Eulor5A	316	6094848
+95	Eulor5B	192	6160384
+96	Eulor6A	248	6225920
+97	Eulor6B	350	6291456
+98	Eulor6C	208	6356992
+99	Eulor6D	302	6422528
+100	Eulor6E	292	6488064
+101	Eulor7	197	6553600
+102	Eulor8	562	6619136
+103	Eulor9A	301	6684672
+104	Eulor9B	240	6750208
+105	Eulor9C	270	6815744
+106	EuthAT-1	898	6881280
+107	EuthAT-2	1956	6946816
+108	EuthAT-2B	930	7012352
+109	EuthAT-N1	316	7077888
+110	Eutr1	201	7143424
+111	Eutr10	753	7208960
+112	Eutr11	559	7274496
+113	Eutr12	180	7340032
+114	Eutr13	184	7405568
+115	Eutr14	223	7471104
+116	Eutr15	267	7536640
+117	Eutr16	550	7602176
+118	Eutr17	343	7667712
+119	Eutr18	153	7733248
+120	Eutr2	364	7798784
+121	Eutr3	237	7864320
+122	Eutr4	548	7929856
+123	Eutr5	343	7995392
+124	Eutr6	366	8060928
+125	Eutr7	277	8126464
+126	Eutr8	255	8192000
+127	Eutr9	79	8257536
+128	EUTREP1	760	8323072
+129	EUTREP10	708	8388608
+130	EUTREP11	408	8454144
+131	EUTREP12	269	8519680
+132	EUTREP13	646	8585216
+133	EUTREP14	262	8650752
+134	EUTREP15	373	8716288
+135	EUTREP16	139	8781824
+136	EUTREP2	267	8847360
+137	EUTREP3	807	8912896
+138	EUTREP4	126	8978432
+139	EUTREP5	197	9043968
+140	EUTREP6	152	9109504
+141	EUTREP7	383	9175040
+142	EUTREP8	175	9240576
+143	EutTc1-N1	492	9306112
+144	GOLEM	3029	9371648
+145	GOLEM_B	1205	9437184
+146	HAL1	2510	9502720
+147	HAL1M8	2991	9568256
+148	Helitron1Nb_Mam	1116	9633792
+149	Helitron3Na_Mam	486	9699328
+150	HERVFH21I	6529	9764864
+151	HERVH	7713	9830400
+152	HERVK22I	6823	9895936
+153	HERVKC4	5262	9961472
+154	HERVL66I	4329	10027008
+155	HERVL68	3037	10092544
+156	HERVS71	8909	10158080
+157	Kanga1	1745	10223616
+158	Kanga11a	970	10289152
+159	Kanga1d	609	10354688
+160	L1-Y_CF	6298	10420224
+161	L1M1_5	3834	10485760
+162	L1M3A_5	2728	10551296
+163	L1M3DE_5	2137	10616832
+164	L1M3D_5	1375	10682368
+165	L1M6_5end	2515	10747904
+166	L1M7_5end	2237	10813440
+167	L1MA10	1069	10878976
+168	L1MA9_5	2113	10944512
+169	L1MB4_5	1795	11010048
+170	L1MB6_5	1711	11075584
+171	L1MB7	922	11141120
+172	L1MC3	2487	11206656
+173	L1MC4B	1522	11272192
+174	L1MC4_5end	2555	11337728
+175	L1MC5	2174	11403264
+176	L1MD1_5	1010	11468800
+177	L1MDA_5	3320	11534336
+178	L1ME3C_3end	870	11599872
+179	L1ME3D_3end	989	11665408
+180	L1ME3E_3end	989	11730944
+181	L1ME3F_3end	990	11796480
+182	L1ME4	596	11862016
+183	L1ME5	507	11927552
+184	L1ME5_3end	941	11993088
+185	L1MEC_5	2527	12058624
+186	L1MEe_5end	1164	12124160
+187	L1MEf_5end	2217	12189696
+188	L1MEg_5end	2101	12255232
+189	L1P_MA2	7678	12320768
+190	L1_Canid2_5end	2817	12386304
+191	L1_Canid_5end	2494	12451840
+192	L1_Carn1_5end	2682	12517376
+193	L1_Carn2_5end	2268	12582912
+194	L1_Carn2_orf2	3288	12648448
+195	L1_Carn3_5end	2709	12713984
+196	L1_Carn5_3end	1021	12779520
+197	L1_Carn5_5end	2849	12845056
+198	L1_Carni_orf2	1712	12910592
+199	L1_CF	4251	12976128
+200	L2	3419	13041664
+201	L2B	419	13107200
+202	L2C	473	13172736
+203	L2D	307	13238272
+204	L3b_3end	482	13303808
+205	L4	1960	13369344
+206	L5	2265	13434880
+207	LmeSINE1b	415	13500416
+208	LmeSINE1c	404	13565952
+209	LSU-rRNA_Cel	3509	13631488
+210	LSU-rRNA_Dme	3900	13697024
+211	LSU-rRNA_Hsa	5035	13762560
+212	LTR104_Mam	1509	13828096
+213	LTR108d_Mam	544	13893632
+214	LTR108e_Mam	548	13959168
+215	LTR10A	609	14024704
+216	LTR10E	637	14090240
+217	LTR10G	523	14155776
+218	LTR16A	450	14221312
+219	LTR16B	463	14286848
+220	LTR16B1	480	14352384
+221	LTR16B2	462	14417920
+222	LTR16D1	675	14483456
+223	LTR16D2	572	14548992
+224	LTR16E1	538	14614528
+225	LTR16E2	568	14680064
+226	LTR33	521	14745600
+227	LTR33A	523	14811136
+228	LTR33B	503	14876672
+229	LTR33C	629	14942208
+230	LTR35B_CF	571	15007744
+231	LTR37-int	4060	15073280
+232	LTR40A1	584	15138816
+233	LTR51_CF	625	15204352
+234	LTR53-int	3329	15269888
+235	LTR54	510	15335424
+236	LTR54B	498	15400960
+237	LTR67B	620	15466496
+238	LTR68	740	15532032
+239	LTR72A_CF	718	15597568
+240	LTR72B_CF	623	15663104
+241	LTR75_1	546	15728640
+242	LTR78	1304	15794176
+243	LTR79	527	15859712
+244	LTR80A	583	15925248
+245	LTR80B	584	15990784
+246	LTR81A	1350	16056320
+247	LTR81B	1393	16121856
+248	LTR81C	1153	16187392
+249	LTR82A	872	16252928
+250	LTR82B	830	16318464
+251	LTR83	780	16384000
+252	LTR84a	757	16449536
+253	LTR84b	761	16515072
+254	LTR85a	702	16580608
+255	LTR85b	784	16646144
+256	LTR85c	823	16711680
+257	LTR86A1	513	16777216
+258	LTR86A2	508	16842752
+259	LTR86B1	493	16908288
+260	LTR86B2	487	16973824
+261	LTR86C	621	17039360
+262	LTR87	624	17104896
+263	LTR88a	816	17170432
+264	LTR88b	837	17235968
+265	LTR88c	862	17301504
+266	LTR89	879	17367040
+267	LTR90A	976	17432576
+268	LTR90B	796	17498112
+269	MamGyp-int	5103	17563648
+270	MamGypLTR1a	784	17629184
+271	MamGypLTR1b	782	17694720
+272	MamGypLTR1c	803	17760256
+273	MamGypLTR1d	813	17825792
+274	MamGypLTR2	1189	17891328
+275	MamGypLTR2b	922	17956864
+276	MamGypLTR2c	1068	18022400
+277	MamGypLTR3	839	18087936
+278	MamRep137	444	18153472
+279	MamRep1527	969	18219008
+280	MamRep1879	216	18284544
+281	MamRep1894	123	18350080
+282	MamRep38	295	18415616
+283	MamRep4096	426	18481152
+284	MamRep434	426	18546688
+285	MamRep488	219	18612224
+286	MamRep564	357	18677760
+287	MamRep605	876	18743296
+288	MamSINE1	290	18808832
+289	MamTip2	305	18874368
+290	MARE1	945	18939904
+291	MARE10	181	19005440
+292	MARE11	197	19070976
+293	MARE3	180	19136512
+294	MARE4	117	19202048
+295	MARE5	564	19267584
+296	MARE6	715	19333120
+297	MARE7	150	19398656
+298	MARE8	156	19464192
+299	MARE9	139	19529728
+300	MER101B_CF	467	19595264
+301	MER101_CF	500	19660800
+302	MER103	166	19726336
+303	MER104	180	19791872
+304	MER104A	744	19857408
+305	MER104B	915	19922944
+306	MER104C	729	19988480
+307	MER105	204	20054016
+308	MER115	693	20119552
+309	MER116	84	20185088
+310	MER121	399	20250624
+311	MER123	210	20316160
+312	MER124	397	20381696
+313	MER125	176	20447232
+314	MER126	308	20512768
+315	MER127	364	20578304
+316	MER129	469	20643840
+317	MER130	475	20709376
+318	MER131	174	20774912
+319	MER132	178	20840448
+320	MER133A	106	20905984
+321	MER133B	140	20971520
+322	MER134	213	21037056
+323	MER135	228	21102592
+324	MER136	318	21168128
+325	MER2	344	21233664
+326	MER21B	863	21299200
+327	MER21C	935	21364736
+328	MER21C_BT	958	21430272
+329	MER25	2136	21495808
+330	MER2B	335	21561344
+331	MER3	209	21626880
+332	MER30	230	21692416
+333	MER31A	485	21757952
+334	MER34-int	8207	21823488
+335	MER34A	571	21889024
+336	MER34A1	587	21954560
+337	MER34A_CF	507	22020096
+338	MER34B_CF	602	22085632
+339	MER34C_CF	550	22151168
+340	MER41_CF	632	22216704
+341	MER44D	705	22282240
+342	MER46C	338	22347776
+343	MER47B	418	22413312
+344	MER47C	97	22478848
+345	MER57B1	401	22544384
+346	MER57C1	385	22609920
+347	MER57C2	434	22675456
+348	MER57D	411	22740992
+349	MER57E1	373	22806528
+350	MER57E2	402	22872064
+351	MER57E3	487	22937600
+352	MER58A	224	23003136
+353	MER58B	341	23068672
+354	MER58C	215	23134208
+355	MER58D	386	23199744
+356	MER5A	189	23265280
+357	MER5A1	160	23330816
+358	MER5C	324	23396352
+359	MER5C1	263	23461888
+360	MER6	865	23527424
+361	MER63C	930	23592960
+362	MER65A	445	23658496
+363	MER65I	4871	23724032
+364	MER68A	563	23789568
+365	MER68_I	2990	23855104
+366	MER69A	177	23920640
+367	MER69B	1226	23986176
+368	MER6C	202	24051712
+369	MER70_I	5023	24117248
+370	MER74	624	24182784
+371	MER74A	558	24248320
+372	MER76-int	6189	24313856
+373	MER80	508	24379392
+374	MER82	653	24444928
+375	MER87_CF	556	24510464
+376	MER90a_LTR	614	24576000
+377	MER91B	184	24641536
+378	MER92C	554	24707072
+379	MER97d	1205	24772608
+380	MERX	756	24838144
+381	MIR	260	24903680
+382	MIR3	224	24969216
+383	MIRb	268	25034752
+384	MIRc	268	25100288
+385	MLT-int	1735	25165824
+386	MLT1A0	374	25231360
+387	MLT1A1	410	25296896
+388	MLT1B	390	25362432
+389	MLT1C	467	25427968
+390	MLT1C1	504	25493504
+391	MLT1C2	461	25559040
+392	MLT1D	505	25624576
+393	MLT1E	593	25690112
+394	MLT1E1	654	25755648
+395	MLT1E1A	698	25821184
+396	MLT1E2	626	25886720
+397	MLT1F	542	25952256
+398	MLT1F1	567	26017792
+399	MLT1F2	523	26083328
+400	MLT1F_I	1399	26148864
+401	MLT1H_I	1472	26214400
+402	MLT1J	516	26279936
+403	MLT1J-int	1387	26345472
+404	MLT1J1	446	26411008
+405	MLT1J2	450	26476544
+406	MLT1M	672	26542080
+407	MLT1O	441	26607616
+408	MLT1_I	1375	26673152
+409	MLT2B2	503	26738688
+410	MLT2B3	717	26804224
+411	MLT2B4	557	26869760
+412	MLT2E	622	26935296
+413	MLT2F	661	27000832
+414	MSTC	428	27066368
+415	MST_I	1651	27131904
+416	NeoSch-6.5283	387	27197440
+417	ORSL	275	27262976
+418	ORSL-2a	342	27328512
+419	ORSL-2b	508	27394048
+420	RICKSHA	2030	27459584
+421	RICKSHA_0	1708	27525120
+422	Ricksha_a	1181	27590656
+423	SAT1_CF	532	27656192
+424	SINEC1A_CF	168	27721728
+425	SINEC1B1_CF	164	27787264
+426	SINEC1B2_CF	164	27852800
+427	SINEC1C1_CF	159	27918336
+428	SINEC1C2_CF	158	27983872
+429	SINEC1D_CF	195	28049408
+430	SINEC1_CF	144	28114944
+431	SINEC2A1_CF	196	28180480
+432	SINEC2A2_CF	143	28246016
+433	SINEC_c1	209	28311552
+434	SSU-rRNA_Cel	1647	28377088
+435	SSU-rRNA_Dme	1995	28442624
+436	SSU-rRNA_Hsa	1869	28508160
+437	SVA2	217	28573696
+438	TAR1	2111	28639232
+439	THER1	263	28704768
+440	THER2	169	28770304
+441	Tigger10	1843	28835840
+442	Tigger12	1959	28901376
+443	Tigger12A	791	28966912
+444	Tigger13a	771	29032448
+445	Tigger14a	329	29097984
+446	Tigger15a	715	29163520
+447	Tigger16a	933	29229056
+448	Tigger16b	337	29294592
+449	Tigger1a_Car	471	29360128
+450	Tigger2a_Car	341	29425664
+451	Tigger2f	3455	29491200
+452	TIGGER5A	366	29556736
+453	TIGGER5_A	351	29622272
+454	TIGGER5_B	446	29687808
+455	TIGGER6A	1106	29753344
+456	Tigger9b	624	29818880
+457	tRNA-Ala-GCA	75	29884416
+458	tRNA-Ala-GCY_	75	29949952
+459	tRNA-Arg-CGA	76	30015488
+460	tRNA-Arg-CGG	76	30081024
+461	tRNA-Arg-CGY	77	30146560
+462	tRNA-Asp-GAY	75	30212096
+463	tRNA-Gln-CAA	75	30277632
+464	tRNA-Gln-CAA_	75	30343168
+465	tRNA-Gln-CAG	75	30408704
+466	tRNA-His-CAY	75	30474240
+467	tRNA-His-CAY_	75	30539776
+468	tRNA-Ile-ATA	77	30605312
+469	tRNA-Ile-ATC	77	30670848
+470	tRNA-Ile-ATT	77	30736384
+471	tRNA-Leu-CTA	85	30801920
+472	tRNA-Leu-CTA_	85	30867456
+473	tRNA-Leu-CTG	86	30932992
+474	tRNA-Leu-CTY	85	30998528
+475	tRNA-Leu-TTA	86	31064064
+476	tRNA-Leu-TTA(m)	78	31129600
+477	tRNA-Leu-TTG	86	31195136
+478	tRNA-Lys-AAG	76	31260672
+479	tRNA-Met	76	31326208
+480	tRNA-Met-i	75	31391744
+481	tRNA-Met_	76	31457280
+482	tRNA-Pro-CCA	75	31522816
+483	tRNA-Pro-CCG	75	31588352
+484	tRNA-SeC(e)-TGA	89	31653888
+485	tRNA-Ser-AGY	85	31719424
+486	tRNA-Ser-TCA	85	31784960
+487	tRNA-Ser-TCAm	73	31850496
+488	tRNA-Ser-TCA_	85	31916032
+489	tRNA-Ser-TCG	85	31981568
+490	tRNA-Ser-TCY	85	32047104
+491	tRNA-Thr-ACG_	77	32112640
+492	tRNA-Thr-ACY_	77	32178176
+493	tRNA-Tyr-TAC	76	32243712
+494	tRNA-Tyr-TAT	76	32309248
+495	tRNA-Val-GTA	76	32374784
+496	U14	87	32440320
+497	U7	63	32505856
+498	U8	136	32571392
+499	UCON1	236	32636928
+500	UCON10	435	32702464
+501	UCON100	122	32768000
+502	UCON101	120	32833536
+503	UCON102	107	32899072
+504	UCON103	152	32964608
+505	UCON104	177	33030144
+506	UCON105	159	33095680
+507	UCON106	191	33161216
+508	UCON107	205	33226752
+509	UCON11	382	33292288
+510	UCON12	298	33357824
+511	UCON12A	369	33423360
+512	UCON13	513	33488896
+513	UCON132a	153	33554432
+514	UCON132b	148	33619968
+515	UCON14	347	33685504
+516	UCON15	340	33751040
+517	UCON16	289	33816576
+518	UCON17	460	33882112
+519	UCON18	333	33947648
+520	UCON19	361	34013184
+521	UCON2	282	34078720
+522	UCON20	699	34144256
+523	UCON21	330	34209792
+524	UCON22	340	34275328
+525	UCON23	154	34340864
+526	UCON24	384	34406400
+527	UCON25	137	34471936
+528	UCON26	343	34537472
+529	UCON27	1268	34603008
+530	UCON28	280	34668544
+531	UCON28a	807	34734080
+532	UCON28b	575	34799616
+533	UCON28c	568	34865152
+534	UCON29	437	34930688
+535	UCON3	172	34996224
+536	UCON31	384	35061760
+537	UCON32	246	35127296
+538	UCON33	275	35192832
+539	UCON34	125	35258368
+540	UCON35	131	35323904
+541	UCON36	149	35389440
+542	UCON37	143	35454976
+543	UCON38	156	35520512
+544	UCON39	182	35586048
+545	UCON4	310	35651584
+546	UCON40	315	35717120
+547	UCON41	139	35782656
+548	UCON42	315	35848192
+549	UCON43	172	35913728
+550	UCON44	183	35979264
+551	UCON45	167	36044800
+552	UCON46	181	36110336
+553	UCON47	165	36175872
+554	UCON48	264	36241408
+555	UCON49	141	36306944
+556	UCON5	405	36372480
+557	UCON50	133	36438016
+558	UCON51	99	36503552
+559	UCON52	122	36569088
+560	UCON53	234	36634624
+561	UCON54	178	36700160
+562	UCON55	170	36765696
+563	UCON56	138	36831232
+564	UCON57	88	36896768
+565	UCON58	142	36962304
+566	UCON59	111	37027840
+567	UCON6	301	37093376
+568	UCON60	137	37158912
+569	UCON61	137	37224448
+570	UCON62	124	37289984
+571	UCON63	165	37355520
+572	UCON64	183	37421056
+573	UCON65	177	37486592
+574	UCON66	144	37552128
+575	UCON67	112	37617664
+576	UCON68	132	37683200
+577	UCON69	107	37748736
+578	UCON7	393	37814272
+579	UCON70	146	37879808
+580	UCON71	126	37945344
+581	UCON72	189	38010880
+582	UCON73	105	38076416
+583	UCON74	659	38141952
+584	UCON75	206	38207488
+585	UCON76	241	38273024
+586	UCON77	117	38338560
+587	UCON78	147	38404096
+588	UCON79	171	38469632
+589	UCON8	381	38535168
+590	UCON80	142	38600704
+591	UCON81	84	38666240
+592	UCON82	148	38731776
+593	UCON83	102	38797312
+594	UCON84	234	38862848
+595	UCON85	80	38928384
+596	UCON86	190	38993920
+597	UCON87	121	39059456
+598	UCON88	112	39124992
+599	UCON89	167	39190528
+600	UCON9	323	39256064
+601	UCON90	148	39321600
+602	UCON91	146	39387136
+603	UCON92	132	39452672
+604	UCON93	156	39518208
+605	UCON94	133	39583744
+606	UCON95	144	39649280
+607	UCON96	157	39714816
+608	UCON97	137	39780352
+609	UCON98	143	39845888
+610	UCON99	100	39911424
+611	X10a_DNA	78	39976960
+612	X10b_DNA	176	40042496
+613	X11_DNA	426	40108032
+614	X11_LINE	275	40173568
+615	X12_DNA	307	40239104
+616	X12_LINE	194	40304640
+617	X13_DNA	507	40370176
+618	X13_LINE	191	40435712
+619	X15_DNA	193	40501248
+620	X15_LINE	223	40566784
+621	X17_DNA	306	40632320
+622	X17_LINE	296	40697856
+623	X18_DNA	337	40763392
+624	X18_LINE	227	40828928
+625	X19_LINE	224	40894464
+626	X1_DNA	606	40960000
+627	X1_LINE	645	41025536
+628	X1_LR	162	41091072
+629	X20_DNA	199	41156608
+630	X20_LINE	253	41222144
+631	X21_DNA	159	41287680
+632	X21_LINE	185	41353216
+633	X22_DNA	149	41418752
+634	X23_DNA	218	41484288
+635	X24_DNA	173	41549824
+636	X24_LINE	269	41615360
+637	X25_DNA	189	41680896
+638	X26_DNA	551	41746432
+639	X27_DNA	339	41811968
+640	X28_DNA	388	41877504
+641	X29a_DNA	360	41943040
+642	X29b_DNA	386	42008576
+643	X2a_DNA	155	42074112
+644	X2b_DNA	189	42139648
+645	X2_LINE	193	42205184
+646	X2_LR	179	42270720
+647	X30_DNA	287	42336256
+648	X31_DNA	313	42401792
+649	X32_DNA	336	42467328
+650	X33a_DNA	366	42532864
+651	X34_DNA	166	42598400
+652	X3_LINE	233	42663936
+653	X3_LR	178	42729472
+654	X4a_DNA	215	42795008
+655	X4b_DNA	399	42860544
+656	X4_LINE	306	42926080
+657	X4_LR	331	42991616
+658	X5a_DNA	176	43057152
+659	X5A_LINE	230	43122688
+660	X5b_DNA	187	43188224
+661	X5B_LINE	185	43253760
+662	X6a_DNA	350	43319296
+663	X6A_LINE	258	43384832
+664	X6b_DNA	243	43450368
+665	X6B_LINE	290	43515904
+666	X7A_LINE	267	43581440
+667	X7B_LINE	250	43646976
+668	X7C_LINE	236	43712512
+669	X7D_LINE	159	43778048
+670	X7_DNA	328	43843584
+671	X8_LINE	296	43909120
+672	X9a_DNA	326	43974656
+673	X9b_DNA	317	44040192
+674	X9c_DNA	287	44105728
+675	X9_LINE	159	44171264
+676	Zaphod3	2623	44236800
+677	ZOMBI	2806	44302336
+678	ZOMBI_B	468	44367872
+679	ZOMBI_C	333	44433408
+Started loading the genome: Thu Aug 29 16:47:53 2024
+
+Genome: size given as a parameter = 44498944
+SA: size given as a parameter = 1084342
+SAindex: size given as a parameter = 1
+Read from SAindex: pGe.gSAindexNbases=13  nSAi=89478484
+nGenome=44498944;  nSAbyte=1084342
+GstrandBit=32   SA number of indices=262870
+Shared memory is not used for genomes. Allocated a private copy of the genome.
+Genome file size: 44498944 bytes; state: good=1 eof=0 fail=0 bad=0
+Loading Genome ... done! state: good=1 eof=0 fail=0 bad=0; loaded 44498944 bytes
+SA file size: 1084342 bytes; state: good=1 eof=0 fail=0 bad=0
+Loading SA ... done! state: good=1 eof=0 fail=0 bad=0; loaded 1084342 bytes
+Loading SAindex ... done: 391468491 bytes
+Finished loading the genome: Thu Aug 29 16:47:53 2024
+
+alignIntronMax=alignMatesGapMax=0, the max intron size will be approximately determined by (2^winBinNbits)*winAnchorDistNbins=589824
+Opening the file: STAR_alignment_cons_dog_sineCA2/_STARtmp//Unmapped.out.mate1.thread0 ... ok
+Opening the file: STAR_alignment_cons_dog_sineCA2/_STARtmp//Unmapped.out.mate1.thread1 ... ok
+Opening the file: STAR_alignment_cons_dog_sineCA2/_STARtmp//Unmapped.out.mate1.thread2 ... ok
+Opening the file: STAR_alignment_cons_dog_sineCA2/_STARtmp//Unmapped.out.mate1.thread3 ... ok
+Opening the file: STAR_alignment_cons_dog_sineCA2/_STARtmp//Unmapped.out.mate1.thread4 ... ok
+Opening the file: STAR_alignment_cons_dog_sineCA2/_STARtmp//Unmapped.out.mate1.thread5 ... ok
+Opening the file: STAR_alignment_cons_dog_sineCA2/_STARtmp//Unmapped.out.mate1.thread6 ... ok
+Opening the file: STAR_alignment_cons_dog_sineCA2/_STARtmp//Unmapped.out.mate1.thread7 ... ok
+Created thread # 1
+Created thread # 2
+Created thread # 3
+Created thread # 4
+Created thread # 5
+Created thread # 6
+Created thread # 7
+Completed: thread #2
+Completed: thread #0
+Completed: thread #3
+Completed: thread #4
+Completed: thread #5
+Completed: thread #6
+Completed: thread #7
+BAM sorting: 1399 mapped reads
+BAM sorting bins genomic start loci:
+1	423	9
+2	423	68
+3	423	81
+4	423	92
+5	423	100
+6	424	19
+7	424	79
+8	424	83
+9	424	94
+10	425	8
+11	425	27
+12	425	79
+13	425	83
+14	425	94
+15	426	71
+16	426	80
+17	426	91
+18	427	95
+19	429	72
+20	429	80
+21	429	91
+22	430	0
+23	430	0
+24	430	0
+25	430	0
+26	430	0
+27	430	0
+28	430	8
+29	430	10
+30	430	17
+31	430	24
+32	430	32
+33	430	40
+34	430	49
+35	430	57
+36	430	93
+37	430	99
+38	431	0
+39	431	0
+40	431	0
+41	431	0
+42	431	0
+43	431	4
+44	431	9
+45	431	11
+46	431	20
+47	431	27
+48	431	39
+Completed: thread #1
+Joined thread # 1
+Joined thread # 2
+Joined thread # 3
+Joined thread # 4
+Joined thread # 5
+Joined thread # 6
+Joined thread # 7
+Aug 29 16:47:55 ..... started sorting BAM
+Max memory needed for sorting = 27280
+ALL DONE!

@@ -38,7 +38,7 @@ def func(pct, allvals):
 
 
 # Data for the pie chart
-labels = ['Poly(A)', 'Micro-Sat',  'TE']
+labels = ['A/T stretch', 'Micro-Sat',  'TE']
 sizes = [polA, microsat, TE]
 colors = ['#007E81','#084D4F','#95C11F']
 

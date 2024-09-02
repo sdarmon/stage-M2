@@ -112,6 +112,8 @@ else:
     sep = "split('\t')[8].split(' ')[1]"
 func = eval(f"lambda x: x.{sep}")
 
+
+#Reading the gene.gtf file
 with open(Arg[2], 'r') as f:
     for line in f:
         target = func(line)
@@ -123,11 +125,11 @@ with open(Arg[2], 'r') as f:
             CDS.add(target)
         genes.add(target)
 
-#Reading the transposable elements from the TE.gtf file
+#Reading the transposable elements from the aligned sequences file
 transpo = set()
 with open(Arg[3], 'r') as f:
     for line in f:
-        target = func(line)
+        target = line.split('\t')[2]
         transpo.add(target)
 
 #Function that computes the entropy of the n-mers in the sequences

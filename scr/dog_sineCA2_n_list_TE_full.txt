@@ -1,0 +1,8 @@
+>SINEC1A_CF	SINE2/tRNA	Canis lupus familiaris
+>SINEC1B1_CF	SINE2/tRNA	Canis lupus familiaris
+>SINEC1B2_CF	SINE2/tRNA	Canis lupus familiaris
+>SINEC1C1_CF	SINE2/tRNA	Canis lupus familiaris
+>SINEC1C2_CF	SINE2/tRNA	Canis lupus familiaris
+>SINEC1_CF	SINE2/tRNA	Canis lupus familiaris
+>SINEC2A1_CF	SINE2/tRNA	Canis lupus familiaris
+>SINEC2A2_CF	SINE2/tRNA	Canis lupus familiaris

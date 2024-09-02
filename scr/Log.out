@@ -1,0 +1,1067 @@
+STAR version=STAR_2.6.1d
+STAR compilation time,server,dir=Fri Nov 16 17:02:31 EST 2018 florence.cshl.edu:/sonas-hs/gingeras/nlsas_norepl/user/dobin/STAR/STAR.master/source
+##### DEFAULT parameters:
+versionSTAR                       20201
+versionGenome                     20101   20200   
+parametersFiles                   -   
+sysShell                          -
+runMode                           alignReads
+runThreadN                        1
+runDirPerm                        User_RWX
+runRNGseed                        777
+genomeDir                         ./GenomeDir/
+genomeLoad                        NoSharedMemory
+genomeFastaFiles                  -   
+genomeChainFiles                  -   
+genomeSAindexNbases               14
+genomeChrBinNbits                 18
+genomeSAsparseD                   1
+genomeSuffixLengthMax             18446744073709551615
+genomeFileSizes                   0   
+genomeConsensusFile               -
+readFilesType                     Fastx   
+readFilesIn                       Read1   Read2   
+readFilesPrefix                   -
+readFilesCommand                  -   
+readMatesLengthsIn                NotEqual
+readMapNumber                     18446744073709551615
+readNameSeparator                 /   
+inputBAMfile                      -
+bamRemoveDuplicatesType           -
+bamRemoveDuplicatesMate2basesN    0
+limitGenomeGenerateRAM            31000000000
+limitIObufferSize                 150000000
+limitOutSAMoneReadBytes           100000
+limitOutSJcollapsed               1000000
+limitOutSJoneRead                 1000
+limitBAMsortRAM                   0
+limitSjdbInsertNsj                1000000
+outFileNamePrefix                 ./
+outTmpDir                         -
+outTmpKeep                        None
+outStd                            Log
+outReadsUnmapped                  None
+outQSconversionAdd                0
+outMultimapperOrder               Old_2.4
+outSAMtype                        SAM   
+outSAMmode                        Full
+outSAMstrandField                 None
+outSAMattributes                  Standard   
+outSAMunmapped                    None   
+outSAMorder                       Paired
+outSAMprimaryFlag                 OneBestScore
+outSAMreadID                      Standard
+outSAMmapqUnique                  255
+outSAMflagOR                      0
+outSAMflagAND                     65535
+outSAMattrRGline                  -   
+outSAMheaderHD                    -   
+outSAMheaderPG                    -   
+outSAMheaderCommentFile           -
+outBAMcompression                 1
+outBAMsortingThreadN              0
+outBAMsortingBinsN                50
+outSAMfilter                      None   
+outSAMmultNmax                    18446744073709551615
+outSAMattrIHstart                 1
+outSAMtlen                        1
+outSJfilterReads                  All
+outSJfilterCountUniqueMin         3   1   1   1   
+outSJfilterCountTotalMin          3   1   1   1   
+outSJfilterOverhangMin            30   12   12   12   
+outSJfilterDistToOtherSJmin       10   0   5   10   
+outSJfilterIntronMaxVsReadN       50000   100000   200000   
+outWigType                        None   
+outWigStrand                      Stranded   
+outWigReferencesPrefix            -
+outWigNorm                        RPM   
+outFilterType                     Normal
+outFilterMultimapNmax             10
+outFilterMultimapScoreRange       1
+outFilterScoreMin                 0
+outFilterScoreMinOverLread        0.66
+outFilterMatchNmin                0
+outFilterMatchNminOverLread       0.66
+outFilterMismatchNmax             10
+outFilterMismatchNoverLmax        0.3
+outFilterMismatchNoverReadLmax    1
+outFilterIntronMotifs             None
+outFilterIntronStrands            RemoveInconsistentStrands
+clip5pNbases                      0   
+clip3pNbases                      0   
+clip3pAfterAdapterNbases          0   
+clip3pAdapterSeq                  -   
+clip3pAdapterMMp                  0.1   
+winBinNbits                       16
+winAnchorDistNbins                9
+winFlankNbins                     4
+winAnchorMultimapNmax             50
+winReadCoverageRelativeMin        0.5
+winReadCoverageBasesMin           0
+scoreGap                          0
+scoreGapNoncan                    -8
+scoreGapGCAG                      -4
+scoreGapATAC                      -8
+scoreStitchSJshift                1
+scoreGenomicLengthLog2scale       -0.25
+scoreDelBase                      -2
+scoreDelOpen                      -2
+scoreInsOpen                      -2
+scoreInsBase                      -2
+seedSearchLmax                    0
+seedSearchStartLmax               50
+seedSearchStartLmaxOverLread      1
+seedPerReadNmax                   1000
+seedPerWindowNmax                 50
+seedNoneLociPerWindow             10
+seedMultimapNmax                  10000
+seedSplitMin                      12
+alignIntronMin                    21
+alignIntronMax                    0
+alignMatesGapMax                  0
+alignTranscriptsPerReadNmax       10000
+alignSJoverhangMin                5
+alignSJDBoverhangMin              3
+alignSJstitchMismatchNmax         0   -1   0   0   
+alignSplicedMateMapLmin           0
+alignSplicedMateMapLminOverLmate    0.66
+alignWindowsPerReadNmax           10000
+alignTranscriptsPerWindowNmax     100
+alignEndsType                     Local
+alignSoftClipAtReferenceEnds      Yes
+alignEndsProtrude                 0   ConcordantPair   
+alignInsertionFlush               None
+peOverlapNbasesMin                0
+peOverlapMMp                      0.01
+chimSegmentMin                    0
+chimScoreMin                      0
+chimScoreDropMax                  20
+chimScoreSeparation               10
+chimScoreJunctionNonGTAG          -1
+chimMainSegmentMultNmax           10
+chimJunctionOverhangMin           20
+chimOutType                       Junctions   
+chimFilter                        banGenomicN   
+chimSegmentReadGapMax             0
+chimMultimapNmax                  0
+chimMultimapScoreRange            1
+chimNonchimScoreDropMin           20
+chimOutJunctionFormat             0   
+sjdbFileChrStartEnd               -   
+sjdbGTFfile                       -
+sjdbGTFchrPrefix                  -
+sjdbGTFfeatureExon                exon
+sjdbGTFtagExonParentTranscript    transcript_id
+sjdbGTFtagExonParentGene          gene_id
+sjdbOverhang                      100
+sjdbScore                         2
+sjdbInsertSave                    Basic
+varVCFfile                        -
+waspOutputMode                    None
+quantMode                         -   
+quantTranscriptomeBAMcompression    1
+quantTranscriptomeBan             IndelSoftclipSingleend
+twopass1readsN                    18446744073709551615
+twopassMode                       None
+##### Command Line:
+STAR --runThreadN 8 --runMode genomeGenerate --genomeDir ../../results/dog/te_ref --genomeFastaFiles ../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa --genomeSAindexNbases 13 --genomeSAsparseD 4 --genomeChrBinNbits 16
+##### Initial USER parameters from Command Line:
+###### All USER parameters from Command Line:
+runThreadN                    8     ~RE-DEFINED
+runMode                       genomeGenerate     ~RE-DEFINED
+genomeDir                     ../../results/dog/te_ref     ~RE-DEFINED
+genomeFastaFiles              ../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa        ~RE-DEFINED
+genomeSAindexNbases           13     ~RE-DEFINED
+genomeSAsparseD               4     ~RE-DEFINED
+genomeChrBinNbits             16     ~RE-DEFINED
+##### Finished reading parameters from all sources
+
+##### Final user re-defined parameters-----------------:
+runMode                           genomeGenerate
+runThreadN                        8
+genomeDir                         ../../results/dog/te_ref
+genomeFastaFiles                  ../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa   
+genomeSAindexNbases               13
+genomeChrBinNbits                 16
+genomeSAsparseD                   4
+
+-------------------------------
+##### Final effective command line:
+STAR   --runMode genomeGenerate   --runThreadN 8   --genomeDir ../../results/dog/te_ref   --genomeFastaFiles ../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa      --genomeSAindexNbases 13   --genomeChrBinNbits 16   --genomeSAsparseD 4
+
+##### Final parameters after user input--------------------------------:
+versionSTAR                       20201
+versionGenome                     20101   20200   
+parametersFiles                   -   
+sysShell                          -
+runMode                           genomeGenerate
+runThreadN                        8
+runDirPerm                        User_RWX
+runRNGseed                        777
+genomeDir                         ../../results/dog/te_ref
+genomeLoad                        NoSharedMemory
+genomeFastaFiles                  ../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa   
+genomeChainFiles                  -   
+genomeSAindexNbases               13
+genomeChrBinNbits                 16
+genomeSAsparseD                   4
+genomeSuffixLengthMax             18446744073709551615
+genomeFileSizes                   0   
+genomeConsensusFile               -
+readFilesType                     Fastx   
+readFilesIn                       Read1   Read2   
+readFilesPrefix                   -
+readFilesCommand                  -   
+readMatesLengthsIn                NotEqual
+readMapNumber                     18446744073709551615
+readNameSeparator                 /   
+inputBAMfile                      -
+bamRemoveDuplicatesType           -
+bamRemoveDuplicatesMate2basesN    0
+limitGenomeGenerateRAM            31000000000
+limitIObufferSize                 150000000
+limitOutSAMoneReadBytes           100000
+limitOutSJcollapsed               1000000
+limitOutSJoneRead                 1000
+limitBAMsortRAM                   0
+limitSjdbInsertNsj                1000000
+outFileNamePrefix                 ./
+outTmpDir                         -
+outTmpKeep                        None
+outStd                            Log
+outReadsUnmapped                  None
+outQSconversionAdd                0
+outMultimapperOrder               Old_2.4
+outSAMtype                        SAM   
+outSAMmode                        Full
+outSAMstrandField                 None
+outSAMattributes                  Standard   
+outSAMunmapped                    None   
+outSAMorder                       Paired
+outSAMprimaryFlag                 OneBestScore
+outSAMreadID                      Standard
+outSAMmapqUnique                  255
+outSAMflagOR                      0
+outSAMflagAND                     65535
+outSAMattrRGline                  -   
+outSAMheaderHD                    -   
+outSAMheaderPG                    -   
+outSAMheaderCommentFile           -
+outBAMcompression                 1
+outBAMsortingThreadN              0
+outBAMsortingBinsN                50
+outSAMfilter                      None   
+outSAMmultNmax                    18446744073709551615
+outSAMattrIHstart                 1
+outSAMtlen                        1
+outSJfilterReads                  All
+outSJfilterCountUniqueMin         3   1   1   1   
+outSJfilterCountTotalMin          3   1   1   1   
+outSJfilterOverhangMin            30   12   12   12   
+outSJfilterDistToOtherSJmin       10   0   5   10   
+outSJfilterIntronMaxVsReadN       50000   100000   200000   
+outWigType                        None   
+outWigStrand                      Stranded   
+outWigReferencesPrefix            -
+outWigNorm                        RPM   
+outFilterType                     Normal
+outFilterMultimapNmax             10
+outFilterMultimapScoreRange       1
+outFilterScoreMin                 0
+outFilterScoreMinOverLread        0.66
+outFilterMatchNmin                0
+outFilterMatchNminOverLread       0.66
+outFilterMismatchNmax             10
+outFilterMismatchNoverLmax        0.3
+outFilterMismatchNoverReadLmax    1
+outFilterIntronMotifs             None
+outFilterIntronStrands            RemoveInconsistentStrands
+clip5pNbases                      0   
+clip3pNbases                      0   
+clip3pAfterAdapterNbases          0   
+clip3pAdapterSeq                  -   
+clip3pAdapterMMp                  0.1   
+winBinNbits                       16
+winAnchorDistNbins                9
+winFlankNbins                     4
+winAnchorMultimapNmax             50
+winReadCoverageRelativeMin        0.5
+winReadCoverageBasesMin           0
+scoreGap                          0
+scoreGapNoncan                    -8
+scoreGapGCAG                      -4
+scoreGapATAC                      -8
+scoreStitchSJshift                1
+scoreGenomicLengthLog2scale       -0.25
+scoreDelBase                      -2
+scoreDelOpen                      -2
+scoreInsOpen                      -2
+scoreInsBase                      -2
+seedSearchLmax                    0
+seedSearchStartLmax               50
+seedSearchStartLmaxOverLread      1
+seedPerReadNmax                   1000
+seedPerWindowNmax                 50
+seedNoneLociPerWindow             10
+seedMultimapNmax                  10000
+seedSplitMin                      12
+alignIntronMin                    21
+alignIntronMax                    0
+alignMatesGapMax                  0
+alignTranscriptsPerReadNmax       10000
+alignSJoverhangMin                5
+alignSJDBoverhangMin              3
+alignSJstitchMismatchNmax         0   -1   0   0   
+alignSplicedMateMapLmin           0
+alignSplicedMateMapLminOverLmate    0.66
+alignWindowsPerReadNmax           10000
+alignTranscriptsPerWindowNmax     100
+alignEndsType                     Local
+alignSoftClipAtReferenceEnds      Yes
+alignEndsProtrude                 0   ConcordantPair   
+alignInsertionFlush               None
+peOverlapNbasesMin                0
+peOverlapMMp                      0.01
+chimSegmentMin                    0
+chimScoreMin                      0
+chimScoreDropMax                  20
+chimScoreSeparation               10
+chimScoreJunctionNonGTAG          -1
+chimMainSegmentMultNmax           10
+chimJunctionOverhangMin           20
+chimOutType                       Junctions   
+chimFilter                        banGenomicN   
+chimSegmentReadGapMax             0
+chimMultimapNmax                  0
+chimMultimapScoreRange            1
+chimNonchimScoreDropMin           20
+chimOutJunctionFormat             0   
+sjdbFileChrStartEnd               -   
+sjdbGTFfile                       -
+sjdbGTFchrPrefix                  -
+sjdbGTFfeatureExon                exon
+sjdbGTFtagExonParentTranscript    transcript_id
+sjdbGTFtagExonParentGene          gene_id
+sjdbOverhang                      100
+sjdbScore                         2
+sjdbInsertSave                    Basic
+varVCFfile                        -
+waspOutputMode                    None
+quantMode                         -   
+quantTranscriptomeBAMcompression    1
+quantTranscriptomeBan             IndelSoftclipSingleend
+twopass1readsN                    18446744073709551615
+twopassMode                       None
+----------------------------------------
+
+Finished loading and checking parameters
+Aug 26 17:44:24 ... starting to generate Genome files
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 0  ">ALINE" chrStart: 0
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 1  "BLACKJACK" chrStart: 65536
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 2  "Bsp" chrStart: 131072
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 3  "CAN" chrStart: 196608
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 4  "CarERV2" chrStart: 262144
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 5  "CarERV2a1_LTR" chrStart: 327680
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 6  "CarERV2a_LTR" chrStart: 393216
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 7  "CarERV2b1_LTR" chrStart: 458752
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 8  "CarERV2b2_LTR" chrStart: 524288
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 9  "CarERV2c1_LTR" chrStart: 589824
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 10  "CarERV2c2_LTR" chrStart: 655360
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 11  "CarERV2c3_LTR" chrStart: 720896
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 12  "CarERV2d1_LTR" chrStart: 786432
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 13  "CarERV2d2_LTR" chrStart: 851968
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 14  "CarERV3_LTR" chrStart: 917504
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 15  "CarERV4a1_LTR" chrStart: 983040
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 16  "CarERV4a2_LTR" chrStart: 1048576
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 17  "CarERV4a_LTR" chrStart: 1114112
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 18  "CarERV4b_LTR" chrStart: 1179648
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 19  "CarERV4c_CF" chrStart: 1245184
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 20  "CarERVR1_LTR" chrStart: 1310720
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 21  "CarLTR1-int" chrStart: 1376256
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 22  "CarLTR10_LTR" chrStart: 1441792
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 23  "CarLTR11a_LTR" chrStart: 1507328
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 24  "CarLTR11b_LTR" chrStart: 1572864
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 25  "CarLTR1A1A_LTR" chrStart: 1638400
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 26  "CarLTR1A1B_LTR" chrStart: 1703936
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 27  "CarLTR1A1C_LTR" chrStart: 1769472
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 28  "CarLTR1A2A_LTR" chrStart: 1835008
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 29  "CarLTR1A2B_LTR" chrStart: 1900544
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 30  "CarLTR1A3_LTR" chrStart: 1966080
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 31  "CarLTR1B1_LTR" chrStart: 2031616
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 32  "CarLTR1B2_LTR" chrStart: 2097152
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 33  "CarLTR2_LTR" chrStart: 2162688
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 34  "CarLTR3" chrStart: 2228224
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 35  "CarLTR4_LTR" chrStart: 2293760
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 36  "CarLTR5_LTR" chrStart: 2359296
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 37  "CarLTR6b" chrStart: 2424832
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 38  "CarLTR6c" chrStart: 2490368
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 39  "CarLTR7" chrStart: 2555904
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 40  "CarLTR8b" chrStart: 2621440
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 41  "CarLTR9_LTR" chrStart: 2686976
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 42  "CarSat1" chrStart: 2752512
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 43  "Carsat2" chrStart: 2818048
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 44  "Carsat3" chrStart: 2883584
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 45  "CfERV1" chrStart: 2949120
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 46  "CfERV1a_LTR" chrStart: 3014656
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 47  "CfERV1b_LTR" chrStart: 3080192
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 48  "CfERV1c_LTR" chrStart: 3145728
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 49  "CfERV1z_LTR" chrStart: 3211264
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 50  "CfERVF1" chrStart: 3276800
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 51  "CfERVF1_LTR" chrStart: 3342336
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 52  "CfERVF2" chrStart: 3407872
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 53  "CfERVF2B_LTR" chrStart: 3473408
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 54  "CfERVF2_LTR" chrStart: 3538944
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 55  "CHARLIE1" chrStart: 3604480
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 56  "Charlie11" chrStart: 3670016
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 57  "Charlie13a" chrStart: 3735552
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 58  "Charlie13b" chrStart: 3801088
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 59  "Charlie15a" chrStart: 3866624
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 60  "Charlie16a" chrStart: 3932160
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 61  "Charlie17a" chrStart: 3997696
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 62  "Charlie18a" chrStart: 4063232
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 63  "Charlie19a" chrStart: 4128768
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 64  "CHARLIE1A" chrStart: 4194304
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 65  "CHARLIE1B" chrStart: 4259840
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 66  "CHARLIE2" chrStart: 4325376
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 67  "Charlie21a" chrStart: 4390912
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 68  "Charlie22a" chrStart: 4456448
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 69  "Charlie24" chrStart: 4521984
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 70  "Charlie25" chrStart: 4587520
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 71  "Charlie26a" chrStart: 4653056
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 72  "Charlie27" chrStart: 4718592
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 73  "Charlie28" chrStart: 4784128
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 74  "CHARLIE4" chrStart: 4849664
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 75  "CHARLIE8A" chrStart: 4915200
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 76  "CR1L" chrStart: 4980736
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 77  "CR1_Mam" chrStart: 5046272
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 78  "DeuSINE" chrStart: 5111808
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 79  "DNA1_Mam" chrStart: 5177344
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 80  "ERVL-B4" chrStart: 5242880
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 81  "ERVL-E" chrStart: 5308416
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 82  "Eulor1" chrStart: 5373952
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 83  "Eulor10" chrStart: 5439488
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 84  "Eulor11" chrStart: 5505024
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 85  "Eulor12" chrStart: 5570560
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 86  "Eulor12B_CM" chrStart: 5636096
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 87  "Eulor12_CM" chrStart: 5701632
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 88  "Eulor2A" chrStart: 5767168
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 89  "Eulor2B" chrStart: 5832704
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 90  "Eulor2C" chrStart: 5898240
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 91  "Eulor3" chrStart: 5963776
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 92  "Eulor4" chrStart: 6029312
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 93  "Eulor5A" chrStart: 6094848
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 94  "Eulor5B" chrStart: 6160384
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 95  "Eulor6A" chrStart: 6225920
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 96  "Eulor6B" chrStart: 6291456
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 97  "Eulor6C" chrStart: 6356992
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 98  "Eulor6D" chrStart: 6422528
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 99  "Eulor6E" chrStart: 6488064
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 100  "Eulor7" chrStart: 6553600
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 101  "Eulor8" chrStart: 6619136
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 102  "Eulor9A" chrStart: 6684672
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 103  "Eulor9B" chrStart: 6750208
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 104  "Eulor9C" chrStart: 6815744
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 105  "EuthAT-1" chrStart: 6881280
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 106  "EuthAT-2" chrStart: 6946816
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 107  "EuthAT-2B" chrStart: 7012352
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 108  "EuthAT-N1" chrStart: 7077888
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 109  "Eutr1" chrStart: 7143424
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 110  "Eutr10" chrStart: 7208960
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 111  "Eutr11" chrStart: 7274496
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 112  "Eutr12" chrStart: 7340032
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 113  "Eutr13" chrStart: 7405568
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 114  "Eutr14" chrStart: 7471104
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 115  "Eutr15" chrStart: 7536640
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 116  "Eutr16" chrStart: 7602176
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 117  "Eutr17" chrStart: 7667712
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 118  "Eutr18" chrStart: 7733248
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 119  "Eutr2" chrStart: 7798784
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 120  "Eutr3" chrStart: 7864320
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 121  "Eutr4" chrStart: 7929856
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 122  "Eutr5" chrStart: 7995392
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 123  "Eutr6" chrStart: 8060928
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 124  "Eutr7" chrStart: 8126464
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 125  "Eutr8" chrStart: 8192000
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 126  "Eutr9" chrStart: 8257536
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 127  "EUTREP1" chrStart: 8323072
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 128  "EUTREP10" chrStart: 8388608
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 129  "EUTREP11" chrStart: 8454144
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 130  "EUTREP12" chrStart: 8519680
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 131  "EUTREP13" chrStart: 8585216
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 132  "EUTREP14" chrStart: 8650752
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 133  "EUTREP15" chrStart: 8716288
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 134  "EUTREP16" chrStart: 8781824
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 135  "EUTREP2" chrStart: 8847360
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 136  "EUTREP3" chrStart: 8912896
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 137  "EUTREP4" chrStart: 8978432
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 138  "EUTREP5" chrStart: 9043968
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 139  "EUTREP6" chrStart: 9109504
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 140  "EUTREP7" chrStart: 9175040
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 141  "EUTREP8" chrStart: 9240576
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 142  "EutTc1-N1" chrStart: 9306112
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 143  "GOLEM" chrStart: 9371648
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 144  "GOLEM_B" chrStart: 9437184
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 145  "HAL1" chrStart: 9502720
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 146  "HAL1M8" chrStart: 9568256
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 147  "Helitron1Nb_Mam" chrStart: 9633792
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 148  "Helitron3Na_Mam" chrStart: 9699328
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 149  "HERVFH21I" chrStart: 9764864
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 150  "HERVH" chrStart: 9830400
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 151  "HERVK22I" chrStart: 9895936
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 152  "HERVKC4" chrStart: 9961472
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 153  "HERVL66I" chrStart: 10027008
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 154  "HERVL68" chrStart: 10092544
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 155  "HERVS71" chrStart: 10158080
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 156  "Kanga1" chrStart: 10223616
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 157  "Kanga11a" chrStart: 10289152
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 158  "Kanga1d" chrStart: 10354688
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 159  "L1-Y_CF" chrStart: 10420224
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 160  "L1M1_5" chrStart: 10485760
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 161  "L1M3A_5" chrStart: 10551296
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 162  "L1M3DE_5" chrStart: 10616832
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 163  "L1M3D_5" chrStart: 10682368
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 164  "L1M6_5end" chrStart: 10747904
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 165  "L1M7_5end" chrStart: 10813440
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 166  "L1MA10" chrStart: 10878976
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 167  "L1MA9_5" chrStart: 10944512
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 168  "L1MB4_5" chrStart: 11010048
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 169  "L1MB6_5" chrStart: 11075584
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 170  "L1MB7" chrStart: 11141120
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 171  "L1MC3" chrStart: 11206656
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 172  "L1MC4B" chrStart: 11272192
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 173  "L1MC4_5end" chrStart: 11337728
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 174  "L1MC5" chrStart: 11403264
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 175  "L1MD1_5" chrStart: 11468800
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 176  "L1MDA_5" chrStart: 11534336
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 177  "L1ME3C_3end" chrStart: 11599872
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 178  "L1ME3D_3end" chrStart: 11665408
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 179  "L1ME3E_3end" chrStart: 11730944
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 180  "L1ME3F_3end" chrStart: 11796480
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 181  "L1ME4" chrStart: 11862016
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 182  "L1ME5" chrStart: 11927552
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 183  "L1ME5_3end" chrStart: 11993088
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 184  "L1MEC_5" chrStart: 12058624
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 185  "L1MEe_5end" chrStart: 12124160
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 186  "L1MEf_5end" chrStart: 12189696
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 187  "L1MEg_5end" chrStart: 12255232
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 188  "L1P_MA2" chrStart: 12320768
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 189  "L1_Canid2_5end" chrStart: 12386304
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 190  "L1_Canid_5end" chrStart: 12451840
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 191  "L1_Carn1_5end" chrStart: 12517376
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 192  "L1_Carn2_5end" chrStart: 12582912
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 193  "L1_Carn2_orf2" chrStart: 12648448
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 194  "L1_Carn3_5end" chrStart: 12713984
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 195  "L1_Carn5_3end" chrStart: 12779520
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 196  "L1_Carn5_5end" chrStart: 12845056
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 197  "L1_Carni_orf2" chrStart: 12910592
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 198  "L1_CF" chrStart: 12976128
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 199  "L2" chrStart: 13041664
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 200  "L2B" chrStart: 13107200
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 201  "L2C" chrStart: 13172736
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 202  "L2D" chrStart: 13238272
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 203  "L3b_3end" chrStart: 13303808
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 204  "L4" chrStart: 13369344
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 205  "L5" chrStart: 13434880
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 206  "LmeSINE1b" chrStart: 13500416
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 207  "LmeSINE1c" chrStart: 13565952
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 208  "LSU-rRNA_Cel" chrStart: 13631488
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 209  "LSU-rRNA_Dme" chrStart: 13697024
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 210  "LSU-rRNA_Hsa" chrStart: 13762560
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 211  "LTR104_Mam" chrStart: 13828096
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 212  "LTR108d_Mam" chrStart: 13893632
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 213  "LTR108e_Mam" chrStart: 13959168
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 214  "LTR10A" chrStart: 14024704
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 215  "LTR10E" chrStart: 14090240
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 216  "LTR10G" chrStart: 14155776
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 217  "LTR16A" chrStart: 14221312
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 218  "LTR16B" chrStart: 14286848
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 219  "LTR16B1" chrStart: 14352384
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 220  "LTR16B2" chrStart: 14417920
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 221  "LTR16D1" chrStart: 14483456
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 222  "LTR16D2" chrStart: 14548992
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 223  "LTR16E1" chrStart: 14614528
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 224  "LTR16E2" chrStart: 14680064
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 225  "LTR33" chrStart: 14745600
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 226  "LTR33A" chrStart: 14811136
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 227  "LTR33B" chrStart: 14876672
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 228  "LTR33C" chrStart: 14942208
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 229  "LTR35B_CF" chrStart: 15007744
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 230  "LTR37-int" chrStart: 15073280
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 231  "LTR40A1" chrStart: 15138816
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 232  "LTR51_CF" chrStart: 15204352
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 233  "LTR53-int" chrStart: 15269888
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 234  "LTR54" chrStart: 15335424
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 235  "LTR54B" chrStart: 15400960
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 236  "LTR67B" chrStart: 15466496
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 237  "LTR68" chrStart: 15532032
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 238  "LTR72A_CF" chrStart: 15597568
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 239  "LTR72B_CF" chrStart: 15663104
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 240  "LTR75_1" chrStart: 15728640
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 241  "LTR78" chrStart: 15794176
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 242  "LTR79" chrStart: 15859712
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 243  "LTR80A" chrStart: 15925248
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 244  "LTR80B" chrStart: 15990784
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 245  "LTR81A" chrStart: 16056320
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 246  "LTR81B" chrStart: 16121856
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 247  "LTR81C" chrStart: 16187392
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 248  "LTR82A" chrStart: 16252928
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 249  "LTR82B" chrStart: 16318464
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 250  "LTR83" chrStart: 16384000
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 251  "LTR84a" chrStart: 16449536
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 252  "LTR84b" chrStart: 16515072
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 253  "LTR85a" chrStart: 16580608
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 254  "LTR85b" chrStart: 16646144
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 255  "LTR85c" chrStart: 16711680
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 256  "LTR86A1" chrStart: 16777216
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 257  "LTR86A2" chrStart: 16842752
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 258  "LTR86B1" chrStart: 16908288
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 259  "LTR86B2" chrStart: 16973824
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 260  "LTR86C" chrStart: 17039360
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 261  "LTR87" chrStart: 17104896
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 262  "LTR88a" chrStart: 17170432
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 263  "LTR88b" chrStart: 17235968
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 264  "LTR88c" chrStart: 17301504
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 265  "LTR89" chrStart: 17367040
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 266  "LTR90A" chrStart: 17432576
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 267  "LTR90B" chrStart: 17498112
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 268  "MamGyp-int" chrStart: 17563648
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 269  "MamGypLTR1a" chrStart: 17629184
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 270  "MamGypLTR1b" chrStart: 17694720
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 271  "MamGypLTR1c" chrStart: 17760256
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 272  "MamGypLTR1d" chrStart: 17825792
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 273  "MamGypLTR2" chrStart: 17891328
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 274  "MamGypLTR2b" chrStart: 17956864
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 275  "MamGypLTR2c" chrStart: 18022400
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 276  "MamGypLTR3" chrStart: 18087936
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 277  "MamRep137" chrStart: 18153472
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 278  "MamRep1527" chrStart: 18219008
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 279  "MamRep1879" chrStart: 18284544
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 280  "MamRep1894" chrStart: 18350080
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 281  "MamRep38" chrStart: 18415616
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 282  "MamRep4096" chrStart: 18481152
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 283  "MamRep434" chrStart: 18546688
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 284  "MamRep488" chrStart: 18612224
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 285  "MamRep564" chrStart: 18677760
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 286  "MamRep605" chrStart: 18743296
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 287  "MamSINE1" chrStart: 18808832
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 288  "MamTip2" chrStart: 18874368
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 289  "MARE1" chrStart: 18939904
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 290  "MARE10" chrStart: 19005440
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 291  "MARE11" chrStart: 19070976
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 292  "MARE3" chrStart: 19136512
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 293  "MARE4" chrStart: 19202048
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 294  "MARE5" chrStart: 19267584
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 295  "MARE6" chrStart: 19333120
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 296  "MARE7" chrStart: 19398656
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 297  "MARE8" chrStart: 19464192
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 298  "MARE9" chrStart: 19529728
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 299  "MER101B_CF" chrStart: 19595264
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 300  "MER101_CF" chrStart: 19660800
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 301  "MER103" chrStart: 19726336
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 302  "MER104" chrStart: 19791872
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 303  "MER104A" chrStart: 19857408
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 304  "MER104B" chrStart: 19922944
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 305  "MER104C" chrStart: 19988480
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 306  "MER105" chrStart: 20054016
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 307  "MER115" chrStart: 20119552
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 308  "MER116" chrStart: 20185088
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 309  "MER121" chrStart: 20250624
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 310  "MER123" chrStart: 20316160
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 311  "MER124" chrStart: 20381696
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 312  "MER125" chrStart: 20447232
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 313  "MER126" chrStart: 20512768
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 314  "MER127" chrStart: 20578304
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 315  "MER129" chrStart: 20643840
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 316  "MER130" chrStart: 20709376
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 317  "MER131" chrStart: 20774912
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 318  "MER132" chrStart: 20840448
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 319  "MER133A" chrStart: 20905984
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 320  "MER133B" chrStart: 20971520
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 321  "MER134" chrStart: 21037056
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 322  "MER135" chrStart: 21102592
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 323  "MER136" chrStart: 21168128
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 324  "MER2" chrStart: 21233664
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 325  "MER21B" chrStart: 21299200
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 326  "MER21C" chrStart: 21364736
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 327  "MER21C_BT" chrStart: 21430272
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 328  "MER25" chrStart: 21495808
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 329  "MER2B" chrStart: 21561344
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 330  "MER3" chrStart: 21626880
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 331  "MER30" chrStart: 21692416
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 332  "MER31A" chrStart: 21757952
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 333  "MER34-int" chrStart: 21823488
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 334  "MER34A" chrStart: 21889024
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 335  "MER34A1" chrStart: 21954560
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 336  "MER34A_CF" chrStart: 22020096
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 337  "MER34B_CF" chrStart: 22085632
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 338  "MER34C_CF" chrStart: 22151168
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 339  "MER41_CF" chrStart: 22216704
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 340  "MER44D" chrStart: 22282240
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 341  "MER46C" chrStart: 22347776
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 342  "MER47B" chrStart: 22413312
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 343  "MER47C" chrStart: 22478848
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 344  "MER57B1" chrStart: 22544384
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 345  "MER57C1" chrStart: 22609920
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 346  "MER57C2" chrStart: 22675456
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 347  "MER57D" chrStart: 22740992
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 348  "MER57E1" chrStart: 22806528
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 349  "MER57E2" chrStart: 22872064
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 350  "MER57E3" chrStart: 22937600
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 351  "MER58A" chrStart: 23003136
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 352  "MER58B" chrStart: 23068672
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 353  "MER58C" chrStart: 23134208
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 354  "MER58D" chrStart: 23199744
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 355  "MER5A" chrStart: 23265280
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 356  "MER5A1" chrStart: 23330816
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 357  "MER5C" chrStart: 23396352
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 358  "MER5C1" chrStart: 23461888
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 359  "MER6" chrStart: 23527424
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 360  "MER63C" chrStart: 23592960
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 361  "MER65A" chrStart: 23658496
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 362  "MER65I" chrStart: 23724032
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 363  "MER68A" chrStart: 23789568
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 364  "MER68_I" chrStart: 23855104
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 365  "MER69A" chrStart: 23920640
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 366  "MER69B" chrStart: 23986176
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 367  "MER6C" chrStart: 24051712
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 368  "MER70_I" chrStart: 24117248
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 369  "MER74" chrStart: 24182784
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 370  "MER74A" chrStart: 24248320
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 371  "MER76-int" chrStart: 24313856
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 372  "MER80" chrStart: 24379392
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 373  "MER82" chrStart: 24444928
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 374  "MER87_CF" chrStart: 24510464
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 375  "MER90a_LTR" chrStart: 24576000
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 376  "MER91B" chrStart: 24641536
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 377  "MER92C" chrStart: 24707072
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 378  "MER97d" chrStart: 24772608
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 379  "MERX" chrStart: 24838144
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 380  "MIR" chrStart: 24903680
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 381  "MIR3" chrStart: 24969216
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 382  "MIRb" chrStart: 25034752
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 383  "MIRc" chrStart: 25100288
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 384  "MLT-int" chrStart: 25165824
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 385  "MLT1A0" chrStart: 25231360
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 386  "MLT1A1" chrStart: 25296896
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 387  "MLT1B" chrStart: 25362432
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 388  "MLT1C" chrStart: 25427968
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 389  "MLT1C1" chrStart: 25493504
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 390  "MLT1C2" chrStart: 25559040
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 391  "MLT1D" chrStart: 25624576
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 392  "MLT1E" chrStart: 25690112
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 393  "MLT1E1" chrStart: 25755648
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 394  "MLT1E1A" chrStart: 25821184
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 395  "MLT1E2" chrStart: 25886720
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 396  "MLT1F" chrStart: 25952256
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 397  "MLT1F1" chrStart: 26017792
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 398  "MLT1F2" chrStart: 26083328
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 399  "MLT1F_I" chrStart: 26148864
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 400  "MLT1H_I" chrStart: 26214400
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 401  "MLT1J" chrStart: 26279936
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 402  "MLT1J-int" chrStart: 26345472
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 403  "MLT1J1" chrStart: 26411008
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 404  "MLT1J2" chrStart: 26476544
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 405  "MLT1M" chrStart: 26542080
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 406  "MLT1O" chrStart: 26607616
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 407  "MLT1_I" chrStart: 26673152
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 408  "MLT2B2" chrStart: 26738688
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 409  "MLT2B3" chrStart: 26804224
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 410  "MLT2B4" chrStart: 26869760
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 411  "MLT2E" chrStart: 26935296
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 412  "MLT2F" chrStart: 27000832
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 413  "MSTC" chrStart: 27066368
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 414  "MST_I" chrStart: 27131904
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 415  "NeoSch-6.5283" chrStart: 27197440
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 416  "ORSL" chrStart: 27262976
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 417  "ORSL-2a" chrStart: 27328512
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 418  "ORSL-2b" chrStart: 27394048
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 419  "RICKSHA" chrStart: 27459584
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 420  "RICKSHA_0" chrStart: 27525120
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 421  "Ricksha_a" chrStart: 27590656
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 422  "SAT1_CF" chrStart: 27656192
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 423  "SINEC1A_CF" chrStart: 27721728
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 424  "SINEC1B1_CF" chrStart: 27787264
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 425  "SINEC1B2_CF" chrStart: 27852800
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 426  "SINEC1C1_CF" chrStart: 27918336
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 427  "SINEC1C2_CF" chrStart: 27983872
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 428  "SINEC1D_CF" chrStart: 28049408
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 429  "SINEC1_CF" chrStart: 28114944
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 430  "SINEC2A1_CF" chrStart: 28180480
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 431  "SINEC2A2_CF" chrStart: 28246016
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 432  "SINEC_c1" chrStart: 28311552
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 433  "SSU-rRNA_Cel" chrStart: 28377088
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 434  "SSU-rRNA_Dme" chrStart: 28442624
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 435  "SSU-rRNA_Hsa" chrStart: 28508160
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 436  "SVA2" chrStart: 28573696
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 437  "TAR1" chrStart: 28639232
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 438  "THER1" chrStart: 28704768
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 439  "THER2" chrStart: 28770304
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 440  "Tigger10" chrStart: 28835840
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 441  "Tigger12" chrStart: 28901376
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 442  "Tigger12A" chrStart: 28966912
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 443  "Tigger13a" chrStart: 29032448
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 444  "Tigger14a" chrStart: 29097984
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 445  "Tigger15a" chrStart: 29163520
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 446  "Tigger16a" chrStart: 29229056
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 447  "Tigger16b" chrStart: 29294592
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 448  "Tigger1a_Car" chrStart: 29360128
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 449  "Tigger2a_Car" chrStart: 29425664
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 450  "Tigger2f" chrStart: 29491200
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 451  "TIGGER5A" chrStart: 29556736
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 452  "TIGGER5_A" chrStart: 29622272
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 453  "TIGGER5_B" chrStart: 29687808
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 454  "TIGGER6A" chrStart: 29753344
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 455  "Tigger9b" chrStart: 29818880
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 456  "tRNA-Ala-GCA" chrStart: 29884416
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 457  "tRNA-Ala-GCY_" chrStart: 29949952
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 458  "tRNA-Arg-CGA" chrStart: 30015488
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 459  "tRNA-Arg-CGG" chrStart: 30081024
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 460  "tRNA-Arg-CGY" chrStart: 30146560
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 461  "tRNA-Asp-GAY" chrStart: 30212096
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 462  "tRNA-Gln-CAA" chrStart: 30277632
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 463  "tRNA-Gln-CAA_" chrStart: 30343168
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 464  "tRNA-Gln-CAG" chrStart: 30408704
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 465  "tRNA-His-CAY" chrStart: 30474240
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 466  "tRNA-His-CAY_" chrStart: 30539776
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 467  "tRNA-Ile-ATA" chrStart: 30605312
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 468  "tRNA-Ile-ATC" chrStart: 30670848
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 469  "tRNA-Ile-ATT" chrStart: 30736384
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 470  "tRNA-Leu-CTA" chrStart: 30801920
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 471  "tRNA-Leu-CTA_" chrStart: 30867456
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 472  "tRNA-Leu-CTG" chrStart: 30932992
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 473  "tRNA-Leu-CTY" chrStart: 30998528
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 474  "tRNA-Leu-TTA" chrStart: 31064064
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 475  "tRNA-Leu-TTA(m)" chrStart: 31129600
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 476  "tRNA-Leu-TTG" chrStart: 31195136
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 477  "tRNA-Lys-AAG" chrStart: 31260672
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 478  "tRNA-Met" chrStart: 31326208
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 479  "tRNA-Met-i" chrStart: 31391744
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 480  "tRNA-Met_" chrStart: 31457280
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 481  "tRNA-Pro-CCA" chrStart: 31522816
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 482  "tRNA-Pro-CCG" chrStart: 31588352
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 483  "tRNA-SeC(e)-TGA" chrStart: 31653888
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 484  "tRNA-Ser-AGY" chrStart: 31719424
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 485  "tRNA-Ser-TCA" chrStart: 31784960
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 486  "tRNA-Ser-TCAm" chrStart: 31850496
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 487  "tRNA-Ser-TCA_" chrStart: 31916032
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 488  "tRNA-Ser-TCG" chrStart: 31981568
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 489  "tRNA-Ser-TCY" chrStart: 32047104
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 490  "tRNA-Thr-ACG_" chrStart: 32112640
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 491  "tRNA-Thr-ACY_" chrStart: 32178176
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 492  "tRNA-Tyr-TAC" chrStart: 32243712
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 493  "tRNA-Tyr-TAT" chrStart: 32309248
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 494  "tRNA-Val-GTA" chrStart: 32374784
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 495  "U14" chrStart: 32440320
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 496  "U7" chrStart: 32505856
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 497  "U8" chrStart: 32571392
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 498  "UCON1" chrStart: 32636928
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 499  "UCON10" chrStart: 32702464
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 500  "UCON100" chrStart: 32768000
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 501  "UCON101" chrStart: 32833536
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 502  "UCON102" chrStart: 32899072
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 503  "UCON103" chrStart: 32964608
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 504  "UCON104" chrStart: 33030144
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 505  "UCON105" chrStart: 33095680
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 506  "UCON106" chrStart: 33161216
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 507  "UCON107" chrStart: 33226752
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 508  "UCON11" chrStart: 33292288
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 509  "UCON12" chrStart: 33357824
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 510  "UCON12A" chrStart: 33423360
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 511  "UCON13" chrStart: 33488896
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 512  "UCON132a" chrStart: 33554432
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 513  "UCON132b" chrStart: 33619968
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 514  "UCON14" chrStart: 33685504
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 515  "UCON15" chrStart: 33751040
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 516  "UCON16" chrStart: 33816576
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 517  "UCON17" chrStart: 33882112
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 518  "UCON18" chrStart: 33947648
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 519  "UCON19" chrStart: 34013184
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 520  "UCON2" chrStart: 34078720
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 521  "UCON20" chrStart: 34144256
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 522  "UCON21" chrStart: 34209792
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 523  "UCON22" chrStart: 34275328
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 524  "UCON23" chrStart: 34340864
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 525  "UCON24" chrStart: 34406400
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 526  "UCON25" chrStart: 34471936
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 527  "UCON26" chrStart: 34537472
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 528  "UCON27" chrStart: 34603008
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 529  "UCON28" chrStart: 34668544
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 530  "UCON28a" chrStart: 34734080
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 531  "UCON28b" chrStart: 34799616
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 532  "UCON28c" chrStart: 34865152
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 533  "UCON29" chrStart: 34930688
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 534  "UCON3" chrStart: 34996224
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 535  "UCON31" chrStart: 35061760
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 536  "UCON32" chrStart: 35127296
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 537  "UCON33" chrStart: 35192832
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 538  "UCON34" chrStart: 35258368
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 539  "UCON35" chrStart: 35323904
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 540  "UCON36" chrStart: 35389440
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 541  "UCON37" chrStart: 35454976
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 542  "UCON38" chrStart: 35520512
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 543  "UCON39" chrStart: 35586048
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 544  "UCON4" chrStart: 35651584
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 545  "UCON40" chrStart: 35717120
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 546  "UCON41" chrStart: 35782656
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 547  "UCON42" chrStart: 35848192
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 548  "UCON43" chrStart: 35913728
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 549  "UCON44" chrStart: 35979264
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 550  "UCON45" chrStart: 36044800
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 551  "UCON46" chrStart: 36110336
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 552  "UCON47" chrStart: 36175872
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 553  "UCON48" chrStart: 36241408
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 554  "UCON49" chrStart: 36306944
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 555  "UCON5" chrStart: 36372480
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 556  "UCON50" chrStart: 36438016
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 557  "UCON51" chrStart: 36503552
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 558  "UCON52" chrStart: 36569088
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 559  "UCON53" chrStart: 36634624
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 560  "UCON54" chrStart: 36700160
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 561  "UCON55" chrStart: 36765696
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 562  "UCON56" chrStart: 36831232
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 563  "UCON57" chrStart: 36896768
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 564  "UCON58" chrStart: 36962304
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 565  "UCON59" chrStart: 37027840
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 566  "UCON6" chrStart: 37093376
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 567  "UCON60" chrStart: 37158912
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 568  "UCON61" chrStart: 37224448
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 569  "UCON62" chrStart: 37289984
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 570  "UCON63" chrStart: 37355520
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 571  "UCON64" chrStart: 37421056
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 572  "UCON65" chrStart: 37486592
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 573  "UCON66" chrStart: 37552128
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 574  "UCON67" chrStart: 37617664
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 575  "UCON68" chrStart: 37683200
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 576  "UCON69" chrStart: 37748736
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 577  "UCON7" chrStart: 37814272
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 578  "UCON70" chrStart: 37879808
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 579  "UCON71" chrStart: 37945344
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 580  "UCON72" chrStart: 38010880
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 581  "UCON73" chrStart: 38076416
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 582  "UCON74" chrStart: 38141952
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 583  "UCON75" chrStart: 38207488
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 584  "UCON76" chrStart: 38273024
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 585  "UCON77" chrStart: 38338560
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 586  "UCON78" chrStart: 38404096
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 587  "UCON79" chrStart: 38469632
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 588  "UCON8" chrStart: 38535168
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 589  "UCON80" chrStart: 38600704
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 590  "UCON81" chrStart: 38666240
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 591  "UCON82" chrStart: 38731776
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 592  "UCON83" chrStart: 38797312
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 593  "UCON84" chrStart: 38862848
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 594  "UCON85" chrStart: 38928384
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 595  "UCON86" chrStart: 38993920
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 596  "UCON87" chrStart: 39059456
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 597  "UCON88" chrStart: 39124992
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 598  "UCON89" chrStart: 39190528
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 599  "UCON9" chrStart: 39256064
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 600  "UCON90" chrStart: 39321600
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 601  "UCON91" chrStart: 39387136
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 602  "UCON92" chrStart: 39452672
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 603  "UCON93" chrStart: 39518208
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 604  "UCON94" chrStart: 39583744
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 605  "UCON95" chrStart: 39649280
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 606  "UCON96" chrStart: 39714816
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 607  "UCON97" chrStart: 39780352
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 608  "UCON98" chrStart: 39845888
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 609  "UCON99" chrStart: 39911424
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 610  "X10a_DNA" chrStart: 39976960
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 611  "X10b_DNA" chrStart: 40042496
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 612  "X11_DNA" chrStart: 40108032
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 613  "X11_LINE" chrStart: 40173568
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 614  "X12_DNA" chrStart: 40239104
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 615  "X12_LINE" chrStart: 40304640
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 616  "X13_DNA" chrStart: 40370176
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 617  "X13_LINE" chrStart: 40435712
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 618  "X15_DNA" chrStart: 40501248
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 619  "X15_LINE" chrStart: 40566784
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 620  "X17_DNA" chrStart: 40632320
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 621  "X17_LINE" chrStart: 40697856
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 622  "X18_DNA" chrStart: 40763392
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 623  "X18_LINE" chrStart: 40828928
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 624  "X19_LINE" chrStart: 40894464
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 625  "X1_DNA" chrStart: 40960000
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 626  "X1_LINE" chrStart: 41025536
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 627  "X1_LR" chrStart: 41091072
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 628  "X20_DNA" chrStart: 41156608
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 629  "X20_LINE" chrStart: 41222144
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 630  "X21_DNA" chrStart: 41287680
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 631  "X21_LINE" chrStart: 41353216
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 632  "X22_DNA" chrStart: 41418752
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 633  "X23_DNA" chrStart: 41484288
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 634  "X24_DNA" chrStart: 41549824
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 635  "X24_LINE" chrStart: 41615360
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 636  "X25_DNA" chrStart: 41680896
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 637  "X26_DNA" chrStart: 41746432
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 638  "X27_DNA" chrStart: 41811968
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 639  "X28_DNA" chrStart: 41877504
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 640  "X29a_DNA" chrStart: 41943040
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 641  "X29b_DNA" chrStart: 42008576
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 642  "X2a_DNA" chrStart: 42074112
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 643  "X2b_DNA" chrStart: 42139648
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 644  "X2_LINE" chrStart: 42205184
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 645  "X2_LR" chrStart: 42270720
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 646  "X30_DNA" chrStart: 42336256
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 647  "X31_DNA" chrStart: 42401792
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 648  "X32_DNA" chrStart: 42467328
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 649  "X33a_DNA" chrStart: 42532864
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 650  "X34_DNA" chrStart: 42598400
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 651  "X3_LINE" chrStart: 42663936
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 652  "X3_LR" chrStart: 42729472
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 653  "X4a_DNA" chrStart: 42795008
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 654  "X4b_DNA" chrStart: 42860544
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 655  "X4_LINE" chrStart: 42926080
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 656  "X4_LR" chrStart: 42991616
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 657  "X5a_DNA" chrStart: 43057152
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 658  "X5A_LINE" chrStart: 43122688
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 659  "X5b_DNA" chrStart: 43188224
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 660  "X5B_LINE" chrStart: 43253760
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 661  "X6a_DNA" chrStart: 43319296
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 662  "X6A_LINE" chrStart: 43384832
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 663  "X6b_DNA" chrStart: 43450368
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 664  "X6B_LINE" chrStart: 43515904
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 665  "X7A_LINE" chrStart: 43581440
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 666  "X7B_LINE" chrStart: 43646976
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 667  "X7C_LINE" chrStart: 43712512
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 668  "X7D_LINE" chrStart: 43778048
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 669  "X7_DNA" chrStart: 43843584
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 670  "X8_LINE" chrStart: 43909120
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 671  "X9a_DNA" chrStart: 43974656
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 672  "X9b_DNA" chrStart: 44040192
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 673  "X9c_DNA" chrStart: 44105728
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 674  "X9_LINE" chrStart: 44171264
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 675  "Zaphod3" chrStart: 44236800
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 676  "ZOMBI" chrStart: 44302336
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 677  "ZOMBI_B" chrStart: 44367872
+../../data/dog/Repbase16Mars2023CanisLupusFamiliari_without_MicroSat.fa : chr # 678  "ZOMBI_C" chrStart: 44433408
+Estimated genome size=245498944   44498944   201000000
+GstrandBit=32
+Number of SA indices: 262870
+Aug 26 17:44:24 ... starting to sort Suffix Array. This may take a long time...
+Number of chunks: 8;   chunks size limit: 300416 bytes
+Aug 26 17:44:24 ... sorting Suffix Array chunks and saving them to disk...
+Writing 290904 bytes into ../../results/dog/te_ref/SA_0 ; empty space on disk = 905946730496 bytes ... done
+Writing 293464 bytes into ../../results/dog/te_ref/SA_5 ; empty space on disk = 905946435584 bytes ...Writing 298712 bytes into ../../results/dog/te_ref/SA_2 ; empty space on disk = 905946202112 bytes ... done
+Writing 292864 bytes into ../../results/dog/te_ref/SA_1 ; empty space on disk = 905946087424 bytes ...Writing 297720 bytes into ../../results/dog/te_ref/SA_4 ; empty space on disk = 905945858048 bytes ...Writing 295088 bytes into ../../results/dog/te_ref/SA_3 ; empty space on disk = 905945772032 bytes ... done
+ done
+ done
+ done
+ done
+Writing 45416 bytes into ../../results/dog/te_ref/SA_7 ; empty space on disk = 905944948736 bytes ... done
+Writing 288792 bytes into ../../results/dog/te_ref/SA_6 ; empty space on disk = 905944899584 bytes ... done
+Aug 26 17:44:24 ... loading chunks from disk, packing SA...
+Aug 26 17:44:24 ... finished generating suffix array
+Aug 26 17:44:24 ... generating Suffix Array index
+Aug 26 17:44:25 ... completed Suffix Array index
+Aug 26 17:44:25 ... writing Genome to disk ...
+Writing 44498944 bytes into ../../results/dog/te_ref/Genome ; empty space on disk = 905995751424 bytes ... done
+SA size in bytes: 1084342
+Aug 26 17:44:25 ... writing Suffix Array to disk ...
+Writing 1084342 bytes into ../../results/dog/te_ref/SA ; empty space on disk = 905952346112 bytes ... done
+Aug 26 17:44:25 ... writing SAindex to disk
+Writing 8 bytes into ../../results/dog/te_ref/SAindex ; empty space on disk = 906342735872 bytes ... done
+Writing 112 bytes into ../../results/dog/te_ref/SAindex ; empty space on disk = 906342735872 bytes ... done
+Writing 391468371 bytes into ../../results/dog/te_ref/SAindex ; empty space on disk = 906342735872 bytes ... done
+Aug 26 17:44:26 ..... finished successfully
+DONE: Genome generation, EXITING

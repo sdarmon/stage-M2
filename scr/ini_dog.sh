@@ -21,3 +21,10 @@ echo "Agglomeration of connexe components..."
 ## Compute the intersection
 bash inter_dog.sh
 
+
+##Fetch the neighborhood of a comp 
+#bash neigh_comp.sh ../../results/dog/genome/ ../../results/dog/te_ref/ ../../data/dog/ref.gtf ../../data/dog/TE.gtf ../../data/dog/outputNodes.txt ../../data/dog/results/graph_hc_10_dog_1_hc_10_dog_2_k41_C0.05.edges ../../data/dog/results/graph_hc_10_dog_1_hc_10_dog_2_k41.abundance ../../results/dog/processing/comp2.txt ~/Documents/graph/sineCA2 41 10 10
+
+
+##Build the vizitig file for visualisation
+#./visitig ...

@@ -1,0 +1,41 @@
+STAR version=2.7.10a
+STAR compilation time,server,dir=2022-01-16T16:35:44+00:00 <place not set in Debian package>
+##### Command Line:
+/usr/lib/rna-star/bin/STARlong-avx2 --genomeDir ../../results/dog/genome/ --runMode alignReads --runThreadN 8 --readFilesIn _n.unitigs --outFileNamePrefix STAR_alignment_/ --outSAMtype BAM SortedByCoordinate --outSAMunmapped Within --outSAMattributes Standard --outFilterMultimapNmax 10000 --outReadsUnmapped Fastx
+##### Initial USER parameters from Command Line:
+outFileNamePrefix                 STAR_alignment_/
+###### All USER parameters from Command Line:
+genomeDir                     ../../results/dog/genome/     ~RE-DEFINED
+runMode                       alignReads        ~RE-DEFINED
+runThreadN                    8     ~RE-DEFINED
+readFilesIn                   _n.unitigs        ~RE-DEFINED
+outFileNamePrefix             STAR_alignment_/     ~RE-DEFINED
+outSAMtype                    BAM   SortedByCoordinate        ~RE-DEFINED
+outSAMunmapped                Within        ~RE-DEFINED
+outSAMattributes              Standard        ~RE-DEFINED
+outFilterMultimapNmax         10000     ~RE-DEFINED
+outReadsUnmapped              Fastx     ~RE-DEFINED
+##### Finished reading parameters from all sources
+
+##### Final user re-defined parameters-----------------:
+runMode                           alignReads   
+runThreadN                        8
+genomeDir                         ../../results/dog/genome/
+readFilesIn                       _n.unitigs   
+outFileNamePrefix                 STAR_alignment_/
+outReadsUnmapped                  Fastx
+outSAMtype                        BAM   SortedByCoordinate   
+outSAMattributes                  Standard   
+outSAMunmapped                    Within   
+outFilterMultimapNmax             10000
+
+-------------------------------
+##### Final effective command line:
+/usr/lib/rna-star/bin/STARlong-avx2   --runMode alignReads      --runThreadN 8   --genomeDir ../../results/dog/genome/   --readFilesIn _n.unitigs      --outFileNamePrefix STAR_alignment_/   --outReadsUnmapped Fastx   --outSAMtype BAM   SortedByCoordinate      --outSAMattributes Standard      --outSAMunmapped Within      --outFilterMultimapNmax 10000
+----------------------------------------
+
+Number of fastq files for each mate = 1
+
+EXITING because of fatal input ERROR: could not open readFilesIn=_n.unitigs
+
+Aug 27 15:33:02 ...... FATAL ERROR, exiting
