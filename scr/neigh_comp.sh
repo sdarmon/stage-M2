@@ -108,7 +108,8 @@ samtools view -h -F 256 STAR_alignment_${base}/Aligned.sortedByCoord.out.bam | s
 
 samtools view -F 256 STAR_alignment_cons_${base}/Aligned.sortedByCoord.out.bam  > ${out}seq_intersectionCons.txt
 
-bedtools intersect -wb -a ${te} -b STAR_alignment_${base}/output_filtered.bam  -split >  ${out}seq_intersectionTE.txt
+#bedtools intersect -wb -a ${te} -b STAR_alignment_${base}/output_filtered.bam  -split >  ${out}seq_intersectionTE.txt
+echo "" >   ${out}seq_intersectionTE.txt
 
 bedtools intersect -wb -a ${ref} -b STAR_alignment_${base}/output_filtered.bam  -split > ${out}seq_intersectionRef.txt
 

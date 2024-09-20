@@ -17,6 +17,8 @@ dic_index2TE = {}
 with open(Arg[2], 'r') as f:
     for line in f:
         L = line.split('\t')
+        if len(L) < 12 :
+            continue
         TE = L[8].split('"')[3]
         index = int(L[12].split('_')[1])
         if index not in dic_index2TE:
