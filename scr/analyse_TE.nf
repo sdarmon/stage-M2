@@ -440,3 +440,136 @@ python3 match_nodes.py ../../data/droso/$1/outputAllNodes.txt ../../data/droso/$
 
 grep "$2\\$"  ../../data/droso/FC30.table.tsv | awk  '$5 > 0 {print $4 "\t" $5}' | sort -k2 -nr > ../../data/droso/$1/sorted_count.txt
 python3 parent_TE.py ../../data/droso/$1/plot.nodes ../../data/droso/exp_$1.fa ../../data/droso/$1/sorted_count.txt ../../data/droso/$1/plot_enhanced.nodes
+
+
+
+
+STARlong --genomeDir ../../results/dog/te_ref/  \
+   --runMode alignReads   \
+   --runThreadN 8   \
+   --readFilesIn unitigs.fa  \
+   --outFileNamePrefix ../../results/dog/STAR_alignment_unitigs_TE    /  \
+   --outSAMtype BAM SortedByCoordinate     \
+   --outSAMunmapped Within     \
+   --outSAMattributes Standard     \
+   --outFilterMultimapNmax 10000     \
+   --outReadsUnmapped Fastx
+
+samtools view -h ../../results/dog/STAR_alignment_unitigs_TE/Aligned.sortedByCoord.out.bam | awk '$2 < 256 || $1 ~ /^@/' | samtools view -b -o ../../data/dog/seq_intersectionCons_unitigs.txt
+
+STARlong --genomeDir ../../results/dog/genome/  \
+   --runMode alignReads   \
+   --runThreadN 8   \
+   --readFilesIn unitigs.fa  \
+   --outFileNamePrefix ../../results/dog/STAR_alignment_unitigs/  \
+   --outSAMtype BAM SortedByCoordinate     \
+   --outSAMunmapped Within     \
+   --outSAMattributes Standard     \
+   --outFilterMultimapNmax 10000     \
+   --outReadsUnmapped Fastx
+
+samtools view -h ../../results/dog/STAR_alignment_unitigs/Aligned.sortedByCoord.out.bam | awk '$2 < 256 || $1 ~ /^@/' | samtools view -b -o ../../data/dog/output_filtered.bam
+
+bedtools intersect -wb -a ../../data/dog/ref.gtf \
+-b ../../data/dog/output_filtered.bam -split \
+> ../../data/dog/seq_intersectionRef_unitigs.txt
+bedtools intersect -wb -a ../../data/dog/TE.gtf \
+-b ../../data/dog/output_filtered.bam -split \
+> ../../data/dog/seq_intersectionTE_unitigs.txt
+
+python3 add_ref_TE.py ../../data/dog/outputNodes.txt \
+../../data/dog/seq_intersectionTE_unitigs.txt \
+../../data/dog/seq_intersectionRef_unitigs.txt \
+../../data/dog/seq_intersectionCons_unitigs.txt \
+../../data/dog/results/graph_hc_10_dog_1_hc_10_dog_2_k41.abundance
+
+
+
+### trie et supprime les doublons d'un fichier fasta :
+awk '/^>/ {if (seq) print seq; seq=$0; next} {seq=seq "#" $0} END {if (seq) print seq}' repBase2508.fasta | sort -t '#' -k1,1 | awk -F'#' '!seen[$1]++' | sed 's/#/\n/g'
+
+### Bash script to get the TE consensus for a given species
+
+#!/bin/bash
+# Fonction pour afficher l'aide
+afficher_aide() {
+    echo "Usage: $0 [-h] species_name "
+    echo
+    echo "This function extract the TE consensus for a given species"
+    echo
+    echo "Options:"
+    echo "  -h    Show this command"
+    echo
+    echo "Arguments:"
+    echo "  species_name    The name of the species"
+    echo "Exemple:"
+    echo "  $0 'canis lupus familiaris' > TE_cons_CamFam.fasta"
+    exit 0
+}
+
+# Vérification des arguments
+if [ "$#" -lt 1 ]; then
+    afficher_aide
+fi
+
+# Analyse des options
+while getopts ":h" option; do
+    case $option in
+        h)
+            afficher_aide
+            ;;
+        \?)
+            echo "Option invalide : -$OPTARG" >&1
+            afficher_aide
+            ;;
+    esac
+done
+
+# Supprimer les options traitées des arguments
+shift $((OPTIND - 1))
+
+# Vérification des arguments restants
+if  [ "$#" -lt 1 ]; then
+    echo "Erreur : Nombre insuffisant d'arguments."
+    afficher_aide
+fi
+
+# Variables
+spe=$1
+
+# Extraction des TEs de la base de données Dfam
+./famdb.py -i Libraries/ families \
+--include-class-in-name \
+--curated \
+--ancestors \
+--descendants \
+'${spe}' --format fasta_name \
+ | sed 's/#/\t/g' \
+ | sed 's/ @/\t/g' \
+ | sed 's/^>/>dfam_' > dfam.fa
+
+
+# Extraction des TEs de la base de données Repbase
+source venv/bin/activate
+./famdb.py -i Libraries/ lineage -ad '${spe}'' \
+| awk -F '[0-9<(]+' 'NR>2 {print $2}' \
+| sed 's/^ //g' \
+| sort -u > ancestors.txt
+awk 'NR==FNR {ancestors[$1]; next} /^>/ {split($0, fields, "\t"); species=fields[3]; print_seq = (species in ancestors)} print_seq' ancestors.txt repBase2508.fasta \
+| sed 's/^>/>rb_/g' \
+| awk '{if($0 ~ /^>/) {print $0} else {print toupper($0)}}'  > rb.fa
+
+# Concaténation des deux fichiers
+cat dfam.fa rb.fa | awk '{if($0 ~ /^>/) {print $1} else {print $0}}'
+
+Nettoyage
+rm rb.fa ancestors.txt dfam.fa
+
+
+
+###mus hum comparaison
+split -l 2 -d -a 3 100_seq_hm.txt gene
+
+for file in gene*; do     awk '{print ">" $1 "\n" $2}' "$file" > "${file}.fa"; done
+
+for file in /beegfs/data/sdarmon/hum-mus/gene*.fa; do python3 alignment\ convertor.py ${file} ${file}.reads ${file}.reads.aligned ; done

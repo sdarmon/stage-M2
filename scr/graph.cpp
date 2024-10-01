@@ -565,6 +565,23 @@ int Graph::greedy_Hamming_cluster(vector<string> &kmers_at_distance_d, int d){
                 if (distance <= d){
                     classes[j] = classes[i];
                 }
+            } else {
+                int distance = 0;
+                for (int k = 0; k < kmers_at_distance_d[i].size(); k++){
+                    if (kmers_at_distance_d[i][k] != kmers_at_distance_d[j][k]){
+                        distance++;
+                    }
+                }
+                if (distance <= d){
+                    int ci = classes[i];
+                    int cj = classes[j];
+                    int cm = min(ci,cj);
+                    for (int k = 0; k < taille; k++){
+                        if (classes[k] == ci or classes[k] == cj){
+                            classes[k] = cm;
+                        }
+                    }
+                }
             }
         }
     }
